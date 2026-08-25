@@ -2,17 +2,18 @@ import { NextRequest } from 'next/server';
 
 export const runtime = 'nodejs';
 
-const NINEROUTER_API_URL = 'https://9router-production-8466.up.railway.app/v1/chat/completions';
-const NINEROUTER_API_KEY = 'sk-8f7041f3855b1b1a-wmv4fk-2ea26ec8';
+// Configurable AI Gateway endpoint with fallback to active high-performance server
+const AI_GATEWAY_URL = process.env.AI_GATEWAY_URL || process.env.NINEROUTER_API_URL || 'http://nvnmc.asia:26627/v1/chat/completions';
+const AI_GATEWAY_KEY = process.env.AI_GATEWAY_KEY || process.env.NINEROUTER_API_KEY || 'sk-c276eac9b4322b74-tyrxri-1fc67c68';
 
 export async function POST(req: NextRequest) {
   try {
     const { model, messages } = await req.json();
 
-    const upstreamResponse = await fetch(NINEROUTER_API_URL, {
+    const upstreamResponse = await fetch(AI_GATEWAY_URL, {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${NINEROUTER_API_KEY}`,
+        'Authorization': `Bearer ${AI_GATEWAY_KEY}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
@@ -25,7 +26,7 @@ export async function POST(req: NextRequest) {
     if (!upstreamResponse.ok) {
       const errorText = await upstreamResponse.text();
       return new Response(
-        JSON.stringify({ error: `9Router error: ${errorText || upstreamResponse.statusText}` }),
+        JSON.stringify({ error: `AI Gateway error (${upstreamResponse.status}): ${errorText || upstreamResponse.statusText}` }),
         {
           status: upstreamResponse.status,
           headers: { 'Content-Type': 'application/json' },
