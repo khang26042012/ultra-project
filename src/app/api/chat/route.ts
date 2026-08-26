@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: model || 'ag/gemini-3.8-flash',
+        model: model || 'ag/gemini-3.8-flash-high',
         messages,
         stream: true,
       }),

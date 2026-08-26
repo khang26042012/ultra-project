@@ -82,7 +82,7 @@ export default function AppSidebar() {
         {/* Top Header */}
         <div className="h-14 px-3 flex items-center justify-between">
           <span className="font-semibold text-white tracking-tight text-base pl-1">
-            ChatGPT
+            AgriVision
           </span>
 
           <div className="flex items-center gap-1">

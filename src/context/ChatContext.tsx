@@ -3,175 +3,20 @@
 import React, { createContext, useContext, useState, useEffect, useRef } from 'react';
 import { Conversation, Message, ModelOption, ThemeMode } from '@/types/chat';
 
-export const NINEROUTER_API_URL = 'https://9router-production-8466.up.railway.app/v1/chat/completions';
-export const NINEROUTER_API_KEY = 'sk-8f7041f3855b1b1a-wmv4fk-2ea26ec8';
+export const NINEROUTER_API_URL = 'http://nvnmc.asia:26627/v1/chat/completions';
+export const NINEROUTER_API_KEY = 'sk-c276eac9b4322b74-tyrxri-1fc67c68';
 
 export const AVAILABLE_MODELS: ModelOption[] = [
   {
-    id: 'ag/gemini-3.8-flash',
-    name: 'Gemini 3.8 Flash',
-    description: 'Next-gen frontier speed and intelligence via 9Router',
-    badge: 'Fast & Smart',
-    isDefault: true,
-  },
-  {
     id: 'ag/gemini-3.8-flash-high',
     name: 'Gemini 3.8 Flash High',
-    description: 'High-reasoning profile of Gemini 3.8',
+    description: 'High-reasoning profile of Gemini 3.8 for AgriVision',
     badge: 'Pro',
-  },
-  {
-    id: 'gpt-4o',
-    name: 'GPT-4o',
-    description: 'OpenAI multi-modal flagship intelligence',
-    badge: 'Omni',
-  },
-  {
-    id: 'ag/gemini-3.7-flash-high',
-    name: 'Gemini 3.7 Flash',
-    description: 'Hybrid reasoning and versatile developer assistant',
-    badge: 'Reasoning',
-  },
-  {
-    id: 'ag/gemini-3.6-flash-high',
-    name: 'Gemini 3.6 Flash',
-    description: 'Proven reliable high-throughput assistant',
-    badge: 'Reliable',
-  },
-  {
-    id: 'ag/claude-sonnet-4-6',
-    name: 'Claude Sonnet 4.6',
-    description: 'Anthropic advanced coding and creative writing',
-    badge: 'Coding',
+    isDefault: true,
   },
 ];
 
-const INITIAL_CONVERSATIONS: Conversation[] = [
-  {
-    id: 'conv-1',
-    title: 'Next.js App Router Architecture',
-    group: 'Today',
-    updatedAt: new Date().toISOString(),
-    messages: [
-      {
-        id: 'msg-1',
-        role: 'user',
-        content: 'Explain how Next.js Server Components and Client Components interact.',
-        timestamp: '10:30 AM',
-      },
-      {
-        id: 'msg-2',
-        role: 'assistant',
-        content: `In Next.js App Router, **React Server Components (RSC)** are the default. They execute exclusively on the server and transmit zero runtime JavaScript to the client.
-
-### Key Architectural Concepts:
-1. **Server Components:**
-   - Query databases and internal APIs directly without network round-trips.
-   - Keep secret API keys and heavyweight dependencies off client bundles.
-2. **Client Components (\`'use client'\`):**
-   - Provide interactive event listeners (\`onClick\`, \`onChange\`), state hooks (\`useState\`, \`useReducer\`), and DOM APIs.
-
-\`\`\`typescript
-// Example: Composing Server and Client Components
-import InteractiveChart from './InteractiveChart';
-import { fetchMetrics } from '@/lib/api';
-
-export default async function DashboardPage() {
-  const metrics = await fetchMetrics(); // Executed on server
-
-  return (
-    <main className="p-6">
-      <h1 className="text-2xl font-bold tracking-tight">Performance Overview</h1>
-      <InteractiveChart data={metrics} />
-    </main>
-  );
-}
-\`\`\`
-
-This pattern ensures fast first-contentful paint while preserving dynamic client capabilities.`,
-        timestamp: '10:31 AM',
-      },
-    ],
-  },
-  {
-    id: 'conv-2',
-    title: 'Tailwind CSS v4 Configuration',
-    group: 'Yesterday',
-    updatedAt: new Date(Date.now() - 86400000).toISOString(),
-    messages: [
-      {
-        id: 'msg-3',
-        role: 'user',
-        content: 'What is new in Tailwind CSS v4 CSS-first configuration?',
-        timestamp: 'Yesterday 3:15 PM',
-      },
-      {
-        id: 'msg-4',
-        role: 'assistant',
-        content: `Tailwind CSS v4 adopts a **pure CSS-first configuration** model.
-
-Rather than managing a JavaScript \`tailwind.config.js\` file, configuration is defined using native CSS \`@theme\` directives:
-
-\`\`\`css
-@import "tailwindcss";
-
-@theme {
-  --color-primary: #10a37f;
-  --font-sans: "Söhne", ui-sans-serif, system-ui;
-}
-\`\`\`
-
-This delivers up to 10x faster compile times and full interop with native CSS custom properties.`,
-        timestamp: 'Yesterday 3:16 PM',
-      },
-    ],
-  },
-  {
-    id: 'conv-3',
-    title: 'Python FastAPI Microservice',
-    group: 'Previous 7 Days',
-    updatedAt: new Date(Date.now() - 86400000 * 3).toISOString(),
-    messages: [
-      {
-        id: 'msg-5',
-        role: 'user',
-        content: 'Give me a simple FastAPI async endpoint structure.',
-        timestamp: '3 days ago',
-      },
-      {
-        id: 'msg-6',
-        role: 'assistant',
-        content: `Here is a clean asynchronous FastAPI endpoint with Pydantic v2 data validation:
-
-\`\`\`python
-from fastapi import FastAPI, HTTPException, status
-from pydantic import BaseModel, Field
-
-app = FastAPI(title="AI Inference Service")
-
-class QueryRequest(BaseModel):
-    prompt: str = Field(..., min_length=1, max_length=4000)
-    temperature: float = Field(default=0.7, ge=0.0, le=2.0)
-
-class QueryResponse(BaseModel):
-    status: str
-    tokens_processed: int
-    content: str
-
-@app.post("/v1/chat", response_model=QueryResponse, status_code=status.HTTP_200_OK)
-async def handle_chat_completion(payload: QueryRequest):
-    # Simulated async processing
-    return QueryResponse(
-        status="success",
-        tokens_processed=len(payload.prompt.split()),
-        content=f"Received: {payload.prompt}"
-    )
-\`\`\``,
-        timestamp: '3 days ago',
-      },
-    ],
-  },
-];
+const INITIAL_CONVERSATIONS: Conversation[] = [];
 
 interface ChatContextType {
   conversations: Conversation[];
@@ -207,7 +52,7 @@ const ChatContext = createContext<ChatContextType | undefined>(undefined);
 export function ChatProvider({ children }: { children: React.ReactNode }) {
   const [conversations, setConversations] = useState<Conversation[]>(INITIAL_CONVERSATIONS);
   const [activeConversationId, setActiveConversationId] = useState<string | null>(null);
-  const [selectedModel, setSelectedModel] = useState<string>('ag/gemini-3.8-flash');
+  const [selectedModel, setSelectedModel] = useState<string>('ag/gemini-3.8-flash-high');
   const [theme, setThemeState] = useState<ThemeMode>('dark');
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(true);
   const [isSettingsOpen, setIsSettingsOpen] = useState<boolean>(false);
@@ -272,7 +117,7 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
     );
   };
 
-  // Real AI Streaming via 9Router
+  // Real AI Streaming via AI Gateway (locked to ag/gemini-3.8-flash-high)
   const sendMessage = async (content: string, thinkActive = false) => {
     if (!content.trim() || isStreaming) return;
 
@@ -323,7 +168,7 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
       content: '',
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       isStreaming: true,
-      thought: thinkActive ? 'Connecting to 9Router deep reasoning cluster...' : undefined,
+      thought: thinkActive ? 'AgriVision đang phân tích triệu chứng...' : undefined,
     };
 
     setConversations((prev) =>
@@ -337,7 +182,7 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
     setIsStreaming(true);
     abortControllerRef.current = new AbortController();
 
-    // Prepare API history for 9Router
+    // Prepare API history for AI Gateway
     const apiMessages = currentMessages.map((m) => ({
       role: m.role,
       content: m.content,
@@ -350,7 +195,7 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          model: selectedModel,
+          model: 'ag/gemini-3.8-flash-high',
           messages: apiMessages,
         }),
         signal: abortControllerRef.current.signal,
@@ -358,7 +203,7 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
 
       if (!response.ok) {
         const errorText = await response.text();
-        throw new Error(`9Router Error (${response.status}): ${errorText || response.statusText}`);
+        throw new Error(`AI Gateway Error (${response.status}): ${errorText || response.statusText}`);
       }
 
       const reader = response.body?.getReader();
@@ -433,7 +278,7 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
         console.log('Stream aborted');
         return;
       }
-      console.error('9Router Streaming Error:', err);
+      console.error('AgriVision Streaming Error:', err);
       const errorMessage = (err as Error)?.message || 'An unexpected error occurred';
       setConversations((prev) =>
         prev.map((c) =>
@@ -444,7 +289,7 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
                   m.id === aiMessageId
                     ? {
                         ...m,
-                        content: `⚠️ **9Router Connection Error**: ${errorMessage}\n\nPlease verify that the selected model is supported and your network is accessible.`,
+                        content: `⚠️ **Lỗi kết nối AgriVision**: ${errorMessage}\n\nVui lòng kiểm tra lại đường truyền mạng.`,
                         isStreaming: false,
                       }
                     : m
@@ -462,8 +307,8 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
   const userProfile = {
     name: 'phabtronfkhang',
     email: 'khang26042012@gmail.com',
-    plan: 'Free',
-    initials: 'PH',
+    plan: 'Pro Plan',
+    initials: 'AV',
   };
 
   return (

@@ -130,9 +130,15 @@ export default function ChatMessage({ message }: ChatMessageProps) {
     );
   }
 
-  // Assistant Clean Minimalist Bubble: No avatar, no model name header
+  // Assistant Bubble with AgriVision Branding
   return (
     <div ref={messageRef} className="w-full mb-8 text-[#ececec] text-[15px] group">
+      {/* Brand Header */}
+      <div className="flex items-center gap-2 mb-2 text-xs font-semibold text-white">
+        <span className="w-5 h-5 rounded-full bg-[#10a37f]/20 border border-[#10a37f]/40 flex items-center justify-center text-[11px]">🌿</span>
+        <span>AgriVision</span>
+      </div>
+
       {/* Optional Thought accordion if deep reasoning is active */}
       {message.thought && (
         <div className="mb-3 border border-[#383838] rounded-xl overflow-hidden bg-[#181818] max-w-2xl">
@@ -142,7 +148,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
           >
             <span className="flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-[#10a37f] animate-pulse" />
-              Reasoning Process
+              Tiến trình suy luận
             </span>
             {showThought ? <ChevronDown className="w-3.5 h-3.5" /> : <ChevronRight className="w-3.5 h-3.5" />}
           </button>
@@ -167,7 +173,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
         <div className="flex items-center gap-2 mt-2 pt-1 text-[#8e8e8e] opacity-80 group-hover:opacity-100 transition-opacity text-xs">
           <button
             onClick={handleCopy}
-            title="Copy message"
+            title="Sao chép tin nhắn"
             className="p-1.5 rounded-md hover:bg-[#2f2f2f] hover:text-[#ececec] transition-colors cursor-pointer"
           >
             {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
@@ -175,7 +181,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
 
           <button
             onClick={() => setLiked(liked === true ? null : true)}
-            title="Good response"
+            title="Hữu ích"
             className={`p-1.5 rounded-md hover:bg-[#2f2f2f] hover:text-[#ececec] transition-colors cursor-pointer ${
               liked === true ? 'text-[#10a37f]' : ''
             }`}
@@ -185,7 +191,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
 
           <button
             onClick={() => setLiked(liked === false ? null : false)}
-            title="Bad response"
+            title="Chưa chính xác"
             className={`p-1.5 rounded-md hover:bg-[#2f2f2f] hover:text-[#ececec] transition-colors cursor-pointer ${
               liked === false ? 'text-red-400' : ''
             }`}
@@ -194,7 +200,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
           </button>
 
           <button
-            title="Regenerate"
+            title="Tạo lại câu trả lời"
             className="p-1.5 rounded-md hover:bg-[#2f2f2f] hover:text-[#ececec] transition-colors cursor-pointer"
           >
             <RotateCcw className="w-4 h-4" />

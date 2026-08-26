@@ -102,7 +102,7 @@ export default function UpgradeModal() {
             <div>
               <div className="flex items-center gap-1.5 text-sm font-semibold text-white mb-1">
                 <Sparkles className="w-4 h-4 text-[#60a5fa]" />
-                <span>ChatGPT Plus</span>
+                <span>AgriVision Plus</span>
               </div>
               <div className="text-xl font-bold text-white mb-2">
                 $20 <span className="text-xs font-normal text-[#8e8e8e]">/ month</span>
@@ -133,7 +133,7 @@ export default function UpgradeModal() {
 
             <button
               onClick={() => {
-                alert('Thank you for choosing ChatGPT Plus! (Demo mode)');
+                alert('Thank you for choosing AgriVision Plus! (Demo mode)');
                 setIsUpgradeOpen(false);
               }}
               className="mt-6 w-full py-2.5 rounded-xl bg-[#2563eb] hover:bg-[#1d4ed8] text-white text-xs font-semibold shadow-md transition-all cursor-pointer"

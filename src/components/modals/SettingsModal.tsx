@@ -109,7 +109,7 @@ export default function SettingsModal() {
               <div className="space-y-6">
                 <div>
                   <h3 className="text-sm font-semibold text-white mb-1">Theme</h3>
-                  <p className="text-xs text-[#8e8e8e] mb-3">Choose how ChatGPT looks on your device.</p>
+                  <p className="text-xs text-[#8e8e8e] mb-3">Choose how AgriVision looks on your device.</p>
                   <div className="grid grid-cols-3 gap-3">
                     {(['dark', 'light', 'system'] as ThemeMode[]).map((mode) => (
                       <button
