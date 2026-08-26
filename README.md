@@ -1,27 +1,29 @@
-# 🤖 ChatGPT Clone — Pixel-Perfect Next.js AI Web App
+# ⚡ Ultra Project — Pixel-Perfect Next.js AI Workspace
 
-Một ứng dụng web clone giao diện **ChatGPT** đạt chuẩn **Pixel-Perfect**, được xây dựng trên nền tảng **Next.js 16 (App Router)**, **React 19**, **GSAP Animations**, **Tailwind CSS**, và **Shadcn UI**. Ứng dụng tích hợp bộ điều phối mô hình AI đa phương thức hỗ trợ luồng streaming thời gian thực (SSE) qua Gateway OpenAI-compatible.
+Một không gian làm việc AI thế hệ mới (**Ultra AI Project**) đạt chuẩn **Pixel-Perfect** mô phỏng hoàn hảo trải nghiệm **ChatGPT & Claude**, được xây dựng trên nền tảng **Next.js 16 (App Router)**, **React 19**, **GSAP Animations 60 FPS**, **Tailwind CSS**, và **Shadcn UI**.
+
+Ứng dụng tích hợp hệ thống điều phối mô hình đa phương thức (Multimodal AI Gateway) hỗ trợ luồng streaming ký tự thời gian thực (SSE) và hệ sinh thái kỹ năng mở rộng (**Modular Skills**).
 
 ---
 
 ## 🌟 TÍNH NĂNG NỔI BẬT
 
-### 1. Giao diện ChatGPT Chuẩn Mực & Mượt Mà
+### 1. Giao Diện Chuẩn Mực & Hoạt Họa GSAP 60 FPS
 - **AppSidebar (Thanh bên thông minh):**
   - Tự động gom nhóm cuộc hội thoại theo dòng thời gian (`Today`, `Yesterday`, `Previous 7 Days`, `Previous 30 Days`).
-  - Tìm kiếm cuộc trò chuyện nhanh (`Search`), tạo chat mới (`New Chat`), quản lý và xóa hội thoại.
-  - Menu tài khoản cá nhân, đổi theme (`Dark / Light Mode`) và nâng cấp gói.
-  - Hiệu ứng thu gọn/mở rộng thanh bên mượt mà bằng **GSAP**.
+  - Tìm kiếm cuộc trò chuyện nhanh (`Search`), tạo chat mới (`New Chat`), đổi tên và xóa hội thoại.
+  - Menu tài khoản cá nhân, chuyển đổi giao diện (`Dark / Light Mode`) và quản lý cấu hình.
+  - Hiệu ứng thu gọn/mở rộng thanh bên mượt mà bằng **GSAP Motion**.
 - **FloatingInputIsland (Thanh nhập tin nhắn đảo nổi):**
   - Thiết kế nổi hiện đại ở đáy màn hình chuẩn phong cách OpenAI / Claude.
   - Hỗ trợ nút đính kèm tệp (`Plus`), kích hoạt chế độ suy luận chuyên sâu (`Thinking`), nhập giọng nói (`Microphone`).
   - **Menu chọn Model động:** Chuyển đổi linh hoạt giữa `Gemini 3.8 Flash`, `Gemini 3.8 Flash High`, `Gemini 3.7 Flash`, `Claude Sonnet 4.6`, và `GPT-4o`.
-- **Trải nghiệm Hội thoại Đỉnh Cao:**
+- **Trải Nghiệm Hội Thoại Đỉnh Cao:**
   - Hỗ trợ hiển thị Markdown đầy đủ (bảng biểu, in đậm, danh sách).
   - Khối mã nguồn (`CodeBlock`) tô màu cú pháp (Syntax Highlighting) kèm nút sao chép (`Copy`) một chạm.
   - Phản hồi dạng dòng ký tự chạy chữ theo thời gian thực (Server-Sent Events streaming).
 
-### 2. Kiến Trúc Modular Skills
+### 2. Hệ Sinh Thái Kỹ Năng Mở Rộng (Modular Skills)
 Toàn bộ hệ thống kỹ năng thiết kế, animation và tự động hóa được tích hợp tại thư mục `skills/`:
 - **`skills/gsap`**: Thư viện hiệu ứng động chuyên sâu (GSAP Core, React, ScrollTrigger, Timeline).
 - **`skills/ui-ux-pro-max` & `ui-styling`**: Hệ thống Design Tokens, WCAG contrast và chuẩn UI/UX.
@@ -33,12 +35,12 @@ Toàn bộ hệ thống kỹ năng thiết kế, animation và tự động hóa
 ## 🏗️ CẤU TRÚC THƯ MỤC DỰ ÁN
 
 ```
-chatgpt-clone/
+ultra-project/
 ├── src/
 │   ├── app/
 │   │   ├── api/chat/route.ts      # API Endpoint proxy stream SSE về AI Gateway
-│   │   ├── layout.tsx             # Root layout cấu hình theme & font chữ
-│   │   ├── page.tsx               # Trang chính ứng dụng Chat
+│   │   ├── layout.tsx             # Root layout cấu hình Ultra Project & Font Geist
+│   │   ├── page.tsx               # Trang chính ứng dụng Chat Workspace
 │   │   └── globals.css            # Biến CSS Tailwind & Dark/Light mode tokens
 │   ├── components/
 │   │   ├── chat/                  # Header, Message, CodeBlock, EmptyState
@@ -52,8 +54,9 @@ chatgpt-clone/
 │   │   └── chat.ts                # Định nghĩa kiểu dữ liệu TypeScript (Message, Model, ...)
 │   └── lib/
 │       └── utils.ts               # Tiện ích cn (clsx + tailwind-merge)
-├── public/                        # Thư mục tài nguyên tĩnh (Images, Icons, SEO)
-├── skills/                        # Bộ sưu tập các Modular Skills (GSAP, UI/UX, Cloner, ...)
+├── public/                        # Thư mục tài nguyên tĩnh (Images, Logo SVG, Icons)
+├── skills/                        # Thư mục chứa toàn bộ Modular Skills độc lập
+├── tools/                         # Các script tiện ích hạ tầng & Railway automation
 ├── Dockerfile                     # Docker container triển khai production
 ├── docker-compose.yml             # Cấu hình chạy nhanh với Docker Compose
 ├── package.json                   # Dependencies (Next 16, React 19, GSAP 3.15, Tailwind)
@@ -73,7 +76,7 @@ chatgpt-clone/
 ### 2. Cài Đặt Dependencies
 ```bash
 # Di chuyển vào thư mục dự án
-cd chatgpt-clone
+cd ultra-project
 
 # Cài đặt toàn bộ thư viện
 npm install
@@ -108,8 +111,6 @@ Dự án đã sẵn sàng với cấu hình Docker tối ưu:
 # Build và chạy với Docker Compose
 docker compose up -d --build
 ```
-
-Ứng dụng sẽ hoạt động tại cổng `http://localhost:3000`.
 
 ---
 

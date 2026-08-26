@@ -13,8 +13,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Website Clone",
-  description: "Pixel-perfect website clone",
+  title: "Ultra Project — Next-Gen AI Workspace",
+  description: "Pixel-perfect ChatGPT Clone & Multi-Agent AI Workspace with GSAP Animations",
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({
