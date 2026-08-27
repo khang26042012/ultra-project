@@ -7,7 +7,6 @@ import {
   PanelLeftClose,
   Search,
   SquarePen,
-  FolderPlus,
   Trash2,
   Gift,
   X,
@@ -145,19 +144,7 @@ export default function AppSidebar() {
 
         {/* Clean History List Area without extra tabs */}
         <div className="flex-1 overflow-y-auto px-2 space-y-4 no-scrollbar">
-          {/* Projects Section */}
-          <div>
-            <div className="flex items-center justify-between px-3 py-1 text-[11px] font-semibold text-[#8e8e8e] uppercase tracking-wider">
-              <span>Projects</span>
-              <button
-                title="Add new project"
-                className="hover:text-white transition-colors cursor-pointer"
-              >
-                <FolderPlus className="w-3.5 h-3.5" />
-              </button>
-            </div>
-            <div className="px-3 py-1 text-xs text-[#555555]">No projects</div>
-          </div>
+          
 
           {/* Recents Section */}
           <div>
