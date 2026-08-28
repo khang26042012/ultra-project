@@ -29,8 +29,11 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      style={{ overscrollBehavior: 'none' }}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="h-[100dvh] w-screen overflow-hidden fixed inset-0 flex flex-col bg-[#171717] text-[#ececec]">
+        {children}
+      </body>
     </html>
   );
 }

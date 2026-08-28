@@ -8,7 +8,6 @@ import {
   Search,
   SquarePen,
   Trash2,
-  Gift,
   X,
   MessageSquare,
 } from 'lucide-react';
@@ -26,7 +25,6 @@ export default function AppSidebar() {
     setIsSidebarOpen,
     toggleSidebar,
     userProfile,
-    setIsUpgradeOpen,
   } = useChat();
 
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
@@ -74,14 +72,14 @@ export default function AppSidebar() {
       {/* Sidebar Container */}
       <aside
         ref={sidebarRef}
-        className={`fixed md:static inset-y-0 left-0 z-40 w-64 bg-[#171717] border-r border-[#2a2a2a] flex flex-col select-none no-scrollbar ${
+        className={`fixed md:static inset-y-0 left-0 z-40 w-64 bg-[#171717] border-r border-[#262626] flex flex-col select-none no-scrollbar ${
           isSidebarOpen ? 'block' : 'hidden md:hidden'
         }`}
       >
         {/* Top Header */}
         <div className="h-14 px-3 flex items-center justify-between">
-          <span className="font-semibold text-white tracking-tight text-base pl-1">
-            AgriVision
+          <span className="font-semibold text-white tracking-tight text-base pl-1 flex items-center gap-2">
+            <span className="text-[#10a37f]">🌿</span> AgriVision
           </span>
 
           <div className="flex items-center gap-1">
@@ -143,9 +141,7 @@ export default function AppSidebar() {
         <div className="h-px bg-[#262626] mx-3 my-1" />
 
         {/* Clean History List Area without extra tabs */}
-        <div className="flex-1 overflow-y-auto px-2 space-y-4 no-scrollbar">
-          
-
+        <div className="flex-1 overflow-y-auto overscroll-contain px-2 space-y-4 no-scrollbar">
           {/* Recents Section */}
           <div>
             <div className="px-3 py-1 text-[11px] font-semibold text-[#8e8e8e] uppercase tracking-wider">
@@ -220,21 +216,8 @@ export default function AppSidebar() {
                 <div className="font-medium text-xs text-white truncate leading-tight">
                   {userProfile.name}
                 </div>
-                <div className="text-[11px] text-[#8e8e8e]">{userProfile.plan}</div>
               </div>
             </div>
-
-            <button
-              type="button"
-              onClick={(e) => {
-                e.stopPropagation();
-                setIsUpgradeOpen(true);
-              }}
-              className="flex items-center gap-1 px-2 py-1 rounded-full bg-white text-black hover:bg-gray-200 text-[11px] font-semibold transition-colors cursor-pointer shadow-xs"
-            >
-              <Gift className="w-3 h-3" />
-              <span>Claim</span>
-            </button>
           </div>
 
           {/* Profile Menu Dropup */}
