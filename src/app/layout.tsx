@@ -31,7 +31,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
       style={{ overscrollBehavior: 'none' }}
     >
-      <body className="h-[100dvh] w-screen overflow-hidden fixed inset-0 flex flex-col bg-[#171717] text-[#ececec]">
+      <body className="h-[100dvh] w-screen overflow-hidden fixed inset-0 flex flex-col bg-[#ffffff] dark:bg-[#171717] text-[#0d0d0d] dark:text-[#ececec]">
         {children}
       </body>
     </html>

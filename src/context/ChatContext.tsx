@@ -53,16 +53,21 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
   const [conversations, setConversations] = useState<Conversation[]>(INITIAL_CONVERSATIONS);
   const [activeConversationId, setActiveConversationId] = useState<string | null>(null);
   const [selectedModel, setSelectedModel] = useState<string>('ag/gemini-3.8-flash-high');
-  const [theme, setThemeState] = useState<ThemeMode>('dark');
+  const [theme, setThemeState] = useState<ThemeMode>('light');
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState<boolean>(false);
   const [isUpgradeOpen, setIsUpgradeOpen] = useState<boolean>(false);
   const [isStreaming, setIsStreaming] = useState<boolean>(false);
   const abortControllerRef = useRef<AbortController | null>(null);
 
-  // Apply theme class to HTML element
+  // Apply theme class to HTML element with persistence
   const setTheme = (newTheme: ThemeMode) => {
     setThemeState(newTheme);
+    try {
+      localStorage.setItem('agrivision-theme', newTheme);
+    } catch {
+      // ignore
+    }
     const root = document.documentElement;
     if (newTheme === 'dark') {
       root.classList.add('dark');
@@ -79,7 +84,17 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
   };
 
   useEffect(() => {
-    document.documentElement.classList.add('dark');
+    let initialTheme: ThemeMode = 'light';
+    try {
+      const saved = localStorage.getItem('agrivision-theme') as ThemeMode | null;
+      if (saved === 'light' || saved === 'dark' || saved === 'system') {
+        initialTheme = saved;
+      }
+    } catch {
+      // ignore
+    }
+    setTheme(initialTheme);
+
     if (typeof window !== 'undefined') {
       setIsSidebarOpen(window.innerWidth >= 768);
     }
