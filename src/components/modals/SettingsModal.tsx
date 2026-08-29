@@ -14,9 +14,9 @@ import {
 import { ThemeMode } from '@/types/chat';
 
 export default function SettingsModal() {
-  const { isSettingsOpen, setIsSettingsOpen, theme, setTheme } = useChat();
+  const { isSettingsOpen, setIsSettingsOpen, theme, setTheme, clearChatHistory } = useChat();
   const [activeTab, setActiveTab] = useState<'general' | 'speech' | 'data'>('general');
-  const [language, setLanguage] = useState('Auto detect');
+  const [language, setLanguage] = useState('Tiếng Việt');
   const [voice, setVoice] = useState('Alloy');
   const [historyTraining, setHistoryTraining] = useState(true);
 
@@ -36,7 +36,7 @@ export default function SettingsModal() {
   if (!isSettingsOpen) return null;
 
   const voices = ['Alloy', 'Echo', 'Fable', 'Onyx', 'Nova', 'Shimmer'];
-  const languages = ['Auto detect', 'English', 'Tiếng Việt', 'Español', 'Français', 'Deutsch', '日本語'];
+  const languages = ['Tiếng Việt', 'English', 'Español', 'Français', 'Deutsch', '日本語'];
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs animate-in fade-in duration-150">
@@ -50,7 +50,7 @@ export default function SettingsModal() {
             >
               <ArrowLeft className="w-4 h-4" strokeWidth={1.75} />
             </button>
-            <span className="font-semibold text-base text-[#0d0d0d] dark:text-white">Settings</span>
+            <span className="font-semibold text-base text-[#0d0d0d] dark:text-white">Cài đặt</span>
           </div>
 
           <button
@@ -74,7 +74,7 @@ export default function SettingsModal() {
               }`}
             >
               <Settings className="w-4 h-4" strokeWidth={1.75} />
-              <span>General</span>
+              <span>Chung</span>
             </button>
 
             <button
@@ -86,7 +86,7 @@ export default function SettingsModal() {
               }`}
             >
               <Volume2 className="w-4 h-4" strokeWidth={1.75} />
-              <span>Speech</span>
+              <span>Giọng nói</span>
             </button>
 
             <button
@@ -98,7 +98,7 @@ export default function SettingsModal() {
               }`}
             >
               <Database className="w-4 h-4" strokeWidth={1.75} />
-              <span>Data controls</span>
+              <span>Dữ liệu chat</span>
             </button>
           </div>
 
@@ -107,8 +107,8 @@ export default function SettingsModal() {
             {activeTab === 'general' && (
               <div className="space-y-6">
                 <div>
-                  <h3 className="text-sm font-semibold text-[#0d0d0d] dark:text-white mb-1">Theme</h3>
-                  <p className="text-xs text-[#5d5d5d] dark:text-[#8e8e8e] mb-3">Choose how AgriVision looks on your device.</p>
+                  <h3 className="text-sm font-semibold text-[#0d0d0d] dark:text-white mb-1">Giao diện (Theme)</h3>
+                  <p className="text-xs text-[#5d5d5d] dark:text-[#8e8e8e] mb-3">Tùy chọn phong cách hiển thị trên thiết bị của bạn.</p>
                   <div className="grid grid-cols-3 gap-3">
                     {(['light', 'dark', 'system'] as ThemeMode[]).map((mode) => (
                       <button
@@ -121,15 +121,15 @@ export default function SettingsModal() {
                         }`}
                       >
                         <Palette className="w-4 h-4 mx-auto mb-1.5 opacity-80" strokeWidth={1.75} />
-                        {mode}
+                        {mode === 'light' ? 'Chế độ sáng' : mode === 'dark' ? 'Chế độ tối' : 'Hệ thống'}
                       </button>
                     ))}
                   </div>
                 </div>
 
                 <div className="pt-4 border-t border-[#e5e5e5] dark:border-[#333333]">
-                  <h3 className="text-sm font-semibold text-[#0d0d0d] dark:text-white mb-1">Language</h3>
-                  <p className="text-xs text-[#5d5d5d] dark:text-[#8e8e8e] mb-3">Language for the application user interface.</p>
+                  <h3 className="text-sm font-semibold text-[#0d0d0d] dark:text-white mb-1">Ngôn ngữ hiển thị</h3>
+                  <p className="text-xs text-[#5d5d5d] dark:text-[#8e8e8e] mb-3">Ngôn ngữ ưu tiên cho giao diện làm việc.</p>
                   <select
                     value={language}
                     onChange={(e) => setLanguage(e.target.value)}
@@ -148,8 +148,8 @@ export default function SettingsModal() {
             {activeTab === 'speech' && (
               <div className="space-y-6">
                 <div>
-                  <h3 className="text-sm font-semibold text-[#0d0d0d] dark:text-white mb-1">Voice</h3>
-                  <p className="text-xs text-[#5d5d5d] dark:text-[#8e8e8e] mb-3">Select a voice for audio and speech output.</p>
+                  <h3 className="text-sm font-semibold text-[#0d0d0d] dark:text-white mb-1">Giọng đọc</h3>
+                  <p className="text-xs text-[#5d5d5d] dark:text-[#8e8e8e] mb-3">Tùy chọn giọng đọc cho câu trả lời âm thanh.</p>
                   <div className="grid grid-cols-2 gap-3">
                     {voices.map((v) => (
                       <button
@@ -174,9 +174,9 @@ export default function SettingsModal() {
               <div className="space-y-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h3 className="text-sm font-semibold text-[#0d0d0d] dark:text-white">Chat history & training</h3>
+                    <h3 className="text-sm font-semibold text-[#0d0d0d] dark:text-white">Lưu trữ lịch sử & Đồng bộ</h3>
                     <p className="text-xs text-[#5d5d5d] dark:text-[#8e8e8e] max-w-sm mt-0.5">
-                      Save new chats to your account and permit model improvement.
+                      Tự động lưu các đoạn chẩn đoán bệnh cây vào tài khoản cá nhân.
                     </p>
                   </div>
                   <button
@@ -197,21 +197,32 @@ export default function SettingsModal() {
 
                 <div className="pt-4 border-t border-[#e5e5e5] dark:border-[#333333] flex items-center justify-between">
                   <div>
-                    <h3 className="text-sm font-semibold text-[#0d0d0d] dark:text-white">Export data</h3>
-                    <p className="text-xs text-[#5d5d5d] dark:text-[#8e8e8e]">Download a complete archive of your chat history.</p>
+                    <h3 className="text-sm font-semibold text-[#0d0d0d] dark:text-white">Xóa lịch sử hội thoại</h3>
+                    <p className="text-xs text-[#5d5d5d] dark:text-[#8e8e8e]">Xóa toàn bộ các tin nhắn đã hỏi trước đây.</p>
                   </div>
-                  <button className="px-3 py-1.5 rounded-xl border border-[#e5e5e5] hover:bg-[#f4f4f4] dark:border-[#383838] dark:hover:bg-[#2f2f2f] text-xs font-medium transition-colors cursor-pointer text-[#0d0d0d] dark:text-white">
-                    Export
+                  <button
+                    onClick={() => {
+                      if (confirm('Bạn có chắc chắn muốn xóa toàn bộ lịch sử trò chuyện?')) {
+                        clearChatHistory();
+                        setIsSettingsOpen(false);
+                      }
+                    }}
+                    className="px-3 py-1.5 rounded-xl border border-red-300 dark:border-red-900/50 hover:bg-red-50 dark:hover:bg-red-950/30 text-xs font-medium text-red-600 dark:text-red-400 transition-colors cursor-pointer"
+                  >
+                    Xóa lịch sử
                   </button>
                 </div>
 
                 <div className="pt-4 border-t border-[#e5e5e5] dark:border-[#333333] flex items-center justify-between">
                   <div>
-                    <h3 className="text-sm font-semibold text-red-600 dark:text-red-400">Delete account</h3>
-                    <p className="text-xs text-[#5d5d5d] dark:text-[#8e8e8e]">Permanently delete your account and all data.</p>
+                    <h3 className="text-sm font-semibold text-[#0d0d0d] dark:text-white">Xuất dữ liệu chẩn đoán</h3>
+                    <p className="text-xs text-[#5d5d5d] dark:text-[#8e8e8e]">Tải xuống bản sao lưu toàn bộ các cuộc trò chuyện.</p>
                   </div>
-                  <button className="px-3 py-1.5 rounded-xl bg-red-500/10 border border-red-500/30 hover:bg-red-500/20 text-red-600 dark:text-red-400 text-xs font-medium transition-colors cursor-pointer">
-                    Delete
+                  <button
+                    onClick={() => alert('Dữ liệu đã được lưu trữ an toàn trong hệ thống cục bộ.')}
+                    className="px-3 py-1.5 rounded-xl border border-[#e5e5e5] hover:bg-[#f4f4f4] dark:border-[#383838] dark:hover:bg-[#2f2f2f] text-xs font-medium transition-colors cursor-pointer text-[#0d0d0d] dark:text-white"
+                  >
+                    Xuất JSON
                   </button>
                 </div>
               </div>

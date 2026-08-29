@@ -29,3 +29,11 @@ export interface ModelOption {
 }
 
 export type ThemeMode = 'dark' | 'light' | 'system';
+
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  passwordHash: string;
+  createdAt: string;
+}

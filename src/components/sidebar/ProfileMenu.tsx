@@ -16,7 +16,7 @@ interface ProfileMenuProps {
 }
 
 export default function ProfileMenu({ isOpen, onClose }: ProfileMenuProps) {
-  const { userProfile, setIsSettingsOpen } = useChat();
+  const { userProfile, setIsSettingsOpen, logout } = useChat();
   const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -40,29 +40,26 @@ export default function ProfileMenu({ isOpen, onClose }: ProfileMenuProps) {
     >
       {/* Account Info Bar */}
       <div className="flex items-center justify-between p-2.5 rounded-xl hover:bg-[#f4f4f4] dark:hover:bg-[#282828] transition-colors cursor-pointer border-b border-[#e5e5e5] dark:border-[#2b2b2b] mb-1">
-        <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-full bg-[#0d0d0d] text-white dark:bg-[#171717] dark:border dark:border-[#3e3e3e] dark:text-[#ececec] flex items-center justify-center font-bold text-xs shadow-xs">
+        <div className="flex items-center gap-2.5 truncate">
+          <div className="w-8 h-8 shrink-0 rounded-full bg-[#0d0d0d] text-white dark:bg-[#171717] dark:border dark:border-[#3e3e3e] dark:text-[#ececec] flex items-center justify-center font-bold text-xs shadow-xs">
             {userProfile.initials}
           </div>
-          <div>
-            <div className="font-semibold text-xs text-[#0d0d0d] dark:text-white leading-tight">
+          <div className="truncate text-left">
+            <div className="font-semibold text-xs text-[#0d0d0d] dark:text-white leading-tight truncate">
               {userProfile.name}
             </div>
+            {userProfile.email && (
+              <div className="text-[10px] text-[#8e8e8e] truncate mt-0.5">
+                {userProfile.email}
+              </div>
+            )}
           </div>
         </div>
-        <ChevronRight className="w-4 h-4 text-[#8e8e8e]" strokeWidth={1.75} />
+        <ChevronRight className="w-4 h-4 text-[#8e8e8e] shrink-0" strokeWidth={1.75} />
       </div>
 
       {/* Menu Actions */}
       <div className="space-y-0.5">
-        <button
-          onClick={onClose}
-          className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-left hover:bg-[#f4f4f4] dark:hover:bg-[#282828] text-xs font-medium text-[#5d5d5d] hover:text-[#0d0d0d] dark:text-[#b4b4b4] dark:hover:text-white transition-colors cursor-pointer"
-        >
-          <User className="w-4 h-4" strokeWidth={1.75} />
-          <span>Profile</span>
-        </button>
-
         <button
           onClick={() => {
             onClose();
@@ -71,28 +68,34 @@ export default function ProfileMenu({ isOpen, onClose }: ProfileMenuProps) {
           className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-left hover:bg-[#f4f4f4] dark:hover:bg-[#282828] text-xs font-medium text-[#5d5d5d] hover:text-[#0d0d0d] dark:text-[#b4b4b4] dark:hover:text-white transition-colors cursor-pointer"
         >
           <Settings className="w-4 h-4" strokeWidth={1.75} />
-          <span>Settings</span>
+          <span>Cài đặt hệ thống</span>
         </button>
 
         <div className="h-px bg-[#e5e5e5] dark:bg-[#2b2b2b] my-1" />
 
         <button
-          onClick={onClose}
+          onClick={() => {
+            onClose();
+            alert('AgriVision — Trợ lý AI nông nghiệp chuyên sâu chẩn đoán dịch bệnh cây trồng.\nPhiên bản nguyên mẫu 1.0.');
+          }}
           className="w-full flex items-center justify-between px-3 py-2 rounded-xl text-left hover:bg-[#f4f4f4] dark:hover:bg-[#282828] text-xs font-medium text-[#5d5d5d] hover:text-[#0d0d0d] dark:text-[#b4b4b4] dark:hover:text-white transition-colors cursor-pointer"
         >
           <div className="flex items-center gap-3">
             <HelpCircle className="w-4 h-4" strokeWidth={1.75} />
-            <span>Help</span>
+            <span>Trợ giúp & Hướng dẫn</span>
           </div>
           <ChevronRight className="w-3.5 h-3.5 text-[#8e8e8e]" strokeWidth={1.75} />
         </button>
 
         <button
-          onClick={onClose}
+          onClick={() => {
+            onClose();
+            logout();
+          }}
           className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-left hover:bg-red-50 dark:hover:bg-red-950/30 text-xs font-medium text-red-600 dark:text-red-400 transition-colors cursor-pointer"
         >
           <LogOut className="w-4 h-4" strokeWidth={1.75} />
-          <span>Log out</span>
+          <span>Đăng xuất tài khoản</span>
         </button>
       </div>
     </div>
