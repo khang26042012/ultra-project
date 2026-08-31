@@ -11,7 +11,7 @@ export const AVAILABLE_MODELS: ModelOption[] = [
   {
     id: 'ag/gemini-3.8-flash-high',
     name: 'Gemini 3.8 Flash High',
-    description: 'High-reasoning profile of Gemini 3.8 for AgriVision',
+    description: 'High-reasoning multimodal profile for AgriVision',
     badge: 'Pro',
     isDefault: true,
   },
@@ -46,7 +46,7 @@ interface ChatContextType {
   selectConversation: (id: string) => void;
   deleteConversation: (id: string) => void;
   renameConversation: (id: string, newTitle: string) => void;
-  sendMessage: (content: string, thinkActive?: boolean) => Promise<void>;
+  sendMessage: (content: string, imageUrl?: string, thinkActive?: boolean) => Promise<void>;
   userProfile: {
     name: string;
     email: string;
@@ -245,7 +245,7 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
         id: `user-${Date.now()}`,
         name,
         email,
-        passwordHash: password, // client-hashed/proto representation
+        passwordHash: password,
         createdAt: new Date().toISOString(),
       };
 
@@ -368,14 +368,16 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
     );
   };
 
-  // Real AI Streaming via AI Gateway (locked to ag/gemini-3.8-flash-high)
-  const sendMessage = async (content: string, thinkActive = false) => {
-    if (!content.trim() || isStreaming) return;
+  // Real AI Streaming via AI Gateway (locked to ag/gemini-3.8-flash-high with Multimodal & Context Window)
+  const sendMessage = async (content: string, imageUrl?: string, thinkActive = false) => {
+    const trimmedContent = content.trim();
+    if ((!trimmedContent && !imageUrl) || isStreaming) return;
 
     const userMessage: Message = {
       id: `user-${Date.now()}`,
       role: 'user',
-      content: content.trim(),
+      content: trimmedContent || (imageUrl ? 'Chẩn đoán hình ảnh bệnh cây đính kèm' : ''),
+      imageUrl: imageUrl || undefined,
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
     };
 
@@ -383,7 +385,8 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
     let currentMessages: Message[] = [];
 
     if (!targetConvId) {
-      const newTitle = content.trim().length > 32 ? `${content.trim().slice(0, 32)}...` : content.trim();
+      const titleCandidate = trimmedContent || 'Chẩn đoán hình ảnh';
+      const newTitle = titleCandidate.length > 32 ? `${titleCandidate.slice(0, 32)}...` : titleCandidate;
       targetConvId = `conv-${Date.now()}`;
       const newConv: Conversation = {
         id: targetConvId,
@@ -433,11 +436,22 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
     setIsStreaming(true);
     abortControllerRef.current = new AbortController();
 
-    // Prepare API history for AI Gateway
-    const apiMessages = currentMessages.map((m) => ({
-      role: m.role,
-      content: m.content,
-    }));
+    // Prepare full API history for AI Gateway (Full Context Window & Multimodal Image Support)
+    const apiMessages = currentMessages.map((m) => {
+      if (m.imageUrl) {
+        return {
+          role: m.role,
+          content: [
+            { type: 'text', text: m.content || 'Chẩn đoán hình ảnh cây trồng' },
+            { type: 'image_url', image_url: { url: m.imageUrl } },
+          ],
+        };
+      }
+      return {
+        role: m.role,
+        content: m.content,
+      };
+    });
 
     try {
       const response = await fetch('/api/chat', {

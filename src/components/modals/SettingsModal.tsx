@@ -1,48 +1,44 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useChat } from '@/context/ChatContext';
 import {
   X,
-  ArrowLeft,
-  Settings,
+  Palette,
   Volume2,
   Database,
-  Palette,
+  Info,
   Check,
+  Settings,
+  ArrowLeft,
+  Sparkles,
 } from 'lucide-react';
 import { ThemeMode } from '@/types/chat';
 
 export default function SettingsModal() {
-  const { isSettingsOpen, setIsSettingsOpen, theme, setTheme, clearChatHistory } = useChat();
-  const [activeTab, setActiveTab] = useState<'general' | 'speech' | 'data'>('general');
-  const [language, setLanguage] = useState('Tiếng Việt');
-  const [voice, setVoice] = useState('Alloy');
-  const [historyTraining, setHistoryTraining] = useState(true);
+  const {
+    isSettingsOpen,
+    setIsSettingsOpen,
+    theme,
+    setTheme,
+    clearChatHistory,
+  } = useChat();
 
-  // Close on Escape key
-  useEffect(() => {
-    function handleKeyDown(e: KeyboardEvent) {
-      if (e.key === 'Escape') {
-        setIsSettingsOpen(false);
-      }
-    }
-    if (isSettingsOpen) {
-      window.addEventListener('keydown', handleKeyDown);
-    }
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isSettingsOpen, setIsSettingsOpen]);
+  const [activeTab, setActiveTab] = useState<'general' | 'speech' | 'data' | 'about'>('general');
+  const [historyTraining, setHistoryTraining] = useState(true);
+  const [voice, setVoice] = useState('An Nhiên (Tiếng Việt)');
+  const [language, setLanguage] = useState('Tiếng Việt (Mặc định)');
 
   if (!isSettingsOpen) return null;
 
-  const voices = ['Alloy', 'Echo', 'Fable', 'Onyx', 'Nova', 'Shimmer'];
-  const languages = ['Tiếng Việt', 'English', 'Español', 'Français', 'Deutsch', '日本語'];
+  const voices = ['An Nhiên (Tiếng Việt)', 'Minh Đức (Tiếng Việt)', 'Quỳnh Anh (Tiếng Việt)'];
+  const languages = ['Tiếng Việt (Mặc định)', 'English (US)'];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs animate-in fade-in duration-150">
-      <div className="w-full max-w-2xl h-[560px] bg-[#ffffff] dark:bg-[#212121] border border-[#e5e5e5] dark:border-[#383838] rounded-2xl shadow-2xl flex flex-col overflow-hidden text-[#0d0d0d] dark:text-[#ececec]">
-        {/* Header Bar */}
-        <div className="h-14 px-5 flex items-center justify-between border-b border-[#e5e5e5] dark:border-[#333333]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-xs select-none p-4">
+      <div className="w-full max-w-2xl bg-[#ffffff] dark:bg-[#1e1e1e] border border-[#e5e5e5] dark:border-[#333333] rounded-[24px] shadow-2xl overflow-hidden flex flex-col max-h-[85vh]">
+        {/* Modal Header */}
+        <div className="h-14 px-6 border-b border-[#e5e5e5] dark:border-[#333333] flex items-center justify-between">
           <div className="flex items-center gap-2">
             <button
               onClick={() => setIsSettingsOpen(false)}
@@ -99,6 +95,18 @@ export default function SettingsModal() {
             >
               <Database className="w-4 h-4" strokeWidth={1.75} />
               <span>Dữ liệu chat</span>
+            </button>
+
+            <button
+              onClick={() => setActiveTab('about')}
+              className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium transition-colors cursor-pointer ${
+                activeTab === 'about'
+                  ? 'bg-[#0d0d0d] text-white dark:bg-[#2f2f2f] dark:text-white font-semibold'
+                  : 'text-[#5d5d5d] dark:text-[#8e8e8e] hover:text-[#0d0d0d] dark:hover:text-white hover:bg-[#eaeaea] dark:hover:bg-[#252525]'
+              }`}
+            >
+              <Info className="w-4 h-4" strokeWidth={1.75} />
+              <span>Giới thiệu</span>
             </button>
           </div>
 
@@ -224,6 +232,48 @@ export default function SettingsModal() {
                   >
                     Xuất JSON
                   </button>
+                </div>
+              </div>
+            )}
+
+            {activeTab === 'about' && (
+              <div className="space-y-5">
+                <div className="p-4 rounded-2xl bg-[#f7f7f8] dark:bg-[#171717] border border-[#e5e5e5] dark:border-[#333]">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="w-6 h-6 rounded-lg bg-[#0d0d0d] text-white dark:bg-white dark:text-black flex items-center justify-center font-bold text-xs shadow-xs">
+                      AV
+                    </span>
+                    <h3 className="text-sm font-bold text-[#0d0d0d] dark:text-white">AgriVision v1.0</h3>
+                  </div>
+                  <p className="text-xs text-[#5d5d5d] dark:text-[#b4b4b4] leading-relaxed">
+                    Hệ sinh thái Trí tuệ Nhân tạo & Viễn thám Giám sát Bệnh học Thực vật Thông minh, đồng hành cùng bà con nông dân Vĩnh Long và Đồng bằng Sông Cửu Long.
+                  </p>
+                </div>
+
+                <div className="space-y-3 text-xs">
+                  <div className="flex justify-between py-2 border-b border-[#e5e5e5] dark:border-[#2a2a2a]">
+                    <span className="text-[#5d5d5d] dark:text-[#8e8e8e]">Tác giả phát triển:</span>
+                    <span className="font-semibold text-[#0d0d0d] dark:text-white">Phan Trọng Khang</span>
+                  </div>
+                  <div className="flex justify-between py-2 border-b border-[#e5e5e5] dark:border-[#2a2a2a]">
+                    <span className="text-[#5d5d5d] dark:text-[#8e8e8e]">Đơn vị học tập:</span>
+                    <span className="font-medium text-[#0d0d0d] dark:text-white">Lớp 9¹, Trường THCS Vĩnh An (Vĩnh Long)</span>
+                  </div>
+                  <div className="flex justify-between py-2 border-b border-[#e5e5e5] dark:border-[#2a2a2a]">
+                    <span className="text-[#5d5d5d] dark:text-[#8e8e8e]">Mô hình AI cốt lõi:</span>
+                    <span className="font-mono text-[#0d0d0d] dark:text-white flex items-center gap-1">
+                      <Sparkles className="w-3.5 h-3.5" />
+                      ag/gemini-3.8-flash-high
+                    </span>
+                  </div>
+                  <div className="flex justify-between py-2 border-b border-[#e5e5e5] dark:border-[#2a2a2a]">
+                    <span className="text-[#5d5d5d] dark:text-[#8e8e8e]">Tiêu chuẩn can thiệp:</span>
+                    <span className="font-medium text-[#0d0d0d] dark:text-white">An toàn sinh học VietGAP</span>
+                  </div>
+                  <div className="flex justify-between py-2 border-b border-[#e5e5e5] dark:border-[#2a2a2a]">
+                    <span className="text-[#5d5d5d] dark:text-[#8e8e8e]">Độ tin cậy lâm sàng:</span>
+                    <span className="font-medium text-[#0d0d0d] dark:text-white">Nguyên tắc 3 Cấp độ chắc chắn</span>
+                  </div>
                 </div>
               </div>
             )}

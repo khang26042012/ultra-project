@@ -4,16 +4,16 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useChat } from '@/context/ChatContext';
 import ProfileMenu from './ProfileMenu';
 import {
-  PanelLeftClose,
-  Search,
   SquarePen,
+  Search,
+  PanelLeftClose,
   Trash2,
-  X,
   MessageSquare,
+  X,
   LogIn,
 } from 'lucide-react';
-import { TimeGroup } from '@/types/chat';
 import gsap from 'gsap';
+import { TimeGroup } from '@/types/chat';
 
 export default function AppSidebar() {
   const {
@@ -25,57 +25,55 @@ export default function AppSidebar() {
     isSidebarOpen,
     setIsSidebarOpen,
     toggleSidebar,
-    userProfile,
-    currentUser,
     setIsAuthModalOpen,
+    currentUser,
+    userProfile,
   } = useChat();
 
-  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearchVisible, setIsSearchVisible] = useState(false);
-  const sidebarRef = useRef<HTMLElement>(null);
-  const hasMounted = useRef(false);
+  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
 
-  // GSAP 60 FPS buttery smooth animation for Sidebar
+  const sidebarRef = useRef<HTMLElement>(null);
+  const prevOpenRef = useRef(isSidebarOpen);
+
+  // GSAP 60 FPS Smooth Slide Animation for Sidebar toggling
   useEffect(() => {
     if (!sidebarRef.current) return;
 
-    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-
-    if (!hasMounted.current) {
-      hasMounted.current = true;
-      if (isMobile) {
-        gsap.set(sidebarRef.current, { x: isSidebarOpen ? 0 : -270 });
-      } else {
-        gsap.set(sidebarRef.current, {
-          width: isSidebarOpen ? '260px' : '0px',
-          opacity: isSidebarOpen ? 1 : 0,
-        });
-      }
-      return;
-    }
-
-    if (isMobile) {
+    if (isSidebarOpen) {
       gsap.to(sidebarRef.current, {
-        x: isSidebarOpen ? 0 : -270,
-        duration: 0.28,
-        ease: 'power2.out',
+        x: 0,
+        opacity: 1,
+        width: 260,
+        duration: 0.3,
+        ease: 'power3.out',
+        display: 'flex',
       });
     } else {
       gsap.to(sidebarRef.current, {
-        width: isSidebarOpen ? '260px' : '0px',
-        opacity: isSidebarOpen ? 1 : 0,
-        duration: 0.28,
-        ease: 'power2.out',
+        x: -20,
+        opacity: 0,
+        width: 0,
+        duration: 0.25,
+        ease: 'power3.in',
+        onComplete: () => {
+          if (sidebarRef.current && !isSidebarOpen) {
+            sidebarRef.current.style.display = 'none';
+          }
+        },
       });
     }
+
+    prevOpenRef.current = isSidebarOpen;
   }, [isSidebarOpen]);
 
-  const groups: TimeGroup[] = ['Today', 'Yesterday', 'Previous 7 Days'];
-
+  // Filter conversations based on search
   const filteredConversations = conversations.filter((c) =>
     c.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  const groups: TimeGroup[] = ['Today', 'Yesterday', 'Previous 7 Days'];
 
   return (
     <>
@@ -105,14 +103,14 @@ export default function AppSidebar() {
             <div className="flex items-center gap-1">
               <button
                 onClick={() => setIsSearchVisible(!isSearchVisible)}
-                title="Search chats"
+                title="Tìm kiếm đoạn chat"
                 className="p-1.5 rounded-lg hover:bg-[#eaeaea] dark:hover:bg-[#252525] text-[#5d5d5d] hover:text-[#0d0d0d] dark:text-[#b4b4b4] dark:hover:text-white transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
               >
                 <Search className="w-4 h-4" strokeWidth={1.75} />
               </button>
               <button
                 onClick={toggleSidebar}
-                title="Hide sidebar"
+                title="Đóng sidebar"
                 className="p-1.5 rounded-lg hover:bg-[#eaeaea] dark:hover:bg-[#252525] text-[#5d5d5d] hover:text-[#0d0d0d] dark:text-[#b4b4b4] dark:hover:text-white transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
               >
                 <PanelLeftClose className="w-4 h-4" strokeWidth={1.75} />
@@ -126,7 +124,7 @@ export default function AppSidebar() {
               <div className="relative">
                 <input
                   type="text"
-                  placeholder="Search history..."
+                  placeholder="Tìm kiếm lịch sử..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full bg-[#ffffff] dark:bg-[#212121] text-xs text-[#0d0d0d] dark:text-white placeholder-[#8e8e8e] px-3 py-1.5 rounded-lg border border-[#e5e5e5] dark:border-[#383838] focus:border-[#0d0d0d] dark:focus:border-white outline-none transition-colors"
@@ -153,7 +151,7 @@ export default function AppSidebar() {
               className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl bg-[#ffffff] hover:bg-[#f0f0f0] dark:bg-[#212121] dark:hover:bg-[#2a2a2a] text-[#0d0d0d] dark:text-[#ececec] text-xs font-semibold transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer border border-[#e5e5e5] dark:border-[#2f2f2f] shadow-xs"
             >
               <SquarePen className="w-4 h-4 text-[#0d0d0d] dark:text-white" strokeWidth={1.75} />
-              <span>New chat</span>
+              <span>Đoạn chat mới</span>
             </button>
           </div>
 
@@ -165,11 +163,11 @@ export default function AppSidebar() {
             {/* Recents Section */}
             <div>
               <div className="px-3 py-1 text-[11px] font-semibold text-[#8e8e8e] uppercase tracking-wider">
-                Recents
+                Gần đây
               </div>
 
               {filteredConversations.length === 0 ? (
-                <div className="px-3 py-2 text-xs text-[#8e8e8e]">No chats found</div>
+                <div className="px-3 py-2 text-xs text-[#8e8e8e]">Chưa có đoạn chat nào</div>
               ) : (
                 groups.map((group) => {
                   const groupConvs = filteredConversations.filter((c) => c.group === group);
@@ -178,7 +176,7 @@ export default function AppSidebar() {
                   return (
                     <div key={group} className="mt-2 space-y-0.5">
                       <div className="px-3 py-1 text-[10px] font-medium text-[#8e8e8e]">
-                        {group}
+                        {group === 'Today' ? 'Hôm nay' : group === 'Yesterday' ? 'Hôm qua' : '7 ngày trước'}
                       </div>
                       {groupConvs.map((conv) => {
                         const isActive = conv.id === activeConversationId;
@@ -200,15 +198,15 @@ export default function AppSidebar() {
                               <span className="truncate">{conv.title}</span>
                             </div>
 
-                            {/* Delete button on hover */}
+                            {/* Delete button (accessible on hover on PC, visible on mobile) */}
                             <button
                               type="button"
                               onClick={(e) => {
                                 e.stopPropagation();
                                 deleteConversation(conv.id);
                               }}
-                              title="Delete chat"
-                              className="opacity-0 group-hover:opacity-100 p-1 hover:text-red-500 text-[#8e8e8e] transition-opacity cursor-pointer shrink-0"
+                              title="Xóa cuộc trò chuyện này"
+                              className="opacity-70 md:opacity-0 group-hover:opacity-100 p-1.5 rounded-lg hover:bg-[#eaeaea] dark:hover:bg-[#2e2e2e] hover:text-red-600 text-[#8e8e8e] transition-all cursor-pointer shrink-0"
                             >
                               <Trash2 className="w-3.5 h-3.5" strokeWidth={1.75} />
                             </button>
@@ -222,7 +220,7 @@ export default function AppSidebar() {
             </div>
           </div>
 
-          {/* Footer Profile / Auth Bar */}
+          {/* Footer Profile / Auth Bar & Author Attribution */}
           <div className="p-3 border-t border-[#e5e5e5] dark:border-[#262626] relative">
             {currentUser ? (
               <>
@@ -261,6 +259,19 @@ export default function AppSidebar() {
                 <span>Đăng nhập / Đăng ký</span>
               </button>
             )}
+
+            {/* Author Attribution Badge */}
+            <div className="mt-2.5 pt-2 border-t border-[#e5e5e5] dark:border-[#262626] text-center select-text">
+              <div className="text-[11px] font-medium text-[#0d0d0d] dark:text-white leading-tight">
+                AgriVision v1.0
+              </div>
+              <div className="text-[10px] text-[#5d5d5d] dark:text-[#a0a0a0] mt-0.5">
+                Tác giả: <span className="font-semibold text-[#0d0d0d] dark:text-white">Phan Trọng Khang</span>
+              </div>
+              <div className="text-[9.5px] text-[#8e8e8e] dark:text-[#777]">
+                Lớp 9¹, THCS Vĩnh An (Vĩnh Long)
+              </div>
+            </div>
           </div>
         </div>
       </aside>

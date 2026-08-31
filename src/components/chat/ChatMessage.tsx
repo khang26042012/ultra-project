@@ -124,7 +124,16 @@ export default function ChatMessage({ message }: ChatMessageProps) {
     return (
       <div ref={messageRef} className="flex justify-end mb-6">
         <div className="max-w-[85%] sm:max-w-[70%] bg-[#f4f4f4] dark:bg-[#2f2f2f] text-[#0d0d0d] dark:text-[#ececec] border border-[#e5e5e5] dark:border-transparent px-5 py-3.5 rounded-[24px] text-[15px] leading-relaxed shadow-xs">
-          <p className="whitespace-pre-wrap">{message.content}</p>
+          {message.imageUrl && (
+            <div className="mb-2.5 overflow-hidden rounded-2xl border border-[#dedede] dark:border-[#444] bg-black/5 max-w-sm">
+              <img
+                src={message.imageUrl}
+                alt="Ảnh đính kèm chẩn đoán"
+                className="w-full max-h-64 object-cover hover:scale-[1.02] transition-transform duration-200"
+              />
+            </div>
+          )}
+          {message.content && <p className="whitespace-pre-wrap">{message.content}</p>}
         </div>
       </div>
     );
