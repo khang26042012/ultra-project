@@ -1,47 +1,88 @@
-# 🌾 BẢN GIAO VIỆC TÍCH HỢP & NÂNG CẤP HỆ THỐNG: AGRIVISION (ULTRA PROJECT)
-
-**Dành cho:** Antigravity Agent  
-**Tác giả dự án:** Bạn **Phan Trọng Khang** — Học sinh lớp **9¹**, **Trường THCS Vĩnh An** (tỉnh Vĩnh Long)  
-**Mục tiêu:** Tích hợp bộ não chẩn đoán bệnh học lâm sàng, khóa chuẩn mô hình `ag/gemini-3.8-flash-high`, đồng bộ nhận diện thương hiệu và cơ chế lưu trữ dữ liệu hoàn chỉnh.
+# 🌾 BẢN NHIỆM VỤ NÂNG CẤP TOÀN DIỆN: AGENT LOOP, WEB SEARCH 9ROUTER, STREAM THINKING & PROMPT CACHE
+### Áp dụng cho: Repository `ultra-project` (Mô hình `ag/gemini-3.8-flash-high`)
 
 ---
 
-## 📋 DANH SÁCH 5 NHIỆM VỤ TÍCH HỢP BẮT BUỘC (TASKS):
+## 📋 DANH SÁCH CÁC HẠNG MỤC CẦN NÂNG CẤP (TASKS):
 
-### Task 1: Tích Hợp Master System Prompt Vào Luồng API Chat
-* **Vị trí thực thi:** `src/app/api/chat/route.ts` (hoặc lớp xử lý ngữ cảnh trước khi gọi Gateway).
-* **Nội dung:** Nhúng toàn bộ quy tắc bệnh học lâm sàng, danh tính tác giả Phan Trọng Khang (Lớp 9¹ THCS Vĩnh An) và quy tắc 3 cấp độ chắc chắn:
-  - Nếu độ tin cậy **< 100% (dù là 70-90%)**: Tuyệt đối **KHÔNG KẾT LUẬN KHẲNG ĐỊNH**, dùng từ thận trọng (*"Nghi ngờ cao..."*), **HỎI NGƯỢC LẠI NGƯỜI DÙNG** về cảm giác sờ nắn xúc giác, và khuyên liên hệ Trạm Khuyến nông / Chi cục Trồng trọt & BVTV Vĩnh Long.
-  - Xưng hô lễ phép bằng tiếng Việt: Xưng *"em"*, gọi người dùng là *"bác / chú / anh chị"*.
-  - Ưu tiên phác đồ sinh học an toàn VietGAP.
-
-### Task 2: Khóa Cứng Mô Hình & Duy Trì Cửa Sổ Ngữ Cảnh (Context Window)
-* **Model ID:** Luôn cố định là `ag/gemini-3.8-flash-high`.
-* **Duy trì Context Window:** Khi gửi request đến `http://nvnmc.asia:26627/v1/chat/completions`, phải truyền toàn bộ mảng `messages` lịch sử các lượt hội thoại trước đó để AI có trí nhớ ngữ cảnh xuyên suốt, không hỏi lặp lại thông tin đã cung cấp.
-
-### Task 3: Tối Ưu Nút Đính Kèm Ảnh & Giao Diện Quét
-* **Nút `+` (Đính kèm tệp / ảnh):**
-  - Cho phép người dùng bấm vào để chọn ảnh từ máy hoặc chụp trực tiếp từ camera.
-  - Tự động nén ảnh tối ưu và chuyển thành Base64 (`data:image/jpeg;base64,...`) gửi kèm trong payload `image_url`.
-  - Hiển thị thumbnail ảnh xem trước nhỏ gọn ngay phía trên ô nhập tin nhắn kèm nút `x` để hủy ảnh nếu muốn.
-
-### Task 4: Cơ Chế Lưu Trữ Lịch Sử Chat & Cài Đặt (Local Persistence)
-* Tự động lưu toàn bộ các cuộc trò chuyện, tin nhắn và hình ảnh vào `localStorage` theo từng phiên chat.
-* Khi người dùng F5 hoặc mở lại trình duyệt, các đoạn hội thoại cũ trong mục `RECENTS` tại Sidebar phải được khôi phục nguyên vẹn.
-* Thêm nút `Thùng rác` bên cạnh từng đoạn chat để người dùng có thể xóa khi không cần nữa.
-
-### Task 5: Đồng Bộ Thông Tin Tác Giả & Giao Diện Sáng (Light Mode Default)
-* Mặc định khi vào web luôn là **Light Mode** (nền trắng `#ffffff`, chữ đen `#0d0d0d`, icon đơn sắc monochrome thanh mảnh).
-* Tại chân Sidebar (Profile Area) hoặc Modal giới thiệu:
-  - Hiển thị trang trọng dòng chữ: **"AgriVision v1.0 — Tác giả: Phan Trọng Khang (Lớp 9¹, THCS Vĩnh An)"**.
+### Task 1: Xóa Bỏ Hoàn Toàn Thông Tin Tác Giả Ở Chân Sidebar
+- **Vị trí:** `src/components/sidebar/AppSidebar.tsx`
+- **Hành động:** 
+  - Tìm và xóa bỏ hoàn toàn khối `{/* Author Attribution Badge */}` (gồm dòng `AgriVision v1.0`, `Tác giả: Phan Trọng Khang`, `Lớp 9¹, THCS Vĩnh An (Vĩnh Long)` và đường kẻ `border-t`).
+  - Chân Sidebar chỉ giữ lại nút Đăng nhập / Profile menu người dùng.
 
 ---
 
-## 🚀 QUY TRÌNH HOÀN TẤT & TRIỂN KHAI:
-Sau khi hoàn thành các task trên, chạy lệnh kiểm tra, commit và push lên nhánh chính:
-```bash
-git add -A
-git commit -m "feat(agrivision): integrate master clinical pathology system prompt, locked gemini-3.8-flash-high, image attachment, and persistent storage"
-git push origin main
-```
-Render sẽ tự động build và deploy bản mới nhất tại: `https://ultra-project.onrender.com`.
+### Task 2: Tích Hợp Web Search Engine Từ 9Router
+- **Endpoint đã kiểm thử thành công (HTTP 200 OK):**
+  - **URL:** `http://nvnmc.asia:26627/v1/search`
+  - **Headers:** 
+    - `Authorization: Bearer sk-c276eac9b4322b74-tyrxri-1fc67c68`
+    - `Content-Type: application/json`
+  - **Payload mẫu:**
+    ```json
+    {
+      "model": "ag",
+      "query": "<từ khóa tìm kiếm>",
+      "search_type": "web",
+      "max_results": 5
+    }
+    ```
+  - **Dữ liệu trả về:** Mảng `results` (chứa `title`, `url`, `snippet`, `content`) và trường tóm tắt `answer.text`.
+
+---
+
+### Task 3: Cập Nhật Master System Prompt Với Quy Định Tra Cứu Khắt Khe (Search Policy)
+- **Vị trí:** `src/lib/systemPrompt.ts` (và `src/lib/system_prompt.md`)
+- **Nội dung bổ sung vào mục Quy Tắc Bắt Buộc:**
+  > **🛑 ĐIỀU LỆ TRA CỨU THỰC TẾ (WEB SEARCH POLICY):**
+  > 1. Khi đề cập đến **tên thuốc bảo vệ thực vật, tên thương phẩm, hoạt chất sinh học, nồng độ pha chế, danh mục thuốc được phép lưu hành theo quy định Cục BVTV tại Việt Nam**: Nếu chưa chắc chắn 100% hoặc thông tin cần cập nhật mới nhất ➔ **BẮT BUỘC PHẢI GỌI TOOL `web_search` ĐỂ TRA CỨU NGAY**!
+  > 2. Khi phân tích tình hình dịch bệnh mùa vụ, diễn biến thời tiết, hạn mặn tại **tỉnh Vĩnh Long và Đồng bằng sông Cửu Long**: **BẮT BUỘC PHẢI TRA CỨU THỰC TẾ** để có số liệu chính xác từ Chi cục Trồng trọt & BVTV Vĩnh Long.
+  > 3. Tuyệt đối không bịa đặt tên thuốc, liều lượng phun hay giá cả thị trường nếu chưa được kiểm chứng qua kết quả tìm kiếm.
+
+---
+
+### Task 4: Hiển Thị Luồng Suy Luận `<think>` (Stream Thinking Accordion theo chuẩn DSH)
+- Khi mô hình `ag/gemini-3.8-flash-high` gửi stream, chuỗi tư duy nằm trong `delta.reasoning_content` (hoặc bọc trong thẻ `<think>...</think>`).
+- **Xây dựng Component `ThinkingBlock.tsx` trong tin nhắn chat:**
+  - **Trong lúc đang stream suy luận:**
+    - Khối Thinking mở ra ở đầu tin nhắn với hiệu ứng động: Icon 🧠 xoay nhẹ hoặc nhấp nháy, hiển thị dòng suy luận đang chạy theo thời gian thực (`live reasoning throughput`).
+  - **Khi kết thúc suy luận (Settled / Bắt đầu ra câu trả lời chính):**
+    - Khối Thinking **TỰ ĐỘNG THU GỌN (COLLAPSE)** lại thành một thanh toggle nhỏ gọn thanh lịch:  
+      `💭 Đã suy luận trong Xs (Bấm để xem chi tiết)`.
+    - Người dùng có thể bấm vào để mở rộng/thu gọn xem toàn bộ Chain-of-Thought bất kỳ lúc nào.
+    - Màu sắc Light Mode: Nền xám nhạt `bg-[#f4f4f4]`, viền mảnh `border border-[#e5e5e5]`, chữ xám đen `text-[#5d5d5d]`.
+
+---
+
+### Task 5: Kiến Trúc Agent Loop Đa Bước & Giao Diện Gọi Tool Search (Mổ xẻ từ DeepSeek Harness)
+1. **Kiến trúc Vòng lặp Agent (`src/app/api/chat/route.ts` - Agent Loop Pattern):**
+   - Định nghĩa Tool `web_search` theo chuẩn Function Calling của OpenAI/Gemini:
+     ```json
+     {
+       "type": "function",
+       "function": {
+         "name": "web_search",
+         "description": "Tra cứu thông tin thực tế mới nhất về sâu bệnh, danh mục thuốc BVTV, tiêu chuẩn VietGAP và tình hình dịch hại tại Vĩnh Long.",
+         "parameters": {
+           "type": "object",
+           "properties": {
+             "query": { "type": "string", "description": "Từ khóa tìm kiếm chính xác" }
+           },
+           "required": ["query"]
+         }
+       }
+     }
+     ```
+   - **Vòng lặp đa bước (Loop API):**
+     - Khi Gemini trả về `tool_calls`:
+       1. Bắn sự kiện SSE về Frontend hiển thị trạng thái: `🔍 Đang tra cứu: "<query>"...`.
+       2. Gọi API `POST http://nvnmc.asia:26627/v1/search`.
+       3. Đóng gói kết quả tìm kiếm vào tin nhắn `role: "tool"` và tiếp tục gọi lại Gemini (`loop boundary`).
+       4. Vòng lặp tiếp tục tối đa 5 bước cho đến khi Gemini hoàn tất toàn bộ câu trả lời cuối cùng.
+2. **Giao Diện Hiển Thị Tool Call (Frontend Tool Presentation):**
+   - Khi đang tìm kiếm: Khối badge hiển thị nhấp nháy tinh tế: `🔍 Đang tra cứu dữ liệu thực tế: "..."`.
+   - Khi tìm xong: Hiển thị thanh nguồn trích dẫn: `🌐 Đã tham khảo N nguồn tin tức` (người dùng bấm vào có thể xem danh sách link nguồn có favicon và tiêu đề).
+3. **Tối Ưu Hóa Cache Prompt Token (DSH Prompt Cache Stability):**
+   - Đảm bảo **System Prompt** và danh mục **Tool Definitions** luôn được giữ nguyên vẹn ở vị trí đầu tiên của mảng tin nhắn (Static Prefix).
+   - Tuyệt đối không chèn timestamp ngẫu nhiên vào System Prompt để tận dụng tối đa cơ chế **Prompt Prefix Caching** của Gateway, giúp giảm 90% chi phí token và tăng tốc độ phản hồi tức thì.
