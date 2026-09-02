@@ -1,4 +1,11 @@
-export type Role = 'user' | 'assistant' | 'system';
+export type Role = 'user' | 'assistant' | 'system' | 'tool';
+
+export interface SearchSource {
+  title: string;
+  url: string;
+  snippet?: string;
+  favicon?: string;
+}
 
 export interface Message {
   id: string;
@@ -8,6 +15,10 @@ export interface Message {
   timestamp: string;
   isStreaming?: boolean;
   thought?: string;
+  isThinking?: boolean;
+  thinkingSeconds?: number;
+  searchingQuery?: string;
+  sources?: SearchSource[];
   model?: string;
 }
 
