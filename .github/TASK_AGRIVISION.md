@@ -32,7 +32,7 @@
 - **Endpoint 9Router:**
   - **URL:** `http://nvnmc.asia:26627/v1/search`
   - **Headers:** 
-    - `Authorization: Bearer sk-c276eac9b4322b74-tyrxri-1fc67c68`
+    - `Authorization: Bearer your_ai_gateway_key_here`
     - `Content-Type: application/json`
   - **Payload gửi đi:**
     ```json

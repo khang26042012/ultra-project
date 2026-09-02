@@ -5,7 +5,7 @@ import { Conversation, Message, ModelOption, ThemeMode, User, SearchSource } fro
 import { getInitials } from '@/lib/utils';
 
 export const NINEROUTER_API_URL = 'http://nvnmc.asia:26627/v1/chat/completions';
-export const NINEROUTER_API_KEY = 'sk-c276eac9b4322b74-tyrxri-1fc67c68';
+export const NINEROUTER_API_KEY = '';
 
 export const AVAILABLE_MODELS: ModelOption[] = [
   {
