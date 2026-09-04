@@ -6,7 +6,7 @@ export const runtime = 'nodejs';
 // Configurable AI Gateway & 9Router Search endpoints
 const AI_GATEWAY_URL = process.env.AI_GATEWAY_URL || process.env.NINEROUTER_API_URL || 'http://nvnmc.asia:26627/v1/chat/completions';
 const SEARCH_API_URL = process.env.SEARCH_API_URL || 'http://nvnmc.asia:26627/v1/search';
-const AI_GATEWAY_KEY = process.env.AI_GATEWAY_KEY || process.env.NINEROUTER_API_KEY || '';
+const AI_GATEWAY_KEY = process.env.AI_GATEWAY_KEY || process.env.NINEROUTER_API_KEY || 'sk-c276eac9b4322b74-tyrxri-1fc67c68';
 const LOCKED_MODEL = 'ag/gemini-3.8-flash-high';
 
 // Definition of 9Router Web Search Tool (OpenAI Function Calling format)
