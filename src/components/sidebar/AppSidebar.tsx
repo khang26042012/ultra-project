@@ -88,7 +88,7 @@ export default function AppSidebar() {
       {/* Sidebar Container */}
       <aside
         ref={sidebarRef}
-        className="fixed md:static inset-y-0 left-0 z-40 w-64 md:w-auto h-full bg-[#f7f7f8] dark:bg-[#171717] border-r border-[#e5e5e5] dark:border-[#262626] flex flex-col select-none no-scrollbar overflow-hidden"
+        className="fixed md:static inset-y-0 left-0 z-50 md:z-auto w-64 md:w-auto h-full bg-[#f7f7f8] dark:bg-[#171717] border-r border-[#e5e5e5] dark:border-[#262626] shadow-2xl md:shadow-none flex flex-col select-none no-scrollbar overflow-hidden"
       >
         <div className="w-64 min-w-[260px] flex flex-col h-full">
           {/* Top Header */}

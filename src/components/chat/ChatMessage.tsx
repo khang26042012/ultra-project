@@ -156,13 +156,37 @@ export default function ChatMessage({ message }: ChatMessageProps) {
         }
 
         // Headings
+        if (line.startsWith('##### ')) {
+          elements.push(
+            <h5
+              key={i}
+              className="text-xs font-semibold uppercase tracking-wider text-[#737373] dark:text-[#a3a3a3] mt-2.5 mb-1"
+            >
+              {formatInlineMarkdown(line.replace('##### ', ''))}
+            </h5>
+          );
+          i++;
+          continue;
+        }
+        if (line.startsWith('#### ')) {
+          elements.push(
+            <h4
+              key={i}
+              className="text-sm font-semibold text-[#0d0d0d] dark:text-[#ececec] mt-3 mb-1"
+            >
+              {formatInlineMarkdown(line.replace('#### ', ''))}
+            </h4>
+          );
+          i++;
+          continue;
+        }
         if (line.startsWith('### ')) {
           elements.push(
             <h3
               key={i}
               className="text-base font-semibold text-[#0d0d0d] dark:text-[#ececec] mt-3.5 mb-1.5"
             >
-              {line.replace('### ', '')}
+              {formatInlineMarkdown(line.replace('### ', ''))}
             </h3>
           );
           i++;
