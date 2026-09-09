@@ -70,7 +70,7 @@ async function executeWebSearch(query: string) {
 
 export async function POST(req: NextRequest) {
   try {
-    const { messages } = await req.json();
+    const { messages, model, webSearchEnabled = true } = await req.json();
 
     const incomingMessages = Array.isArray(messages) ? messages : [];
 
@@ -89,6 +89,10 @@ export async function POST(req: NextRequest) {
       ...conversationalMessages,
     ];
 
+    // Selected model fallback
+    const targetModel =
+      model === 'ag/gemini-3.8-flash' ? 'ag/gemini-3.8-flash' : LOCKED_MODEL;
+
     // Create readable stream for client SSE response
     const stream = new ReadableStream({
       async start(controller) {
@@ -105,19 +109,25 @@ export async function POST(req: NextRequest) {
           while (turn < maxTurns) {
             turn++;
 
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const requestPayload: any = {
+              model: targetModel,
+              messages: activeMessages,
+              stream: true,
+            };
+
+            if (webSearchEnabled !== false) {
+              requestPayload.tools = [WEB_SEARCH_TOOL];
+              requestPayload.tool_choice = 'auto';
+            }
+
             const gatewayRes = await fetch(AI_GATEWAY_URL, {
               method: 'POST',
               headers: {
                 'Authorization': `Bearer ${AI_GATEWAY_KEY}`,
                 'Content-Type': 'application/json',
               },
-              body: JSON.stringify({
-                model: LOCKED_MODEL,
-                messages: activeMessages,
-                tools: [WEB_SEARCH_TOOL],
-                tool_choice: 'auto',
-                stream: true,
-              }),
+              body: JSON.stringify(requestPayload),
             });
 
             if (!gatewayRes.ok) {

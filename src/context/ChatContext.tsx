@@ -1,19 +1,26 @@
 'use client';
 
 import React, { createContext, useContext, useState, useEffect, useRef, useCallback } from 'react';
-import { Conversation, Message, ModelOption, ThemeMode, User, SearchSource } from '@/types/chat';
+import { Conversation, Message, ModelOption, ThemeMode, User, SearchSource, FontSizeOption } from '@/types/chat';
 import { getInitials } from '@/lib/utils';
+import { supabase } from '@/lib/supabase';
 
 export const NINEROUTER_API_URL = 'http://nvnmc.asia:26627/v1/chat/completions';
-export const NINEROUTER_API_KEY = '';
+export const NINEROUTER_API_KEY = 'sk-c276eac9b4322b74-tyrxri-1fc67c68';
 
 export const AVAILABLE_MODELS: ModelOption[] = [
   {
     id: 'ag/gemini-3.8-flash-high',
     name: 'Gemini 3.8 Flash High',
-    description: 'High-reasoning multimodal profile for AgriVision with 9Router Web Search',
-    badge: 'Pro',
+    description: 'Mô hình suy luận lâm sàng chuyên sâu, bóc tách ca bệnh kép và tra cứu 9Router',
+    badge: 'Khuyên dùng',
     isDefault: true,
+  },
+  {
+    id: 'ag/gemini-3.8-flash',
+    name: 'Gemini 3.8 Flash',
+    description: 'Mô hình phản hồi siêu tốc, trả lời nhanh cho các câu hỏi phổ thông',
+    badge: 'Nhanh',
   },
 ];
 
@@ -27,11 +34,19 @@ interface ChatContextType {
   setSelectedModel: (model: string) => void;
   theme: ThemeMode;
   setTheme: (theme: ThemeMode) => void;
+  fontSize: FontSizeOption;
+  setFontSize: (size: FontSizeOption) => void;
+  isWebSearchEnabled: boolean;
+  setIsWebSearchEnabled: (enabled: boolean) => void;
+  isAutoScrollEnabled: boolean;
+  setIsAutoScrollEnabled: (enabled: boolean) => void;
   isSidebarOpen: boolean;
   setIsSidebarOpen: (open: boolean) => void;
   toggleSidebar: () => void;
   isSettingsOpen: boolean;
   setIsSettingsOpen: (open: boolean) => void;
+  isHelpOpen: boolean;
+  setIsHelpOpen: (open: boolean) => void;
   isUpgradeOpen: boolean;
   setIsUpgradeOpen: (open: boolean) => void;
   isAuthModalOpen: boolean;
@@ -41,6 +56,7 @@ interface ChatContextType {
   register: (name: string, email: string, password: string) => Promise<{ success: boolean; error?: string }>;
   logout: () => void;
   clearChatHistory: () => void;
+  exportBackupJson: () => void;
   isStreaming: boolean;
   createNewChat: () => void;
   selectConversation: (id: string) => void;
@@ -63,8 +79,12 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
   const [activeConversationId, setActiveConversationId] = useState<string | null>(null);
   const [selectedModel, setSelectedModel] = useState<string>('ag/gemini-3.8-flash-high');
   const [theme, setThemeState] = useState<ThemeMode>('light');
+  const [fontSize, setFontSizeState] = useState<FontSizeOption>('medium');
+  const [isWebSearchEnabled, setIsWebSearchEnabledState] = useState<boolean>(true);
+  const [isAutoScrollEnabled, setIsAutoScrollEnabledState] = useState<boolean>(true);
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState<boolean>(false);
+  const [isHelpOpen, setIsHelpOpen] = useState<boolean>(false);
   const [isUpgradeOpen, setIsUpgradeOpen] = useState<boolean>(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState<boolean>(false);
   const [isStreaming, setIsStreaming] = useState<boolean>(false);
@@ -75,44 +95,120 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
     return `agrivision_chats_${userId || 'guest'}`;
   }, []);
 
-  // Sync chats to server storage
-  const syncChatsToServer = useCallback(async (userId: string, data: Conversation[]) => {
+  // Supabase Sync Helpers
+  const syncProfileToSupabase = useCallback(async (user: User) => {
     try {
-      await fetch('/api/storage', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          type: 'sync_chats',
-          userId,
-          conversations: data,
-        }),
+      await supabase.from('profiles').upsert({
+        id: user.id,
+        email: user.email,
+        name: user.name,
+        role: 'farmer',
+        updated_at: new Date().toISOString(),
       });
-    } catch {
-      // background sync fail safe
+    } catch (err) {
+      console.warn('Supabase profile sync error:', err);
     }
   }, []);
 
-  // Sync user to server storage
-  const syncUserToServer = useCallback(async (user: User) => {
+  const syncConversationToSupabase = useCallback(async (conv: Conversation, userId?: string) => {
+    if (!userId) return;
     try {
-      await fetch('/api/storage', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          type: 'sync_user',
-          user,
-        }),
+      await supabase.from('conversations').upsert({
+        id: conv.id,
+        user_id: userId,
+        title: conv.title,
+        model: selectedModel,
+        updated_at: new Date().toISOString(),
       });
-    } catch {
-      // background sync fail safe
+    } catch (err) {
+      console.warn('Supabase conversation sync error:', err);
+    }
+  }, [selectedModel]);
+
+  const syncMessageToSupabase = useCallback(async (convId: string, msg: Message) => {
+    try {
+      await supabase.from('messages').upsert({
+        id: msg.id,
+        conversation_id: convId,
+        role: msg.role,
+        content: msg.content,
+        image_url: msg.imageUrl || null,
+        thought: msg.thought || null,
+        sources: msg.sources ? JSON.parse(JSON.stringify(msg.sources)) : null,
+        timestamp: msg.timestamp,
+      });
+    } catch (err) {
+      console.warn('Supabase message sync error:', err);
     }
   }, []);
 
-  // Load conversations for a specific user
+  const deleteConversationFromSupabase = useCallback(async (convId: string) => {
+    try {
+      await supabase.from('conversations').delete().eq('id', convId);
+    } catch (err) {
+      console.warn('Supabase delete conversation error:', err);
+    }
+  }, []);
+
+  // Load conversations for user: Supabase Cloud -> fallback localStorage
   const loadConversationsForUser = useCallback(async (userId?: string) => {
     const key = getChatStorageKey(userId);
     let loaded: Conversation[] = [];
 
+    // 1. Try Supabase Cloud DB first if logged in
+    if (userId) {
+      try {
+        const { data: convData, error: convError } = await supabase
+          .from('conversations')
+          .select('*')
+          .eq('user_id', userId)
+          .order('updated_at', { ascending: false });
+
+        if (!convError && Array.isArray(convData) && convData.length > 0) {
+          const convIds = convData.map((c) => c.id);
+          const { data: msgData, error: msgError } = await supabase
+            .from('messages')
+            .select('*')
+            .in('conversation_id', convIds)
+            .order('timestamp', { ascending: true });
+
+          const messagesByConv: Record<string, Message[]> = {};
+          if (!msgError && Array.isArray(msgData)) {
+            for (const m of msgData) {
+              if (!messagesByConv[m.conversation_id]) {
+                messagesByConv[m.conversation_id] = [];
+              }
+              messagesByConv[m.conversation_id].push({
+                id: m.id,
+                role: m.role,
+                content: m.content || '',
+                imageUrl: m.image_url || undefined,
+                thought: m.thought || undefined,
+                sources: m.sources || undefined,
+                timestamp: m.timestamp || new Date(m.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+              });
+            }
+          }
+
+          loaded = convData.map((c) => ({
+            id: c.id,
+            title: c.title,
+            group: 'Today',
+            updatedAt: c.updated_at,
+            messages: messagesByConv[c.id] || [],
+          }));
+
+          localStorage.setItem(key, JSON.stringify(loaded));
+          setConversations(loaded);
+          setActiveConversationId(loaded[0].id);
+          return;
+        }
+      } catch (sbErr) {
+        console.warn('Supabase load fallback to local:', sbErr);
+      }
+    }
+
+    // 2. Fallback to LocalStorage
     try {
       const local = localStorage.getItem(key);
       if (local) {
@@ -120,22 +216,6 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
       }
     } catch {
       // ignore
-    }
-
-    // If local was empty and we have a logged-in user, fetch from server file
-    if ((!loaded || loaded.length === 0) && userId) {
-      try {
-        const res = await fetch(`/api/storage?type=chats&userId=${encodeURIComponent(userId)}`);
-        if (res.ok) {
-          const srv = await res.json();
-          if (Array.isArray(srv.conversations) && srv.conversations.length > 0) {
-            loaded = srv.conversations;
-            localStorage.setItem(key, JSON.stringify(loaded));
-          }
-        }
-      } catch {
-        // ignore
-      }
     }
 
     setConversations(loaded || []);
@@ -168,23 +248,75 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  // Font size setting with persistence
+  const setFontSize = (size: FontSizeOption) => {
+    setFontSizeState(size);
+    try {
+      localStorage.setItem('agrivision-font-size', size);
+    } catch {
+      // ignore
+    }
+    if (typeof document !== 'undefined') {
+      document.documentElement.setAttribute('data-font-size', size);
+      const sizeMap = { small: '13px', medium: '15px', large: '17px' };
+      document.documentElement.style.setProperty('--app-font-size', sizeMap[size]);
+    }
+  };
+
+  const setIsWebSearchEnabled = (enabled: boolean) => {
+    setIsWebSearchEnabledState(enabled);
+    try {
+      localStorage.setItem('agrivision-web-search', enabled ? 'true' : 'false');
+    } catch {
+      // ignore
+    }
+  };
+
+  const setIsAutoScrollEnabled = (enabled: boolean) => {
+    setIsAutoScrollEnabledState(enabled);
+    try {
+      localStorage.setItem('agrivision-auto-scroll', enabled ? 'true' : 'false');
+    } catch {
+      // ignore
+    }
+  };
+
   // Initial load
   useEffect(() => {
     let initialTheme: ThemeMode = 'light';
+    let initialFontSize: FontSizeOption = 'medium';
+    let initialWebSearch = true;
+    let initialAutoScroll = true;
+
     try {
-      const saved = localStorage.getItem('agrivision-theme') as ThemeMode | null;
-      if (saved === 'light' || saved === 'dark' || saved === 'system') {
-        initialTheme = saved;
+      const savedTheme = localStorage.getItem('agrivision-theme') as ThemeMode | null;
+      if (savedTheme === 'light' || savedTheme === 'dark' || savedTheme === 'system') {
+        initialTheme = savedTheme;
+      }
+      const savedSize = localStorage.getItem('agrivision-font-size') as FontSizeOption | null;
+      if (savedSize === 'small' || savedSize === 'medium' || savedSize === 'large') {
+        initialFontSize = savedSize;
+      }
+      const savedSearch = localStorage.getItem('agrivision-web-search');
+      if (savedSearch !== null) {
+        initialWebSearch = savedSearch === 'true';
+      }
+      const savedScroll = localStorage.getItem('agrivision-auto-scroll');
+      if (savedScroll !== null) {
+        initialAutoScroll = savedScroll === 'true';
       }
     } catch {
       // ignore
     }
+
     setTheme(initialTheme);
+    setFontSize(initialFontSize);
+    setIsWebSearchEnabledState(initialWebSearch);
+    setIsAutoScrollEnabledState(initialAutoScroll);
 
     if (typeof window !== 'undefined') {
       setIsSidebarOpen(window.innerWidth >= 768);
 
-      // Check current session
       try {
         const rawUser = localStorage.getItem('agrivision_current_user');
         if (rawUser) {
@@ -200,7 +332,7 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
     }
   }, [loadConversationsForUser]);
 
-  // Persist conversations to localStorage and Server whenever they update
+  // Persist conversations to localStorage and Server
   const updateAndPersistConversations = useCallback(
     (updater: (prev: Conversation[]) => Conversation[]) => {
       setConversations((prev) => {
@@ -211,13 +343,10 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
         } catch {
           // ignore
         }
-        if (currentUser?.id) {
-          syncChatsToServer(currentUser.id, updated);
-        }
         return updated;
       });
     },
-    [currentUser?.id, getChatStorageKey, syncChatsToServer]
+    [currentUser?.id, getChatStorageKey]
   );
 
   // Authentication: Register
@@ -227,13 +356,6 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
       const localUsers = localStorage.getItem('agrivision_users');
       if (localUsers) {
         users = JSON.parse(localUsers);
-      } else {
-        // Fallback check server
-        const res = await fetch('/api/storage?type=users');
-        if (res.ok) {
-          const data = await res.json();
-          users = data.users || [];
-        }
       }
 
       const existing = users.find((u) => u.email.toLowerCase() === email.toLowerCase());
@@ -254,24 +376,26 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
       localStorage.setItem('agrivision_current_user', JSON.stringify(newUser));
       setCurrentUser(newUser);
 
-      // Migrate guest chats to new user if any
+      // Cloud profile sync
+      syncProfileToSupabase(newUser);
+
+      // Migrate guest chats to new user
       const guestKey = getChatStorageKey();
       const guestChats = localStorage.getItem(guestKey);
       if (guestChats) {
         try {
-          const parsed = JSON.parse(guestChats);
+          const parsed: Conversation[] = JSON.parse(guestChats);
           if (Array.isArray(parsed) && parsed.length > 0) {
             localStorage.setItem(getChatStorageKey(newUser.id), guestChats);
             setConversations(parsed);
-            syncChatsToServer(newUser.id, parsed);
+            for (const conv of parsed) {
+              syncConversationToSupabase(conv, newUser.id);
+            }
           }
         } catch {
           // ignore
         }
       }
-
-      // Background sync to server JSON
-      syncUserToServer(newUser);
 
       return { success: true };
     } catch (err: unknown) {
@@ -288,16 +412,6 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
         users = JSON.parse(localUsers);
       }
 
-      // Check server if not in local
-      if (users.length === 0) {
-        const res = await fetch('/api/storage?type=users');
-        if (res.ok) {
-          const data = await res.json();
-          users = data.users || [];
-          localStorage.setItem('agrivision_users', JSON.stringify(users));
-        }
-      }
-
       const match = users.find(
         (u) => u.email.toLowerCase() === email.toLowerCase() && u.passwordHash === password
       );
@@ -308,6 +422,7 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
 
       localStorage.setItem('agrivision_current_user', JSON.stringify(match));
       setCurrentUser(match);
+      syncProfileToSupabase(match);
       await loadConversationsForUser(match.id);
 
       return { success: true };
@@ -329,8 +444,32 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
 
   // Clear chat history for current user
   const clearChatHistory = () => {
+    if (currentUser?.id) {
+      supabase.from('conversations').delete().eq('user_id', currentUser.id).then();
+    }
     updateAndPersistConversations(() => []);
     setActiveConversationId(null);
+  };
+
+  // Export JSON Backup
+  const exportBackupJson = () => {
+    const backupData = {
+      project: 'AgriVision',
+      version: '1.0.0',
+      exportDate: new Date().toISOString(),
+      user: currentUser ? { id: currentUser.id, name: currentUser.name, email: currentUser.email } : null,
+      conversations,
+    };
+    const jsonStr = JSON.stringify(backupData, null, 2);
+    const blob = new Blob([jsonStr], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `agrivision-backup-${new Date().toISOString().slice(0, 10)}.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
   };
 
   const toggleSidebar = () => {
@@ -356,6 +495,7 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
   };
 
   const deleteConversation = (id: string) => {
+    deleteConversationFromSupabase(id);
     updateAndPersistConversations((prev) => prev.filter((c) => c.id !== id));
     if (activeConversationId === id) {
       setActiveConversationId(null);
@@ -364,11 +504,18 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
 
   const renameConversation = (id: string, newTitle: string) => {
     updateAndPersistConversations((prev) =>
-      prev.map((c) => (c.id === id ? { ...c, title: newTitle } : c))
+      prev.map((c) => {
+        if (c.id === id) {
+          const updated = { ...c, title: newTitle };
+          syncConversationToSupabase(updated, currentUser?.id);
+          return updated;
+        }
+        return c;
+      })
     );
   };
 
-  // Multi-step Agent Loop with 9Router Web Search & ChatGPT/Claude Reasoning Streaming
+  // Multi-step Agent Loop with 9Router Web Search & Reasoning Streaming
   const sendMessage = async (content: string, imageUrl?: string, thinkActive = false) => {
     const trimmedContent = content.trim();
     if ((!trimmedContent && !imageUrl) || isStreaming) return;
@@ -398,6 +545,9 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
       updateAndPersistConversations((prev) => [newConv, ...prev]);
       setActiveConversationId(targetConvId);
       currentMessages = [userMessage];
+
+      // Sync new conversation to Supabase
+      syncConversationToSupabase(newConv, currentUser?.id);
     } else {
       const conv = conversations.find((c) => c.id === targetConvId);
       currentMessages = conv ? [...conv.messages, userMessage] : [userMessage];
@@ -413,6 +563,9 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
         )
       );
     }
+
+    // Sync user message to Supabase
+    syncMessageToSupabase(targetConvId, userMessage);
 
     // Set up placeholder for streaming response
     const aiMessageId = `ai-${Date.now()}`;
@@ -437,7 +590,7 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
     setIsStreaming(true);
     abortControllerRef.current = new AbortController();
 
-    // Prepare full API history for AI Gateway (Full Context Window & Multimodal Image Support)
+    // Prepare full API history for AI Gateway
     const apiMessages = currentMessages.map((m) => {
       if (m.imageUrl) {
         return {
@@ -469,8 +622,9 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          model: 'ag/gemini-3.8-flash-high',
+          model: selectedModel || 'ag/gemini-3.8-flash-high',
           messages: apiMessages,
+          webSearchEnabled: isWebSearchEnabled,
         }),
         signal: abortControllerRef.current.signal,
       });
@@ -575,34 +729,35 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
         thinkingSeconds = Math.max(1, Math.round((Date.now() - startTime) / 1000));
       }
 
+      const finalAiMessage: Message = {
+        id: aiMessageId,
+        role: 'assistant',
+        content: accumulatedContent,
+        thought: accumulatedThought || undefined,
+        isStreaming: false,
+        isThinking: false,
+        searchingQuery: undefined,
+        thinkingSeconds:
+          thinkingSeconds ||
+          (accumulatedThought ? Math.max(1, Math.round((Date.now() - startTime) / 1000)) : undefined),
+        sources: currentSources.length > 0 ? currentSources : undefined,
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      };
+
       // Mark streaming complete and persist to storage
       updateAndPersistConversations((prev) =>
         prev.map((c) =>
           c.id === targetConvId
             ? {
                 ...c,
-                messages: c.messages.map((m) =>
-                  m.id === aiMessageId
-                    ? {
-                        ...m,
-                        content: accumulatedContent,
-                        thought: accumulatedThought || undefined,
-                        isStreaming: false,
-                        isThinking: false,
-                        searchingQuery: undefined,
-                        thinkingSeconds:
-                          thinkingSeconds ||
-                          (accumulatedThought
-                            ? Math.max(1, Math.round((Date.now() - startTime) / 1000))
-                            : undefined),
-                        sources: currentSources.length > 0 ? currentSources : undefined,
-                      }
-                    : m
-                ),
+                messages: c.messages.map((m) => (m.id === aiMessageId ? finalAiMessage : m)),
               }
             : c
         )
       );
+
+      // Sync completed assistant message to Supabase
+      syncMessageToSupabase(targetConvId, finalAiMessage);
     } catch (err: unknown) {
       if ((err as Error)?.name === 'AbortError') {
         console.log('Stream aborted');
@@ -652,11 +807,19 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
         setSelectedModel,
         theme,
         setTheme,
+        fontSize,
+        setFontSize,
+        isWebSearchEnabled,
+        setIsWebSearchEnabled,
+        isAutoScrollEnabled,
+        setIsAutoScrollEnabled,
         isSidebarOpen,
         setIsSidebarOpen,
         toggleSidebar,
         isSettingsOpen,
         setIsSettingsOpen,
+        isHelpOpen,
+        setIsHelpOpen,
         isUpgradeOpen,
         setIsUpgradeOpen,
         isAuthModalOpen,
@@ -666,6 +829,7 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
         register,
         logout,
         clearChatHistory,
+        exportBackupJson,
         isStreaming,
         createNewChat,
         selectConversation,

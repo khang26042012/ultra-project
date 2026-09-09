@@ -1,0 +1,3708 @@
+[
+  {
+    "id": "crop_001",
+    "topic": "Cay_An_Trai_Dac_San",
+    "name_vi": "Bưởi Năm Roi Bình Minh",
+    "scientific_name": "Citrus maxima 'Nam Roi'",
+    "dia_ban_pho_bien": [
+      "Bình Minh",
+      "Tam Bình",
+      "Trà Ôn"
+    ],
+    "dac_tinh_sinh_thai": "Cây ưa đất phù sa bồi lắng ven sông Hậu, thoát nước tốt, pH thích hợp từ 5.5 - 6.5, cực kỳ mẫn cảm với úng và mặn.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Vàng lá gân xanh (Huanglongbing - HLB)",
+        "muc_do_nguy_hiem": "Cực kỳ nghiêm trọng (Hiểm nghèo)",
+        "tac_nhan": {
+          "loai": "Vi khuẩn",
+          "ten_khoa_hoc": "Candidatus Liberibacter asiaticus",
+          "vector_truyen_benh": "Rầy chổng cánh (Diaphorina citri)"
+        },
+        "trieu_chung_dien_hinh": [
+          "Phiến lá vàng lốm đốm loang lổ không đối xứng (mottling)",
+          "Gân chính và gân phụ vẫn giữ màu xanh đậm hoặc bị sưng gồ, hóa bần",
+          "Lá nhỏ lại, dựng đứng như tai thỏ, đọt non ngắn ngủn",
+          "Trái méo mó, tâm lệch, tép khô xơ, vị chua đắng"
+        ],
+        "phan_biet_chan_doan_kep": "Khác với thiếu kẽm (vết vàng đối xứng đều hai bên gân) và vàng lá thối rễ (vàng cả gân lẫn phiến lá, rễ tơ bị thối tuột vỏ)",
+        "kiem_tra_thuc_dia": "Kiểm tra mặt dưới lá và đọt non tìm rầy chổng cánh đuôi vểnh 45 độ; kiểm tra tính bất đối xứng của vết vàng phiến lá",
+        "phac_do_vietgap": {
+          "canh_tac": "Cắt bỏ tiêu hủy cây bệnh nặng, trồng cây sạch bệnh vi ghép đỉnh sinh trưởng, tạo tán thông thoáng",
+          "sinh_hoc": "Nuôi kiến vàng khống chế rầy chổng cánh, phun nấm ký sinh Beauveria bassiana hoặc dầu khoáng SK Enspray 99EC",
+          "khuyen_cao_vinh_long": "Liên hệ Trạm Khuyến nông Bình Minh / Tam Bình để lấy mẫu xét nghiệm PCR khi phát hiện triệu chứng nghi ngờ"
+        }
+      },
+      {
+        "ten_benh": "Bệnh Ghẻ loét vi khuẩn (Citrus Canker)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Vi khuẩn",
+          "ten_khoa_hoc": "Xanthomonas citri subsp. citri"
+        },
+        "trieu_chung_dien_hinh": [
+          "Vết loét ban đầu là nốt sần nhỏ ngậm nước ở mặt dưới lá",
+          "Vết bệnh phát triển sùi lên, màu nâu xám, rách ở giữa như miệng núi lửa thu nhỏ",
+          "Xung quanh vết loét luôn có quầng vàng sáng rực rỡ đặc trưng",
+          "Xuất hiện trên cả chồi non, cành và vỏ bưởi làm sượng trái"
+        ],
+        "phan_biet_chan_doan_kep": "Khác với Ghẻ nhám: Ghẻ loét có miệng núi lửa và quầng vàng bao quanh; Ghẻ nhám chóp nhọn nhô lên như hạt mụn cơm và không có quầng vàng",
+        "kiem_tra_thuc_dia": "Dùng kính lúp kiểm tra vết nứt miệng núi lửa và quầng halo sáng màu",
+        "phac_do_vietgap": {
+          "canh_tac": "Tỉa bỏ cành lá nhiễm bệnh sau mỗi đợt lộc non, khử trùng kéo cắt cành bằng cồn",
+          "sinh_hoc": "Phun phòng luân phiên các hoạt chất gốc đồng nano sinh học, Kasugamycin, nấm đối kháng Bacillus subtilis",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_002",
+    "topic": "Cay_An_Trai_Dac_San",
+    "name_vi": "Bưởi Da Xanh",
+    "scientific_name": "Citrus maxima 'Da Xanh'",
+    "dia_ban_pho_bien": [
+      "Vũng Liêm",
+      "Trà Ôn",
+      "Mang Thít",
+      "Long Hồ"
+    ],
+    "dac_tinh_sinh_thai": "Thích nghi tốt vùng đất phù sa ven sông Cổ Chiên, nhạy cảm với phèn mặn và úng rễ mùa triều cường.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Vàng lá thối rễ",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Tổ hợp Nấm & Tuyến trùng",
+          "ten_khoa_hoc": "Phytophthora nicotianae, Fusarium solani & Tylenchulus semipenetrans"
+        },
+        "trieu_chung_dien_hinh": [
+          "Gân lá và phiến lá đồng loạt ngả vàng rực",
+          "Lá rụng lác đác từ đọt non xuống dần cành già",
+          "Hệ thống rễ tơ bị thối đen, tuột vỏ trơ lại lõi gỗ mục nát, có mùi ẩm mốc"
+        ],
+        "phan_biet_chan_doan_kep": "Khác với bệnh Greening: Vàng lá thối rễ vàng đều cả lá và rụng trút lá hàng loạt, rễ tơ bị hư hại nặng nề",
+        "kiem_tra_thuc_dia": "Bới nhẹ lớp đất vùng rìa tán lá để kiểm tra đầu chóp rễ tơ và vỏ rễ",
+        "phac_do_vietgap": {
+          "canh_tac": "Đào rãnh thoát nước sâu giữa các liếp bưởi, rải vôi bột (500g/cây) khử trùng đất và ổn định pH 6.0",
+          "sinh_hoc": "Tưới nấm đối kháng Trichoderma harzianum + Streptomyces kết hợp hoạt chất trừ tuyến trùng sinh học Chitosan",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_003",
+    "topic": "Cay_An_Trai_Dac_San",
+    "name_vi": "Cam Sành Tam Bình",
+    "scientific_name": "Citrus nobilis",
+    "dia_ban_pho_bien": [
+      "Tam Bình",
+      "Trà Ôn",
+      "Bình Tân",
+      "Vũng Liêm"
+    ],
+    "dac_tinh_sinh_thai": "Giống cây trồng chủ lực của tỉnh Vĩnh Long, năng suất cao nhưng đòi hỏi kỹ thuật lên liếp xẻ mương và chế độ chăm sóc khắt khe.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Vàng lá gân xanh (HLB) trên Cam sành",
+        "muc_do_nguy_hiem": "Cực kỳ nghiêm trọng",
+        "tac_nhan": {
+          "loai": "Vi khuẩn",
+          "ten_khoa_hoc": "Candidatus Liberibacter asiaticus",
+          "vector_truyen_benh": "Rầy chổng cánh"
+        },
+        "trieu_chung_dien_hinh": [
+          "Lá cam sành co nhỏ, vàng loang lổ, gân chính nổi cộm",
+          "Cây ra hoa trái vụ liên tục nhưng rụng non gần hết",
+          "Rễ suy kiệt nhanh chóng khiến cả vườn lụi tàn sau 2-3 năm nhiễm bệnh"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt kỹ với nấm Fusarium: Bệnh HLB có triệu chứng gân lá sưng gồ và lá dựng đứng tai thỏ",
+        "kiem_tra_thuc_dia": "Dùng bẫy dính màu vàng theo dõi mật độ rầy chổng cánh trong vườn",
+        "phac_do_vietgap": {
+          "canh_tac": "Trồng xen ổi xá lị hoặc ổi nữ hoàng để xua đuổi rầy chổng cánh bằng hương tinh dầu tự nhiên",
+          "sinh_hoc": "Ứng dụng chế phẩm vi sinh Metarhizium anisopliae + Beauveria bassiana xịt khi cây nhú lộc 1-2cm",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_004",
+    "topic": "Cay_An_Trai_Dac_San",
+    "name_vi": "Cam Xoàn",
+    "scientific_name": "Citrus sinensis",
+    "dia_ban_pho_bien": [
+      "Trà Ôn",
+      "Vũng Liêm",
+      "Tam Bình"
+    ],
+    "dac_tinh_sinh_thai": "Trái ngọt thanh mát, vỏ mỏng có đồng tiền ở đít trái, mẫn cảm với nhện đỏ và bệnh thán thư vào mùa mưa ẩm.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Thán thư hại hoa và trái non",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Colletotrichum gloeosporioides"
+        },
+        "trieu_chung_dien_hinh": [
+          "Cánh hoa xuất hiện đốm màu nâu cam sũng nước rồi thối rụng",
+          "Trái non bị đốm đen lõm sâu, cuống trái chuyển màu nâu làm rụng cuống trơ đài"
+        ],
+        "phan_biet_chan_doan_kep": "Khác với rụng trái do sốc nước (cuống hoa tươi rụng, không có quầng nâu đen)",
+        "kiem_tra_thuc_dia": "Kiểm tra cuống hoa và chồi non sau mưa đêm ẩm ướt",
+        "phac_do_vietgap": {
+          "canh_tac": "Bón Canxi-Bo tăng độ dai cuống quả, cắt tỉa thông thoáng tán",
+          "sinh_hoc": "Phun phòng bằng nấm đối kháng Chaetomium hoặc nấm Bacillus subtilis",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_005",
+    "topic": "Cay_An_Trai_Dac_San",
+    "name_vi": "Quýt Đường",
+    "scientific_name": "Citrus reticulata",
+    "dia_ban_pho_bien": [
+      "Tam Bình",
+      "Bình Tân",
+      "Trà Ôn"
+    ],
+    "dac_tinh_sinh_thai": "Cây phát triển mạnh trên đất thịt phù sa dày, trái mọng nước ngọt đậm, vỏ mỏng dễ nhiễm côn trùng chích hút.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Đốm dầu lá và trái (Greasy Spot)",
+        "muc_do_nguy_hiem": "Trung bình",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Mycosphaerella citri"
+        },
+        "trieu_chung_dien_hinh": [
+          "Mặt dưới lá xuất hiện vết nâu đen như vết dầu loang bóng dính",
+          "Mặt trên lá biến vàng tương ứng, gây rụng lá sớm làm kiệt sức cây"
+        ],
+        "phan_biet_chan_doan_kep": "Vết dầu loang ăn sâu vào biểu bì lá không lau rửa được",
+        "kiem_tra_thuc_dia": "Soi mặt dưới phiến lá tầng trung gian dưới tán",
+        "phac_do_vietgap": {
+          "canh_tac": "Thu gom tàn dư lá rụng dưới gốc tiêu hủy",
+          "sinh_hoc": "Phun dầu khoáng trắng phối hợp nấm Trichoderma",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_006",
+    "topic": "Cay_An_Trai_Dac_San",
+    "name_vi": "Quýt Hồng Lai Vung / Trà Ôn",
+    "scientific_name": "Citrus reticulata 'Hong'",
+    "dia_ban_pho_bien": [
+      "Trà Ôn",
+      "Vũng Liêm",
+      "Tam Bình"
+    ],
+    "dac_tinh_sinh_thai": "Vỏ màu cam đỏ rực rỡ vào dịp Tết Nguyên Đán, tán rộng, rất nhạy cảm với ngập úng tầng rễ mặt.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Đốm nâu quả quýt (Alternaria Brown Spot)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Alternaria alternata pv. citri"
+        },
+        "trieu_chung_dien_hinh": [
+          "Đốm nâu đen có quầng vàng xuất hiện trên lộc non và vỏ quả quýt",
+          "Làm quả non rụng sớm, quả già sượng vỏ chai múi mất giá trị"
+        ],
+        "phan_biet_chan_doan_kep": "Không có miệng núi lửa như loét vi khuẩn",
+        "kiem_tra_thuc_dia": "Quan sát lộc non và vỏ quả thời kỳ nuôi trái",
+        "phac_do_vietgap": {
+          "canh_tac": "Tránh tưới phun mưa trực tiếp lên tán vào chiều tối ẩm",
+          "sinh_hoc": "Phun phòng bằng chế phẩm vi sinh Bacillus amyloliquefaciens",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_007",
+    "topic": "Cay_An_Trai_Dac_San",
+    "name_vi": "Chanh Không Hạt (Limca)",
+    "scientific_name": "Citrus latifolia",
+    "dia_ban_pho_bien": [
+      "Bình Minh",
+      "Bình Tân",
+      "Long Hồ"
+    ],
+    "dac_tinh_sinh_thai": "Cây sinh trưởng nhanh, cho trái quanh năm, chịu hạn khá nhưng dễ bị ghẻ nhám và xì mủ gốc nếu đất chua trũng phèn.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Ghẻ nhám sẹo (Citrus Scab)",
+        "muc_do_nguy_hiem": "Trung bình",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Elsinoë fawcettii"
+        },
+        "trieu_chung_dien_hinh": [
+          "Nốt sẹo mụn cơm nhô cao màu vàng nâu sần sùi ở mặt dưới lá và vỏ quả",
+          "Phiến lá non biến dạng vặn vẹo hình lòng chảo"
+        ],
+        "phan_biet_chan_doan_kep": "Khác ghẻ loét: Ghẻ nhám không có miệng núi lửa và không có quầng vàng halo",
+        "kiem_tra_thuc_dia": "Dùng tay sờ bề mặt lộc non thấy ráp nhám rõ rệt",
+        "phac_do_vietgap": {
+          "canh_tac": "Cắt tỉa cành tăm, chồi vượt sau mỗi vụ thu hoạch",
+          "sinh_hoc": "Phun nano đồng sinh học hoặc tinh dầu neem hữu cơ",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_008",
+    "topic": "Cay_An_Trai_Dac_San",
+    "name_vi": "Chanh Giấy Vĩnh Long",
+    "scientific_name": "Citrus aurantifolia",
+    "dia_ban_pho_bien": [
+      "Long Hồ",
+      "Tam Bình",
+      "Trà Ôn"
+    ],
+    "dac_tinh_sinh_thai": "Vỏ mỏng thơm nồng, rất mẫn cảm với virus Tristeza truyền qua rệp muội đen.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Tàn lụi gân trong (Citrus Tristeza Virus)",
+        "muc_do_nguy_hiem": "Cực kỳ nghiêm trọng",
+        "tac_nhan": {
+          "loai": "Virus",
+          "ten_khoa_hoc": "Citrus tristeza virus (CTV)",
+          "vector_truyen_benh": "Rệp muội đen (Toxoptera citricida)"
+        },
+        "trieu_chung_dien_hinh": [
+          "Gân phụ lá non trong suốt khi soi ngược ánh sáng (vein clearing)",
+          "Thân cành bị lõm gai châm kim ăn vào phần gỗ khi bóc vỏ",
+          "Cây sinh trưởng còi cọc tàn lụi nhanh"
+        ],
+        "phan_biet_chan_doan_kep": "Dấu hiệu gai châm kim thân gỗ là triệu chứng độc quyền của CTV",
+        "kiem_tra_thuc_dia": "Cạo vỏ thân xem có các lỗ nhỏ ăn sâu vào lõi gỗ hay không",
+        "phac_do_vietgap": {
+          "canh_tac": "Trồng bằng mắt ghép trên gốc chống chịu như Volkameriana",
+          "sinh_hoc": "Phun dầu khoáng sinh học bảo vệ thiên địch bọ rùa đỏ",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_009",
+    "topic": "Cay_An_Trai_Dac_San",
+    "name_vi": "Sầu Riêng Ri6 Vĩnh Long",
+    "scientific_name": "Durio zibethinus 'Ri6'",
+    "dia_ban_pho_bien": [
+      "Long Hồ",
+      "Vũng Liêm",
+      "Mang Thít",
+      "Tam Bình"
+    ],
+    "dac_tinh_sinh_thai": "Cội nguồn cù lao Long Hồ, cơm vàng hạt lép, rất mẫn cảm với nấm Phytophthora gây xì mủ thối trái.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Xì mủ thối gốc chảy nhựa (Phytophthora)",
+        "muc_do_nguy_hiem": "Cực kỳ nghiêm trọng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Phytophthora palmivora"
+        },
+        "trieu_chung_dien_hinh": [
+          "Cổ rễ và thân chính xì mủ nhờn màu nâu đỏ, gỗ thâm đen",
+          "Lá vàng úa và rụng trút hàng loạt làm cây trơ cành",
+          "Trái sầu riêng bị thối đen từ rốn quả, có mùi chua nồng và mốc trắng"
+        ],
+        "phan_biet_chan_doan_kep": "Khác sâu đục thân (sâu đục thân có đùn mùn cưa ra ngoài)",
+        "kiem_tra_thuc_dia": "Bới kiểm tra vùng cổ rễ tiếp giáp mặt đất vào buổi sáng ẩm",
+        "phac_do_vietgap": {
+          "canh_tac": "Xới rãnh thoát nước, phơi gốc cổ rễ, quét vôi cao 1m định kỳ",
+          "sinh_hoc": "Tiêm thân lân hai chiều Phosphonate (Agri-Fos), tưới gốc Trichoderma + Chaetomium",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_010",
+    "topic": "Cay_An_Trai_Dac_San",
+    "name_vi": "Sầu Riêng Monthong (Dona)",
+    "scientific_name": "Durio zibethinus 'Monthong'",
+    "dia_ban_pho_bien": [
+      "Vũng Liêm",
+      "Trà Ôn",
+      "Long Hồ"
+    ],
+    "dac_tinh_sinh_thai": "Cơm dày ngọt béo ngậy, tán cây vươn cao, dễ bị bệnh cháy lá chết ngọn Rhizoctonia trong mùa mưa.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Cháy lá chết ngọn (Rhizoctonia)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Rhizoctonia solani"
+        },
+        "trieu_chung_dien_hinh": [
+          "Lá non sũng nước như luộc sôi dính bết lại bởi mạng tơ nấm trắng bạc",
+          "Vết cháy chuyển sang nâu sậm, lá dính tòng teng trên cành",
+          "Đọt non thối đen thụt lùi làm khô trơ cành"
+        ],
+        "phan_biet_chan_doan_kep": "Mạng tơ nấm trắng đan dính chùm các lá non với nhau",
+        "kiem_tra_thuc_dia": "Kiểm tra chùm lá đọt non lúc sáng sớm sương ướt",
+        "phac_do_vietgap": {
+          "canh_tac": "Cắt tỉa cành la sát đất, tạo độ thông thoáng vi khí hậu tán",
+          "sinh_hoc": "Phun Validamycin sinh học hoặc nấm Trichoderma viride",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_011",
+    "topic": "Cay_An_Trai_Dac_San",
+    "name_vi": "Xoài Cát Hòa Lộc",
+    "scientific_name": "Mangifera indica 'Hoa Loc'",
+    "dia_ban_pho_bien": [
+      "Vũng Liêm",
+      "Mang Thít",
+      "Long Hồ"
+    ],
+    "dac_tinh_sinh_thai": "Vua của các loài xoài tại ĐBSCL, thịt thơm ngọt đậm đà, rất dễ bị bệnh thán thư phá hại chùm bông và da trái.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Thán thư bông và trái xoài",
+        "muc_do_nguy_hiem": "Nặng (Gây mất mùa bông xoài)",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Colletotrichum gloeosporioides"
+        },
+        "trieu_chung_dien_hinh": [
+          "Chùm bông xoài xuất hiện nhiều chấm đen li ti rồi khô đen rụng cuống",
+          "Vỏ trái chín có đốm đen tròn lõm xuống, thịt quả bên dưới bị chua thối"
+        ],
+        "phan_biet_chan_doan_kep": "Khác bọ trĩ (bọ trĩ làm cọng hoa cong queo có phân đen bài tiết)",
+        "kiem_tra_thuc_dia": "Gõ nhẹ chùm bông lên giấy trắng kiểm tra bọ trĩ kết hợp soi vết thán thư",
+        "phac_do_vietgap": {
+          "canh_tac": "Rung bông rũ nước mưa sau cơn mưa đêm, bao trái bằng túi giấy chuyên dụng",
+          "sinh_hoc": "Phun phòng nấm Chaetomium hoặc thuốc sinh học nguồn gốc Eugenol thảo mộc",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_012",
+    "topic": "Cay_An_Trai_Dac_San",
+    "name_vi": "Xoài Cát Chu",
+    "scientific_name": "Mangifera indica 'Cat Chu'",
+    "dia_ban_pho_bien": [
+      "Long Hồ",
+      "Mang Thít",
+      "Vũng Liêm"
+    ],
+    "dac_tinh_sinh_thai": "Trái thon nhỏ, thịt vàng ươm, dễ xử lý ra hoa nhưng hay bị đốm đen vi khuẩn xì mủ chân chim.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Đốm đen vi khuẩn chân chim (Xanthomonas)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Vi khuẩn",
+          "ten_khoa_hoc": "Xanthomonas campestris pv. mangiferaeindicae"
+        },
+        "trieu_chung_dien_hinh": [
+          "Đốm đen hình góc cạnh chân chim rỉ mủ nhớt trên vỏ quả và phiến lá",
+          "Cành non loét đen dễ gãy khi có gió to"
+        ],
+        "phan_biet_chan_doan_kep": "Vết bệnh chân chim nứt nẻ và chảy mủ nhớt tanh đặc thù vi khuẩn",
+        "kiem_tra_thuc_dia": "Ngâm mẩu mô bệnh vào ly nước xem dòng vi khuẩn đùn ra đục nước",
+        "phac_do_vietgap": {
+          "canh_tac": "Khử trùng kéo cắt cành, cắt bỏ cành bệnh tiêu hủy",
+          "sinh_hoc": "Phun Kasugamycin hoặc đồng nano sinh học",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_013",
+    "topic": "Cay_An_Trai_Dac_San",
+    "name_vi": "Xoài Tượng",
+    "scientific_name": "Mangifera indica",
+    "dia_ban_pho_bien": [
+      "Long Hồ",
+      "Tam Bình",
+      "Trà Ôn"
+    ],
+    "dac_tinh_sinh_thai": "Trái to nặng từ 0.8 - 1.5kg, ăn giòn thơm, chịu đất sét pha tốt.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Phấn trắng hại xoài",
+        "muc_do_nguy_hiem": "Trung bình",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Oidium mangiferae"
+        },
+        "trieu_chung_dien_hinh": [
+          "Lớp phấn màu trắng xám như bột mì phủ trên cọng bông và lá non",
+          "Hoa không thụ phấn được và khô rụng hàng loạt"
+        ],
+        "phan_biet_chan_doan_kep": "Lớp bụi phấn trắng phủ ngoài dễ lau bay",
+        "kiem_tra_thuc_dia": "Soi chùm hoa lúc sương sớm mùa lạnh",
+        "phac_do_vietgap": {
+          "canh_tac": "Tỉa thông thoáng cho ánh nắng chiếu vào tán",
+          "sinh_hoc": "Phun lưu huỳnh sinh học hoặc dung dịch baking soda pha loãng 0.3%",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_014",
+    "topic": "Cay_An_Trai_Dac_San",
+    "name_vi": "Nhãn Xuồng Cơm Vàng",
+    "scientific_name": "Dimocarpus longan 'Xuong Com Vang'",
+    "dia_ban_pho_bien": [
+      "Long Hồ",
+      "Vũng Liêm",
+      "Trà Ôn"
+    ],
+    "dac_tinh_sinh_thai": "Cơm dày ngọt ráo nước màu vàng nhạt, chịu phèn nhẹ, mẫn cảm với bệnh chổi rồng.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Chổi rồng hại nhãn",
+        "muc_do_nguy_hiem": "Cực kỳ nghiêm trọng",
+        "tac_nhan": {
+          "loai": "Virus / Phytoplasma liên kết",
+          "ten_khoa_hoc": "Longan witches' broom-associated virus",
+          "vector_truyen_benh": "Nhện lông nhung (Eriophyes dimocarpi)"
+        },
+        "trieu_chung_dien_hinh": [
+          "Chồi non xoăn tít, lóng ngắn cũn cỡn tụ lại thành chùm như chổi rơm",
+          "Chùm hoa khô queo thành bùi nhùi không thể thụ phấn đậu trái"
+        ],
+        "phan_biet_chan_doan_kep": "Hình dạng bó chổi rơm không thể nhầm lẫn với bệnh nào khác",
+        "kiem_tra_thuc_dia": "Dùng kính lúp soi đọt non tìm nhện lông nhung trắng li ti",
+        "phac_do_vietgap": {
+          "canh_tac": "Cắt sâu vào cành gỗ lành 20-30cm tiêu hủy triệt để tàn dư",
+          "sinh_hoc": "Phun dầu khoáng SK Enspray trừ nhện lông nhung khi cây nhú lộc non",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_015",
+    "topic": "Cay_An_Trai_Dac_San",
+    "name_vi": "Nhãn Ido",
+    "scientific_name": "Dimocarpus longan 'Ido'",
+    "dia_ban_pho_bien": [
+      "Long Hồ",
+      "Mang Thít",
+      "Tam Bình",
+      "Trà Ôn"
+    ],
+    "dac_tinh_sinh_thai": "Kháng bệnh chổi rồng khá tốt, năng suất cao, tỷ lệ đậu trái tốt trên đất cù lao ven sông.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Thối trái sương mai (Phytophthora)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Phytophthora sp."
+        },
+        "trieu_chung_dien_hinh": [
+          "Vỏ trái có đốm nâu tròn rồi lan rộng ra cả chùm quả",
+          "Cơm nhãn bên trong úng nước có mùi chua nồng và thối rữa"
+        ],
+        "phan_biet_chan_doan_kep": "Khác bồ hóng: Thối sương mai làm hỏng thối cơm ruột quả",
+        "kiem_tra_thuc_dia": "Kiểm tra chùm quả sau đợt mưa rào dầm dề",
+        "phac_do_vietgap": {
+          "canh_tac": "Cắt tỉa chùm quả quá dày, không để cành chạm mặt đất",
+          "sinh_hoc": "Phun chế phẩm sinh học Fosetyl-Aluminium hoặc Trichoderma",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_016",
+    "topic": "Cay_An_Trai_Dac_San",
+    "name_vi": "Nhãn Tiêu Da Bò",
+    "scientific_name": "Dimocarpus longan",
+    "dia_ban_pho_bien": [
+      "Long Hồ",
+      "Mang Thít"
+    ],
+    "dac_tinh_sinh_thai": "Vỏ mỏng màu vàng bò, cơm mọng nước, dễ nhiễm nấm muội đen bồ hóng.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Muội đen bồ hóng lá và trái",
+        "muc_do_nguy_hiem": "Nhẹ",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Capnodium citri"
+        },
+        "trieu_chung_dien_hinh": [
+          "Màng đen muội than phủ dày trên phiến lá và chùm quả nhãn",
+          "Làm đen bẩn vỏ quả mất giá trị thương phẩm"
+        ],
+        "phan_biet_chan_doan_kep": "Màng bồ hóng dùng khăn ướt lau là sạch bóng vỏ quả",
+        "kiem_tra_thuc_dia": "Tìm sự hiện diện của rệp sáp và rầy mềm tiết chất ngọt",
+        "phac_do_vietgap": {
+          "canh_tac": "Tỉa cành đón nắng, tiêu diệt kiến tha rệp sáp",
+          "sinh_hoc": "Phun xà phòng thảo mộc hoặc nấm Lecanicillium lecanii trừ rệp sáp",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_017",
+    "topic": "Cay_An_Trai_Dac_San",
+    "name_vi": "Chôm Chôm Java",
+    "scientific_name": "Nephelium lappaceum 'Java'",
+    "dia_ban_pho_bien": [
+      "Long Hồ",
+      "Bình Minh"
+    ],
+    "dac_tinh_sinh_thai": "Đặc sản vùng du lịch sinh thái cù lao An Bình, râu dài đỏ tươi, thịt róc ngọt thanh.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Phấn trắng hại gai quả chôm chôm",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Oidium nephelii"
+        },
+        "trieu_chung_dien_hinh": [
+          "Bột phấn trắng xám bao phủ chùm hoa và râu gai trái non",
+          "Râu gai bị khô đen, trái non rụng hàng loạt hoặc chai sượng"
+        ],
+        "phan_biet_chan_doan_kep": "Gai quả non bị cháy xém bao phủ bột mốc trắng",
+        "kiem_tra_thuc_dia": "Kiểm tra râu gai quả non cỡ hạt đậu phộng",
+        "phac_do_vietgap": {
+          "canh_tac": "Tỉa cành sau thu hoạch, dọn rác mục dưới gốc",
+          "sinh_hoc": "Phun lưu huỳnh sinh học kết hợp Bacillus subtilis",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_018",
+    "topic": "Cay_An_Trai_Dac_San",
+    "name_vi": "Chôm Chôm Nhãn",
+    "scientific_name": "Nephelium lappaceum",
+    "dia_ban_pho_bien": [
+      "Long Hồ",
+      "Mang Thít",
+      "Vũng Liêm"
+    ],
+    "dac_tinh_sinh_thai": "Trái nhỏ râu ngắn, cơm dày giòn ráo ngọt lịm, nhạy cảm với bệnh thối quả Botryodiplodia.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Thối cuống trái chôm chôm",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Lasiodiplodia theobromae"
+        },
+        "trieu_chung_dien_hinh": [
+          "Vết thâm nâu lan nhanh từ cuống bao trùm cả quả trong 2-3 ngày",
+          "Cơm bên trong nhũn nước thối rữa có nấm xám đen"
+        ],
+        "phan_biet_chan_doan_kep": "Thối từ cuống quả lan nhanh kèm hạt bào tử đen li ti",
+        "kiem_tra_thuc_dia": "Kiểm tra chùm quả giai đoạn đỏ râu sắp hái",
+        "phac_do_vietgap": {
+          "canh_tac": "Thu hái quả vào ngày khô ráo, tránh làm giập vỏ",
+          "sinh_hoc": "Phun chế phẩm sinh học Chitosan hoặc dịch thảo mộc kháng nấm",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_019",
+    "topic": "Cay_An_Trai_Dac_San",
+    "name_vi": "Măng Cụt Lục Sĩ Thành",
+    "scientific_name": "Garcinia mangostana",
+    "dia_ban_pho_bien": [
+      "Trà Ôn",
+      "Vũng Liêm",
+      "Long Hồ"
+    ],
+    "dac_tinh_sinh_thai": "Nữ hoàng trái cây nhiệt đới, tuổi thọ cao, dễ bị chảy mủ vàng sượng múi do sốc nước mưa.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Xì mủ vàng sượng múi măng cụt",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Rối loạn sinh lý kết hợp Nấm",
+          "ten_khoa_hoc": "Rối loạn dòng nhựa tế bào do mưa sốc nước"
+        },
+        "trieu_chung_dien_hinh": [
+          "Mủ màu vàng tươi chảy ra ngoài vỏ quả và ngấm vào trong thịt múi",
+          "Múi thịt bị sượng cứng và có vị đắng ngắt"
+        ],
+        "phan_biet_chan_doan_kep": "Mủ màu vàng óng đặc thù chỉ có ở cây măng cụt",
+        "kiem_tra_thuc_dia": "Bổ quả kiểm tra sau đợt mưa dầm chuyển mùa",
+        "phac_do_vietgap": {
+          "canh_tac": "Giữ mực nước mương ổn định, bón Canxi-Bo và Kali hữu cơ",
+          "sinh_hoc": "Phun bổ sung Canxi hữu cơ hòa tan che chắn gốc giảm sốc nước",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_020",
+    "topic": "Cay_An_Trai_Dac_San",
+    "name_vi": "Mít Thái Siêu Sớm (Mít Changai)",
+    "scientific_name": "Artocarpus heterophyllus",
+    "dia_ban_pho_bien": [
+      "Bình Tân",
+      "Tam Bình",
+      "Trà Ôn",
+      "Vũng Liêm",
+      "Long Hồ"
+    ],
+    "dac_tinh_sinh_thai": "Cho trái cực nhanh, múi giòn ngọt ráo, mẫn cảm với bệnh xơ đen vi khuẩn.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Xơ đen mít Thái",
+        "muc_do_nguy_hiem": "Cực kỳ nghiêm trọng",
+        "tac_nhan": {
+          "loai": "Vi khuẩn",
+          "ten_khoa_hoc": "Pantoea stewartii subsp. stewartii"
+        },
+        "trieu_chung_dien_hinh": [
+          "Xơ mít chuyển màu đen kịt, cùi mít đen sì",
+          "Múi mít teo lép chai cứng vị chua chát",
+          "Bên ngoài quả eo thắt, gai không đều"
+        ],
+        "phan_biet_chan_doan_kep": "Khác xơ đỏ sinh lý (xơ đen múi bị chai và hôi chua, thương lái dạt 100%)",
+        "kiem_tra_thuc_dia": "Bổ kiểm tra quả non méo eo lúc thụ phấn trúng mưa",
+        "phac_do_vietgap": {
+          "canh_tac": "Tỉa bớt quả xấu, thụ phấn bổ sung buổi sáng khô ráo, bao quả sớm",
+          "sinh_hoc": "Phun Kasugamycin hoặc đồng vi sinh định kỳ lúc trổ hoa cái",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_021",
+    "topic": "Cay_An_Trai_Dac_San",
+    "name_vi": "Mít Ruột Đỏ Indo",
+    "scientific_name": "Artocarpus heterophyllus 'Red'",
+    "dia_ban_pho_bien": [
+      "Bình Tân",
+      "Vũng Liêm",
+      "Tam Bình"
+    ],
+    "dac_tinh_sinh_thai": "Múi màu cam đỏ bắt mắt thơm mùi chuối, giá trị xuất khẩu cao, dễ bị thối nhũn trái.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Thối nhũn mốc đen trái mít (Rhizopus)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Rhizopus artocarpi"
+        },
+        "trieu_chung_dien_hinh": [
+          "Mô thịt quả nhũn nát nhanh chảy nước nhờn mùi men chua",
+          "Lớp nấm mốc đen tua tủa như chùm râu bao phủ vết thối"
+        ],
+        "phan_biet_chan_doan_kep": "Sợi nấm trắng đầu có chấm đen tròn xù xì đặc trưng",
+        "kiem_tra_thuc_dia": "Quan sát các quả mít treo thấp sát đất liếp",
+        "phac_do_vietgap": {
+          "canh_tac": "Treo trái cao tối thiểu 0.8m so với mặt đất, tỉa thông thoáng",
+          "sinh_hoc": "Phun nấm đối kháng Trichoderma phối hợp vôi bột hòa nước tưới gốc",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_022",
+    "topic": "Cay_An_Trai_Dac_San",
+    "name_vi": "Ổi Nữ Hoàng",
+    "scientific_name": "Psidium guajava 'Queen'",
+    "dia_ban_pho_bien": [
+      "Bình Minh",
+      "Tam Bình",
+      "Long Hồ"
+    ],
+    "dac_tinh_sinh_thai": "Trái giòn ngọt ít hạt, năng suất quanh năm, mẫn cảm thán thư đốm mắt chim.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Đốm mắt chim trên quả ổi",
+        "muc_do_nguy_hiem": "Trung bình",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Pestalotiopsis psidii / Colletotrichum gloeosporioides"
+        },
+        "trieu_chung_dien_hinh": [
+          "Nốt tròn màu nâu có viền đỏ đậm, tâm lõm xám tro như mắt chim",
+          "Vỏ quả chai sượng, thịt quả bên dưới bị chua khô sượng"
+        ],
+        "phan_biet_chan_doan_kep": "Vết tròn lõm có viền hạt dẻ rõ nét trên vỏ quả ổi",
+        "kiem_tra_thuc_dia": "Kiểm tra quả cỡ ngón chân cái trước khi bao bọc",
+        "phac_do_vietgap": {
+          "canh_tac": "Bao trái sớm bằng xốp lưới bọc nilong đục lỗ đáy",
+          "sinh_hoc": "Phun phòng nấm Trichoderma hoặc nano bạc đồng sinh học",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_023",
+    "topic": "Cay_An_Trai_Dac_San",
+    "name_vi": "Ổi Ruột Hồng (Ổi Ruby)",
+    "scientific_name": "Psidium guajava 'Ruby'",
+    "dia_ban_pho_bien": [
+      "Bình Minh",
+      "Trà Ôn",
+      "Vũng Liêm"
+    ],
+    "dac_tinh_sinh_thai": "Ruột đỏ hồng thơm đậm, chịu phù sa nhẹ, dễ nhiễm tuyến trùng nốt sưng rễ.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Nốt sưng tuyến trùng rễ ổi",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Tuyến trùng",
+          "ten_khoa_hoc": "Meloidogyne incognita"
+        },
+        "trieu_chung_dien_hinh": [
+          "Rễ nổi nhiều u sần hình hạt chuỗi tròn méo mó",
+          "Cây còi cọc vàng lá, héo rũ vào buổi trưa nắng dù đất mương vẫn có nước"
+        ],
+        "phan_biet_chan_doan_kep": "U sưng rễ dị hình không phải nốt sần nốt vi khuẩn có ích",
+        "kiem_tra_thuc_dia": "Nhổ kiểm tra rễ non tầng đất mặt",
+        "phac_do_vietgap": {
+          "canh_tac": "Trồng xen hoa cúc vạn thọ xua đuổi tuyến trùng",
+          "sinh_hoc": "Tưới nấm ký sinh tuyến trùng Paecilomyces lilacinus kết hợp Chitosan",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_024",
+    "topic": "Cay_An_Trai_Dac_San",
+    "name_vi": "Mận An Phước",
+    "scientific_name": "Syzygium samarangense",
+    "dia_ban_pho_bien": [
+      "Bình Minh",
+      "Tam Bình",
+      "Long Hồ"
+    ],
+    "dac_tinh_sinh_thai": "Trái đỏ sẫm ngọt mọng nước, mẫn cảm thối nhũn quả mùa mưa.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Thối nhũn quả mận mùa mưa",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Phomopsis sp. & Colletotrichum gloeosporioides"
+        },
+        "trieu_chung_dien_hinh": [
+          "Rốn đít quả mận bị sũng nước thâm đen lan nhanh",
+          "Trái rụng tả tơi khắp mặt đất, lên men chua thối nát"
+        ],
+        "phan_biet_chan_doan_kep": "Khác dòi đục (dòi đục có lỗ châm kim và dòi bò bên trong)",
+        "kiem_tra_thuc_dia": "Bóp nhẹ phần rốn đít quả kiểm tra độ mềm nhũn",
+        "phac_do_vietgap": {
+          "canh_tac": "Trùm lưới cước toàn vườn hoặc bao chùm từng chùm quả mận",
+          "sinh_hoc": "Phun chế phẩm sinh học Bacillus subtilis, thu gom tiêu hủy quả rụng",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_025",
+    "topic": "Cay_An_Trai_Dac_San",
+    "name_vi": "Vú Sữa Lò Rèn",
+    "scientific_name": "Chrysophyllum cainito",
+    "dia_ban_pho_bien": [
+      "Vũng Liêm",
+      "Mang Thít",
+      "Long Hồ"
+    ],
+    "dac_tinh_sinh_thai": "Dòng sữa trắng ngọt ngào hương vani, cây cổ thụ nhưng dễ nhiễm thán thư quả.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Thán thư đốm mắt cua quả vú sữa",
+        "muc_do_nguy_hiem": "Trung bình",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Colletotrichum gloeosporioides"
+        },
+        "trieu_chung_dien_hinh": [
+          "Đốm tròn màu nâu lõm nhẹ vào thịt quả",
+          "Trái chín bị chai cứng một bên má và giảm vị béo ngọt"
+        ],
+        "phan_biet_chan_doan_kep": "Khác rám nắng (thán thư có vòng đồng tâm và viền đen sẫm)",
+        "kiem_tra_thuc_dia": "Kiểm tra chùm trái khi vỏ chuyển màu ửng tía",
+        "phac_do_vietgap": {
+          "canh_tac": "Bao trái bằng túi giấy bọc chuyên dụng",
+          "sinh_hoc": "Phun phòng dung dịch thảo mộc tỏi ớt hoặc nấm Chaetomium",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_026",
+    "topic": "Cay_An_Trai_Dac_San",
+    "name_vi": "Vú Sữa Hoàng Kim (Abiu)",
+    "scientific_name": "Pouteria caimito",
+    "dia_ban_pho_bien": [
+      "Long Hồ",
+      "Tam Bình",
+      "Trà Ôn"
+    ],
+    "dac_tinh_sinh_thai": "Vỏ vàng óng ả, thịt thạch dẻo ngọt, ưa đất ẩm giàu mùn ven sông.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Đốm đen thối chóp trái Hoàng Kim",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Lasiodiplodia theobromae"
+        },
+        "trieu_chung_dien_hinh": [
+          "Chóp nhọn đuôi trái bị thâm đen khô sần lan rộng",
+          "Thịt thạch bên trong sượng cứng chuyển nâu đục"
+        ],
+        "phan_biet_chan_doan_kep": "Đốm tập trung ở phần chóp nhọn phía đáy do đọng nước",
+        "kiem_tra_thuc_dia": "Kiểm tra chóp đáy quả lúc sáng sớm sương đọng",
+        "phac_do_vietgap": {
+          "canh_tac": "Bao quả bằng bao màng thoát ẩm không đọng giọt nước đáy",
+          "sinh_hoc": "Phun phòng nấm Trichoderma hoặc nano đồng định kỳ",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_027",
+    "topic": "Cay_An_Trai_Dac_San",
+    "name_vi": "Thanh Long Ruột Đỏ",
+    "scientific_name": "Hylocereus costaricensis",
+    "dia_ban_pho_bien": [
+      "Bình Tân",
+      "Trà Ôn",
+      "Tam Bình"
+    ],
+    "dac_tinh_sinh_thai": "Cây họ xương rồng chịu hạn giỏi nhưng cực kỳ mẫn cảm bệnh đốm nâu tắc kè.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Đốm nâu đốm tắc kè thanh long",
+        "muc_do_nguy_hiem": "Cực kỳ nghiêm trọng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Neoscytalidium dimidiatum"
+        },
+        "trieu_chung_dien_hinh": [
+          "Nốt sần màu nâu đỏ gồ ghề như da con tắc kè trên cành và vỏ quả",
+          "Làm cành thối nát, vỏ quả sẹo mụn chai sượng thương lái loại bỏ"
+        ],
+        "phan_biet_chan_doan_kep": "Nốt sần tắc kè sần sùi đặc thù không nhầm lẫn",
+        "kiem_tra_thuc_dia": "Quan sát các tai cành non và tai quả",
+        "phac_do_vietgap": {
+          "canh_tac": "Cắt bỏ cành bệnh chôn sâu rải vôi bột (không vứt xuống mương)",
+          "sinh_hoc": "Phun nấm đối kháng Chaetomium phối hợp nano bạc đồng",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_028",
+    "topic": "Cay_An_Trai_Dac_San",
+    "name_vi": "Thanh Long Ruột Trắng",
+    "scientific_name": "Hylocereus undatus",
+    "dia_ban_pho_bien": [
+      "Bình Tân",
+      "Trà Ôn"
+    ],
+    "dac_tinh_sinh_thai": "Thịt trắng giòn chua ngọt thanh mát, dễ bị vi khuẩn thối mềm cành.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Thối mềm nhũn cành thanh long",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Vi khuẩn",
+          "ten_khoa_hoc": "Pectobacterium carotovorum"
+        },
+        "trieu_chung_dien_hinh": [
+          "Mô thịt cành ủng nước nhũn nát bốc mùi hôi thối khó chịu",
+          "Thịt cành tan rữa trơ lại lõi trụ gỗ trắng"
+        ],
+        "phan_biet_chan_doan_kep": "Mùi thối chua nồng nặc và chảy nước dịch nhờn vi khuẩn",
+        "kiem_tra_thuc_dia": "Bóp ngón tay thấy thịt cành mềm nhũn chảy nước đục",
+        "phac_do_vietgap": {
+          "canh_tac": "Gọt sạch phần thịt nhũn tới lõi gỗ bôi vôi đặc",
+          "sinh_hoc": "Phun Kasugamycin hoặc đồng oxyclorua phòng ngừa",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_029",
+    "topic": "Cay_An_Trai_Dac_San",
+    "name_vi": "Đu Đủ Ruột Vàng / Đài Loan",
+    "scientific_name": "Carica papaya",
+    "dia_ban_pho_bien": [
+      "Bình Tân",
+      "Long Hồ",
+      "Tam Bình"
+    ],
+    "dac_tinh_sinh_thai": "Cây thân thảo mau cho trái, mẫn cảm virus đốm vòng PRSV.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Đốm vòng virus đu đủ (PRSV)",
+        "muc_do_nguy_hiem": "Cực kỳ nghiêm trọng",
+        "tac_nhan": {
+          "loai": "Virus",
+          "ten_khoa_hoc": "Papaya ringspot virus",
+          "vector_truyen_benh": "Rệp muội"
+        },
+        "trieu_chung_dien_hinh": [
+          "Lá non biến dạng co rúm chỉ còn gân như bàn tay ếch",
+          "Vỏ quả nổi các vòng tròn đồng tâm như mắt kính, quả sượng đắng"
+        ],
+        "phan_biet_chan_doan_kep": "Vòng tròn đồng tâm trên vỏ quả và lá biến dạng bàn tay ếch",
+        "kiem_tra_thuc_dia": "Kiểm tra mặt dưới lá tìm rệp muội truyền bệnh",
+        "phac_do_vietgap": {
+          "canh_tac": "Nhổ tiêu hủy ngay cây chớm bệnh, không chiết ghép cây bệnh",
+          "sinh_hoc": "Phun dầu khoáng sinh học ngăn rệp chích hút truyền virus",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_030",
+    "topic": "Cay_An_Trai_Dac_San",
+    "name_vi": "Dừa Xiêm Xanh",
+    "scientific_name": "Cocos nucifera 'Xiêm Xanh'",
+    "dia_ban_pho_bien": [
+      "Vũng Liêm",
+      "Trà Ôn",
+      "Mang Thít",
+      "Long Hồ",
+      "Tam Bình"
+    ],
+    "dac_tinh_sinh_thai": "Nước ngọt thanh, cây bờ kênh mương, dễ bị nấm thối đọt non chết cây.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Thối đọt dừa non chết điểm sinh trưởng",
+        "muc_do_nguy_hiem": "Cực kỳ nghiêm trọng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Phytophthora palmivora"
+        },
+        "trieu_chung_dien_hinh": [
+          "Lá bẹ đọt chính ở giữa ngọn bị vàng héo gục gãy",
+          "Củ hũ non bên trong thối nhũn bốc mùi hôi thối mục nát",
+          "Rút nhẹ bẹ đọt non tuột ra dễ dàng, cây chết hoàn toàn"
+        ],
+        "phan_biet_chan_doan_kep": "Khác bọ dừa (bọ dừa cắn tạo vệt sọc chứ không làm thối củ hũ)",
+        "kiem_tra_thuc_dia": "Kiểm tra đỉnh sinh trưởng nơi cổ bẹ đọt non đầu mùa mưa",
+        "phac_do_vietgap": {
+          "canh_tac": "Vệ sinh dọn sạch rác bẹ dừa khô quanh ngọn định kỳ",
+          "sinh_hoc": "Bỏ muối hột trộn lưu huỳnh hoặc gói Trichoderma vào kẽ bẹ ngọn dừa",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_031",
+    "topic": "Cay_An_Trai_Dac_San",
+    "name_vi": "Dừa Mã Lai (Dừa Dứa)",
+    "scientific_name": "Cocos nucifera 'Malay'",
+    "dia_ban_pho_bien": [
+      "Trà Ôn",
+      "Vũng Liêm",
+      "Long Hồ"
+    ],
+    "dac_tinh_sinh_thai": "Thân lùn mau cho trái, buồng sai trĩu, chịu mặn tốt, dễ bị cháy lá Pestalotia.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Đốm xám cháy lá dừa (Pestalotiopsis)",
+        "muc_do_nguy_hiem": "Trung bình",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Pestalotiopsis palmarum"
+        },
+        "trieu_chung_dien_hinh": [
+          "Đốm bầu dục màu nâu vàng tâm xám tro viền nâu đậm",
+          "Các đốm liên kết làm cả tàu dừa bị cháy xém khô giòn"
+        ],
+        "phan_biet_chan_doan_kep": "Tâm đốm màu xám tro có hạt đen li ti viền đậm rõ rệt",
+        "kiem_tra_thuc_dia": "Quan sát các tàu lá dừa phía dưới sát gốc",
+        "phac_do_vietgap": {
+          "canh_tac": "Rọc bỏ tàu dừa sâu bệnh tiêu hủy, bón đủ Kali và phân chuồng hoai",
+          "sinh_hoc": "Phun nano đồng sinh học hoặc nấm Chaetomium",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_032",
+    "topic": "Cay_An_Trai_Dac_San",
+    "name_vi": "Dừa Sáp Cầu Kè / Trà Ôn",
+    "scientific_name": "Cocos nucifera 'Makapuno'",
+    "dia_ban_pho_bien": [
+      "Trà Ôn",
+      "Vũng Liêm"
+    ],
+    "dac_tinh_sinh_thai": "Cơm đặc dẻo sánh kem béo ngậy, giá trị cao kỷ lục, dễ rụng trái non do nấm.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Rụng cuống trái non dừa sáp",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm kết hợp Dinh dưỡng",
+          "ten_khoa_hoc": "Colletotrichum gloeosporioides"
+        },
+        "trieu_chung_dien_hinh": [
+          "Trái dừa non bằng quả trứng bị nứt cuống đài sũng nước thâm đen",
+          "Trái rụng hàng loạt dù buồng dừa đậu rất nhiều hoa"
+        ],
+        "phan_biet_chan_doan_kep": "Vết đốm đen quanh cuống đài hoa",
+        "kiem_tra_thuc_dia": "Kiểm tra liên kết giữa đài hoa và cuống trái non",
+        "phac_do_vietgap": {
+          "canh_tac": "Giữ ẩm đều đặn tránh sốc nước, bón Bo - Kẽm",
+          "sinh_hoc": "Phun nấm đối kháng Bacillus subtilis hoặc dịch chiết rong biển",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_033",
+    "topic": "Cay_An_Trai_Dac_San",
+    "name_vi": "Chuối Già Nam Mỹ (Cavendish)",
+    "scientific_name": "Musa acuminata 'Cavendish'",
+    "dia_ban_pho_bien": [
+      "Bình Tân",
+      "Trà Ôn",
+      "Tam Bình",
+      "Long Hồ"
+    ],
+    "dac_tinh_sinh_thai": "Trồng xuất khẩu thâm canh, đối tượng chính của bệnh héo vàng Panama TR4.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Héo rũ Panama (Fusarium oxysporum TR4)",
+        "muc_do_nguy_hiem": "Cực kỳ nghiêm trọng (Hủy diệt đất)",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Fusarium oxysporum f. sp. cubense (TR4)"
+        },
+        "trieu_chung_dien_hinh": [
+          "Lá già vàng từ mép vào gân rồi gãy gục bám quanh thân giả",
+          "Cắt ngang thân giả thấy mạch dẫn chuyển màu nâu đỏ hoặc đen bầm",
+          "Củ chuối thối nâu từ ngoài vào trong, cây chết khô đứng"
+        ],
+        "phan_biet_chan_doan_kep": "Mạch dẫn thân giả nâu đỏ là dấu hiệu kinh điển của Panama TR4",
+        "kiem_tra_thuc_dia": "Cắt ngang thân giả cách gốc 30cm kiểm tra vòng mạch dẫn",
+        "phac_do_vietgap": {
+          "canh_tac": "Đào tiêu hủy cả bụi chuối bằng vôi bột, cách ly mương nước, không trồng lại chuối",
+          "sinh_hoc": "Bón lót Trichoderma số lượng lớn kết hợp vi khuẩn Pseudomonas putida",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_034",
+    "topic": "Cay_An_Trai_Dac_San",
+    "name_vi": "Chuối Xiêm (Chuối Sứ)",
+    "scientific_name": "Musa balbisiana",
+    "dia_ban_pho_bien": [
+      "Mang Thít",
+      "Long Hồ",
+      "Tam Bình",
+      "Vũng Liêm"
+    ],
+    "dac_tinh_sinh_thai": "Chuối dân dã bờ ao ruộng vườn, dễ bị virus chùn đọt BBTV.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Chùn đọt chuối (Bunchy Top Virus)",
+        "muc_do_nguy_hiem": "Cực kỳ nghiêm trọng",
+        "tac_nhan": {
+          "loai": "Virus",
+          "ten_khoa_hoc": "Banana bunchy top virus (BBTV)",
+          "vector_truyen_benh": "Rệp muội đen (Pentalonia nigronervosa)"
+        },
+        "trieu_chung_dien_hinh": [
+          "Lá mới ngắn ngủn dựng đứng xếp xít hình quạt ở ngọn",
+          "Gân lá có các sọc đứt quãng màu xanh đậm hình chữ J hoặc dấu chấm",
+          "Cây lùn tịt không trổ buồng được"
+        ],
+        "phan_biet_chan_doan_kep": "Đọt chuối chùn lại bó quạt rất đặc thù",
+        "kiem_tra_thuc_dia": "Soi nách bẹ lá tìm rệp muội đen bám dày đặc",
+        "phac_do_vietgap": {
+          "canh_tac": "Đào bỏ cả bụi tiêu hủy, không lấy giống từ bụi bệnh",
+          "sinh_hoc": "Phun xà phòng sinh học thảo mộc trừ rệp muội đen",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_035",
+    "topic": "Cay_An_Trai_Dac_San",
+    "name_vi": "Sapôchê (Hồng Xiêm Mặc Bắc)",
+    "scientific_name": "Manilkara zapota",
+    "dia_ban_pho_bien": [
+      "Mang Thít",
+      "Tam Bình",
+      "Vũng Liêm"
+    ],
+    "dac_tinh_sinh_thai": "Cây gỗ bền bỉ chịu mặn và ngập khá tốt, dễ bị nấm đốm mắt chim trên lá.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Đốm lá Sapôchê (Phaeophleospora)",
+        "muc_do_nguy_hiem": "Trung bình",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Phaeophleospora indica"
+        },
+        "trieu_chung_dien_hinh": [
+          "Đốm tròn nhỏ li ti màu nâu đỏ tâm xám bạc trên lá già",
+          "Lá bị khô giòn từng mảng rồi rụng sớm làm suy giảm quang hợp"
+        ],
+        "phan_biet_chan_doan_kep": "Đốm nhỏ li ti tập trung ở tầng lá già",
+        "kiem_tra_thuc_dia": "Quan sát mặt trên phiến lá già dưới tán",
+        "phac_do_vietgap": {
+          "canh_tac": "Quét dọn tiêu hủy lá rụng quanh gốc, bón phân chuồng hoai mục",
+          "sinh_hoc": "Phun thuốc gốc đồng sinh học hoặc nấm Chaetomium định kỳ",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_036",
+    "topic": "Cay_Luong_Thuc_Mau",
+    "name_vi": "Lúa OM5451 (Hè Thu / Đông Xuân)",
+    "scientific_name": "Oryza sativa 'OM5451'",
+    "dia_ban_pho_bien": [
+      "Bình Tân",
+      "Tam Bình",
+      "Trà Ôn",
+      "Vũng Liêm",
+      "Long Hồ"
+    ],
+    "dac_tinh_sinh_thai": "Giống lúa thuần hạt dài cho năng suất cao thích nghi rộng khắp các cánh đồng Vĩnh Long, mẫn cảm đạo ôn và rầy nâu.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Đạo ôn lá và cổ bông (Magnaporthe oryzae)",
+        "muc_do_nguy_hiem": "Cực kỳ nghiêm trọng (Cháy rụi lá và lép trắng bông)",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Magnaporthe oryzae (Pyricularia oryzae)"
+        },
+        "trieu_chung_dien_hinh": [
+          "Vết bệnh trên lá hình mắt én (hình thoi) rộng ở giữa nhọn hai đầu",
+          "Tâm vết bệnh màu xám tro, viền ngoài màu nâu đỏ đậm",
+          "Cổ bông bị thâm đen sưng tóp làm cả bông lúa gãy gục hạt lép trắng 100%"
+        ],
+        "phan_biet_chan_doan_kep": "Hình mắt én đặc trưng phân biệt rõ với đốm sọc vi khuẩn (vết sọc thẳng dài ngấm nước)",
+        "kiem_tra_thuc_dia": "Quan sát chóp lá non vào sáng sớm lúc có sương mù ẩm ướt",
+        "phac_do_vietgap": {
+          "canh_tac": "Gieo sạ mật độ vừa phải 80-100kg/ha, giảm đạm bón tăng Kali và Silic",
+          "sinh_hoc": "Phun phòng bằng nấm đối kháng Chaetomium hoặc thuốc sinh học nguồn gốc Tricyclazole / Kasugamycin",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      },
+      {
+        "ten_benh": "Bệnh Cháy bìa lá do vi khuẩn (Bacterial Leaf Blight)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Vi khuẩn",
+          "ten_khoa_hoc": "Xanthomonas oryzae pv. oryzae"
+        },
+        "trieu_chung_dien_hinh": [
+          "Vết bệnh bắt đầu từ chóp hoặc mép lá lúa rồi cháy dọc theo bìa lá uốn lượn gợn sóng",
+          "Vết cháy màu vàng rơm viền xanh đậm sũng nước",
+          "Sáng sớm có giọt dịch vi khuẩn đùn ra đọng ở mép lá khô lại thành hạt tròn màu hổ phách"
+        ],
+        "phan_biet_chan_doan_kep": "Mép lá cháy gợn sóng và có hạt dịch vi khuẩn vàng khô đọng ở mép",
+        "kiem_tra_thuc_dia": "Cắt mẩu lá bệnh nhúng vào nước xem dịch vi khuẩn đùn ra đục như sữa",
+        "phac_do_vietgap": {
+          "canh_tac": "Tháo cạn nước trong ruộng, tuyệt đối ngưng bón phân đạm và phân bón lá khi thấy chớm bệnh",
+          "sinh_hoc": "Phun thuốc sinh học vi khuẩn đối kháng Bacillus subtilis hoặc Kasugamycin",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_037",
+    "topic": "Cay_Luong_Thuc_Mau",
+    "name_vi": "Lúa Đài Thơm 8",
+    "scientific_name": "Oryza sativa 'Dai Thom 8'",
+    "dia_ban_pho_bien": [
+      "Bình Tân",
+      "Tam Bình",
+      "Trà Ôn",
+      "Mang Thít"
+    ],
+    "dac_tinh_sinh_thai": "Cơm dẻo thơm ngon hạt gạo trong đẹp xuất khẩu, cứng cây chịu đổ ngã khá nhưng dễ bị khô vằn và lem lép hạt.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Khô vằn hại lúa (Đốm vằn)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Rhizoctonia solani"
+        },
+        "trieu_chung_dien_hinh": [
+          "Vết bệnh hình bầu dục đốm vằn da hổ màu xám xanh xuất hiện ở bẹ lá sát mặt nước",
+          "Vết vằn loang dần lên các bẹ lá trên và phiến lá cờ",
+          "Hạch nấm màu nâu tròn như hạt cải bám chặt trên bẹ lá"
+        ],
+        "phan_biet_chan_doan_kep": "Vết loang vằn vện da hổ và có hạch nấm tròn màu nâu hạt cải",
+        "kiem_tra_thuc_dia": "Vạch gốc lúa sát mặt nước kiểm tra chân bẹ lá giai đoạn làm đòng",
+        "phac_do_vietgap": {
+          "canh_tac": "Không sạ quá dày, vệ sinh dọn vớt hạch nấm trôi nổi trên mặt nước khi bừa trục",
+          "sinh_hoc": "Phun Validamycin sinh học hoặc nấm Trichoderma viride",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_038",
+    "topic": "Cay_Luong_Thuc_Mau",
+    "name_vi": "Lúa ST25 (Gạo ngon nhất thế giới)",
+    "scientific_name": "Oryza sativa 'ST25'",
+    "dia_ban_pho_bien": [
+      "Vũng Liêm",
+      "Trà Ôn",
+      "Bình Tân"
+    ],
+    "dac_tinh_sinh_thai": "Gạo đặc sản thượng hạng, thân cao lá dày, đòi hỏi quản lý rầy nâu và bệnh vàng lùn nghiêm ngặt.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Vàng lùn và Lùn xoắn lá (Rice Grassy Stunt / Ragged Stunt)",
+        "muc_do_nguy_hiem": "Cực kỳ nghiêm trọng (Hủy diệt cả cánh đồng)",
+        "tac_nhan": {
+          "loai": "Virus",
+          "ten_khoa_hoc": "Rice grassy stunt virus (RGSV) & Rice ragged stunt virus (RRSV)",
+          "vector_truyen_benh": "Rầy nâu (Nilaparvata lugens)"
+        },
+        "trieu_chung_dien_hinh": [
+          "Cây lúa lùn tịt, đâm nhiều chồi vô hiệu mọc lùm bụi cỏ",
+          "Lá lúa ngắn cứng, ngả vàng cam từ chóp lá lan dần vào trong",
+          "Rìa lá bị rách khuyết răng cưa, gân lá có các u bướu sần sùi, nghẹn đòng không trổ được"
+        ],
+        "phan_biet_chan_doan_kep": "Khuyết mép lá và gân lá nổi u bướu sần sùi đặc thù của virus RRSV",
+        "kiem_tra_thuc_dia": "Vạch gốc lúa kiểm tra mật độ rầy nâu cám và rầy cánh dài",
+        "phac_do_vietgap": {
+          "canh_tac": "Tuân thủ lịch gieo sạ né rầy đồng loạt của Chi cục BVTV Vĩnh Long",
+          "sinh_hoc": "Bảo tồn thiên địch nhện lycosa, bọ xít nước và nấm ký sinh Metarhizium anisopliae",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_039",
+    "topic": "Cay_Luong_Thuc_Mau",
+    "name_vi": "Lúa Jasmine 85",
+    "scientific_name": "Oryza sativa 'Jasmine 85'",
+    "dia_ban_pho_bien": [
+      "Tam Bình",
+      "Trà Ôn",
+      "Long Hồ"
+    ],
+    "dac_tinh_sinh_thai": "Lúa thơm hạt dài truyền thống ĐBSCL, dễ nhiễm bệnh lem lép hạt trong mùa mưa rào rộ.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Lem lép hạt lúa mùa mưa",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Tổ hợp Nấm & Vi khuẩn",
+          "ten_khoa_hoc": "Fusarium sp., Bipolaris oryzae, Curvularia sp. & Pseudomonas glumae"
+        },
+        "trieu_chung_dien_hinh": [
+          "Vỏ trấu hạt lúa xuất hiện các đốm nâu đen lốm đốm hoặc thâm đen hoàn toàn",
+          "Hạt gạo bên trong bị lép rỗng hoặc biến màu đen, gãy nát khi xay xát"
+        ],
+        "phan_biet_chan_doan_kep": "Hạt bị đen lép lốm đốm trên cả bông lúa khi vừa trổ thoát",
+        "kiem_tra_thuc_dia": "Kiểm tra bông lúa khi vừa trổ lẹt xẹt và trổ đều",
+        "phac_do_vietgap": {
+          "canh_tac": "Bón phân đợt đón đòng đúng tỷ lệ, không bón đạm muộn",
+          "sinh_hoc": "Phun phòng bằng nấm đối kháng Bacillus kết hợp hoạt chất sinh học Chitosan 2 lần (trổ lẹt xẹt và trổ đều)",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_040",
+    "topic": "Cay_Luong_Thuc_Mau",
+    "name_vi": "Lúa OM18",
+    "scientific_name": "Oryza sativa 'OM18'",
+    "dia_ban_pho_bien": [
+      "Bình Tân",
+      "Tam Bình",
+      "Trà Ôn",
+      "Vũng Liêm"
+    ],
+    "dac_tinh_sinh_thai": "Chống chịu phèn mặn khá tốt, bông to hạt sáng chắc, kháng đạo ôn vừa nhưng dễ nhiễm đốm sọc vi khuẩn.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Đốm sọc vi khuẩn (Bacterial Leaf Streak)",
+        "muc_do_nguy_hiem": "Trung bình",
+        "tac_nhan": {
+          "loai": "Vi khuẩn",
+          "ten_khoa_hoc": "Xanthomonas oryzae pv. oryzicola"
+        },
+        "trieu_chung_dien_hinh": [
+          "Các sọc hẹp màu nâu sẫm chạy dọc theo giữa hai gân phụ lá lúa",
+          "Khi đưa lên soi trước ánh sáng thấy vệt sọc trong suốt ngấm nước",
+          "Có hạt dịch vi khuẩn màu vàng óng tròn li ti đọng trên mặt vết sọc"
+        ],
+        "phan_biet_chan_doan_kep": "Sọc hẹp bị giới hạn giữa 2 gân lá, khác với cháy bìa lá chạy dọc mép",
+        "kiem_tra_thuc_dia": "Soi lá lúa ngược ánh sáng mặt trời để thấy vệt sọc trong suốt",
+        "phac_do_vietgap": {
+          "canh_tac": "Tránh bón thừa đạm khi thời tiết mưa gió dập lá",
+          "sinh_hoc": "Phun thuốc gốc đồng sinh học hoặc Kasugamycin",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_041",
+    "topic": "Cay_Luong_Thuc_Mau",
+    "name_vi": "Lúa Nếp Sáp ĐBSCL",
+    "scientific_name": "Oryza sativa var. glutinosa",
+    "dia_ban_pho_bien": [
+      "Bình Tân",
+      "Tam Bình"
+    ],
+    "dac_tinh_sinh_thai": "Hạt gạo nếp dẻo thơm đặc sản làm bánh truyền thống, thân mềm dễ đổ ngã và dễ nhiễm hoa cúc than vàng.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Than vàng lúa nếp (Bệnh hoa cúc / False Smut)",
+        "muc_do_nguy_hiem": "Trung bình",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Ustilaginoidea virens"
+        },
+        "trieu_chung_dien_hinh": [
+          "Hạt nếp biến thành một khối tròn phồng to bọc màng vàng cam như hoa cúc",
+          "Màng vỡ ra giải phóng vô số bụi bào tử màu xanh đen than bám bẩn cả bông lúa"
+        ],
+        "phan_biet_chan_doan_kep": "Khối u tròn màu hoa cúc vàng cam rất đặc trưng",
+        "kiem_tra_thuc_dia": "Quan sát bông lúa giai đoạn ngậm sữa và chín sáp",
+        "phac_do_vietgap": {
+          "canh_tac": "Sử dụng giống nếp sạch bệnh, bón cân đối N-P-K",
+          "sinh_hoc": "Phun phòng hoạt chất gốc đồng hoặc Validamycin trước khi trổ đòng",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_042",
+    "topic": "Cay_Luong_Thuc_Mau",
+    "name_vi": "Khoai Lang Tím Nhật Bình Tân",
+    "scientific_name": "Ipomoea batatas 'Murasaki'",
+    "dia_ban_pho_bien": [
+      "Bình Tân",
+      "Bình Minh",
+      "Tam Bình"
+    ],
+    "dac_tinh_sinh_thai": "Đặc sản nức tiếng thủ phủ khoai lang Bình Tân - Vĩnh Long, ruột tím ngọt bùi xuất khẩu, chịu áp lực bọ hà và chết dây lỡ cổ rễ.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Chết dây lỡ cổ rễ khoai lang (Héo dây Fusarium)",
+        "muc_do_nguy_hiem": "Cực kỳ nghiêm trọng (Mất trắng cả ruộng)",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Fusarium oxysporum f. sp. batatas"
+        },
+        "trieu_chung_dien_hinh": [
+          "Dây khoai bị nứt nẻ và teo thắt ở đoạn sát gốc tiếp giáp mặt đất giồng",
+          "Phần vỏ cổ dây chuyển sang màu nâu đen, lá chuyển vàng rồi héo rũ toàn bộ dây",
+          "Cắt vát dây thấy mạch dẫn truyền bên trong thâm đen, củ dưới đất bị thối khô"
+        ],
+        "phan_biet_chan_doan_kep": "Đoạn cổ dây sát mặt giồng bị nứt bần thâm đen và bó mạch thâm",
+        "kiem_tra_thuc_dia": "Vạch bụi khoai kiểm tra đoạn dây tiếp giáp đỉnh giồng",
+        "phac_do_vietgap": {
+          "canh_tac": "Lên giồng cao thoát nước, luân canh ngập nước trồng lúa để diệt mầm nấm Fusarium trong đất",
+          "sinh_hoc": "Xử lý hom giống bằng dung dịch nấm đối kháng Trichoderma harzianum trước khi cắm giồng",
+          "khuyen_cao_vinh_long": "Áp dụng nghiêm quy trình luân canh Lúa - Khoai lang của Phòng NN&PTNT huyện Bình Tân"
+        }
+      },
+      {
+        "ten_benh": "Bệnh Bọ hà (Sùng khoai lang) đục củ xì mủ đắng",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Côn trùng gây hại tạo điều kiện Nấm xâm nhập",
+          "ten_khoa_hoc": "Cylas formicarius"
+        },
+        "trieu_chung_dien_hinh": [
+          "Củ khoai xuất hiện các lỗ đục nhỏ tròn xì mủ đen",
+          "Bên trong củ có các đường hầm ngoằn ngoèo chứa ấu trùng sùng trắng",
+          "Thịt củ khoai biến thành màu nâu xám bốc mùi hôi chua hăng hắc và đắng ngắt"
+        ],
+        "phan_biet_chan_doan_kep": "Mùi hôi đắng đặc thù của củ bị sùng hà đục",
+        "kiem_tra_thuc_dia": "Kiểm tra vết nứt nẻ đất giồng khoai lang",
+        "phac_do_vietgap": {
+          "canh_tac": "Vun giồng cao và lấp kín các khe nứt không để bọ hà chui xuống đẻ trứng vào củ",
+          "sinh_hoc": "Tưới nấm ký sinh côn trùng Beauveria bassiana hoặc Metarhizium vào đất giồng",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_043",
+    "topic": "Cay_Luong_Thuc_Mau",
+    "name_vi": "Khoai Lang Bí (Bí Đường)",
+    "scientific_name": "Ipomoea batatas",
+    "dia_ban_pho_bien": [
+      "Bình Tân",
+      "Bình Minh"
+    ],
+    "dac_tinh_sinh_thai": "Ruột màu vàng cam ngọt đậm dẻo thơm, dễ nhiễm nấm thối đen Ceratocystis.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Thối đen củ khoai lang (Black Rot)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Ceratocystis fimbriata"
+        },
+        "trieu_chung_dien_hinh": [
+          "Đốm tròn màu nâu xám hơi lõm trên vỏ củ khoai",
+          "Vết bệnh ăn sâu vào thịt củ biến thịt thành màu đen cứng có vị đắng ngắt"
+        ],
+        "phan_biet_chan_doan_kep": "Thịt củ đen cứng và có vị đắng nồng nặc",
+        "kiem_tra_thuc_dia": "Cạo vỏ củ kiểm tra màu sắc mô thịt bên dưới",
+        "phac_do_vietgap": {
+          "canh_tac": "Tránh làm trầy xước củ khi thu hoạch, bảo quản nơi thoáng mát",
+          "sinh_hoc": "Ngâm củ giống trong chế phẩm nấm đối kháng Trichoderma",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_044",
+    "topic": "Cay_Luong_Thuc_Mau",
+    "name_vi": "Khoai Lang Trắng Sữa",
+    "scientific_name": "Ipomoea batatas",
+    "dia_ban_pho_bien": [
+      "Bình Tân",
+      "Tam Bình"
+    ],
+    "dac_tinh_sinh_thai": "Ruột trắng bột nhiều giàu tinh bột, chịu khô hạn khá nhưng dễ nhiễm virus khảm lá chùn đọt.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Khảm lá virus khoai lang (Sweet Potato Feathery Mottle Virus - SPFMV)",
+        "muc_do_nguy_hiem": "Trung bình",
+        "tac_nhan": {
+          "loai": "Virus",
+          "ten_khoa_hoc": "Sweet potato feathery mottle virus (SPFMV)",
+          "vector_truyen_benh": "Bọ phấn trắng và Rệp muội"
+        },
+        "trieu_chung_dien_hinh": [
+          "Lá non bị khảm các đốm vàng loang lổ dạng lông vũ dọc gân lá",
+          "Dây còi cọc chùn ngọn, củ nhỏ méo mó xơ xác"
+        ],
+        "phan_biet_chan_doan_kep": "Vết khảm hình lông vũ dọc theo hai bên gân lá",
+        "kiem_tra_thuc_dia": "Quan sát ngọn dây khoai non vào sáng sớm",
+        "phac_do_vietgap": {
+          "canh_tac": "Chọn hom giống sạch bệnh từ các ruộng khỏe mạnh",
+          "sinh_hoc": "Phun xịt dầu khoáng xua đuổi bọ phấn trắng và rệp muội",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_045",
+    "topic": "Cay_Luong_Thuc_Mau",
+    "name_vi": "Bắp Lai Sinh Học (Ngô lai)",
+    "scientific_name": "Zea mays",
+    "dia_ban_pho_bien": [
+      "Bình Minh",
+      "Bình Tân",
+      "Trà Ôn",
+      "Vũng Liêm"
+    ],
+    "dac_tinh_sinh_thai": "Cây trồng cạn luân canh mùa khô trên đất lúa, năng suất sinh khối bắp hạt lớn, dễ bị rỉ sắt lá và đốm lá lớn.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Rỉ sắt hại lá bắp (Puccinia sorghi)",
+        "muc_do_nguy_hiem": "Trung bình",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Puccinia sorghi"
+        },
+        "trieu_chung_dien_hinh": [
+          "Các mụn nhỏ li ti màu nâu đỏ như bột rỉ sắt xuất hiện ở cả hai mặt phiến lá bắp",
+          "Lá bị khô cháy từng mảng, cây còi cọc hạt bắp không no mẩy"
+        ],
+        "phan_biet_chan_doan_kep": "Mụn bột màu nâu đỏ rỉ sắt miết ngón tay dính bột nâu",
+        "kiem_tra_thuc_dia": "Miết ngón tay lên mặt lá kiểm tra bột rỉ sắt",
+        "phac_do_vietgap": {
+          "canh_tac": "Vệ sinh đồng ruộng, trồng giống bắp lai kháng bệnh",
+          "sinh_hoc": "Phun lưu huỳnh sinh học hoặc nano bạc đồng",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_046",
+    "topic": "Cay_Luong_Thuc_Mau",
+    "name_vi": "Bắp Nếp Nữ Hoàng (Ngô nếp tím)",
+    "scientific_name": "Zea mays var. ceratina",
+    "dia_ban_pho_bien": [
+      "Bình Minh",
+      "Long Hồ"
+    ],
+    "dac_tinh_sinh_thai": "Hạt màu tím dẻo ngọt ăn sống hoặc luộc thơm ngon giàu anthocyanin, mẫn cảm khô vằn bắp.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Đốm lá lớn hại bắp (Helminthosporium maydis)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Helminthosporium maydis (Bipolaris maydis)"
+        },
+        "trieu_chung_dien_hinh": [
+          "Vết bệnh hình thoi dài màu nâu xám chạy song song với gân lá",
+          "Các vết liên kết làm toàn bộ phiến lá bị khô cháy rách tơi tả"
+        ],
+        "phan_biet_chan_doan_kep": "Vết bệnh hình thoi dài dọc theo phiến lá bắp",
+        "kiem_tra_thuc_dia": "Quan sát lá bắp tầng dưới chân gốc giai đoạn trổ cờ",
+        "phac_do_vietgap": {
+          "canh_tac": "Bóc bỏ bớt lá chân khô héo, bón đủ phân lân và kali",
+          "sinh_hoc": "Phun chế phẩm sinh học Chaetomium hoặc Trichoderma",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_047",
+    "topic": "Cay_Luong_Thuc_Mau",
+    "name_vi": "Bắp Mỹ Ngọt (Sweet Corn)",
+    "scientific_name": "Zea mays var. saccharata",
+    "dia_ban_pho_bien": [
+      "Bình Minh",
+      "Bình Tân",
+      "Trà Ôn"
+    ],
+    "dac_tinh_sinh_thai": "Hạt vàng óng mọng nước ngọt thanh, dễ bị sâu keo mùa thu và thối thân vi khuẩn.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Thối thân bắp vi khuẩn (Pectobacterium)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Vi khuẩn",
+          "ten_khoa_hoc": "Pectobacterium carotovorum subsp. carotovorum"
+        },
+        "trieu_chung_dien_hinh": [
+          "Các lóng thân phía dưới bị sũng nước thâm đen, bốc mùi hôi thối khó chịu",
+          "Thân cây bị gục ngã ngang, lá chuyển vàng héo rũ"
+        ],
+        "phan_biet_chan_doan_kep": "Thân mềm nhũn chảy nước bốc mùi hôi tanh khó ngửi",
+        "kiem_tra_thuc_dia": "Ngửi và bóp nhẹ đoạn thân bắp sát mặt đất",
+        "phac_do_vietgap": {
+          "canh_tac": "Tránh tưới ngập gốc vào ngày nắng nóng gay gắt",
+          "sinh_hoc": "Phun Kasugamycin hoặc đồng oxyclorua phòng ngừa",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_048",
+    "topic": "Cay_Luong_Thuc_Mau",
+    "name_vi": "Khoai Mì (Sắn KM94)",
+    "scientific_name": "Manihot esculenta",
+    "dia_ban_pho_bien": [
+      "Trà Ôn",
+      "Vũng Liêm"
+    ],
+    "dac_tinh_sinh_thai": "Cây lấy củ giàu tinh bột công nghiệp, đối tượng số một của bệnh khảm lá virus sắn nguy hiểm.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Khảm lá virus sắn (Sri Lankan Cassava Mosaic Virus - SLCMV)",
+        "muc_do_nguy_hiem": "Cực kỳ nghiêm trọng (Hủy diệt vùng nguyên liệu)",
+        "tac_nhan": {
+          "loai": "Virus",
+          "ten_khoa_hoc": "Sri Lankan cassava mosaic virus (SLCMV)",
+          "vector_truyen_benh": "Bọ phấn trắng (Bemisia tabaci)"
+        },
+        "trieu_chung_dien_hinh": [
+          "Lá non bị khảm vàng loang lổ xen kẽ xanh đậm, phiến lá xoăn tít biến dạng nhăn nheo",
+          "Cây lùn còi cọc không phát triển củ được, củ teo tóp trơ lõi xơ"
+        ],
+        "phan_biet_chan_doan_kep": "Lá khảm xoăn tít quăn queo biến dạng bàn tay co rút",
+        "kiem_tra_thuc_dia": "Vạch mặt dưới lá ngọn tìm bọ phấn trắng bay vụt lên",
+        "phac_do_vietgap": {
+          "canh_tac": "Tuyệt đối không dùng hom giống từ vùng nhiễm bệnh, tiêu hủy triệt để cây bệnh",
+          "sinh_hoc": "Phun dầu khoáng sinh học xua đuổi bọ phấn trắng",
+          "khuyen_cao_vinh_long": "Thực hiện nghiêm công điện phòng chống dịch khảm lá sắn của Cục Trồng trọt"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_049",
+    "topic": "Cay_Luong_Thuc_Mau",
+    "name_vi": "Mía Đường ROC",
+    "scientific_name": "Saccharum officinarum",
+    "dia_ban_pho_bien": [
+      "Trà Ôn",
+      "Vũng Liêm"
+    ],
+    "dac_tinh_sinh_thai": "Cây công nghiệp mía đường ven sông rạch, mẫn cảm bệnh thối đỏ thân mía Colletotrichum.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Thối đỏ ruột mía (Red Rot)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Colletotrichum falcatum"
+        },
+        "trieu_chung_dien_hinh": [
+          "Bổ dọc thân mía thấy ruột mía chuyển màu đỏ thẫm có các vệt ngang màu trắng",
+          "Nước mía bị lên men chua bốc mùi cồn, hàm lượng đường tụt giảm nghiêm trọng",
+          "Lá ngọn bị khô vàng từ chóp xuống"
+        ],
+        "phan_biet_chan_doan_kep": "Ruột mía đỏ rực xen kẽ vệt trắng ngang như vạch sơn",
+        "kiem_tra_thuc_dia": "Chẻ dọc thân mía nghi ngờ kiểm tra màu sắc tủy ruột",
+        "phac_do_vietgap": {
+          "canh_tac": "Chọn hom mía sạch bệnh, luân canh đất sau 2-3 vụ mía lưu gốc",
+          "sinh_hoc": "Xử lý hom giống bằng Trichoderma trước khi đặt rãnh",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_050",
+    "topic": "Cay_Luong_Thuc_Mau",
+    "name_vi": "Khoai Môn Lệ Phố / Môn Nước",
+    "scientific_name": "Colocasia esculenta",
+    "dia_ban_pho_bien": [
+      "Tam Bình",
+      "Long Hồ",
+      "Mang Thít"
+    ],
+    "dac_tinh_sinh_thai": "Cây ưa đất sình lầy ngập nước bờ mương vườn, củ dẻo thơm, dễ bị cháy lá sương mai Phytophthora.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Đốm mắt cua sương mai khoai môn",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Phytophthora colocasiae"
+        },
+        "trieu_chung_dien_hinh": [
+          "Đốm tròn màu nâu sũng nước xuất hiện giữa phiến lá môn to bản",
+          "Vết bệnh loang rộng có các vòng đồng tâm màu nâu vàng ứa giọt nước vàng óng",
+          "Lá bị thối rách thủng lỗ to, củ môn bị thối úng nhũn dưới bùn"
+        ],
+        "phan_biet_chan_doan_kep": "Vết thối rách thủng lỗ to có vòng đồng tâm rỉ giọt nước vàng",
+        "kiem_tra_thuc_dia": "Quan sát phiến lá to bản sau đợt mưa rào ẩm thấp",
+        "phac_do_vietgap": {
+          "canh_tac": "Trồng mật độ vừa phải, tháo bớt nước mương không để ngập úng gốc kéo dài",
+          "sinh_hoc": "Phun chế phẩm sinh học Fosetyl-Aluminium hoặc nấm Chaetomium",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_051",
+    "topic": "Cay_Luong_Thuc_Mau",
+    "name_vi": "Khoai Từ",
+    "scientific_name": "Dioscorea esculenta",
+    "dia_ban_pho_bien": [
+      "Bình Tân",
+      "Trà Ôn"
+    ],
+    "dac_tinh_sinh_thai": "Cây dây leo có gai, củ nhỏ ăn thơm ngọt thanh mát, dễ bị nấm thán thư cháy lá.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Thán thư cháy đen dây khoai từ",
+        "muc_do_nguy_hiem": "Trung bình",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Colletotrichum gloeosporioides"
+        },
+        "trieu_chung_dien_hinh": [
+          "Lá xuất hiện đốm đen góc cạnh rồi lan rộng làm cháy khô cả lá",
+          "Dây leo bị thâm đen và chết rụi từ ngọn lùi dần xuống gốc"
+        ],
+        "phan_biet_chan_doan_kep": "Dây leo thâm đen khô giòn làm củ dưới đất ngừng lớn",
+        "kiem_tra_thuc_dia": "Kiểm tra ngọn dây leo vào mùa mưa ẩm",
+        "phac_do_vietgap": {
+          "canh_tac": "Cắm chà giàn leo cao ráo thoáng gió",
+          "sinh_hoc": "Phun nấm đối kháng Trichoderma hoặc đồng nano sinh học",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_052",
+    "topic": "Cay_Luong_Thuc_Mau",
+    "name_vi": "Khoai Mỡ Tím",
+    "scientific_name": "Dioscorea alata",
+    "dia_ban_pho_bien": [
+      "Bình Tân",
+      "Tam Bình",
+      "Trà Ôn"
+    ],
+    "dac_tinh_sinh_thai": "Củ to nhiều tinh bột tím nấu canh thơm dẻo, chịu phèn khá tốt, mẫn cảm thối khô củ do tuyến trùng.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Thối khô da củ khoai mỡ do tuyến trùng",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Tuyến trùng",
+          "ten_khoa_hoc": "Scutellonema bradys"
+        },
+        "trieu_chung_dien_hinh": [
+          "Lớp da ngoài củ khoai mỡ bị nứt nẻ sần sùi màu nâu đen",
+          "Dưới lớp vỏ xuất hiện lớp mô thịt khô xơ màu nâu xám dày 1-2cm không ăn được"
+        ],
+        "phan_biet_chan_doan_kep": "Lớp mô thịt dưới vỏ bị khô xơ nâu đen như bã mía",
+        "kiem_tra_thuc_dia": "Gọt nhẹ lớp vỏ củ kiểm tra mô thịt sát bìa",
+        "phac_do_vietgap": {
+          "canh_tac": "Lựa củ giống không bị nứt sần, luân canh với lúa nước",
+          "sinh_hoc": "Tưới nấm ký sinh tuyến trùng Paecilomyces lilacinus vào giồng đất",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_053",
+    "topic": "Cay_Luong_Thuc_Mau",
+    "name_vi": "Củ Dong Riềng (Bình Tinh)",
+    "scientific_name": "Canna edulis",
+    "dia_ban_pho_bien": [
+      "Mang Thít",
+      "Vũng Liêm",
+      "Long Hồ"
+    ],
+    "dac_tinh_sinh_thai": "Cây lấy củ mài tinh bột làm miến dong bánh lọt, ưa ẩm bờ kênh, dễ bị nấm đốm rỉ lá.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Rỉ lá đốm nâu dong riềng (Puccinia thaliae)",
+        "muc_do_nguy_hiem": "Nhẹ",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Puccinia thaliae"
+        },
+        "trieu_chung_dien_hinh": [
+          "Mặt dưới lá xuất hiện các chấm mụn rỉ sắt màu vàng cam",
+          "Lá nhanh vàng và khô cháy sớm làm giảm kích thước củ"
+        ],
+        "phan_biet_chan_doan_kep": "Mụn phấn vàng cam ở mặt dưới lá dong",
+        "kiem_tra_thuc_dia": "Lật mặt dưới phiến lá dong riềng kiểm tra",
+        "phac_do_vietgap": {
+          "canh_tac": "Cắt bỏ lá già sát gốc tiêu hủy, bón phân chuồng",
+          "sinh_hoc": "Phun lưu huỳnh vôi hoặc nano bạc sinh học",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_054",
+    "topic": "Cay_Luong_Thuc_Mau",
+    "name_vi": "Lạc / Đậu Phộng ĐBSCL",
+    "scientific_name": "Arachis hypogaea",
+    "dia_ban_pho_bien": [
+      "Bình Minh",
+      "Bình Tân",
+      "Trà Ôn"
+    ],
+    "dac_tinh_sinh_thai": "Cây họ đậu làm giàu đạm cho đất bãi bồi ven sông, dễ bị héo xanh vi khuẩn và đốm lá Cercospora.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Héo xanh vi khuẩn đậu phộng (Ralstonia)",
+        "muc_do_nguy_hiem": "Cực kỳ nghiêm trọng",
+        "tac_nhan": {
+          "loai": "Vi khuẩn",
+          "ten_khoa_hoc": "Ralstonia solanacearum"
+        },
+        "trieu_chung_dien_hinh": [
+          "Cây đang xanh tươi bỗng héo rũ cụp xuống trong 1-2 ngày mà lá vẫn còn giữ màu xanh",
+          "Cổ rễ thâm đen ủng nước, cắt ngang nhúng vào ly nước thấy dòng vi khuẩn trắng đùn ra như khói thuốc lá"
+        ],
+        "phan_biet_chan_doan_kep": "Cây chết khi lá vẫn xanh tươi; dòng dịch khuẩn trắng đùn ra trong nước",
+        "kiem_tra_thuc_dia": "Thử nghiệm ngâm gốc cây héo vào ly nước trong suốt kiểm tra dòng khuẩn",
+        "phac_do_vietgap": {
+          "canh_tac": "Luân canh triệt để với lúa nước, không trồng đậu phộng liên tục nhiều vụ",
+          "sinh_hoc": "Tưới vi khuẩn đối kháng Bacillus subtilis hoặc chế phẩm Kasugamycin",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_055",
+    "topic": "Cay_Luong_Thuc_Mau",
+    "name_vi": "Đậu Nành / Đậu Tương",
+    "scientific_name": "Glycine max",
+    "dia_ban_pho_bien": [
+      "Bình Minh",
+      "Bình Tân"
+    ],
+    "dac_tinh_sinh_thai": "Cây họ đậu lấy hạt giàu đạm thực vật, dễ nhiễm bệnh rỉ sắt Phakopsora gây rụng lá hàng loạt.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Rỉ sắt đậu nành (Phakopsora pachyrhizi)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Phakopsora pachyrhizi"
+        },
+        "trieu_chung_dien_hinh": [
+          "Các mụn nhỏ li ti màu nâu đỏ xuất hiện ở mặt dưới lá đậu nành",
+          "Lá bị biến vàng khô cháy và rụng trút sớm làm trái lép hạt"
+        ],
+        "phan_biet_chan_doan_kep": "Mặt dưới lá phủ đầy mụn bột màu nâu rỉ sét",
+        "kiem_tra_thuc_dia": "Soi mặt dưới phiến lá đậu nành thời kỳ trổ hoa làm quả",
+        "phac_do_vietgap": {
+          "canh_tac": "Trồng đúng mật độ, bón đủ lân và kali",
+          "sinh_hoc": "Phun phòng bằng nấm đối kháng Chaetomium hoặc thuốc sinh học nguồn gốc nano đồng",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_056",
+    "topic": "Rau_An_La_An_Qua",
+    "name_vi": "Cà Chua Bi / Cà Chua Leo",
+    "scientific_name": "Solanum lycopersicum",
+    "dia_ban_pho_bien": [
+      "Bình Tân",
+      "Bình Minh",
+      "Long Hồ",
+      "Tam Bình",
+      "TP. Vĩnh Long"
+    ],
+    "dac_tinh_sinh_thai": "Rau màu phát triển trên đất phù sa nhẹ tơi xốp ven sông, yêu cầu tưới ẩm tiêu úng tức thì, luân canh liên tục để hạn chế tích lũy mầm bệnh đất.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Mốc sương sương mai (Phytophthora infestans)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Phytophthora infestans"
+        },
+        "trieu_chung_dien_hinh": [
+          "Triệu chứng điển hình gây hại bộ phận lá, chồi hoặc thân cây Cà Chua Bi / Cà Chua Leo",
+          "Mô bào bị ngậm nước, biến màu nâu xám hoặc vàng úa, làm giảm nhanh khả năng quang hợp",
+          "Cây suy kiệt, lá rụng hoặc thân bị đổ rạp gục ngã"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt triệu chứng nấm (có lớp mốc tơ) với vi khuẩn (mùi hôi tanh sũng nước) hoặc virus (khảm lá xoăn ngọn)",
+        "kiem_tra_thuc_dia": "Quan sát phiến lá và vùng cổ rễ cây Cà Chua Bi / Cà Chua Leo vào buổi sáng sớm",
+        "phac_do_vietgap": {
+          "canh_tac": "Lên liếp cao ráo, phủ bạt nilon nông nghiệp, bón vôi bột khử trùng đất trước khi xuống giống",
+          "sinh_hoc": "Tưới nấm đối kháng Trichoderma harzianum hoặc phun chế phẩm sinh học Bacillus subtilis định kỳ 7-10 ngày/lần",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_057",
+    "topic": "Rau_An_La_An_Qua",
+    "name_vi": "Ớt Chỉ Thiên Vĩnh Long",
+    "scientific_name": "Capsicum annuum",
+    "dia_ban_pho_bien": [
+      "Bình Tân",
+      "Bình Minh",
+      "Long Hồ",
+      "Tam Bình",
+      "TP. Vĩnh Long"
+    ],
+    "dac_tinh_sinh_thai": "Rau màu phát triển trên đất phù sa nhẹ tơi xốp ven sông, yêu cầu tưới ẩm tiêu úng tức thì, luân canh liên tục để hạn chế tích lũy mầm bệnh đất.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Thán thư ớt thối ướt (Colletotrichum capsici)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Colletotrichum capsici"
+        },
+        "trieu_chung_dien_hinh": [
+          "Triệu chứng điển hình gây hại bộ phận lá, chồi hoặc thân cây Ớt Chỉ Thiên Vĩnh Long",
+          "Mô bào bị ngậm nước, biến màu nâu xám hoặc vàng úa, làm giảm nhanh khả năng quang hợp",
+          "Cây suy kiệt, lá rụng hoặc thân bị đổ rạp gục ngã"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt triệu chứng nấm (có lớp mốc tơ) với vi khuẩn (mùi hôi tanh sũng nước) hoặc virus (khảm lá xoăn ngọn)",
+        "kiem_tra_thuc_dia": "Quan sát phiến lá và vùng cổ rễ cây Ớt Chỉ Thiên Vĩnh Long vào buổi sáng sớm",
+        "phac_do_vietgap": {
+          "canh_tac": "Lên liếp cao ráo, phủ bạt nilon nông nghiệp, bón vôi bột khử trùng đất trước khi xuống giống",
+          "sinh_hoc": "Tưới nấm đối kháng Trichoderma harzianum hoặc phun chế phẩm sinh học Bacillus subtilis định kỳ 7-10 ngày/lần",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_058",
+    "topic": "Rau_An_La_An_Qua",
+    "name_vi": "Ớt Sừng Vàng",
+    "scientific_name": "Capsicum frutescens",
+    "dia_ban_pho_bien": [
+      "Bình Tân",
+      "Bình Minh",
+      "Long Hồ",
+      "Tam Bình",
+      "TP. Vĩnh Long"
+    ],
+    "dac_tinh_sinh_thai": "Rau màu phát triển trên đất phù sa nhẹ tơi xốp ven sông, yêu cầu tưới ẩm tiêu úng tức thì, luân canh liên tục để hạn chế tích lũy mầm bệnh đất.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Khảm lá virus ớt do bọ phấn (Chilli Veinal Mottle Virus)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Virus",
+          "ten_khoa_hoc": "Chilli Veinal Mottle Virus"
+        },
+        "trieu_chung_dien_hinh": [
+          "Triệu chứng điển hình gây hại bộ phận lá, chồi hoặc thân cây Ớt Sừng Vàng",
+          "Mô bào bị ngậm nước, biến màu nâu xám hoặc vàng úa, làm giảm nhanh khả năng quang hợp",
+          "Cây suy kiệt, lá rụng hoặc thân bị đổ rạp gục ngã"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt triệu chứng nấm (có lớp mốc tơ) với vi khuẩn (mùi hôi tanh sũng nước) hoặc virus (khảm lá xoăn ngọn)",
+        "kiem_tra_thuc_dia": "Quan sát phiến lá và vùng cổ rễ cây Ớt Sừng Vàng vào buổi sáng sớm",
+        "phac_do_vietgap": {
+          "canh_tac": "Lên liếp cao ráo, phủ bạt nilon nông nghiệp, bón vôi bột khử trùng đất trước khi xuống giống",
+          "sinh_hoc": "Tưới nấm đối kháng Trichoderma harzianum hoặc phun chế phẩm sinh học Bacillus subtilis định kỳ 7-10 ngày/lần",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_059",
+    "topic": "Rau_An_La_An_Qua",
+    "name_vi": "Cà Tím Dài",
+    "scientific_name": "Solanum melongena",
+    "dia_ban_pho_bien": [
+      "Bình Tân",
+      "Bình Minh",
+      "Long Hồ",
+      "Tam Bình",
+      "TP. Vĩnh Long"
+    ],
+    "dac_tinh_sinh_thai": "Rau màu phát triển trên đất phù sa nhẹ tơi xốp ven sông, yêu cầu tưới ẩm tiêu úng tức thì, luân canh liên tục để hạn chế tích lũy mầm bệnh đất.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Héo xanh vi khuẩn cà tím (Ralstonia solanacearum)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Vi khuẩn",
+          "ten_khoa_hoc": "Ralstonia solanacearum"
+        },
+        "trieu_chung_dien_hinh": [
+          "Triệu chứng điển hình gây hại bộ phận lá, chồi hoặc thân cây Cà Tím Dài",
+          "Mô bào bị ngậm nước, biến màu nâu xám hoặc vàng úa, làm giảm nhanh khả năng quang hợp",
+          "Cây suy kiệt, lá rụng hoặc thân bị đổ rạp gục ngã"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt triệu chứng nấm (có lớp mốc tơ) với vi khuẩn (mùi hôi tanh sũng nước) hoặc virus (khảm lá xoăn ngọn)",
+        "kiem_tra_thuc_dia": "Quan sát phiến lá và vùng cổ rễ cây Cà Tím Dài vào buổi sáng sớm",
+        "phac_do_vietgap": {
+          "canh_tac": "Lên liếp cao ráo, phủ bạt nilon nông nghiệp, bón vôi bột khử trùng đất trước khi xuống giống",
+          "sinh_hoc": "Tưới nấm đối kháng Trichoderma harzianum hoặc phun chế phẩm sinh học Bacillus subtilis định kỳ 7-10 ngày/lần",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_060",
+    "topic": "Rau_An_La_An_Qua",
+    "name_vi": "Dưa Hấu Mặt Trời Đỏ",
+    "scientific_name": "Citrullus lanatus",
+    "dia_ban_pho_bien": [
+      "Bình Tân",
+      "Bình Minh",
+      "Long Hồ",
+      "Tam Bình",
+      "TP. Vĩnh Long"
+    ],
+    "dac_tinh_sinh_thai": "Rau màu phát triển trên đất phù sa nhẹ tơi xốp ven sông, yêu cầu tưới ẩm tiêu úng tức thì, luân canh liên tục để hạn chế tích lũy mầm bệnh đất.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Nứt thân chảy mủ dưa hấu (Didymella bryoniae)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Didymella bryoniae"
+        },
+        "trieu_chung_dien_hinh": [
+          "Triệu chứng điển hình gây hại bộ phận lá, chồi hoặc thân cây Dưa Hấu Mặt Trời Đỏ",
+          "Mô bào bị ngậm nước, biến màu nâu xám hoặc vàng úa, làm giảm nhanh khả năng quang hợp",
+          "Cây suy kiệt, lá rụng hoặc thân bị đổ rạp gục ngã"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt triệu chứng nấm (có lớp mốc tơ) với vi khuẩn (mùi hôi tanh sũng nước) hoặc virus (khảm lá xoăn ngọn)",
+        "kiem_tra_thuc_dia": "Quan sát phiến lá và vùng cổ rễ cây Dưa Hấu Mặt Trời Đỏ vào buổi sáng sớm",
+        "phac_do_vietgap": {
+          "canh_tac": "Lên liếp cao ráo, phủ bạt nilon nông nghiệp, bón vôi bột khử trùng đất trước khi xuống giống",
+          "sinh_hoc": "Tưới nấm đối kháng Trichoderma harzianum hoặc phun chế phẩm sinh học Bacillus subtilis định kỳ 7-10 ngày/lần",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_061",
+    "topic": "Rau_An_La_An_Qua",
+    "name_vi": "Dưa Leo / Dưa Chuột Baby",
+    "scientific_name": "Cucumis sativus",
+    "dia_ban_pho_bien": [
+      "Bình Tân",
+      "Bình Minh",
+      "Long Hồ",
+      "Tam Bình",
+      "TP. Vĩnh Long"
+    ],
+    "dac_tinh_sinh_thai": "Rau màu phát triển trên đất phù sa nhẹ tơi xốp ven sông, yêu cầu tưới ẩm tiêu úng tức thì, luân canh liên tục để hạn chế tích lũy mầm bệnh đất.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Sương mai giả dưa leo (Pseudoperonospora cubensis)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Pseudoperonospora cubensis"
+        },
+        "trieu_chung_dien_hinh": [
+          "Triệu chứng điển hình gây hại bộ phận lá, chồi hoặc thân cây Dưa Leo / Dưa Chuột Baby",
+          "Mô bào bị ngậm nước, biến màu nâu xám hoặc vàng úa, làm giảm nhanh khả năng quang hợp",
+          "Cây suy kiệt, lá rụng hoặc thân bị đổ rạp gục ngã"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt triệu chứng nấm (có lớp mốc tơ) với vi khuẩn (mùi hôi tanh sũng nước) hoặc virus (khảm lá xoăn ngọn)",
+        "kiem_tra_thuc_dia": "Quan sát phiến lá và vùng cổ rễ cây Dưa Leo / Dưa Chuột Baby vào buổi sáng sớm",
+        "phac_do_vietgap": {
+          "canh_tac": "Lên liếp cao ráo, phủ bạt nilon nông nghiệp, bón vôi bột khử trùng đất trước khi xuống giống",
+          "sinh_hoc": "Tưới nấm đối kháng Trichoderma harzianum hoặc phun chế phẩm sinh học Bacillus subtilis định kỳ 7-10 ngày/lần",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_062",
+    "topic": "Rau_An_La_An_Qua",
+    "name_vi": "Khổ Qua (Mướp Đắng Rừng)",
+    "scientific_name": "Momordica charantia",
+    "dia_ban_pho_bien": [
+      "Bình Tân",
+      "Bình Minh",
+      "Long Hồ",
+      "Tam Bình",
+      "TP. Vĩnh Long"
+    ],
+    "dac_tinh_sinh_thai": "Rau màu phát triển trên đất phù sa nhẹ tơi xốp ven sông, yêu cầu tưới ẩm tiêu úng tức thì, luân canh liên tục để hạn chế tích lũy mầm bệnh đất.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Phấn trắng hại khổ qua (Podosphaera xanthii)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Podosphaera xanthii"
+        },
+        "trieu_chung_dien_hinh": [
+          "Triệu chứng điển hình gây hại bộ phận lá, chồi hoặc thân cây Khổ Qua (Mướp Đắng Rừng)",
+          "Mô bào bị ngậm nước, biến màu nâu xám hoặc vàng úa, làm giảm nhanh khả năng quang hợp",
+          "Cây suy kiệt, lá rụng hoặc thân bị đổ rạp gục ngã"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt triệu chứng nấm (có lớp mốc tơ) với vi khuẩn (mùi hôi tanh sũng nước) hoặc virus (khảm lá xoăn ngọn)",
+        "kiem_tra_thuc_dia": "Quan sát phiến lá và vùng cổ rễ cây Khổ Qua (Mướp Đắng Rừng) vào buổi sáng sớm",
+        "phac_do_vietgap": {
+          "canh_tac": "Lên liếp cao ráo, phủ bạt nilon nông nghiệp, bón vôi bột khử trùng đất trước khi xuống giống",
+          "sinh_hoc": "Tưới nấm đối kháng Trichoderma harzianum hoặc phun chế phẩm sinh học Bacillus subtilis định kỳ 7-10 ngày/lần",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_063",
+    "topic": "Rau_An_La_An_Qua",
+    "name_vi": "Bầu Sao Vĩnh Long",
+    "scientific_name": "Lagenaria siceraria",
+    "dia_ban_pho_bien": [
+      "Bình Tân",
+      "Bình Minh",
+      "Long Hồ",
+      "Tam Bình",
+      "TP. Vĩnh Long"
+    ],
+    "dac_tinh_sinh_thai": "Rau màu phát triển trên đất phù sa nhẹ tơi xốp ven sông, yêu cầu tưới ẩm tiêu úng tức thì, luân canh liên tục để hạn chế tích lũy mầm bệnh đất.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Khảm lá virus bầu (Cucumber Mosaic Virus - CMV)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Virus",
+          "ten_khoa_hoc": "Cucumber Mosaic Virus - CMV"
+        },
+        "trieu_chung_dien_hinh": [
+          "Triệu chứng điển hình gây hại bộ phận lá, chồi hoặc thân cây Bầu Sao Vĩnh Long",
+          "Mô bào bị ngậm nước, biến màu nâu xám hoặc vàng úa, làm giảm nhanh khả năng quang hợp",
+          "Cây suy kiệt, lá rụng hoặc thân bị đổ rạp gục ngã"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt triệu chứng nấm (có lớp mốc tơ) với vi khuẩn (mùi hôi tanh sũng nước) hoặc virus (khảm lá xoăn ngọn)",
+        "kiem_tra_thuc_dia": "Quan sát phiến lá và vùng cổ rễ cây Bầu Sao Vĩnh Long vào buổi sáng sớm",
+        "phac_do_vietgap": {
+          "canh_tac": "Lên liếp cao ráo, phủ bạt nilon nông nghiệp, bón vôi bột khử trùng đất trước khi xuống giống",
+          "sinh_hoc": "Tưới nấm đối kháng Trichoderma harzianum hoặc phun chế phẩm sinh học Bacillus subtilis định kỳ 7-10 ngày/lần",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_064",
+    "topic": "Rau_An_La_An_Qua",
+    "name_vi": "Bí Đao Chanh (Bí Sáp)",
+    "scientific_name": "Benincasa hispida",
+    "dia_ban_pho_bien": [
+      "Bình Tân",
+      "Bình Minh",
+      "Long Hồ",
+      "Tam Bình",
+      "TP. Vĩnh Long"
+    ],
+    "dac_tinh_sinh_thai": "Rau màu phát triển trên đất phù sa nhẹ tơi xốp ven sông, yêu cầu tưới ẩm tiêu úng tức thì, luân canh liên tục để hạn chế tích lũy mầm bệnh đất.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Thối hoa thối ngọn bí đao (Choanephora cucurbitarum)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Choanephora cucurbitarum"
+        },
+        "trieu_chung_dien_hinh": [
+          "Triệu chứng điển hình gây hại bộ phận lá, chồi hoặc thân cây Bí Đao Chanh (Bí Sáp)",
+          "Mô bào bị ngậm nước, biến màu nâu xám hoặc vàng úa, làm giảm nhanh khả năng quang hợp",
+          "Cây suy kiệt, lá rụng hoặc thân bị đổ rạp gục ngã"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt triệu chứng nấm (có lớp mốc tơ) với vi khuẩn (mùi hôi tanh sũng nước) hoặc virus (khảm lá xoăn ngọn)",
+        "kiem_tra_thuc_dia": "Quan sát phiến lá và vùng cổ rễ cây Bí Đao Chanh (Bí Sáp) vào buổi sáng sớm",
+        "phac_do_vietgap": {
+          "canh_tac": "Lên liếp cao ráo, phủ bạt nilon nông nghiệp, bón vôi bột khử trùng đất trước khi xuống giống",
+          "sinh_hoc": "Tưới nấm đối kháng Trichoderma harzianum hoặc phun chế phẩm sinh học Bacillus subtilis định kỳ 7-10 ngày/lần",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_065",
+    "topic": "Rau_An_La_An_Qua",
+    "name_vi": "Bí Đỏ / Bí Hạt Đậu",
+    "scientific_name": "Cucurbita moschata",
+    "dia_ban_pho_bien": [
+      "Bình Tân",
+      "Bình Minh",
+      "Long Hồ",
+      "Tam Bình",
+      "TP. Vĩnh Long"
+    ],
+    "dac_tinh_sinh_thai": "Rau màu phát triển trên đất phù sa nhẹ tơi xốp ven sông, yêu cầu tưới ẩm tiêu úng tức thì, luân canh liên tục để hạn chế tích lũy mầm bệnh đất.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Đốm phấn vàng lá bí đỏ (Pseudoperonospora cubensis)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Pseudoperonospora cubensis"
+        },
+        "trieu_chung_dien_hinh": [
+          "Triệu chứng điển hình gây hại bộ phận lá, chồi hoặc thân cây Bí Đỏ / Bí Hạt Đậu",
+          "Mô bào bị ngậm nước, biến màu nâu xám hoặc vàng úa, làm giảm nhanh khả năng quang hợp",
+          "Cây suy kiệt, lá rụng hoặc thân bị đổ rạp gục ngã"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt triệu chứng nấm (có lớp mốc tơ) với vi khuẩn (mùi hôi tanh sũng nước) hoặc virus (khảm lá xoăn ngọn)",
+        "kiem_tra_thuc_dia": "Quan sát phiến lá và vùng cổ rễ cây Bí Đỏ / Bí Hạt Đậu vào buổi sáng sớm",
+        "phac_do_vietgap": {
+          "canh_tac": "Lên liếp cao ráo, phủ bạt nilon nông nghiệp, bón vôi bột khử trùng đất trước khi xuống giống",
+          "sinh_hoc": "Tưới nấm đối kháng Trichoderma harzianum hoặc phun chế phẩm sinh học Bacillus subtilis định kỳ 7-10 ngày/lần",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_066",
+    "topic": "Rau_An_La_An_Qua",
+    "name_vi": "Mướp Hương",
+    "scientific_name": "Luffa cylindrica",
+    "dia_ban_pho_bien": [
+      "Bình Tân",
+      "Bình Minh",
+      "Long Hồ",
+      "Tam Bình",
+      "TP. Vĩnh Long"
+    ],
+    "dac_tinh_sinh_thai": "Rau màu phát triển trên đất phù sa nhẹ tơi xốp ven sông, yêu cầu tưới ẩm tiêu úng tức thì, luân canh liên tục để hạn chế tích lũy mầm bệnh đất.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Bọ trĩ xoăn đọt mướp hương (Thrips palmi)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Thrips palmi"
+        },
+        "trieu_chung_dien_hinh": [
+          "Triệu chứng điển hình gây hại bộ phận lá, chồi hoặc thân cây Mướp Hương",
+          "Mô bào bị ngậm nước, biến màu nâu xám hoặc vàng úa, làm giảm nhanh khả năng quang hợp",
+          "Cây suy kiệt, lá rụng hoặc thân bị đổ rạp gục ngã"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt triệu chứng nấm (có lớp mốc tơ) với vi khuẩn (mùi hôi tanh sũng nước) hoặc virus (khảm lá xoăn ngọn)",
+        "kiem_tra_thuc_dia": "Quan sát phiến lá và vùng cổ rễ cây Mướp Hương vào buổi sáng sớm",
+        "phac_do_vietgap": {
+          "canh_tac": "Lên liếp cao ráo, phủ bạt nilon nông nghiệp, bón vôi bột khử trùng đất trước khi xuống giống",
+          "sinh_hoc": "Tưới nấm đối kháng Trichoderma harzianum hoặc phun chế phẩm sinh học Bacillus subtilis định kỳ 7-10 ngày/lần",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_067",
+    "topic": "Rau_An_La_An_Qua",
+    "name_vi": "Đậu Bắp Cao Sản",
+    "scientific_name": "Abelmoschus esculentus",
+    "dia_ban_pho_bien": [
+      "Bình Tân",
+      "Bình Minh",
+      "Long Hồ",
+      "Tam Bình",
+      "TP. Vĩnh Long"
+    ],
+    "dac_tinh_sinh_thai": "Rau màu phát triển trên đất phù sa nhẹ tơi xốp ven sông, yêu cầu tưới ẩm tiêu úng tức thì, luân canh liên tục để hạn chế tích lũy mầm bệnh đất.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Khảm vàng gân lá đậu bắp (Bhendi Yellow Vein Mosaic Virus)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Virus",
+          "ten_khoa_hoc": "Bhendi Yellow Vein Mosaic Virus"
+        },
+        "trieu_chung_dien_hinh": [
+          "Triệu chứng điển hình gây hại bộ phận lá, chồi hoặc thân cây Đậu Bắp Cao Sản",
+          "Mô bào bị ngậm nước, biến màu nâu xám hoặc vàng úa, làm giảm nhanh khả năng quang hợp",
+          "Cây suy kiệt, lá rụng hoặc thân bị đổ rạp gục ngã"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt triệu chứng nấm (có lớp mốc tơ) với vi khuẩn (mùi hôi tanh sũng nước) hoặc virus (khảm lá xoăn ngọn)",
+        "kiem_tra_thuc_dia": "Quan sát phiến lá và vùng cổ rễ cây Đậu Bắp Cao Sản vào buổi sáng sớm",
+        "phac_do_vietgap": {
+          "canh_tac": "Lên liếp cao ráo, phủ bạt nilon nông nghiệp, bón vôi bột khử trùng đất trước khi xuống giống",
+          "sinh_hoc": "Tưới nấm đối kháng Trichoderma harzianum hoặc phun chế phẩm sinh học Bacillus subtilis định kỳ 7-10 ngày/lần",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_068",
+    "topic": "Rau_An_La_An_Qua",
+    "name_vi": "Đậu Cô Ve Lùn",
+    "scientific_name": "Phaseolus vulgaris",
+    "dia_ban_pho_bien": [
+      "Bình Tân",
+      "Bình Minh",
+      "Long Hồ",
+      "Tam Bình",
+      "TP. Vĩnh Long"
+    ],
+    "dac_tinh_sinh_thai": "Rau màu phát triển trên đất phù sa nhẹ tơi xốp ven sông, yêu cầu tưới ẩm tiêu úng tức thì, luân canh liên tục để hạn chế tích lũy mầm bệnh đất.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Rỉ sắt lá đậu cô ve (Uromyces appendiculatus)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Uromyces appendiculatus"
+        },
+        "trieu_chung_dien_hinh": [
+          "Triệu chứng điển hình gây hại bộ phận lá, chồi hoặc thân cây Đậu Cô Ve Lùn",
+          "Mô bào bị ngậm nước, biến màu nâu xám hoặc vàng úa, làm giảm nhanh khả năng quang hợp",
+          "Cây suy kiệt, lá rụng hoặc thân bị đổ rạp gục ngã"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt triệu chứng nấm (có lớp mốc tơ) với vi khuẩn (mùi hôi tanh sũng nước) hoặc virus (khảm lá xoăn ngọn)",
+        "kiem_tra_thuc_dia": "Quan sát phiến lá và vùng cổ rễ cây Đậu Cô Ve Lùn vào buổi sáng sớm",
+        "phac_do_vietgap": {
+          "canh_tac": "Lên liếp cao ráo, phủ bạt nilon nông nghiệp, bón vôi bột khử trùng đất trước khi xuống giống",
+          "sinh_hoc": "Tưới nấm đối kháng Trichoderma harzianum hoặc phun chế phẩm sinh học Bacillus subtilis định kỳ 7-10 ngày/lần",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_069",
+    "topic": "Rau_An_La_An_Qua",
+    "name_vi": "Đậu Đũa Hạt Đen",
+    "scientific_name": "Vigna unguiculata subsp. sesquipedalis",
+    "dia_ban_pho_bien": [
+      "Bình Tân",
+      "Bình Minh",
+      "Long Hồ",
+      "Tam Bình",
+      "TP. Vĩnh Long"
+    ],
+    "dac_tinh_sinh_thai": "Rau màu phát triển trên đất phù sa nhẹ tơi xốp ven sông, yêu cầu tưới ẩm tiêu úng tức thì, luân canh liên tục để hạn chế tích lũy mầm bệnh đất.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Héo vàng rụng lá Fusarium (Fusarium oxysporum)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Fusarium oxysporum"
+        },
+        "trieu_chung_dien_hinh": [
+          "Triệu chứng điển hình gây hại bộ phận lá, chồi hoặc thân cây Đậu Đũa Hạt Đen",
+          "Mô bào bị ngậm nước, biến màu nâu xám hoặc vàng úa, làm giảm nhanh khả năng quang hợp",
+          "Cây suy kiệt, lá rụng hoặc thân bị đổ rạp gục ngã"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt triệu chứng nấm (có lớp mốc tơ) với vi khuẩn (mùi hôi tanh sũng nước) hoặc virus (khảm lá xoăn ngọn)",
+        "kiem_tra_thuc_dia": "Quan sát phiến lá và vùng cổ rễ cây Đậu Đũa Hạt Đen vào buổi sáng sớm",
+        "phac_do_vietgap": {
+          "canh_tac": "Lên liếp cao ráo, phủ bạt nilon nông nghiệp, bón vôi bột khử trùng đất trước khi xuống giống",
+          "sinh_hoc": "Tưới nấm đối kháng Trichoderma harzianum hoặc phun chế phẩm sinh học Bacillus subtilis định kỳ 7-10 ngày/lần",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_070",
+    "topic": "Rau_An_La_An_Qua",
+    "name_vi": "Rau Muống Nước / Muống Ruộng",
+    "scientific_name": "Ipomoea aquatica",
+    "dia_ban_pho_bien": [
+      "Bình Tân",
+      "Bình Minh",
+      "Long Hồ",
+      "Tam Bình",
+      "TP. Vĩnh Long"
+    ],
+    "dac_tinh_sinh_thai": "Rau màu phát triển trên đất phù sa nhẹ tơi xốp ven sông, yêu cầu tưới ẩm tiêu úng tức thì, luân canh liên tục để hạn chế tích lũy mầm bệnh đất.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Rỉ trắng rau muống (Albugo ipomoeae-aquaticae)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Albugo ipomoeae-aquaticae"
+        },
+        "trieu_chung_dien_hinh": [
+          "Triệu chứng điển hình gây hại bộ phận lá, chồi hoặc thân cây Rau Muống Nước / Muống Ruộng",
+          "Mô bào bị ngậm nước, biến màu nâu xám hoặc vàng úa, làm giảm nhanh khả năng quang hợp",
+          "Cây suy kiệt, lá rụng hoặc thân bị đổ rạp gục ngã"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt triệu chứng nấm (có lớp mốc tơ) với vi khuẩn (mùi hôi tanh sũng nước) hoặc virus (khảm lá xoăn ngọn)",
+        "kiem_tra_thuc_dia": "Quan sát phiến lá và vùng cổ rễ cây Rau Muống Nước / Muống Ruộng vào buổi sáng sớm",
+        "phac_do_vietgap": {
+          "canh_tac": "Lên liếp cao ráo, phủ bạt nilon nông nghiệp, bón vôi bột khử trùng đất trước khi xuống giống",
+          "sinh_hoc": "Tưới nấm đối kháng Trichoderma harzianum hoặc phun chế phẩm sinh học Bacillus subtilis định kỳ 7-10 ngày/lần",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_071",
+    "topic": "Rau_An_La_An_Qua",
+    "name_vi": "Cải Xanh Mỡ",
+    "scientific_name": "Brassica juncea",
+    "dia_ban_pho_bien": [
+      "Bình Tân",
+      "Bình Minh",
+      "Long Hồ",
+      "Tam Bình",
+      "TP. Vĩnh Long"
+    ],
+    "dac_tinh_sinh_thai": "Rau màu phát triển trên đất phù sa nhẹ tơi xốp ven sông, yêu cầu tưới ẩm tiêu úng tức thì, luân canh liên tục để hạn chế tích lũy mầm bệnh đất.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Thối nhũn bẹ cải xanh vi khuẩn (Pectobacterium carotovorum)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Vi khuẩn",
+          "ten_khoa_hoc": "Pectobacterium carotovorum"
+        },
+        "trieu_chung_dien_hinh": [
+          "Triệu chứng điển hình gây hại bộ phận lá, chồi hoặc thân cây Cải Xanh Mỡ",
+          "Mô bào bị ngậm nước, biến màu nâu xám hoặc vàng úa, làm giảm nhanh khả năng quang hợp",
+          "Cây suy kiệt, lá rụng hoặc thân bị đổ rạp gục ngã"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt triệu chứng nấm (có lớp mốc tơ) với vi khuẩn (mùi hôi tanh sũng nước) hoặc virus (khảm lá xoăn ngọn)",
+        "kiem_tra_thuc_dia": "Quan sát phiến lá và vùng cổ rễ cây Cải Xanh Mỡ vào buổi sáng sớm",
+        "phac_do_vietgap": {
+          "canh_tac": "Lên liếp cao ráo, phủ bạt nilon nông nghiệp, bón vôi bột khử trùng đất trước khi xuống giống",
+          "sinh_hoc": "Tưới nấm đối kháng Trichoderma harzianum hoặc phun chế phẩm sinh học Bacillus subtilis định kỳ 7-10 ngày/lần",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_072",
+    "topic": "Rau_An_La_An_Qua",
+    "name_vi": "Cải Ngọt Ăn Lá",
+    "scientific_name": "Brassica integrifolia",
+    "dia_ban_pho_bien": [
+      "Bình Tân",
+      "Bình Minh",
+      "Long Hồ",
+      "Tam Bình",
+      "TP. Vĩnh Long"
+    ],
+    "dac_tinh_sinh_thai": "Rau màu phát triển trên đất phù sa nhẹ tơi xốp ven sông, yêu cầu tưới ẩm tiêu úng tức thì, luân canh liên tục để hạn chế tích lũy mầm bệnh đất.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Chết rạp cây con nấm (Pythium debaryanum)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Pythium debaryanum"
+        },
+        "trieu_chung_dien_hinh": [
+          "Triệu chứng điển hình gây hại bộ phận lá, chồi hoặc thân cây Cải Ngọt Ăn Lá",
+          "Mô bào bị ngậm nước, biến màu nâu xám hoặc vàng úa, làm giảm nhanh khả năng quang hợp",
+          "Cây suy kiệt, lá rụng hoặc thân bị đổ rạp gục ngã"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt triệu chứng nấm (có lớp mốc tơ) với vi khuẩn (mùi hôi tanh sũng nước) hoặc virus (khảm lá xoăn ngọn)",
+        "kiem_tra_thuc_dia": "Quan sát phiến lá và vùng cổ rễ cây Cải Ngọt Ăn Lá vào buổi sáng sớm",
+        "phac_do_vietgap": {
+          "canh_tac": "Lên liếp cao ráo, phủ bạt nilon nông nghiệp, bón vôi bột khử trùng đất trước khi xuống giống",
+          "sinh_hoc": "Tưới nấm đối kháng Trichoderma harzianum hoặc phun chế phẩm sinh học Bacillus subtilis định kỳ 7-10 ngày/lần",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_073",
+    "topic": "Rau_An_La_An_Qua",
+    "name_vi": "Cải Thìa / Cải Chíp",
+    "scientific_name": "Brassica rapa subsp. chinensis",
+    "dia_ban_pho_bien": [
+      "Bình Tân",
+      "Bình Minh",
+      "Long Hồ",
+      "Tam Bình",
+      "TP. Vĩnh Long"
+    ],
+    "dac_tinh_sinh_thai": "Rau màu phát triển trên đất phù sa nhẹ tơi xốp ven sông, yêu cầu tưới ẩm tiêu úng tức thì, luân canh liên tục để hạn chế tích lũy mầm bệnh đất.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Đốm vòng đen Alternaria (Alternaria brassicae)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Alternaria brassicae"
+        },
+        "trieu_chung_dien_hinh": [
+          "Triệu chứng điển hình gây hại bộ phận lá, chồi hoặc thân cây Cải Thìa / Cải Chíp",
+          "Mô bào bị ngậm nước, biến màu nâu xám hoặc vàng úa, làm giảm nhanh khả năng quang hợp",
+          "Cây suy kiệt, lá rụng hoặc thân bị đổ rạp gục ngã"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt triệu chứng nấm (có lớp mốc tơ) với vi khuẩn (mùi hôi tanh sũng nước) hoặc virus (khảm lá xoăn ngọn)",
+        "kiem_tra_thuc_dia": "Quan sát phiến lá và vùng cổ rễ cây Cải Thìa / Cải Chíp vào buổi sáng sớm",
+        "phac_do_vietgap": {
+          "canh_tac": "Lên liếp cao ráo, phủ bạt nilon nông nghiệp, bón vôi bột khử trùng đất trước khi xuống giống",
+          "sinh_hoc": "Tưới nấm đối kháng Trichoderma harzianum hoặc phun chế phẩm sinh học Bacillus subtilis định kỳ 7-10 ngày/lần",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_074",
+    "topic": "Rau_An_La_An_Qua",
+    "name_vi": "Cải Bắp Trắng",
+    "scientific_name": "Brassica oleracea var. capitata",
+    "dia_ban_pho_bien": [
+      "Bình Tân",
+      "Bình Minh",
+      "Long Hồ",
+      "Tam Bình",
+      "TP. Vĩnh Long"
+    ],
+    "dac_tinh_sinh_thai": "Rau màu phát triển trên đất phù sa nhẹ tơi xốp ven sông, yêu cầu tưới ẩm tiêu úng tức thì, luân canh liên tục để hạn chế tích lũy mầm bệnh đất.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Đốm đen chân bắp cải (Phoma lingam)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Phoma lingam"
+        },
+        "trieu_chung_dien_hinh": [
+          "Triệu chứng điển hình gây hại bộ phận lá, chồi hoặc thân cây Cải Bắp Trắng",
+          "Mô bào bị ngậm nước, biến màu nâu xám hoặc vàng úa, làm giảm nhanh khả năng quang hợp",
+          "Cây suy kiệt, lá rụng hoặc thân bị đổ rạp gục ngã"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt triệu chứng nấm (có lớp mốc tơ) với vi khuẩn (mùi hôi tanh sũng nước) hoặc virus (khảm lá xoăn ngọn)",
+        "kiem_tra_thuc_dia": "Quan sát phiến lá và vùng cổ rễ cây Cải Bắp Trắng vào buổi sáng sớm",
+        "phac_do_vietgap": {
+          "canh_tac": "Lên liếp cao ráo, phủ bạt nilon nông nghiệp, bón vôi bột khử trùng đất trước khi xuống giống",
+          "sinh_hoc": "Tưới nấm đối kháng Trichoderma harzianum hoặc phun chế phẩm sinh học Bacillus subtilis định kỳ 7-10 ngày/lần",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_075",
+    "topic": "Rau_An_La_An_Qua",
+    "name_vi": "Cải Thảo Xoăn",
+    "scientific_name": "Brassica rapa subsp. pekinensis",
+    "dia_ban_pho_bien": [
+      "Bình Tân",
+      "Bình Minh",
+      "Long Hồ",
+      "Tam Bình",
+      "TP. Vĩnh Long"
+    ],
+    "dac_tinh_sinh_thai": "Rau màu phát triển trên đất phù sa nhẹ tơi xốp ven sông, yêu cầu tưới ẩm tiêu úng tức thì, luân canh liên tục để hạn chế tích lũy mầm bệnh đất.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Thối hạch sương nấm trắng (Sclerotinia sclerotiorum)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Sclerotinia sclerotiorum"
+        },
+        "trieu_chung_dien_hinh": [
+          "Triệu chứng điển hình gây hại bộ phận lá, chồi hoặc thân cây Cải Thảo Xoăn",
+          "Mô bào bị ngậm nước, biến màu nâu xám hoặc vàng úa, làm giảm nhanh khả năng quang hợp",
+          "Cây suy kiệt, lá rụng hoặc thân bị đổ rạp gục ngã"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt triệu chứng nấm (có lớp mốc tơ) với vi khuẩn (mùi hôi tanh sũng nước) hoặc virus (khảm lá xoăn ngọn)",
+        "kiem_tra_thuc_dia": "Quan sát phiến lá và vùng cổ rễ cây Cải Thảo Xoăn vào buổi sáng sớm",
+        "phac_do_vietgap": {
+          "canh_tac": "Lên liếp cao ráo, phủ bạt nilon nông nghiệp, bón vôi bột khử trùng đất trước khi xuống giống",
+          "sinh_hoc": "Tưới nấm đối kháng Trichoderma harzianum hoặc phun chế phẩm sinh học Bacillus subtilis định kỳ 7-10 ngày/lần",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_076",
+    "topic": "Rau_An_La_An_Qua",
+    "name_vi": "Xà Lách Búp Mỡ",
+    "scientific_name": "Lactuca sativa",
+    "dia_ban_pho_bien": [
+      "Bình Tân",
+      "Bình Minh",
+      "Long Hồ",
+      "Tam Bình",
+      "TP. Vĩnh Long"
+    ],
+    "dac_tinh_sinh_thai": "Rau màu phát triển trên đất phù sa nhẹ tơi xốp ven sông, yêu cầu tưới ẩm tiêu úng tức thì, luân canh liên tục để hạn chế tích lũy mầm bệnh đất.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Cháy rìa lá sinh lý thiếu canxi (Tipburn)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Tipburn"
+        },
+        "trieu_chung_dien_hinh": [
+          "Triệu chứng điển hình gây hại bộ phận lá, chồi hoặc thân cây Xà Lách Búp Mỡ",
+          "Mô bào bị ngậm nước, biến màu nâu xám hoặc vàng úa, làm giảm nhanh khả năng quang hợp",
+          "Cây suy kiệt, lá rụng hoặc thân bị đổ rạp gục ngã"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt triệu chứng nấm (có lớp mốc tơ) với vi khuẩn (mùi hôi tanh sũng nước) hoặc virus (khảm lá xoăn ngọn)",
+        "kiem_tra_thuc_dia": "Quan sát phiến lá và vùng cổ rễ cây Xà Lách Búp Mỡ vào buổi sáng sớm",
+        "phac_do_vietgap": {
+          "canh_tac": "Lên liếp cao ráo, phủ bạt nilon nông nghiệp, bón vôi bột khử trùng đất trước khi xuống giống",
+          "sinh_hoc": "Tưới nấm đối kháng Trichoderma harzianum hoặc phun chế phẩm sinh học Bacillus subtilis định kỳ 7-10 ngày/lần",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_077",
+    "topic": "Rau_An_La_An_Qua",
+    "name_vi": "Xà Lách Romaine",
+    "scientific_name": "Lactuca sativa var. longifolia",
+    "dia_ban_pho_bien": [
+      "Bình Tân",
+      "Bình Minh",
+      "Long Hồ",
+      "Tam Bình",
+      "TP. Vĩnh Long"
+    ],
+    "dac_tinh_sinh_thai": "Rau màu phát triển trên đất phù sa nhẹ tơi xốp ven sông, yêu cầu tưới ẩm tiêu úng tức thì, luân canh liên tục để hạn chế tích lũy mầm bệnh đất.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Đốm vi khuẩn xà lách (Xanthomonas campestris pv. vitians)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Vi khuẩn",
+          "ten_khoa_hoc": "Xanthomonas campestris pv. vitians"
+        },
+        "trieu_chung_dien_hinh": [
+          "Triệu chứng điển hình gây hại bộ phận lá, chồi hoặc thân cây Xà Lách Romaine",
+          "Mô bào bị ngậm nước, biến màu nâu xám hoặc vàng úa, làm giảm nhanh khả năng quang hợp",
+          "Cây suy kiệt, lá rụng hoặc thân bị đổ rạp gục ngã"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt triệu chứng nấm (có lớp mốc tơ) với vi khuẩn (mùi hôi tanh sũng nước) hoặc virus (khảm lá xoăn ngọn)",
+        "kiem_tra_thuc_dia": "Quan sát phiến lá và vùng cổ rễ cây Xà Lách Romaine vào buổi sáng sớm",
+        "phac_do_vietgap": {
+          "canh_tac": "Lên liếp cao ráo, phủ bạt nilon nông nghiệp, bón vôi bột khử trùng đất trước khi xuống giống",
+          "sinh_hoc": "Tưới nấm đối kháng Trichoderma harzianum hoặc phun chế phẩm sinh học Bacillus subtilis định kỳ 7-10 ngày/lần",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_078",
+    "topic": "Rau_An_La_An_Qua",
+    "name_vi": "Hành Lá Gốc Trắng",
+    "scientific_name": "Allium fistulosum",
+    "dia_ban_pho_bien": [
+      "Bình Tân",
+      "Bình Minh",
+      "Long Hồ",
+      "Tam Bình",
+      "TP. Vĩnh Long"
+    ],
+    "dac_tinh_sinh_thai": "Rau màu phát triển trên đất phù sa nhẹ tơi xốp ven sông, yêu cầu tưới ẩm tiêu úng tức thì, luân canh liên tục để hạn chế tích lũy mầm bệnh đất.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Thối gốc hành lá mốc trắng (Sclerotium cepivorum)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Sclerotium cepivorum"
+        },
+        "trieu_chung_dien_hinh": [
+          "Triệu chứng điển hình gây hại bộ phận lá, chồi hoặc thân cây Hành Lá Gốc Trắng",
+          "Mô bào bị ngậm nước, biến màu nâu xám hoặc vàng úa, làm giảm nhanh khả năng quang hợp",
+          "Cây suy kiệt, lá rụng hoặc thân bị đổ rạp gục ngã"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt triệu chứng nấm (có lớp mốc tơ) với vi khuẩn (mùi hôi tanh sũng nước) hoặc virus (khảm lá xoăn ngọn)",
+        "kiem_tra_thuc_dia": "Quan sát phiến lá và vùng cổ rễ cây Hành Lá Gốc Trắng vào buổi sáng sớm",
+        "phac_do_vietgap": {
+          "canh_tac": "Lên liếp cao ráo, phủ bạt nilon nông nghiệp, bón vôi bột khử trùng đất trước khi xuống giống",
+          "sinh_hoc": "Tưới nấm đối kháng Trichoderma harzianum hoặc phun chế phẩm sinh học Bacillus subtilis định kỳ 7-10 ngày/lần",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_079",
+    "topic": "Rau_An_La_An_Qua",
+    "name_vi": "Hẹ Ăn Lá Vĩnh Long",
+    "scientific_name": "Allium tuberosum",
+    "dia_ban_pho_bien": [
+      "Bình Tân",
+      "Bình Minh",
+      "Long Hồ",
+      "Tam Bình",
+      "TP. Vĩnh Long"
+    ],
+    "dac_tinh_sinh_thai": "Rau màu phát triển trên đất phù sa nhẹ tơi xốp ven sông, yêu cầu tưới ẩm tiêu úng tức thì, luân canh liên tục để hạn chế tích lũy mầm bệnh đất.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Đốm tím lá hẹ (Alternaria porri)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Alternaria porri"
+        },
+        "trieu_chung_dien_hinh": [
+          "Triệu chứng điển hình gây hại bộ phận lá, chồi hoặc thân cây Hẹ Ăn Lá Vĩnh Long",
+          "Mô bào bị ngậm nước, biến màu nâu xám hoặc vàng úa, làm giảm nhanh khả năng quang hợp",
+          "Cây suy kiệt, lá rụng hoặc thân bị đổ rạp gục ngã"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt triệu chứng nấm (có lớp mốc tơ) với vi khuẩn (mùi hôi tanh sũng nước) hoặc virus (khảm lá xoăn ngọn)",
+        "kiem_tra_thuc_dia": "Quan sát phiến lá và vùng cổ rễ cây Hẹ Ăn Lá Vĩnh Long vào buổi sáng sớm",
+        "phac_do_vietgap": {
+          "canh_tac": "Lên liếp cao ráo, phủ bạt nilon nông nghiệp, bón vôi bột khử trùng đất trước khi xuống giống",
+          "sinh_hoc": "Tưới nấm đối kháng Trichoderma harzianum hoặc phun chế phẩm sinh học Bacillus subtilis định kỳ 7-10 ngày/lần",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_080",
+    "topic": "Rau_An_La_An_Qua",
+    "name_vi": "Rau Ngót / Bồ Ngót",
+    "scientific_name": "Sauropus androgynus",
+    "dia_ban_pho_bien": [
+      "Bình Tân",
+      "Bình Minh",
+      "Long Hồ",
+      "Tam Bình",
+      "TP. Vĩnh Long"
+    ],
+    "dac_tinh_sinh_thai": "Rau màu phát triển trên đất phù sa nhẹ tơi xốp ven sông, yêu cầu tưới ẩm tiêu úng tức thì, luân canh liên tục để hạn chế tích lũy mầm bệnh đất.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Xoăn lá chùn ngọn rau ngót do bọ trĩ",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Tổ hợp vi sinh vật gây hại"
+        },
+        "trieu_chung_dien_hinh": [
+          "Triệu chứng điển hình gây hại bộ phận lá, chồi hoặc thân cây Rau Ngót / Bồ Ngót",
+          "Mô bào bị ngậm nước, biến màu nâu xám hoặc vàng úa, làm giảm nhanh khả năng quang hợp",
+          "Cây suy kiệt, lá rụng hoặc thân bị đổ rạp gục ngã"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt triệu chứng nấm (có lớp mốc tơ) với vi khuẩn (mùi hôi tanh sũng nước) hoặc virus (khảm lá xoăn ngọn)",
+        "kiem_tra_thuc_dia": "Quan sát phiến lá và vùng cổ rễ cây Rau Ngót / Bồ Ngót vào buổi sáng sớm",
+        "phac_do_vietgap": {
+          "canh_tac": "Lên liếp cao ráo, phủ bạt nilon nông nghiệp, bón vôi bột khử trùng đất trước khi xuống giống",
+          "sinh_hoc": "Tưới nấm đối kháng Trichoderma harzianum hoặc phun chế phẩm sinh học Bacillus subtilis định kỳ 7-10 ngày/lần",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_081",
+    "topic": "Rau_An_La_An_Qua",
+    "name_vi": "Rau Mồng Tơi",
+    "scientific_name": "Basella alba",
+    "dia_ban_pho_bien": [
+      "Bình Tân",
+      "Bình Minh",
+      "Long Hồ",
+      "Tam Bình",
+      "TP. Vĩnh Long"
+    ],
+    "dac_tinh_sinh_thai": "Rau màu phát triển trên đất phù sa nhẹ tơi xốp ven sông, yêu cầu tưới ẩm tiêu úng tức thì, luân canh liên tục để hạn chế tích lũy mầm bệnh đất.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Đốm mắt cua lá mồng tơi (Cercospora basellae)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Cercospora basellae"
+        },
+        "trieu_chung_dien_hinh": [
+          "Triệu chứng điển hình gây hại bộ phận lá, chồi hoặc thân cây Rau Mồng Tơi",
+          "Mô bào bị ngậm nước, biến màu nâu xám hoặc vàng úa, làm giảm nhanh khả năng quang hợp",
+          "Cây suy kiệt, lá rụng hoặc thân bị đổ rạp gục ngã"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt triệu chứng nấm (có lớp mốc tơ) với vi khuẩn (mùi hôi tanh sũng nước) hoặc virus (khảm lá xoăn ngọn)",
+        "kiem_tra_thuc_dia": "Quan sát phiến lá và vùng cổ rễ cây Rau Mồng Tơi vào buổi sáng sớm",
+        "phac_do_vietgap": {
+          "canh_tac": "Lên liếp cao ráo, phủ bạt nilon nông nghiệp, bón vôi bột khử trùng đất trước khi xuống giống",
+          "sinh_hoc": "Tưới nấm đối kháng Trichoderma harzianum hoặc phun chế phẩm sinh học Bacillus subtilis định kỳ 7-10 ngày/lần",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_082",
+    "topic": "Rau_An_La_An_Qua",
+    "name_vi": "Rau Đay Quả Dài",
+    "scientific_name": "Corchorus olitorius",
+    "dia_ban_pho_bien": [
+      "Bình Tân",
+      "Bình Minh",
+      "Long Hồ",
+      "Tam Bình",
+      "TP. Vĩnh Long"
+    ],
+    "dac_tinh_sinh_thai": "Rau màu phát triển trên đất phù sa nhẹ tơi xốp ven sông, yêu cầu tưới ẩm tiêu úng tức thì, luân canh liên tục để hạn chế tích lũy mầm bệnh đất.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Cháy lá đốm nâu rau đay (Rhizoctonia solani)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Rhizoctonia solani"
+        },
+        "trieu_chung_dien_hinh": [
+          "Triệu chứng điển hình gây hại bộ phận lá, chồi hoặc thân cây Rau Đay Quả Dài",
+          "Mô bào bị ngậm nước, biến màu nâu xám hoặc vàng úa, làm giảm nhanh khả năng quang hợp",
+          "Cây suy kiệt, lá rụng hoặc thân bị đổ rạp gục ngã"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt triệu chứng nấm (có lớp mốc tơ) với vi khuẩn (mùi hôi tanh sũng nước) hoặc virus (khảm lá xoăn ngọn)",
+        "kiem_tra_thuc_dia": "Quan sát phiến lá và vùng cổ rễ cây Rau Đay Quả Dài vào buổi sáng sớm",
+        "phac_do_vietgap": {
+          "canh_tac": "Lên liếp cao ráo, phủ bạt nilon nông nghiệp, bón vôi bột khử trùng đất trước khi xuống giống",
+          "sinh_hoc": "Tưới nấm đối kháng Trichoderma harzianum hoặc phun chế phẩm sinh học Bacillus subtilis định kỳ 7-10 ngày/lần",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_083",
+    "topic": "Rau_An_La_An_Qua",
+    "name_vi": "Rau Càng Cua",
+    "scientific_name": "Peperomia pellucida",
+    "dia_ban_pho_bien": [
+      "Bình Tân",
+      "Bình Minh",
+      "Long Hồ",
+      "Tam Bình",
+      "TP. Vĩnh Long"
+    ],
+    "dac_tinh_sinh_thai": "Rau màu phát triển trên đất phù sa nhẹ tơi xốp ven sông, yêu cầu tưới ẩm tiêu úng tức thì, luân canh liên tục để hạn chế tích lũy mầm bệnh đất.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Thối nhũn ướt thân mềm rau càng cua (Pectobacterium)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Pectobacterium"
+        },
+        "trieu_chung_dien_hinh": [
+          "Triệu chứng điển hình gây hại bộ phận lá, chồi hoặc thân cây Rau Càng Cua",
+          "Mô bào bị ngậm nước, biến màu nâu xám hoặc vàng úa, làm giảm nhanh khả năng quang hợp",
+          "Cây suy kiệt, lá rụng hoặc thân bị đổ rạp gục ngã"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt triệu chứng nấm (có lớp mốc tơ) với vi khuẩn (mùi hôi tanh sũng nước) hoặc virus (khảm lá xoăn ngọn)",
+        "kiem_tra_thuc_dia": "Quan sát phiến lá và vùng cổ rễ cây Rau Càng Cua vào buổi sáng sớm",
+        "phac_do_vietgap": {
+          "canh_tac": "Lên liếp cao ráo, phủ bạt nilon nông nghiệp, bón vôi bột khử trùng đất trước khi xuống giống",
+          "sinh_hoc": "Tưới nấm đối kháng Trichoderma harzianum hoặc phun chế phẩm sinh học Bacillus subtilis định kỳ 7-10 ngày/lần",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_084",
+    "topic": "Rau_An_La_An_Qua",
+    "name_vi": "Rau Má Bờ Ruộng",
+    "scientific_name": "Centella asiatica",
+    "dia_ban_pho_bien": [
+      "Bình Tân",
+      "Bình Minh",
+      "Long Hồ",
+      "Tam Bình",
+      "TP. Vĩnh Long"
+    ],
+    "dac_tinh_sinh_thai": "Rau màu phát triển trên đất phù sa nhẹ tơi xốp ven sông, yêu cầu tưới ẩm tiêu úng tức thì, luân canh liên tục để hạn chế tích lũy mầm bệnh đất.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Đốm lá tròn rau má (Cercospora centellae)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Cercospora centellae"
+        },
+        "trieu_chung_dien_hinh": [
+          "Triệu chứng điển hình gây hại bộ phận lá, chồi hoặc thân cây Rau Má Bờ Ruộng",
+          "Mô bào bị ngậm nước, biến màu nâu xám hoặc vàng úa, làm giảm nhanh khả năng quang hợp",
+          "Cây suy kiệt, lá rụng hoặc thân bị đổ rạp gục ngã"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt triệu chứng nấm (có lớp mốc tơ) với vi khuẩn (mùi hôi tanh sũng nước) hoặc virus (khảm lá xoăn ngọn)",
+        "kiem_tra_thuc_dia": "Quan sát phiến lá và vùng cổ rễ cây Rau Má Bờ Ruộng vào buổi sáng sớm",
+        "phac_do_vietgap": {
+          "canh_tac": "Lên liếp cao ráo, phủ bạt nilon nông nghiệp, bón vôi bột khử trùng đất trước khi xuống giống",
+          "sinh_hoc": "Tưới nấm đối kháng Trichoderma harzianum hoặc phun chế phẩm sinh học Bacillus subtilis định kỳ 7-10 ngày/lần",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_085",
+    "topic": "Rau_An_La_An_Qua",
+    "name_vi": "Rau Diếp Cá",
+    "scientific_name": "Houttuynia cordata",
+    "dia_ban_pho_bien": [
+      "Bình Tân",
+      "Bình Minh",
+      "Long Hồ",
+      "Tam Bình",
+      "TP. Vĩnh Long"
+    ],
+    "dac_tinh_sinh_thai": "Rau màu phát triển trên đất phù sa nhẹ tơi xốp ven sông, yêu cầu tưới ẩm tiêu úng tức thì, luân canh liên tục để hạn chế tích lũy mầm bệnh đất.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Thối gốc lở cổ rễ diếp cá (Rhizoctonia)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Rhizoctonia"
+        },
+        "trieu_chung_dien_hinh": [
+          "Triệu chứng điển hình gây hại bộ phận lá, chồi hoặc thân cây Rau Diếp Cá",
+          "Mô bào bị ngậm nước, biến màu nâu xám hoặc vàng úa, làm giảm nhanh khả năng quang hợp",
+          "Cây suy kiệt, lá rụng hoặc thân bị đổ rạp gục ngã"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt triệu chứng nấm (có lớp mốc tơ) với vi khuẩn (mùi hôi tanh sũng nước) hoặc virus (khảm lá xoăn ngọn)",
+        "kiem_tra_thuc_dia": "Quan sát phiến lá và vùng cổ rễ cây Rau Diếp Cá vào buổi sáng sớm",
+        "phac_do_vietgap": {
+          "canh_tac": "Lên liếp cao ráo, phủ bạt nilon nông nghiệp, bón vôi bột khử trùng đất trước khi xuống giống",
+          "sinh_hoc": "Tưới nấm đối kháng Trichoderma harzianum hoặc phun chế phẩm sinh học Bacillus subtilis định kỳ 7-10 ngày/lần",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_086",
+    "topic": "Rau_An_La_An_Qua",
+    "name_vi": "Cần Tây ĐBSCL",
+    "scientific_name": "Apium graveolens",
+    "dia_ban_pho_bien": [
+      "Bình Tân",
+      "Bình Minh",
+      "Long Hồ",
+      "Tam Bình",
+      "TP. Vĩnh Long"
+    ],
+    "dac_tinh_sinh_thai": "Rau màu phát triển trên đất phù sa nhẹ tơi xốp ven sông, yêu cầu tưới ẩm tiêu úng tức thì, luân canh liên tục để hạn chế tích lũy mầm bệnh đất.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Đốm lá sương mai cần tây (Septoria apiicola)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Septoria apiicola"
+        },
+        "trieu_chung_dien_hinh": [
+          "Triệu chứng điển hình gây hại bộ phận lá, chồi hoặc thân cây Cần Tây ĐBSCL",
+          "Mô bào bị ngậm nước, biến màu nâu xám hoặc vàng úa, làm giảm nhanh khả năng quang hợp",
+          "Cây suy kiệt, lá rụng hoặc thân bị đổ rạp gục ngã"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt triệu chứng nấm (có lớp mốc tơ) với vi khuẩn (mùi hôi tanh sũng nước) hoặc virus (khảm lá xoăn ngọn)",
+        "kiem_tra_thuc_dia": "Quan sát phiến lá và vùng cổ rễ cây Cần Tây ĐBSCL vào buổi sáng sớm",
+        "phac_do_vietgap": {
+          "canh_tac": "Lên liếp cao ráo, phủ bạt nilon nông nghiệp, bón vôi bột khử trùng đất trước khi xuống giống",
+          "sinh_hoc": "Tưới nấm đối kháng Trichoderma harzianum hoặc phun chế phẩm sinh học Bacillus subtilis định kỳ 7-10 ngày/lần",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_087",
+    "topic": "Rau_An_La_An_Qua",
+    "name_vi": "Cần Nước Vĩnh Long",
+    "scientific_name": "Oenanthe javanica",
+    "dia_ban_pho_bien": [
+      "Bình Tân",
+      "Bình Minh",
+      "Long Hồ",
+      "Tam Bình",
+      "TP. Vĩnh Long"
+    ],
+    "dac_tinh_sinh_thai": "Rau màu phát triển trên đất phù sa nhẹ tơi xốp ven sông, yêu cầu tưới ẩm tiêu úng tức thì, luân canh liên tục để hạn chế tích lũy mầm bệnh đất.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Rỉ sắt lá cần nước (Puccinia oenanthes)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Puccinia oenanthes"
+        },
+        "trieu_chung_dien_hinh": [
+          "Triệu chứng điển hình gây hại bộ phận lá, chồi hoặc thân cây Cần Nước Vĩnh Long",
+          "Mô bào bị ngậm nước, biến màu nâu xám hoặc vàng úa, làm giảm nhanh khả năng quang hợp",
+          "Cây suy kiệt, lá rụng hoặc thân bị đổ rạp gục ngã"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt triệu chứng nấm (có lớp mốc tơ) với vi khuẩn (mùi hôi tanh sũng nước) hoặc virus (khảm lá xoăn ngọn)",
+        "kiem_tra_thuc_dia": "Quan sát phiến lá và vùng cổ rễ cây Cần Nước Vĩnh Long vào buổi sáng sớm",
+        "phac_do_vietgap": {
+          "canh_tac": "Lên liếp cao ráo, phủ bạt nilon nông nghiệp, bón vôi bột khử trùng đất trước khi xuống giống",
+          "sinh_hoc": "Tưới nấm đối kháng Trichoderma harzianum hoặc phun chế phẩm sinh học Bacillus subtilis định kỳ 7-10 ngày/lần",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_088",
+    "topic": "Rau_An_La_An_Qua",
+    "name_vi": "Rau Đắng Đất / Rau Đắng Biển",
+    "scientific_name": "Glinus oppositifolius",
+    "dia_ban_pho_bien": [
+      "Bình Tân",
+      "Bình Minh",
+      "Long Hồ",
+      "Tam Bình",
+      "TP. Vĩnh Long"
+    ],
+    "dac_tinh_sinh_thai": "Rau màu phát triển trên đất phù sa nhẹ tơi xốp ven sông, yêu cầu tưới ẩm tiêu úng tức thì, luân canh liên tục để hạn chế tích lũy mầm bệnh đất.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Thối nhũn thân rau đắng sau mưa",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Tổ hợp vi sinh vật gây hại"
+        },
+        "trieu_chung_dien_hinh": [
+          "Triệu chứng điển hình gây hại bộ phận lá, chồi hoặc thân cây Rau Đắng Đất / Rau Đắng Biển",
+          "Mô bào bị ngậm nước, biến màu nâu xám hoặc vàng úa, làm giảm nhanh khả năng quang hợp",
+          "Cây suy kiệt, lá rụng hoặc thân bị đổ rạp gục ngã"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt triệu chứng nấm (có lớp mốc tơ) với vi khuẩn (mùi hôi tanh sũng nước) hoặc virus (khảm lá xoăn ngọn)",
+        "kiem_tra_thuc_dia": "Quan sát phiến lá và vùng cổ rễ cây Rau Đắng Đất / Rau Đắng Biển vào buổi sáng sớm",
+        "phac_do_vietgap": {
+          "canh_tac": "Lên liếp cao ráo, phủ bạt nilon nông nghiệp, bón vôi bột khử trùng đất trước khi xuống giống",
+          "sinh_hoc": "Tưới nấm đối kháng Trichoderma harzianum hoặc phun chế phẩm sinh học Bacillus subtilis định kỳ 7-10 ngày/lần",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_089",
+    "topic": "Rau_An_La_An_Qua",
+    "name_vi": "Bạc Hà / Dọc Mùng",
+    "scientific_name": "Alocasia odora",
+    "dia_ban_pho_bien": [
+      "Bình Tân",
+      "Bình Minh",
+      "Long Hồ",
+      "Tam Bình",
+      "TP. Vĩnh Long"
+    ],
+    "dac_tinh_sinh_thai": "Rau màu phát triển trên đất phù sa nhẹ tơi xốp ven sông, yêu cầu tưới ẩm tiêu úng tức thì, luân canh liên tục để hạn chế tích lũy mầm bệnh đất.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Thối nhũn bẹ bạc hà (Pythium sp.)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Pythium sp."
+        },
+        "trieu_chung_dien_hinh": [
+          "Triệu chứng điển hình gây hại bộ phận lá, chồi hoặc thân cây Bạc Hà / Dọc Mùng",
+          "Mô bào bị ngậm nước, biến màu nâu xám hoặc vàng úa, làm giảm nhanh khả năng quang hợp",
+          "Cây suy kiệt, lá rụng hoặc thân bị đổ rạp gục ngã"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt triệu chứng nấm (có lớp mốc tơ) với vi khuẩn (mùi hôi tanh sũng nước) hoặc virus (khảm lá xoăn ngọn)",
+        "kiem_tra_thuc_dia": "Quan sát phiến lá và vùng cổ rễ cây Bạc Hà / Dọc Mùng vào buổi sáng sớm",
+        "phac_do_vietgap": {
+          "canh_tac": "Lên liếp cao ráo, phủ bạt nilon nông nghiệp, bón vôi bột khử trùng đất trước khi xuống giống",
+          "sinh_hoc": "Tưới nấm đối kháng Trichoderma harzianum hoặc phun chế phẩm sinh học Bacillus subtilis định kỳ 7-10 ngày/lần",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_090",
+    "topic": "Rau_An_La_An_Qua",
+    "name_vi": "Ngò Gai / Mùi Tàu",
+    "scientific_name": "Eryngium foetidum",
+    "dia_ban_pho_bien": [
+      "Bình Tân",
+      "Bình Minh",
+      "Long Hồ",
+      "Tam Bình",
+      "TP. Vĩnh Long"
+    ],
+    "dac_tinh_sinh_thai": "Rau màu phát triển trên đất phù sa nhẹ tơi xốp ven sông, yêu cầu tưới ẩm tiêu úng tức thì, luân canh liên tục để hạn chế tích lũy mầm bệnh đất.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Thối thâm tim lá ngò gai vi khuẩn",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Vi khuẩn",
+          "ten_khoa_hoc": "Tổ hợp vi sinh vật gây hại"
+        },
+        "trieu_chung_dien_hinh": [
+          "Triệu chứng điển hình gây hại bộ phận lá, chồi hoặc thân cây Ngò Gai / Mùi Tàu",
+          "Mô bào bị ngậm nước, biến màu nâu xám hoặc vàng úa, làm giảm nhanh khả năng quang hợp",
+          "Cây suy kiệt, lá rụng hoặc thân bị đổ rạp gục ngã"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt triệu chứng nấm (có lớp mốc tơ) với vi khuẩn (mùi hôi tanh sũng nước) hoặc virus (khảm lá xoăn ngọn)",
+        "kiem_tra_thuc_dia": "Quan sát phiến lá và vùng cổ rễ cây Ngò Gai / Mùi Tàu vào buổi sáng sớm",
+        "phac_do_vietgap": {
+          "canh_tac": "Lên liếp cao ráo, phủ bạt nilon nông nghiệp, bón vôi bột khử trùng đất trước khi xuống giống",
+          "sinh_hoc": "Tưới nấm đối kháng Trichoderma harzianum hoặc phun chế phẩm sinh học Bacillus subtilis định kỳ 7-10 ngày/lần",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_091",
+    "topic": "Cay_Cong_Nghiep_Duoc_Lieu",
+    "name_vi": "Sen Đồng Tháp Mười / Trà Ôn",
+    "scientific_name": "Nelumbo nucifera",
+    "dia_ban_pho_bien": [
+      "Trà Ôn",
+      "Vũng Liêm",
+      "Long Hồ",
+      "Mang Thít",
+      "Bình Tân"
+    ],
+    "dac_tinh_sinh_thai": "Cây công nghiệp ngắn ngày và cây dược liệu có giá trị kinh tế cao, yêu cầu đất giàu hữu cơ thoát nước tốt, hạn chế tối đa dư lượng hóa chất theo tiêu chuẩn VietGAP/GACP-WHO.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Thối ngó thối củ sen (Pythium / Fusarium)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Pythium / Fusarium"
+        },
+        "trieu_chung_dien_hinh": [
+          "Triệu chứng tổn thương mô rễ, thân củ hoặc lá của cây dược liệu Sen Đồng Tháp Mười / Trà Ôn",
+          "Vết bệnh chuyển thâm đen thối rữa hoặc nứt nẻ, cản trở tổng hợp hoạt chất dược tính",
+          "Cây suy kiệt rụng lá, củ bị thối úng mục nát"
+        ],
+        "phan_biet_chan_doan_kep": "Khác với thiếu chất sinh lý (vết bệnh nấm có bào tử hoặc tơ sợi, vi khuẩn có mùi tanh thối)",
+        "kiem_tra_thuc_dia": "Kiểm tra rễ củ và phiến lá Sen Đồng Tháp Mười / Trà Ôn",
+        "phac_do_vietgap": {
+          "canh_tac": "Trồng mật độ chuẩn, nâng luống cao ráo thoát nước triệt để trong mùa mưa bão",
+          "sinh_hoc": "Tưới nấm đối kháng Trichoderma phối hợp nấm cộng sinh rễ Glomus intraradices (Mycorrhiza)",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_092",
+    "topic": "Cay_Cong_Nghiep_Duoc_Lieu",
+    "name_vi": "Nấm Rơm Rơm Cấy Vĩnh Long",
+    "scientific_name": "Volvariella volvacea",
+    "dia_ban_pho_bien": [
+      "Trà Ôn",
+      "Vũng Liêm",
+      "Long Hồ",
+      "Mang Thít",
+      "Bình Tân"
+    ],
+    "dac_tinh_sinh_thai": "Cây công nghiệp ngắn ngày và cây dược liệu có giá trị kinh tế cao, yêu cầu đất giàu hữu cơ thoát nước tốt, hạn chế tối đa dư lượng hóa chất theo tiêu chuẩn VietGAP/GACP-WHO.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Nấm mốc xanh thối meo nấm rơm (Trichoderma viride mọc dại)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Trichoderma viride mọc dại"
+        },
+        "trieu_chung_dien_hinh": [
+          "Triệu chứng tổn thương mô rễ, thân củ hoặc lá của cây dược liệu Nấm Rơm Rơm Cấy Vĩnh Long",
+          "Vết bệnh chuyển thâm đen thối rữa hoặc nứt nẻ, cản trở tổng hợp hoạt chất dược tính",
+          "Cây suy kiệt rụng lá, củ bị thối úng mục nát"
+        ],
+        "phan_biet_chan_doan_kep": "Khác với thiếu chất sinh lý (vết bệnh nấm có bào tử hoặc tơ sợi, vi khuẩn có mùi tanh thối)",
+        "kiem_tra_thuc_dia": "Kiểm tra rễ củ và phiến lá Nấm Rơm Rơm Cấy Vĩnh Long",
+        "phac_do_vietgap": {
+          "canh_tac": "Trồng mật độ chuẩn, nâng luống cao ráo thoát nước triệt để trong mùa mưa bão",
+          "sinh_hoc": "Tưới nấm đối kháng Trichoderma phối hợp nấm cộng sinh rễ Glomus intraradices (Mycorrhiza)",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_093",
+    "topic": "Cay_Cong_Nghiep_Duoc_Lieu",
+    "name_vi": "Nấm Mèo / Mộc Nhĩ",
+    "scientific_name": "Auricularia auricula-judae",
+    "dia_ban_pho_bien": [
+      "Trà Ôn",
+      "Vũng Liêm",
+      "Long Hồ",
+      "Mang Thít",
+      "Bình Tân"
+    ],
+    "dac_tinh_sinh_thai": "Cây công nghiệp ngắn ngày và cây dược liệu có giá trị kinh tế cao, yêu cầu đất giàu hữu cơ thoát nước tốt, hạn chế tối đa dư lượng hóa chất theo tiêu chuẩn VietGAP/GACP-WHO.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Mốc đen mốc thoi mộc nhĩ (Aspergillus niger)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Aspergillus niger"
+        },
+        "trieu_chung_dien_hinh": [
+          "Triệu chứng tổn thương mô rễ, thân củ hoặc lá của cây dược liệu Nấm Mèo / Mộc Nhĩ",
+          "Vết bệnh chuyển thâm đen thối rữa hoặc nứt nẻ, cản trở tổng hợp hoạt chất dược tính",
+          "Cây suy kiệt rụng lá, củ bị thối úng mục nát"
+        ],
+        "phan_biet_chan_doan_kep": "Khác với thiếu chất sinh lý (vết bệnh nấm có bào tử hoặc tơ sợi, vi khuẩn có mùi tanh thối)",
+        "kiem_tra_thuc_dia": "Kiểm tra rễ củ và phiến lá Nấm Mèo / Mộc Nhĩ",
+        "phac_do_vietgap": {
+          "canh_tac": "Trồng mật độ chuẩn, nâng luống cao ráo thoát nước triệt để trong mùa mưa bão",
+          "sinh_hoc": "Tưới nấm đối kháng Trichoderma phối hợp nấm cộng sinh rễ Glomus intraradices (Mycorrhiza)",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_094",
+    "topic": "Cay_Cong_Nghiep_Duoc_Lieu",
+    "name_vi": "Gừng Dé / Gừng Trâu",
+    "scientific_name": "Zingiber officinale",
+    "dia_ban_pho_bien": [
+      "Trà Ôn",
+      "Vũng Liêm",
+      "Long Hồ",
+      "Mang Thít",
+      "Bình Tân"
+    ],
+    "dac_tinh_sinh_thai": "Cây công nghiệp ngắn ngày và cây dược liệu có giá trị kinh tế cao, yêu cầu đất giàu hữu cơ thoát nước tốt, hạn chế tối đa dư lượng hóa chất theo tiêu chuẩn VietGAP/GACP-WHO.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Thối củ gừng vi khuẩn héo xanh (Ralstonia solanacearum)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Vi khuẩn",
+          "ten_khoa_hoc": "Ralstonia solanacearum"
+        },
+        "trieu_chung_dien_hinh": [
+          "Triệu chứng tổn thương mô rễ, thân củ hoặc lá của cây dược liệu Gừng Dé / Gừng Trâu",
+          "Vết bệnh chuyển thâm đen thối rữa hoặc nứt nẻ, cản trở tổng hợp hoạt chất dược tính",
+          "Cây suy kiệt rụng lá, củ bị thối úng mục nát"
+        ],
+        "phan_biet_chan_doan_kep": "Khác với thiếu chất sinh lý (vết bệnh nấm có bào tử hoặc tơ sợi, vi khuẩn có mùi tanh thối)",
+        "kiem_tra_thuc_dia": "Kiểm tra rễ củ và phiến lá Gừng Dé / Gừng Trâu",
+        "phac_do_vietgap": {
+          "canh_tac": "Trồng mật độ chuẩn, nâng luống cao ráo thoát nước triệt để trong mùa mưa bão",
+          "sinh_hoc": "Tưới nấm đối kháng Trichoderma phối hợp nấm cộng sinh rễ Glomus intraradices (Mycorrhiza)",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_095",
+    "topic": "Cay_Cong_Nghiep_Duoc_Lieu",
+    "name_vi": "Nghệ Vàng Củ",
+    "scientific_name": "Curcuma longa",
+    "dia_ban_pho_bien": [
+      "Trà Ôn",
+      "Vũng Liêm",
+      "Long Hồ",
+      "Mang Thít",
+      "Bình Tân"
+    ],
+    "dac_tinh_sinh_thai": "Cây công nghiệp ngắn ngày và cây dược liệu có giá trị kinh tế cao, yêu cầu đất giàu hữu cơ thoát nước tốt, hạn chế tối đa dư lượng hóa chất theo tiêu chuẩn VietGAP/GACP-WHO.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Đốm mắt cua lá nghệ (Colletotrichum curcumae)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Colletotrichum curcumae"
+        },
+        "trieu_chung_dien_hinh": [
+          "Triệu chứng tổn thương mô rễ, thân củ hoặc lá của cây dược liệu Nghệ Vàng Củ",
+          "Vết bệnh chuyển thâm đen thối rữa hoặc nứt nẻ, cản trở tổng hợp hoạt chất dược tính",
+          "Cây suy kiệt rụng lá, củ bị thối úng mục nát"
+        ],
+        "phan_biet_chan_doan_kep": "Khác với thiếu chất sinh lý (vết bệnh nấm có bào tử hoặc tơ sợi, vi khuẩn có mùi tanh thối)",
+        "kiem_tra_thuc_dia": "Kiểm tra rễ củ và phiến lá Nghệ Vàng Củ",
+        "phac_do_vietgap": {
+          "canh_tac": "Trồng mật độ chuẩn, nâng luống cao ráo thoát nước triệt để trong mùa mưa bão",
+          "sinh_hoc": "Tưới nấm đối kháng Trichoderma phối hợp nấm cộng sinh rễ Glomus intraradices (Mycorrhiza)",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_096",
+    "topic": "Cay_Cong_Nghiep_Duoc_Lieu",
+    "name_vi": "Sả Chanh ĐBSCL",
+    "scientific_name": "Cymbopogon citratus",
+    "dia_ban_pho_bien": [
+      "Trà Ôn",
+      "Vũng Liêm",
+      "Long Hồ",
+      "Mang Thít",
+      "Bình Tân"
+    ],
+    "dac_tinh_sinh_thai": "Cây công nghiệp ngắn ngày và cây dược liệu có giá trị kinh tế cao, yêu cầu đất giàu hữu cơ thoát nước tốt, hạn chế tối đa dư lượng hóa chất theo tiêu chuẩn VietGAP/GACP-WHO.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Rỉ sắt lá sả (Puccinia nakanishikii)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Puccinia nakanishikii"
+        },
+        "trieu_chung_dien_hinh": [
+          "Triệu chứng tổn thương mô rễ, thân củ hoặc lá của cây dược liệu Sả Chanh ĐBSCL",
+          "Vết bệnh chuyển thâm đen thối rữa hoặc nứt nẻ, cản trở tổng hợp hoạt chất dược tính",
+          "Cây suy kiệt rụng lá, củ bị thối úng mục nát"
+        ],
+        "phan_biet_chan_doan_kep": "Khác với thiếu chất sinh lý (vết bệnh nấm có bào tử hoặc tơ sợi, vi khuẩn có mùi tanh thối)",
+        "kiem_tra_thuc_dia": "Kiểm tra rễ củ và phiến lá Sả Chanh ĐBSCL",
+        "phac_do_vietgap": {
+          "canh_tac": "Trồng mật độ chuẩn, nâng luống cao ráo thoát nước triệt để trong mùa mưa bão",
+          "sinh_hoc": "Tưới nấm đối kháng Trichoderma phối hợp nấm cộng sinh rễ Glomus intraradices (Mycorrhiza)",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_097",
+    "topic": "Cay_Cong_Nghiep_Duoc_Lieu",
+    "name_vi": "Đinh Lăng Lá Xẻ (Sâm Nam)",
+    "scientific_name": "Polyscias fruticosa",
+    "dia_ban_pho_bien": [
+      "Trà Ôn",
+      "Vũng Liêm",
+      "Long Hồ",
+      "Mang Thít",
+      "Bình Tân"
+    ],
+    "dac_tinh_sinh_thai": "Cây công nghiệp ngắn ngày và cây dược liệu có giá trị kinh tế cao, yêu cầu đất giàu hữu cơ thoát nước tốt, hạn chế tối đa dư lượng hóa chất theo tiêu chuẩn VietGAP/GACP-WHO.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Thối đen rễ củ đinh lăng (Fusarium oxysporum)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Fusarium oxysporum"
+        },
+        "trieu_chung_dien_hinh": [
+          "Triệu chứng tổn thương mô rễ, thân củ hoặc lá của cây dược liệu Đinh Lăng Lá Xẻ (Sâm Nam)",
+          "Vết bệnh chuyển thâm đen thối rữa hoặc nứt nẻ, cản trở tổng hợp hoạt chất dược tính",
+          "Cây suy kiệt rụng lá, củ bị thối úng mục nát"
+        ],
+        "phan_biet_chan_doan_kep": "Khác với thiếu chất sinh lý (vết bệnh nấm có bào tử hoặc tơ sợi, vi khuẩn có mùi tanh thối)",
+        "kiem_tra_thuc_dia": "Kiểm tra rễ củ và phiến lá Đinh Lăng Lá Xẻ (Sâm Nam)",
+        "phac_do_vietgap": {
+          "canh_tac": "Trồng mật độ chuẩn, nâng luống cao ráo thoát nước triệt để trong mùa mưa bão",
+          "sinh_hoc": "Tưới nấm đối kháng Trichoderma phối hợp nấm cộng sinh rễ Glomus intraradices (Mycorrhiza)",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_098",
+    "topic": "Cay_Cong_Nghiep_Duoc_Lieu",
+    "name_vi": "Nha Đam / Lô Hội Mỹ",
+    "scientific_name": "Aloe vera",
+    "dia_ban_pho_bien": [
+      "Trà Ôn",
+      "Vũng Liêm",
+      "Long Hồ",
+      "Mang Thít",
+      "Bình Tân"
+    ],
+    "dac_tinh_sinh_thai": "Cây công nghiệp ngắn ngày và cây dược liệu có giá trị kinh tế cao, yêu cầu đất giàu hữu cơ thoát nước tốt, hạn chế tối đa dư lượng hóa chất theo tiêu chuẩn VietGAP/GACP-WHO.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Đốm đen thối nhũn lá nha đam (Aloe Black Spot)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Aloe Black Spot"
+        },
+        "trieu_chung_dien_hinh": [
+          "Triệu chứng tổn thương mô rễ, thân củ hoặc lá của cây dược liệu Nha Đam / Lô Hội Mỹ",
+          "Vết bệnh chuyển thâm đen thối rữa hoặc nứt nẻ, cản trở tổng hợp hoạt chất dược tính",
+          "Cây suy kiệt rụng lá, củ bị thối úng mục nát"
+        ],
+        "phan_biet_chan_doan_kep": "Khác với thiếu chất sinh lý (vết bệnh nấm có bào tử hoặc tơ sợi, vi khuẩn có mùi tanh thối)",
+        "kiem_tra_thuc_dia": "Kiểm tra rễ củ và phiến lá Nha Đam / Lô Hội Mỹ",
+        "phac_do_vietgap": {
+          "canh_tac": "Trồng mật độ chuẩn, nâng luống cao ráo thoát nước triệt để trong mùa mưa bão",
+          "sinh_hoc": "Tưới nấm đối kháng Trichoderma phối hợp nấm cộng sinh rễ Glomus intraradices (Mycorrhiza)",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_099",
+    "topic": "Cay_Cong_Nghiep_Duoc_Lieu",
+    "name_vi": "Cà Gai Leo Vĩnh Long",
+    "scientific_name": "Solanum procumbens",
+    "dia_ban_pho_bien": [
+      "Trà Ôn",
+      "Vũng Liêm",
+      "Long Hồ",
+      "Mang Thít",
+      "Bình Tân"
+    ],
+    "dac_tinh_sinh_thai": "Cây công nghiệp ngắn ngày và cây dược liệu có giá trị kinh tế cao, yêu cầu đất giàu hữu cơ thoát nước tốt, hạn chế tối đa dư lượng hóa chất theo tiêu chuẩn VietGAP/GACP-WHO.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Lở cổ rễ cà gai leo con (Rhizoctonia solani)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Rhizoctonia solani"
+        },
+        "trieu_chung_dien_hinh": [
+          "Triệu chứng tổn thương mô rễ, thân củ hoặc lá của cây dược liệu Cà Gai Leo Vĩnh Long",
+          "Vết bệnh chuyển thâm đen thối rữa hoặc nứt nẻ, cản trở tổng hợp hoạt chất dược tính",
+          "Cây suy kiệt rụng lá, củ bị thối úng mục nát"
+        ],
+        "phan_biet_chan_doan_kep": "Khác với thiếu chất sinh lý (vết bệnh nấm có bào tử hoặc tơ sợi, vi khuẩn có mùi tanh thối)",
+        "kiem_tra_thuc_dia": "Kiểm tra rễ củ và phiến lá Cà Gai Leo Vĩnh Long",
+        "phac_do_vietgap": {
+          "canh_tac": "Trồng mật độ chuẩn, nâng luống cao ráo thoát nước triệt để trong mùa mưa bão",
+          "sinh_hoc": "Tưới nấm đối kháng Trichoderma phối hợp nấm cộng sinh rễ Glomus intraradices (Mycorrhiza)",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_100",
+    "topic": "Cay_Cong_Nghiep_Duoc_Lieu",
+    "name_vi": "Trà Hoa Vàng",
+    "scientific_name": "Camellia chrysantha",
+    "dia_ban_pho_bien": [
+      "Trà Ôn",
+      "Vũng Liêm",
+      "Long Hồ",
+      "Mang Thít",
+      "Bình Tân"
+    ],
+    "dac_tinh_sinh_thai": "Cây công nghiệp ngắn ngày và cây dược liệu có giá trị kinh tế cao, yêu cầu đất giàu hữu cơ thoát nước tốt, hạn chế tối đa dư lượng hóa chất theo tiêu chuẩn VietGAP/GACP-WHO.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Thán thư cháy lá búp trà hoa vàng",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Tổ hợp nấm bệnh đặc hữu"
+        },
+        "trieu_chung_dien_hinh": [
+          "Triệu chứng tổn thương mô rễ, thân củ hoặc lá của cây dược liệu Trà Hoa Vàng",
+          "Vết bệnh chuyển thâm đen thối rữa hoặc nứt nẻ, cản trở tổng hợp hoạt chất dược tính",
+          "Cây suy kiệt rụng lá, củ bị thối úng mục nát"
+        ],
+        "phan_biet_chan_doan_kep": "Khác với thiếu chất sinh lý (vết bệnh nấm có bào tử hoặc tơ sợi, vi khuẩn có mùi tanh thối)",
+        "kiem_tra_thuc_dia": "Kiểm tra rễ củ và phiến lá Trà Hoa Vàng",
+        "phac_do_vietgap": {
+          "canh_tac": "Trồng mật độ chuẩn, nâng luống cao ráo thoát nước triệt để trong mùa mưa bão",
+          "sinh_hoc": "Tưới nấm đối kháng Trichoderma phối hợp nấm cộng sinh rễ Glomus intraradices (Mycorrhiza)",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_101",
+    "topic": "Cay_Cong_Nghiep_Duoc_Lieu",
+    "name_vi": "Mã Đề / Xa Tiền Tử",
+    "scientific_name": "Plantago major",
+    "dia_ban_pho_bien": [
+      "Trà Ôn",
+      "Vũng Liêm",
+      "Long Hồ",
+      "Mang Thít",
+      "Bình Tân"
+    ],
+    "dac_tinh_sinh_thai": "Cây công nghiệp ngắn ngày và cây dược liệu có giá trị kinh tế cao, yêu cầu đất giàu hữu cơ thoát nước tốt, hạn chế tối đa dư lượng hóa chất theo tiêu chuẩn VietGAP/GACP-WHO.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Đốm phấn sương mai mã đề",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Tổ hợp nấm bệnh đặc hữu"
+        },
+        "trieu_chung_dien_hinh": [
+          "Triệu chứng tổn thương mô rễ, thân củ hoặc lá của cây dược liệu Mã Đề / Xa Tiền Tử",
+          "Vết bệnh chuyển thâm đen thối rữa hoặc nứt nẻ, cản trở tổng hợp hoạt chất dược tính",
+          "Cây suy kiệt rụng lá, củ bị thối úng mục nát"
+        ],
+        "phan_biet_chan_doan_kep": "Khác với thiếu chất sinh lý (vết bệnh nấm có bào tử hoặc tơ sợi, vi khuẩn có mùi tanh thối)",
+        "kiem_tra_thuc_dia": "Kiểm tra rễ củ và phiến lá Mã Đề / Xa Tiền Tử",
+        "phac_do_vietgap": {
+          "canh_tac": "Trồng mật độ chuẩn, nâng luống cao ráo thoát nước triệt để trong mùa mưa bão",
+          "sinh_hoc": "Tưới nấm đối kháng Trichoderma phối hợp nấm cộng sinh rễ Glomus intraradices (Mycorrhiza)",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_102",
+    "topic": "Cay_Cong_Nghiep_Duoc_Lieu",
+    "name_vi": "Chùm Ngây Dinh Dưỡng",
+    "scientific_name": "Moringa oleifera",
+    "dia_ban_pho_bien": [
+      "Trà Ôn",
+      "Vũng Liêm",
+      "Long Hồ",
+      "Mang Thít",
+      "Bình Tân"
+    ],
+    "dac_tinh_sinh_thai": "Cây công nghiệp ngắn ngày và cây dược liệu có giá trị kinh tế cao, yêu cầu đất giàu hữu cơ thoát nước tốt, hạn chế tối đa dư lượng hóa chất theo tiêu chuẩn VietGAP/GACP-WHO.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Đốm lá đốm nâu chùm ngây",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Tổ hợp nấm bệnh đặc hữu"
+        },
+        "trieu_chung_dien_hinh": [
+          "Triệu chứng tổn thương mô rễ, thân củ hoặc lá của cây dược liệu Chùm Ngây Dinh Dưỡng",
+          "Vết bệnh chuyển thâm đen thối rữa hoặc nứt nẻ, cản trở tổng hợp hoạt chất dược tính",
+          "Cây suy kiệt rụng lá, củ bị thối úng mục nát"
+        ],
+        "phan_biet_chan_doan_kep": "Khác với thiếu chất sinh lý (vết bệnh nấm có bào tử hoặc tơ sợi, vi khuẩn có mùi tanh thối)",
+        "kiem_tra_thuc_dia": "Kiểm tra rễ củ và phiến lá Chùm Ngây Dinh Dưỡng",
+        "phac_do_vietgap": {
+          "canh_tac": "Trồng mật độ chuẩn, nâng luống cao ráo thoát nước triệt để trong mùa mưa bão",
+          "sinh_hoc": "Tưới nấm đối kháng Trichoderma phối hợp nấm cộng sinh rễ Glomus intraradices (Mycorrhiza)",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_103",
+    "topic": "Cay_Cong_Nghiep_Duoc_Lieu",
+    "name_vi": "Cỏ Ngọt Stevia",
+    "scientific_name": "Stevia rebaudiana",
+    "dia_ban_pho_bien": [
+      "Trà Ôn",
+      "Vũng Liêm",
+      "Long Hồ",
+      "Mang Thít",
+      "Bình Tân"
+    ],
+    "dac_tinh_sinh_thai": "Cây công nghiệp ngắn ngày và cây dược liệu có giá trị kinh tế cao, yêu cầu đất giàu hữu cơ thoát nước tốt, hạn chế tối đa dư lượng hóa chất theo tiêu chuẩn VietGAP/GACP-WHO.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Héo rũ gốc mốc trắng cỏ ngọt (Sclerotium rolfsii)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Sclerotium rolfsii"
+        },
+        "trieu_chung_dien_hinh": [
+          "Triệu chứng tổn thương mô rễ, thân củ hoặc lá của cây dược liệu Cỏ Ngọt Stevia",
+          "Vết bệnh chuyển thâm đen thối rữa hoặc nứt nẻ, cản trở tổng hợp hoạt chất dược tính",
+          "Cây suy kiệt rụng lá, củ bị thối úng mục nát"
+        ],
+        "phan_biet_chan_doan_kep": "Khác với thiếu chất sinh lý (vết bệnh nấm có bào tử hoặc tơ sợi, vi khuẩn có mùi tanh thối)",
+        "kiem_tra_thuc_dia": "Kiểm tra rễ củ và phiến lá Cỏ Ngọt Stevia",
+        "phac_do_vietgap": {
+          "canh_tac": "Trồng mật độ chuẩn, nâng luống cao ráo thoát nước triệt để trong mùa mưa bão",
+          "sinh_hoc": "Tưới nấm đối kháng Trichoderma phối hợp nấm cộng sinh rễ Glomus intraradices (Mycorrhiza)",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_104",
+    "topic": "Cay_Cong_Nghiep_Duoc_Lieu",
+    "name_vi": "Kim Ngân Hoa Dược Liệu",
+    "scientific_name": "Lonicera japonica",
+    "dia_ban_pho_bien": [
+      "Trà Ôn",
+      "Vũng Liêm",
+      "Long Hồ",
+      "Mang Thít",
+      "Bình Tân"
+    ],
+    "dac_tinh_sinh_thai": "Cây công nghiệp ngắn ngày và cây dược liệu có giá trị kinh tế cao, yêu cầu đất giàu hữu cơ thoát nước tốt, hạn chế tối đa dư lượng hóa chất theo tiêu chuẩn VietGAP/GACP-WHO.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Phấn trắng lá hoa kim ngân (Microsphaera lonicerae)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Microsphaera lonicerae"
+        },
+        "trieu_chung_dien_hinh": [
+          "Triệu chứng tổn thương mô rễ, thân củ hoặc lá của cây dược liệu Kim Ngân Hoa Dược Liệu",
+          "Vết bệnh chuyển thâm đen thối rữa hoặc nứt nẻ, cản trở tổng hợp hoạt chất dược tính",
+          "Cây suy kiệt rụng lá, củ bị thối úng mục nát"
+        ],
+        "phan_biet_chan_doan_kep": "Khác với thiếu chất sinh lý (vết bệnh nấm có bào tử hoặc tơ sợi, vi khuẩn có mùi tanh thối)",
+        "kiem_tra_thuc_dia": "Kiểm tra rễ củ và phiến lá Kim Ngân Hoa Dược Liệu",
+        "phac_do_vietgap": {
+          "canh_tac": "Trồng mật độ chuẩn, nâng luống cao ráo thoát nước triệt để trong mùa mưa bão",
+          "sinh_hoc": "Tưới nấm đối kháng Trichoderma phối hợp nấm cộng sinh rễ Glomus intraradices (Mycorrhiza)",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  },
+  {
+    "id": "crop_105",
+    "topic": "Cay_Cong_Nghiep_Duoc_Lieu",
+    "name_vi": "Dâu Tằm Ăn Quả (Morus)",
+    "scientific_name": "Morus alba",
+    "dia_ban_pho_bien": [
+      "Trà Ôn",
+      "Vũng Liêm",
+      "Long Hồ",
+      "Mang Thít",
+      "Bình Tân"
+    ],
+    "dac_tinh_sinh_thai": "Cây công nghiệp ngắn ngày và cây dược liệu có giá trị kinh tế cao, yêu cầu đất giàu hữu cơ thoát nước tốt, hạn chế tối đa dư lượng hóa chất theo tiêu chuẩn VietGAP/GACP-WHO.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh Rỉ sắt đốm nâu lá dâu tằm (Aecidium mori)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Aecidium mori"
+        },
+        "trieu_chung_dien_hinh": [
+          "Triệu chứng tổn thương mô rễ, thân củ hoặc lá của cây dược liệu Dâu Tằm Ăn Quả (Morus)",
+          "Vết bệnh chuyển thâm đen thối rữa hoặc nứt nẻ, cản trở tổng hợp hoạt chất dược tính",
+          "Cây suy kiệt rụng lá, củ bị thối úng mục nát"
+        ],
+        "phan_biet_chan_doan_kep": "Khác với thiếu chất sinh lý (vết bệnh nấm có bào tử hoặc tơ sợi, vi khuẩn có mùi tanh thối)",
+        "kiem_tra_thuc_dia": "Kiểm tra rễ củ và phiến lá Dâu Tằm Ăn Quả (Morus)",
+        "phac_do_vietgap": {
+          "canh_tac": "Trồng mật độ chuẩn, nâng luống cao ráo thoát nước triệt để trong mùa mưa bão",
+          "sinh_hoc": "Tưới nấm đối kháng Trichoderma phối hợp nấm cộng sinh rễ Glomus intraradices (Mycorrhiza)",
+          "khuyen_cao_vinh_long": "Thực hiện theo khuyến cáo của Chi cục Trồng trọt & BVTV tỉnh Vĩnh Long"
+        }
+      }
+    ]
+  }
+]

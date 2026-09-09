@@ -41,6 +41,7 @@ export interface ModelOption {
 }
 
 export type ThemeMode = 'dark' | 'light' | 'system';
+export type FontSizeOption = 'small' | 'medium' | 'large';
 
 export interface User {
   id: string;
