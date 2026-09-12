@@ -98,14 +98,17 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
   // Supabase Sync Helpers
   const syncProfileToSupabase = useCallback(async (user: User) => {
     try {
-      await supabase.from('profiles').upsert({
-        id: user.id,
-        email: user.email.toLowerCase().trim(),
-        name: user.name,
-        password_hash: user.passwordHash,
-        role: 'farmer',
-        updated_at: new Date().toISOString(),
-      });
+      await supabase.from('profiles').upsert(
+        {
+          id: user.id,
+          email: user.email.toLowerCase().trim(),
+          name: user.name,
+          password_hash: user.passwordHash,
+          role: 'farmer',
+          updated_at: new Date().toISOString(),
+        },
+        { onConflict: 'email' }
+      );
     } catch (err) {
       console.warn('Supabase profile sync error:', err);
     }
@@ -350,43 +353,93 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
     [currentUser?.id, getChatStorageKey]
   );
 
-  // Authentication: Register
+  // Authentication: Register (Bắt conflict theo email, không nuốt lỗi)
   const register = async (name: string, email: string, password: string) => {
     try {
       const cleanEmail = email.toLowerCase().trim();
+      const cleanPass = password.trim();
 
-      // 1. Kiểm tra email đã tồn tại trên Supabase chưa
+      // 1. Kiểm tra tài khoản đã tồn tại trên Supabase chưa
       const { data: existingUser } = await supabase
         .from('profiles')
-        .select('id')
+        .select('*')
         .eq('email', cleanEmail)
         .maybeSingle();
 
       if (existingUser) {
-        return { success: false, error: 'Email này đã được đăng ký trên hệ thống' };
+        // Nếu tài khoản cũ bị null password_hash, tự động kích hoạt mật khẩu mới và đăng nhập
+        if (!existingUser.password_hash) {
+          await supabase
+            .from('profiles')
+            .update({
+              name: name.trim(),
+              password_hash: cleanPass,
+              updated_at: new Date().toISOString(),
+            })
+            .eq('id', existingUser.id);
+
+          const healedUser: User = {
+            id: existingUser.id,
+            name: name.trim(),
+            email: cleanEmail,
+            passwordHash: cleanPass,
+            createdAt: existingUser.created_at || new Date().toISOString(),
+          };
+
+          localStorage.setItem('agrivision_current_user', JSON.stringify(healedUser));
+          setCurrentUser(healedUser);
+          await loadConversationsForUser(healedUser.id);
+          return { success: true };
+        }
+
+        // Nếu mật khẩu nhập vào khớp với tài khoản đã có, tự động đăng nhập luôn
+        if (existingUser.password_hash === cleanPass) {
+          const loggedUser: User = {
+            id: existingUser.id,
+            name: existingUser.name || name.trim(),
+            email: cleanEmail,
+            passwordHash: cleanPass,
+            createdAt: existingUser.created_at || new Date().toISOString(),
+          };
+
+          localStorage.setItem('agrivision_current_user', JSON.stringify(loggedUser));
+          setCurrentUser(loggedUser);
+          await loadConversationsForUser(loggedUser.id);
+          return { success: true };
+        }
+
+        return {
+          success: false,
+          error: 'Email này đã tồn tại. Vui lòng chuyển sang tab Đăng nhập để vào tài khoản.',
+        };
       }
 
-      // 2. Tạo đối tượng User mới
+      // 2. Tạo ID user mới
+      const newUserId = `user-${Date.now()}`;
       const newUser: User = {
-        id: `user-${Date.now()}`,
+        id: newUserId,
         name: name.trim(),
         email: cleanEmail,
-        passwordHash: password,
+        passwordHash: cleanPass,
         createdAt: new Date().toISOString(),
       };
 
-      // 3. Lưu vào Supabase Cloud Database
-      const { error: insertError } = await supabase.from('profiles').upsert({
-        id: newUser.id,
-        email: newUser.email,
-        name: newUser.name,
-        password_hash: password,
-        role: 'farmer',
-        updated_at: new Date().toISOString(),
-      });
+      // 3. Ghi vào Supabase bắt xung đột theo EMAIL (onConflict: 'email')
+      const { error: insertError } = await supabase.from('profiles').upsert(
+        {
+          id: newUserId,
+          email: cleanEmail,
+          name: name.trim(),
+          password_hash: cleanPass,
+          role: 'farmer',
+          updated_at: new Date().toISOString(),
+        },
+        { onConflict: 'email' }
+      );
 
       if (insertError) {
-        console.warn('Lỗi ghi Supabase:', insertError);
+        console.error('Lỗi insert Supabase:', insertError);
+        return { success: false, error: `Lỗi kết nối máy chủ: ${insertError.message}` };
       }
 
       // 4. Lưu bản sao vào localStorage để hoạt động tức thì
@@ -424,21 +477,34 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  // Authentication: Login
+  // Authentication: Login (Truy vấn trực tiếp Supabase, auto-healing)
   const login = async (email: string, password: string) => {
     try {
       const cleanEmail = email.toLowerCase().trim();
+      const cleanPass = password.trim();
 
       // 1. Truy vấn trực tiếp tài khoản từ Supabase Cloud Database
-      const { data: dbUser } = await supabase
+      const { data: dbUser, error: dbError } = await supabase
         .from('profiles')
         .select('*')
         .eq('email', cleanEmail)
         .maybeSingle();
 
+      if (dbError) {
+        console.warn('Supabase query error in login:', dbError);
+      }
+
       if (dbUser) {
-        // Kiểm tra mật khẩu từ Supabase
-        if (dbUser.password_hash !== password) {
+        // Tự động chữa lành nếu tài khoản cũ chưa có password_hash
+        if (!dbUser.password_hash) {
+          await supabase
+            .from('profiles')
+            .update({ password_hash: cleanPass })
+            .eq('id', dbUser.id);
+          dbUser.password_hash = cleanPass;
+        }
+
+        if (dbUser.password_hash !== cleanPass) {
           return { success: false, error: 'Mật khẩu không chính xác' };
         }
 
@@ -446,11 +512,11 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
           id: dbUser.id,
           name: dbUser.name || 'Người dùng',
           email: dbUser.email,
-          passwordHash: dbUser.password_hash || password,
+          passwordHash: dbUser.password_hash,
           createdAt: dbUser.created_at || new Date().toISOString(),
         };
 
-        // Lưu session vào localStorage của tab/thiết bị hiện tại
+        // Lưu session vào localStorage
         localStorage.setItem('agrivision_current_user', JSON.stringify(loggedUser));
         setCurrentUser(loggedUser);
 
@@ -469,7 +535,7 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
         return { success: true };
       }
 
-      // 2. Dự phòng: Nếu mất mạng hoặc không thấy trên DB, kiểm tra localStorage
+      // 2. Dự phòng: Nếu mất mạng hoặc chưa kịp lên DB, kiểm tra localStorage
       let localUsers: User[] = [];
       try {
         const raw = localStorage.getItem('agrivision_users');
@@ -477,13 +543,28 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
       } catch {}
 
       const localMatch = localUsers.find(
-        (u) => u.email.toLowerCase() === cleanEmail && u.passwordHash === password
+        (u) => u.email.toLowerCase() === cleanEmail && u.passwordHash === cleanPass
       );
 
       if (localMatch) {
+        // Tự động đẩy lên Supabase để lần sau không bị lỗi nữa
+        supabase
+          .from('profiles')
+          .upsert(
+            {
+              id: localMatch.id,
+              email: cleanEmail,
+              name: localMatch.name,
+              password_hash: cleanPass,
+              role: 'farmer',
+              updated_at: new Date().toISOString(),
+            },
+            { onConflict: 'email' }
+          )
+          .then();
+
         localStorage.setItem('agrivision_current_user', JSON.stringify(localMatch));
         setCurrentUser(localMatch);
-        syncProfileToSupabase(localMatch);
         await loadConversationsForUser(localMatch.id);
         return { success: true };
       }
