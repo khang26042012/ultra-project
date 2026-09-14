@@ -17,12 +17,14 @@ import {
   X,
 } from 'lucide-react';
 import gsap from 'gsap';
+import { useChat } from '@/context/ChatContext';
 
 interface ChatMessageProps {
   message: Message;
 }
 
 export default function ChatMessage({ message }: ChatMessageProps) {
+  const { fontSize = 'medium' } = useChat();
   const [copied, setCopied] = useState(false);
   const [liked, setLiked] = useState<boolean | null>(null);
   const [showThought, setShowThought] = useState(false);
@@ -30,6 +32,9 @@ export default function ChatMessage({ message }: ChatMessageProps) {
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [lightboxZoom, setLightboxZoom] = useState(1);
   const messageRef = useRef<HTMLDivElement>(null);
+
+  const fontSizeClass =
+    fontSize === 'small' ? 'text-[13px]' : fontSize === 'large' ? 'text-[17px]' : 'text-[15px]';
 
   // GSAP 60 FPS Message Reveal Animation (Fade & Slide In)
   useEffect(() => {
@@ -42,12 +47,17 @@ export default function ChatMessage({ message }: ChatMessageProps) {
     }
   }, []);
 
-  // Keyboard shortcut (Escape) to close Lightbox
+  // Keyboard shortcut (Escape, +, -) to control Lightbox
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isLightboxOpen) {
+      if (!isLightboxOpen) return;
+      if (e.key === 'Escape') {
         setIsLightboxOpen(false);
         setLightboxZoom(1);
+      } else if (e.key === '+' || e.key === '=') {
+        setLightboxZoom((prev) => Math.min(prev + 0.25, 3));
+      } else if (e.key === '-' || e.key === '_') {
+        setLightboxZoom((prev) => Math.max(prev - 0.25, 0.5));
       }
     },
     [isLightboxOpen]
@@ -137,9 +147,23 @@ export default function ChatMessage({ message }: ChatMessageProps) {
             );
           }
           if (sub.startsWith('**') && sub.endsWith('**') && sub.length >= 4) {
+            const inner = sub.slice(2, -2);
+            const innerParts = inner.split(/(_[^_]+_|\*[^*]+\*)/g);
             return (
               <strong key={`b-${pIdx}-${tIdx}-${sIdx}`} className="font-semibold text-[#0d0d0d] dark:text-white">
-                {sub.slice(2, -2)}
+                {innerParts.map((ip, ipIdx) => {
+                  if (
+                    (ip.startsWith('_') && ip.endsWith('_') && ip.length >= 2) ||
+                    (ip.startsWith('*') && ip.endsWith('*') && ip.length >= 2)
+                  ) {
+                    return (
+                      <em key={ipIdx} className="italic font-medium">
+                        {ip.slice(1, -1)}
+                      </em>
+                    );
+                  }
+                  return ip;
+                })}
               </strong>
             );
           }
@@ -180,8 +204,8 @@ export default function ChatMessage({ message }: ChatMessageProps) {
       while (i < rawLines.length) {
         const line = rawLines[i];
 
-        // Horizontal rule separator (-- or --- or ***) - Task 2
-        if (/^(\-{2,}|\*{3,})$/.test(line.trim())) {
+        // Horizontal rule separator (-- or --- or *** or ___ or - - -)
+        if (/^(\-{2,}|\*{3,}|_{3,}|(-\s*){3,}|(\*\s*){3,})$/.test(line.trim())) {
           elements.push(
             <hr key={i} className="my-3.5 border-t border-[#e5e5e5] dark:border-[#2a2a2a]" />
           );
@@ -190,7 +214,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
         }
 
         // Markdown Table detection (consecutive lines starting with |)
-        if (line.trim().startsWith('|') && line.trim().endsWith('|')) {
+        if (line.trim().startsWith('|')) {
           const tableLines: string[] = [];
           while (i < rawLines.length && rawLines[i].trim().startsWith('|')) {
             tableLines.push(rawLines[i].trim());
@@ -198,21 +222,22 @@ export default function ChatMessage({ message }: ChatMessageProps) {
           }
 
           if (tableLines.length >= 2) {
-            const headerRow = tableLines[0]
-              .split('|')
-              .slice(1, -1)
-              .map((c) => c.trim());
+            const parseRow = (rowStr: string) => {
+              const trimmed = rowStr.trim();
+              const cells = trimmed.split('|');
+              const start = trimmed.startsWith('|') ? 1 : 0;
+              const end = trimmed.endsWith('|') ? cells.length - 1 : cells.length;
+              return cells.slice(start, end).map((c) => c.trim());
+            };
+
+            const headerRow = parseRow(tableLines[0]);
             const startDataIdx = tableLines[1].includes('---') ? 2 : 1;
-            const dataRows = tableLines.slice(startDataIdx).map((tl) =>
-              tl
-                .split('|')
-                .slice(1, -1)
-                .map((c) => c.trim())
-            );
+            const dataRows = tableLines.slice(startDataIdx).map((tl) => parseRow(tl));
 
             elements.push(
               <div
                 key={`table-${i}`}
+                data-testid="markdown-table"
                 className="overflow-x-auto my-3 rounded-xl border border-[#e5e5e5] dark:border-[#333] shadow-xs"
               >
                 <table className="w-full text-xs text-left border-collapse">
@@ -245,6 +270,15 @@ export default function ChatMessage({ message }: ChatMessageProps) {
                 </table>
               </div>
             );
+            continue;
+          } else {
+            for (const tl of tableLines) {
+              elements.push(
+                <p key={`single-tbl-${i}`} className="leading-7">
+                  {formatInlineMarkdown(tl)}
+                </p>
+              );
+            }
             continue;
           }
         }
@@ -325,9 +359,9 @@ export default function ChatMessage({ message }: ChatMessageProps) {
           continue;
         }
 
-        // Bullet lists - Task 3: pl-5 indent & neat styled dot
-        if (line.trim().startsWith('- ') || line.trim().startsWith('* ')) {
-          const text = line.trim().substring(2);
+        // Bullet lists - Task 3: pl-5 indent & neat styled dot (supports -, *, +)
+        if (/^[-*+]\s/.test(line.trim())) {
+          const text = line.trim().replace(/^[-*+]\s/, '');
           elements.push(
             <div key={i} className="flex items-start gap-2.5 pl-5 my-1">
               <span className="w-1.5 h-1.5 rounded-full bg-[#8e8e8e] dark:bg-[#737373] mt-2.5 shrink-0" />
@@ -381,7 +415,9 @@ export default function ChatMessage({ message }: ChatMessageProps) {
     return (
       <>
         <div ref={messageRef} className="flex justify-end mb-6">
-          <div className="max-w-[85%] sm:max-w-[70%] bg-[#f4f4f4] dark:bg-[#262626] text-[#0d0d0d] dark:text-[#ececec] border border-[#e5e5e5] dark:border-transparent px-4 sm:px-5 py-3 rounded-[20px] text-[15px] leading-relaxed shadow-xs">
+          <div
+            className={`max-w-[85%] sm:max-w-[70%] bg-[#f4f4f4] dark:bg-[#262626] text-[#0d0d0d] dark:text-[#ececec] border border-[#e5e5e5] dark:border-transparent px-4 sm:px-5 py-3 rounded-[20px] ${fontSizeClass} chat-message-text leading-relaxed shadow-xs`}
+          >
             {message.imageUrl && (
               <div
                 onClick={() => {
@@ -422,7 +458,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
               <button
                 type="button"
                 onClick={() => setLightboxZoom((prev) => Math.min(prev + 0.25, 3))}
-                title="Phóng to (+)"
+                title="Phóng to (+)" aria-label="Phóng to"
                 className="p-1.5 rounded-full hover:bg-white/20 transition-colors cursor-pointer"
               >
                 <ZoomIn className="w-4 h-4" strokeWidth={2} />
@@ -430,7 +466,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
               <button
                 type="button"
                 onClick={() => setLightboxZoom((prev) => Math.max(prev - 0.25, 0.5))}
-                title="Thu nhỏ (-)"
+                title="Thu nhỏ (-)" aria-label="Thu nhỏ"
                 className="p-1.5 rounded-full hover:bg-white/20 transition-colors cursor-pointer"
               >
                 <ZoomOut className="w-4 h-4" strokeWidth={2} />
@@ -450,7 +486,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
                   setIsLightboxOpen(false);
                   setLightboxZoom(1);
                 }}
-                title="Đóng (Esc)"
+                title="Đóng (Esc)" aria-label="Đóng"
                 className="p-1.5 rounded-full hover:bg-white/20 transition-colors text-white/90 hover:text-white cursor-pointer"
               >
                 <X className="w-4 h-4" strokeWidth={2} />
@@ -467,7 +503,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
                 alt="Chi tiết ảnh bệnh cây trồng"
                 style={{ transform: `scale(${lightboxZoom})` }}
                 className="max-w-full max-h-[80vh] object-contain rounded-xl shadow-2xl transition-transform duration-200"
-              />
+              ></img>
             </div>
             <div className="absolute bottom-4 text-xs text-white/70">
               Nhấn ESC hoặc bấm ra ngoài để đóng • Bấm +/- để thu phóng
@@ -483,7 +519,10 @@ export default function ChatMessage({ message }: ChatMessageProps) {
 
   // Assistant Bubble with Minimalist Monochrome Branding
   return (
-    <div ref={messageRef} className="w-full mb-8 text-[#0d0d0d] dark:text-[#ececec] text-[15px] group">
+    <div
+      ref={messageRef}
+      className={`w-full mb-8 text-[#0d0d0d] dark:text-[#ececec] ${fontSizeClass} chat-message-text group`}
+    >
       {/* Brand Header */}
       <div className="flex items-center gap-2 mb-2 text-xs font-semibold text-[#0d0d0d] dark:text-white">
         <span className="w-5 h-5 rounded-md bg-[#0d0d0d] text-white dark:bg-white dark:text-black flex items-center justify-center font-bold text-[10px] shadow-xs">
@@ -492,14 +531,14 @@ export default function ChatMessage({ message }: ChatMessageProps) {
         <span>AgriVision</span>
       </div>
 
-      {/* 1. Live Searching Indicator Badge (Task 4: Thin text like thinking) */}
+      {/* 1. Live Searching Indicator Badge */}
       {message.searchingQuery && (
         <div className="inline-flex items-center text-xs font-medium text-[#737373] dark:text-[#a3a3a3] animate-pulse mb-2 select-none">
-          <span>Đang tìm kiếm thông tin...</span>
+          <span>🔍 Đang tra cứu dữ liệu...</span>
         </div>
       )}
 
-      {/* 2. Web Search Sources Dropdown Bar (Task 4: Thin button like thinking) */}
+      {/* 2. Web Search Sources Dropdown Bar */}
       {message.sources && message.sources.length > 0 && (
         <div className="mb-2.5 select-none">
           <button
@@ -507,12 +546,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
             onClick={() => setShowSources(!showSources)}
             className="inline-flex items-center gap-1 text-xs font-medium text-[#737373] hover:text-[#0d0d0d] dark:text-[#a3a3a3] dark:hover:text-white transition-colors cursor-pointer"
           >
-            <span>Đã tìm kiếm {message.sources.length} nguồn thông tin</span>
-            {showSources ? (
-              <ChevronDown className="w-3 h-3" strokeWidth={2} />
-            ) : (
-              <ChevronRight className="w-3 h-3" strokeWidth={2} />
-            )}
+            <span>Đã tìm kiếm {message.sources.length} nguồn thông tin {showSources ? '▴' : '▾'}</span>
           </button>
 
           {showSources && (
@@ -533,8 +567,16 @@ export default function ChatMessage({ message }: ChatMessageProps) {
                     className="flex flex-col group/src text-left p-2 rounded-xl hover:bg-[#f4f4f4] dark:hover:bg-[#212121] transition-colors border border-transparent hover:border-[#e5e5e5] dark:hover:border-[#333]"
                   >
                     <div className="flex items-center gap-1.5 text-[11px] text-[#8e8e8e]">
-                      <ExternalLink className="w-3 h-3 group-hover/src:text-[#0d0d0d] dark:group-hover/src:text-white" />
+                      <img
+                        src={src.favicon || `https://www.google.com/s2/favicons?domain=${domain}&sz=32`}
+                        alt="favicon"
+                        className="w-3.5 h-3.5 rounded-xs shrink-0 object-contain"
+                        onError={(e) => {
+                          (e.target as HTMLElement).style.display = 'none';
+                        }}
+                      />
                       <span className="truncate font-mono">{domain}</span>
+                      <ExternalLink className="w-3 h-3 group-hover/src:text-[#0d0d0d] dark:group-hover/src:text-white ml-auto" />
                     </div>
                     <div className="text-xs font-medium text-[#0d0d0d] dark:text-[#ececec] group-hover/src:underline line-clamp-1 mt-0.5">
                       {src.title}
@@ -552,7 +594,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
         </div>
       )}
 
-      {/* 3. Thinking UI Standard (Task 5: exact match to settled text, no cloud emoji) */}
+      {/* 3. Thinking UI Standard */}
       {/* 3A: Live Streaming Thinking */}
       {isCurrentlyThinking && (
         <div className="inline-flex items-center text-xs font-medium text-[#737373] dark:text-[#a3a3a3] animate-pulse mb-2.5 select-none">
@@ -571,13 +613,9 @@ export default function ChatMessage({ message }: ChatMessageProps) {
             <span>
               {message.thinkingSeconds
                 ? `Đã suy luận trong ${message.thinkingSeconds}s`
-                : 'Tiến trình suy luận'}
+                : 'Đã suy luận trong 1s'}{' '}
+              {showThought ? '▴' : '▾'}
             </span>
-            {showThought ? (
-              <ChevronDown className="w-3 h-3" strokeWidth={2} />
-            ) : (
-              <ChevronRight className="w-3 h-3" strokeWidth={2} />
-            )}
           </button>
 
           {showThought && (

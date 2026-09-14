@@ -150,3 +150,25 @@ div {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
+
+
+/* Dynamic Chat Font Size Settings */
+html[data-font-size="small"] {
+  --app-font-size: 13px;
+}
+html[data-font-size="medium"] {
+  --app-font-size: 15px;
+}
+html[data-font-size="large"] {
+  --app-font-size: 17px;
+}
+
+html[data-font-size="small"] .chat-message-text {
+  font-size: 13px !important;
+}
+html[data-font-size="medium"] .chat-message-text {
+  font-size: 15px !important;
+}
+html[data-font-size="large"] .chat-message-text {
+  font-size: 17px !important;
+}

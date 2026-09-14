@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { useChat } from '@/context/ChatContext';
 import {
   X,
@@ -62,6 +62,20 @@ export default function SettingsModal() {
     }
   }, [conversations]);
 
+  // Close on Escape key
+  useEffect(() => {
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key === 'Escape') {
+        setConfirmDelete(false);
+        setIsSettingsOpen(false);
+      }
+    }
+    if (isSettingsOpen) {
+      window.addEventListener('keydown', handleKeyDown);
+    }
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isSettingsOpen, setIsSettingsOpen]);
+
   if (!isSettingsOpen) return null;
 
   const languages = ['Tiếng Việt (Mặc định)', 'English (US)'];
@@ -119,6 +133,7 @@ export default function SettingsModal() {
                 <button
                   key={tab.id}
                   type="button"
+                  data-testid={`settings-tab-mobile-${tab.id}`}
                   onClick={() => {
                     setActiveTab(tab.id);
                     setConfirmDelete(false);
@@ -148,6 +163,7 @@ export default function SettingsModal() {
                 <button
                   key={tab.id}
                   type="button"
+                  data-testid={`settings-tab-${tab.id}`}
                   onClick={() => {
                     setActiveTab(tab.id);
                     setConfirmDelete(false);
@@ -229,6 +245,7 @@ export default function SettingsModal() {
                       <button
                         key={item.key}
                         type="button"
+                        data-testid={`font-size-${item.key}`}
                         onClick={() => setFontSize(item.key as FontSizeOption)}
                         className={`p-3 rounded-xl border text-left transition-all cursor-pointer ${
                           fontSize === item.key
@@ -255,6 +272,9 @@ export default function SettingsModal() {
                   </div>
                   <button
                     type="button"
+                    role="switch"
+                    aria-checked={isAutoScrollEnabled}
+                    data-testid="toggle-auto-scroll"
                     onClick={() => setIsAutoScrollEnabled(!isAutoScrollEnabled)}
                     className={`w-11 h-6 rounded-full transition-colors relative shrink-0 cursor-pointer ${
                       isAutoScrollEnabled ? 'bg-[#0d0d0d] dark:bg-white' : 'bg-[#e5e5e5] dark:bg-[#424242]'
@@ -348,6 +368,9 @@ export default function SettingsModal() {
                   </div>
                   <button
                     type="button"
+                    role="switch"
+                    aria-checked={isWebSearchEnabled}
+                    data-testid="toggle-web-search"
                     onClick={() => setIsWebSearchEnabled(!isWebSearchEnabled)}
                     className={`w-11 h-6 rounded-full transition-colors relative shrink-0 cursor-pointer ${
                       isWebSearchEnabled ? 'bg-[#0d0d0d] dark:bg-white' : 'bg-[#e5e5e5] dark:bg-[#424242]'
@@ -402,11 +425,13 @@ export default function SettingsModal() {
                   </div>
                   <button
                     type="button"
+                    title="Xuất JSON"
+                    data-testid="export-json-button"
                     onClick={exportBackupJson}
                     className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-[#e5e5e5] hover:bg-[#f4f4f4] dark:border-[#383838] dark:hover:bg-[#2f2f2f] text-xs font-medium transition-colors cursor-pointer text-[#0d0d0d] dark:text-white shrink-0"
                   >
                     <Download className="w-3.5 h-3.5" strokeWidth={1.75} />
-                    <span>Tải JSON</span>
+                    <span>Xuất JSON</span>
                   </button>
                 </div>
 

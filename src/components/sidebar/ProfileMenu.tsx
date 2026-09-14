@@ -40,6 +40,7 @@ export default function ProfileMenu({ isOpen, onClose }: ProfileMenuProps) {
     >
       {/* Account Info Bar - Opens Settings */}
       <div
+        data-testid="profile-account-bar"
         onClick={() => {
           onClose();
           setIsSettingsOpen(true);
@@ -67,6 +68,7 @@ export default function ProfileMenu({ isOpen, onClose }: ProfileMenuProps) {
       {/* Menu Actions */}
       <div className="space-y-0.5">
         <button
+          data-testid="profile-settings-button"
           onClick={() => {
             onClose();
             setIsSettingsOpen(true);

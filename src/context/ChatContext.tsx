@@ -392,22 +392,6 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
           return { success: true };
         }
 
-        // Nếu mật khẩu nhập vào khớp với tài khoản đã có, tự động đăng nhập luôn
-        if (existingUser.password_hash === cleanPass) {
-          const loggedUser: User = {
-            id: existingUser.id,
-            name: existingUser.name || name.trim(),
-            email: cleanEmail,
-            passwordHash: cleanPass,
-            createdAt: existingUser.created_at || new Date().toISOString(),
-          };
-
-          localStorage.setItem('agrivision_current_user', JSON.stringify(loggedUser));
-          setCurrentUser(loggedUser);
-          await loadConversationsForUser(loggedUser.id);
-          return { success: true };
-        }
-
         return {
           success: false,
           error: 'Email này đã tồn tại. Vui lòng chuyển sang tab Đăng nhập để vào tài khoản.',
@@ -719,7 +703,7 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
       content: '',
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       isStreaming: true,
-      isThinking: thinkActive,
+      isThinking: true,
       thought: '',
     };
 
@@ -754,7 +738,7 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
     const startTime = Date.now();
     let accumulatedContent = '';
     let accumulatedThought = '';
-    let isThinking = false;
+    let isThinking = true;
     let thinkingSeconds = 0;
     let searchingQuery: string | undefined = undefined;
     let currentSources: SearchSource[] = [];
@@ -814,7 +798,9 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
                 }
                 // 3. Search sources returned from 9Router
                 else if (parsed.type === 'sources' && Array.isArray(parsed.sources)) {
-                  currentSources = [...currentSources, ...parsed.sources];
+                  const existingUrls = new Set(currentSources.map((s) => s.url));
+                  const newSources = parsed.sources.filter((s: SearchSource) => !existingUrls.has(s.url));
+                  currentSources = [...currentSources, ...newSources];
                   searchingQuery = undefined;
                 }
                 // 4. Content token
