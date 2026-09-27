@@ -83,3 +83,26 @@ Tích hợp **BỘ NÃO LAI 2 TẦNG (HYBRID DUAL-ENGINE)**:
      - Thời gian phản hồi trung bình (Latency): < 2.5s nhờ kết hợp Local Data Tool.
      - Tỷ lệ giảm chi phí gọi API nhờ Prompt Caching: Tiết kiệm 88%.
    - Biểu đồ trực quan hóa dữ liệu hiển thị ngay trong mục Giới thiệu dự án.
+---
+
+### 🧬 TRỤ CỘT 6: HỢP NHẤT DỮ LIỆU & QUY MÔ HÓA 1.000 CÂY TRỒNG BẰNG 5 SUBAGENTS ĐỘC LẬP (3 WORKER SEARCH, 2 WORKER KIỂM ĐỊNH)
+*Nâng cấp AgriVision thành KHO TRI THỨC BỆNH HỌC THỰC VẬT ĐỒ SỘ NHẤT VIỆT NAM với ít nhất 1.000 loài cây trồng và toàn bộ phổ bệnh học:*
+
+1. **Gộp & Khử trùng lặp tệp dữ liệu (Deduplication & Consolidation):**
+   - Viết script tự động nạp toàn bộ các tệp JSON cây trồng hiện có (`vinh_long_plant_pathology_100_crops.json` và các bản mở rộng).
+   - Lọc bỏ triệt để các cây bị trùng tên tiếng Việt (`name_vi`) hoặc trùng tên khoa học (`scientific_name`).
+   - Hợp nhất thành tệp siêu dữ liệu duy nhất: `src/data/vietnam_plant_pathology_1000_crops.json` (và export alias sang các file dữ liệu cũ để tránh gãy import).
+
+2. **Khởi tạo 5 Subagents hoạt động song song độc lập:**
+   - **3 Subagents Thu Thập & Tra Cứu Liên Tục (Workers 1, 2, 3):**
+     - Chạy đa luồng liên tục sử dụng công cụ tìm kiếm 9Router để tìm kiếm và bổ sung thêm các giống cây trồng mới cho đến khi **đạt tối thiểu 1.000 loài cây trồng**.
+     - Phạm vi bao phủ:
+       - Cây trồng bản địa 63 tỉnh thành Việt Nam (đồng bằng, miền núi, duyên hải, hải đảo).
+       - Cây trồng kinh tế du nhập từ thị trường quốc tế nhưng hiện tại đã và đang được trồng thực tế tại Việt Nam (ví dụ: Việt quất nhiệt đới, Dâu tây New Zealand/Hàn Quốc, Nho mẫu đơn, Măng tây xanh, Sâm Maca, Vanilla, Saffron nghệ tây, Nho thân gỗ Nam Mỹ, Táo đỏ hữu cơ, Wasabi Đà Lạt, Trà hoa vàng, Chà là Trung Đông, Cherry nhiệt đới, Hạt dẻ cười,...).
+     - **BẮT BUỘC ĐỦ BỆNH:** Mỗi cây phải có từ 2 đến 5 bệnh đặc thù (cả bệnh phổ biến lẫn bệnh phức tạp/nguy hiểm), gồm tác nhân vi sinh, triệu chứng lá/thân/rễ/trái, cách bóc tách chẩn đoán kép và phác đồ VietGAP sinh học.
+   - **2 Subagents Kiểm Định & Rà Soát Chất Lượng (Auditors 4, 5):**
+     - Quét toàn bộ 1.000 cây trong tệp JSON:
+       - Kiểm tra cấu trúc Schema: Không được thiếu bất kỳ trường nào (`topic`, `name_vi`, `scientific_name`, `danh_sach_benh`,...).
+       - Kiểm định tính chính xác của tên khoa học (viết nghiêng, đúng chi/loài) và tác nhân vi khuẩn, nấm, tuyến trùng, virus.
+       - Rà soát chính tả, thuật ngữ nông học chuẩn và loại bỏ hoàn toàn các mô tả mơ hồ, chung chung.
+       - Đảm bảo tệp JSON chuẩn cú pháp 100%, không bị lỗi parse (`JSON.parse()` thành công tuyệt đối).
