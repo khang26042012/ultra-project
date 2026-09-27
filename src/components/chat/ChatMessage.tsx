@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useRef, useEffect, useCallback } from 'react';
+import Link from 'next/link';
 import { Message } from '@/types/chat';
 import CodeBlock from './CodeBlock';
 import {
@@ -15,6 +16,12 @@ import {
   ZoomIn,
   ZoomOut,
   X,
+  ShieldAlert,
+  ShieldCheck,
+  Activity,
+  CheckCircle2,
+  BookOpen,
+  Send,
 } from 'lucide-react';
 import gsap from 'gsap';
 import { useChat } from '@/context/ChatContext';
@@ -24,13 +31,15 @@ interface ChatMessageProps {
 }
 
 export default function ChatMessage({ message }: ChatMessageProps) {
-  const { fontSize = 'medium' } = useChat();
+  const { fontSize = 'medium', sendMessage } = useChat();
   const [copied, setCopied] = useState(false);
+  const [copiedCard, setCopiedCard] = useState(false);
   const [liked, setLiked] = useState<boolean | null>(null);
   const [showThought, setShowThought] = useState(false);
   const [showSources, setShowSources] = useState(false);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [lightboxZoom, setLightboxZoom] = useState(1);
+  const [checkedSensoryItems, setCheckedSensoryItems] = useState<Record<string, string>>({});
   const messageRef = useRef<HTMLDivElement>(null);
 
   const fontSizeClass =
@@ -83,6 +92,25 @@ export default function ChatMessage({ message }: ChatMessageProps) {
       setTimeout(() => setCopied(false), 2000);
     } catch {
       setCopied(false);
+    }
+  };
+
+  const handleCopyClinicalCard = async (cardText: string) => {
+    try {
+      await navigator.clipboard.writeText(cardText);
+      setCopiedCard(true);
+      setTimeout(() => setCopiedCard(false), 2500);
+    } catch {
+      setCopiedCard(false);
+    }
+  };
+
+  // Tactile Sensory Button Click Handler: sends farmer feedback directly to AI
+  const handleSensoryAction = async (question: string, answer: 'Có' | 'Không') => {
+    setCheckedSensoryItems((prev) => ({ ...prev, [question]: answer }));
+    if (sendMessage) {
+      const feedbackMessage = `Tôi đã kiểm tra thực địa ngoài vườn cho bài test "${question}": Kết quả là [${answer}]. Nhờ bác sĩ AgriVision chốt lại độ chắc chắn chẩn đoán và hướng dẫn phác đồ sinh học điều trị chi tiết.`;
+      await sendMessage(feedbackMessage);
     }
   };
 
@@ -186,160 +214,208 @@ export default function ChatMessage({ message }: ChatMessageProps) {
     });
   };
 
-  const renderFormattedContent = (content: string) => {
-    const parts = content.split(/(```[\s\S]*?```)/g);
+  // Extract Clinical Card Metadata from message content
+  const clinicalCardData = React.useMemo(() => {
+    if (message.role !== 'assistant' || !message.content) return null;
+    const content = message.content;
+    const hasCard =
+      content.includes('PHIẾU KHÁM BỆNH LÂM SÀNG') ||
+      content.includes('VL-PATH-2026') ||
+      content.includes('BÀI TEST XÚC GIÁC THỰC ĐỊA');
 
-    return parts.map((part, index) => {
-      if (part.startsWith('```') && part.endsWith('```')) {
-        const lines = part.slice(3, -3).trim().split('\n');
-        const language = lines[0].trim();
-        const code = lines.slice(1).join('\n');
-        return <CodeBlock key={index} language={language} code={code} />;
+    if (!hasCard) return null;
+
+    // Extract File ID
+    const idMatch = content.match(/VL-PATH-2026-([A-Z0-9]+)/i) || content.match(/VL-PATH-[A-Z0-9-]+/i);
+    const fileId = idMatch ? idMatch[0] : 'VL-PATH-2026-AUTO';
+
+    // Extract Danger Level
+    let dangerLevel = 'Trung bình';
+    let dangerColor = 'amber';
+    if (content.includes('Hiểm nghèo') || content.includes('🔴')) {
+      dangerLevel = 'Hiểm nghèo';
+      dangerColor = 'red';
+    } else if (content.includes('Nặng') || content.includes('🟠') || content.includes('Cao')) {
+      dangerLevel = 'Nguy cơ cao';
+      dangerColor = 'amber';
+    } else if (content.includes('🟡') || content.includes('Trung bình')) {
+      dangerLevel = 'Trung bình';
+      dangerColor = 'blue';
+    }
+
+    // Extract Sensory Questions
+    const sensoryQuestions: string[] = [];
+    const testLines = content.split('\n');
+    let inTestSection = false;
+
+    for (const line of testLines) {
+      const upper = line.toUpperCase();
+      if (
+        upper.includes('BÀI TEST XÚC GIÁC') ||
+        upper.includes('BÀI TEST THỰC ĐỊA') ||
+        upper.includes('KIỂM TRA THỰC ĐỊA') ||
+        upper.includes('TEST THỰC ĐỊA') ||
+        upper.includes('2 BƯỚC KIỂM TRA')
+      ) {
+        inTestSection = true;
+        continue;
+      }
+      if (inTestSection && line.startsWith('###')) {
+        inTestSection = false;
+        break;
+      }
+      if (inTestSection && (/^\d+[\.\)]\s/.test(line.trim()) || /^[-*•]\s/.test(line.trim()))) {
+        const cleanQ = line
+          .trim()
+          .replace(/^\d+[\.\)]\s*/, '')
+          .replace(/^[-*•]\s*/, '')
+          .replace(/\*\*\[(.*?)\]:\*\*/, '$1:')
+          .replace(/->\s*\*.*?\*/, '')
+          .trim();
+        if (cleanQ && cleanQ.length > 5) sensoryQuestions.push(cleanQ);
+      }
+    }
+
+    // Fallback default sensory checks if not parsed in bullet form
+    const finalSensoryQuestions =
+      sensoryQuestions.length > 0
+        ? sensoryQuestions.slice(0, 3)
+        : [
+            'Kiểm tra độ ẩm mềm và màu sắc mạch dẫn mô bệnh tại thực địa',
+            'Ngửi kiểm tra mùi chua men lên men hoặc dòng mủ vi khuẩn trào ra',
+          ];
+
+    return {
+      fileId,
+      dangerLevel,
+      dangerColor,
+      sensoryQuestions: finalSensoryQuestions,
+    };
+  }, [message.content, message.role]);
+
+  // Render Markdown Table
+  const renderMarkdownTable = (tableLines: string[], key: string | number) => {
+    if (tableLines.length < 2) return null;
+    const headerLine = tableLines[0];
+    const dataLines = tableLines.slice(2);
+
+    const parseRow = (line: string) => {
+      const parts = line.split('|');
+      if (parts.length > 2) {
+        return parts.slice(1, -1).map((cell) => cell.trim());
+      }
+      return parts.map((cell) => cell.trim());
+    };
+
+    const headers = parseRow(headerLine);
+
+    return (
+      <div key={key} className="my-4 overflow-x-auto rounded-xl border border-[#e5e5e5] dark:border-[#2f2f2f] bg-[#ffffff] dark:bg-[#1a1a1a]">
+        <table className="min-w-full text-xs text-left border-collapse">
+          <thead>
+            <tr className="border-b border-[#e5e5e5] dark:border-[#2f2f2f] bg-[#f9f9f9] dark:bg-[#222222]">
+              {headers.map((h, hIdx) => (
+                <th key={hIdx} className="px-3.5 py-2.5 font-semibold text-[#0d0d0d] dark:text-[#ececec]">
+                  {formatInlineMarkdown(h)}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-[#e5e5e5] dark:divide-[#2f2f2f]">
+            {dataLines.map((rowLine, rIdx) => {
+              const cells = parseRow(rowLine);
+              return (
+                <tr key={rIdx} className="hover:bg-[#f9f9f9] dark:hover:bg-[#202020] transition-colors">
+                  {cells.map((cell, cIdx) => (
+                    <td key={cIdx} className="px-3.5 py-2 leading-relaxed text-[#525252] dark:text-[#c4c4c4]">
+                      {formatInlineMarkdown(cell)}
+                    </td>
+                  ))}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    );
+  };
+
+  // Render content with code blocks, tables, and typography
+  const renderFormattedContent = (content: string) => {
+    const codeBlockRegex = /```([a-zA-Z0-9_-]*)\n([\s\S]*?)```/g;
+    const blocks: { type: 'text' | 'code'; content: string; language?: string }[] = [];
+    let lastIndex = 0;
+    let match: RegExpExecArray | null;
+
+    while ((match = codeBlockRegex.exec(content)) !== null) {
+      if (match.index > lastIndex) {
+        blocks.push({ type: 'text', content: content.substring(lastIndex, match.index) });
+      }
+      blocks.push({ type: 'code', language: match[1] || 'plaintext', content: match[2].trimEnd() });
+      lastIndex = match.index + match[0].length;
+    }
+    if (lastIndex < content.length) {
+      blocks.push({ type: 'text', content: content.substring(lastIndex) });
+    }
+
+    return blocks.map((block, index) => {
+      if (block.type === 'code') {
+        return <CodeBlock key={index} code={block.content} language={block.language || 'plaintext'} />;
       }
 
-      const rawLines = part.split('\n');
+      const lines = block.content.split('\n');
       const elements: React.ReactNode[] = [];
       let i = 0;
 
-      while (i < rawLines.length) {
-        const line = rawLines[i];
+      while (i < lines.length) {
+        const line = lines[i];
 
-        // Horizontal rule separator (-- or --- or *** or ___ or - - -)
-        if (/^(\-{2,}|\*{3,}|_{3,}|(-\s*){3,}|(\*\s*){3,})$/.test(line.trim())) {
-          elements.push(
-            <hr key={i} className="my-3.5 border-t border-[#e5e5e5] dark:border-[#2a2a2a]" />
-          );
-          i++;
-          continue;
-        }
-
-        // Markdown Table detection (consecutive lines starting with |)
-        if (line.trim().startsWith('|')) {
-          const tableLines: string[] = [];
-          while (i < rawLines.length && rawLines[i].trim().startsWith('|')) {
-            tableLines.push(rawLines[i].trim());
-            i++;
+        // Table detection
+        if (line.trim().startsWith('|') && line.trim().endsWith('|')) {
+          const tableLines: string[] = [line];
+          let j = i + 1;
+          while (j < lines.length && lines[j].trim().startsWith('|') && lines[j].trim().endsWith('|')) {
+            tableLines.push(lines[j]);
+            j++;
           }
-
           if (tableLines.length >= 2) {
-            const parseRow = (rowStr: string) => {
-              const trimmed = rowStr.trim();
-              const cells = trimmed.split('|');
-              const start = trimmed.startsWith('|') ? 1 : 0;
-              const end = trimmed.endsWith('|') ? cells.length - 1 : cells.length;
-              return cells.slice(start, end).map((c) => c.trim());
-            };
-
-            const headerRow = parseRow(tableLines[0]);
-            const startDataIdx = tableLines[1].includes('---') ? 2 : 1;
-            const dataRows = tableLines.slice(startDataIdx).map((tl) => parseRow(tl));
-
-            elements.push(
-              <div
-                key={`table-${i}`}
-                data-testid="markdown-table"
-                className="overflow-x-auto my-3 rounded-xl border border-[#e5e5e5] dark:border-[#333] shadow-xs"
-              >
-                <table className="w-full text-xs text-left border-collapse">
-                  <thead className="bg-[#f7f7f8] dark:bg-[#1f1f1f] border-b border-[#e5e5e5] dark:border-[#333] text-[#0d0d0d] dark:text-white font-semibold">
-                    <tr>
-                      {headerRow.map((h, hIdx) => (
-                        <th key={hIdx} className="px-3.5 py-2.5 whitespace-nowrap">
-                          {formatInlineMarkdown(h)}
-                        </th>
-                      ))}
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-[#e5e5e5] dark:divide-[#333] bg-white dark:bg-[#181818]">
-                    {dataRows.map((row, rIdx) => (
-                      <tr
-                        key={rIdx}
-                        className="hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors"
-                      >
-                        {row.map((cell, cIdx) => (
-                          <td
-                            key={cIdx}
-                            className="px-3.5 py-2 text-[#5d5d5d] dark:text-[#b4b4b4] leading-relaxed"
-                          >
-                            {formatInlineMarkdown(cell)}
-                          </td>
-                        ))}
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            );
-            continue;
-          } else {
-            for (const tl of tableLines) {
-              elements.push(
-                <p key={`single-tbl-${i}`} className="leading-7">
-                  {formatInlineMarkdown(tl)}
-                </p>
-              );
-            }
+            elements.push(renderMarkdownTable(tableLines, i));
+            i = j;
             continue;
           }
         }
 
-        // Headings (check from h5 down to h1)
-        if (line.startsWith('##### ')) {
-          elements.push(
-            <h5
-              key={i}
-              className="text-xs font-semibold uppercase tracking-wider text-[#737373] dark:text-[#a3a3a3] mt-2.5 mb-1"
-            >
-              {formatInlineMarkdown(line.replace('##### ', ''))}
-            </h5>
-          );
+        // Horizontal rules
+        if (/^(\-{2,}|\*{3,})$/.test(line.trim())) {
+          elements.push(<hr key={i} className="my-3.5 border-t border-[#e5e5e5] dark:border-[#2a2a2a]" />);
           i++;
           continue;
         }
-        if (line.startsWith('#### ')) {
+
+        // Headings
+        if (line.startsWith('# ')) {
           elements.push(
-            <h4
-              key={i}
-              className="text-sm font-semibold text-[#0d0d0d] dark:text-[#ececec] mt-3 mb-1"
-            >
-              {formatInlineMarkdown(line.replace('#### ', ''))}
-            </h4>
-          );
-          i++;
-          continue;
-        }
-        if (line.startsWith('### ')) {
-          elements.push(
-            <h3
-              key={i}
-              className="text-base font-semibold text-[#0d0d0d] dark:text-[#ececec] mt-3.5 mb-1.5"
-            >
-              {formatInlineMarkdown(line.replace('### ', ''))}
-            </h3>
+            <h1 key={i} className="text-xl sm:text-2xl font-bold tracking-tight text-[#0d0d0d] dark:text-white mt-5 mb-2.5">
+              {formatInlineMarkdown(line.replace('# ', ''))}
+            </h1>
           );
           i++;
           continue;
         }
         if (line.startsWith('## ')) {
           elements.push(
-            <h2
-              key={i}
-              className="text-lg font-bold text-[#0d0d0d] dark:text-[#ececec] mt-4 mb-2"
-            >
+            <h2 key={i} className="text-lg sm:text-xl font-bold tracking-tight text-[#0d0d0d] dark:text-white mt-4 mb-2">
               {formatInlineMarkdown(line.replace('## ', ''))}
             </h2>
           );
           i++;
           continue;
         }
-        if (line.startsWith('# ')) {
+        if (line.startsWith('### ')) {
           elements.push(
-            <h1
-              key={i}
-              className="text-xl font-bold text-[#0d0d0d] dark:text-[#ececec] mt-5 mb-2.5"
-            >
-              {formatInlineMarkdown(line.replace('# ', ''))}
-            </h1>
+            <h3 key={i} className="text-base sm:text-lg font-bold text-[#0d0d0d] dark:text-white mt-3.5 mb-1.5 flex items-center gap-1.5">
+              {formatInlineMarkdown(line.replace('### ', ''))}
+            </h3>
           );
           i++;
           continue;
@@ -359,7 +435,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
           continue;
         }
 
-        // Bullet lists - Task 3: pl-5 indent & neat styled dot (supports -, *, +)
+        // Bullet lists
         if (/^[-*+]\s/.test(line.trim())) {
           const text = line.trim().replace(/^[-*+]\s/, '');
           elements.push(
@@ -410,7 +486,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
     });
   };
 
-  // User Message Bubble: neat on the right, compact thumbnail + Lightbox (Task 7)
+  // User Message Bubble
   if (message.role === 'user') {
     return (
       <>
@@ -450,7 +526,6 @@ export default function ChatMessage({ message }: ChatMessageProps) {
             }}
             className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex flex-col items-center justify-center p-4 select-none animate-in fade-in duration-150"
           >
-            {/* Top Lightbox Controls */}
             <div
               onClick={(e) => e.stopPropagation()}
               className="absolute top-4 right-4 flex items-center gap-2 bg-black/50 p-1.5 rounded-full backdrop-blur-md border border-white/20 text-white z-10"
@@ -458,7 +533,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
               <button
                 type="button"
                 onClick={() => setLightboxZoom((prev) => Math.min(prev + 0.25, 3))}
-                title="Phóng to (+)" aria-label="Phóng to"
+                title="Phóng to (+)"
                 className="p-1.5 rounded-full hover:bg-white/20 transition-colors cursor-pointer"
               >
                 <ZoomIn className="w-4 h-4" strokeWidth={2} />
@@ -466,7 +541,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
               <button
                 type="button"
                 onClick={() => setLightboxZoom((prev) => Math.max(prev - 0.25, 0.5))}
-                title="Thu nhỏ (-)" aria-label="Thu nhỏ"
+                title="Thu nhỏ (-)"
                 className="p-1.5 rounded-full hover:bg-white/20 transition-colors cursor-pointer"
               >
                 <ZoomOut className="w-4 h-4" strokeWidth={2} />
@@ -486,14 +561,13 @@ export default function ChatMessage({ message }: ChatMessageProps) {
                   setIsLightboxOpen(false);
                   setLightboxZoom(1);
                 }}
-                title="Đóng (Esc)" aria-label="Đóng"
+                title="Đóng (Esc)"
                 className="p-1.5 rounded-full hover:bg-white/20 transition-colors text-white/90 hover:text-white cursor-pointer"
               >
                 <X className="w-4 h-4" strokeWidth={2} />
               </button>
             </div>
 
-            {/* Lightbox Image Stage */}
             <div
               onClick={(e) => e.stopPropagation()}
               className="relative max-w-4xl max-h-[85vh] overflow-hidden flex items-center justify-center"
@@ -503,7 +577,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
                 alt="Chi tiết ảnh bệnh cây trồng"
                 style={{ transform: `scale(${lightboxZoom})` }}
                 className="max-w-full max-h-[80vh] object-contain rounded-xl shadow-2xl transition-transform duration-200"
-              ></img>
+              />
             </div>
             <div className="absolute bottom-4 text-xs text-white/70">
               Nhấn ESC hoặc bấm ra ngoài để đóng • Bấm +/- để thu phóng
@@ -517,7 +591,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
   const isCurrentlyThinking = message.isThinking && message.isStreaming;
   const hasSettledThought = !isCurrentlyThinking && !!message.thought;
 
-  // Assistant Bubble with Minimalist Monochrome Branding
+  // Assistant Bubble
   return (
     <div
       ref={messageRef}
@@ -595,14 +669,12 @@ export default function ChatMessage({ message }: ChatMessageProps) {
       )}
 
       {/* 3. Thinking UI Standard */}
-      {/* 3A: Live Streaming Thinking */}
       {isCurrentlyThinking && (
         <div className="inline-flex items-center text-xs font-medium text-[#737373] dark:text-[#a3a3a3] animate-pulse mb-2.5 select-none">
           <span>Đang suy nghĩ...</span>
         </div>
       )}
 
-      {/* 3B: Settled Thinking */}
       {hasSettledThought && (
         <div className="mb-2.5 select-none">
           <button
@@ -626,7 +698,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
         </div>
       )}
 
-      {/* 4. Direct Content: Minimalist, clean, immediate */}
+      {/* 4. Direct Content */}
       <div className="leading-relaxed">
         {renderFormattedContent(message.content)}
         {message.isStreaming && !isCurrentlyThinking && (
@@ -634,7 +706,120 @@ export default function ChatMessage({ message }: ChatMessageProps) {
         )}
       </div>
 
-      {/* 5. Action Bar */}
+      {/* 5. Interactive Clinical Pathology Card (Trụ cột 2) */}
+      {!message.isStreaming && clinicalCardData && (
+        <div className="mt-4 p-4 sm:p-5 rounded-3xl bg-[#f9f9f9] dark:bg-[#191919] border border-[#e5e5e5] dark:border-[#2e2e2e] shadow-xs space-y-4 select-none">
+          {/* Card Top Header */}
+          <div className="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-[#e5e5e5] dark:border-[#2a2a2a]">
+            <div className="flex items-center gap-2">
+              <span className="w-6 h-6 rounded-lg bg-emerald-600 text-white flex items-center justify-center font-bold text-xs shadow-2xs">
+                🩺
+              </span>
+              <span className="font-bold text-xs sm:text-sm tracking-tight text-[#0d0d0d] dark:text-white">
+                HỒ SƠ BỆNH ÁN ĐIỆN TỬ
+              </span>
+              <span className="text-[11px] font-mono px-2 py-0.5 rounded-md bg-[#ffffff] dark:bg-[#252525] border border-[#e5e5e5] dark:border-[#383838] text-[#525252] dark:text-[#a3a3a3]">
+                {clinicalCardData.fileId}
+              </span>
+            </div>
+
+            <div className="flex items-center gap-2">
+              {clinicalCardData.dangerLevel === 'Hiểm nghèo' ? (
+                <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-red-100 text-red-800 dark:bg-red-950/60 dark:text-red-300 border border-red-200 dark:border-red-900/50">
+                  <span className="w-1.5 h-1.5 rounded-full bg-red-600 animate-pulse" />
+                  Hiểm nghèo
+                </span>
+              ) : (
+                <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-100 text-amber-800 dark:bg-amber-950/60 dark:text-amber-300 border border-amber-200 dark:border-amber-900/50">
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-500" />
+                  Nguy cơ cao
+                </span>
+              )}
+            </div>
+          </div>
+
+          {/* Interactive Sensory Verification Buttons */}
+          {clinicalCardData.sensoryQuestions.length > 0 && (
+            <div className="p-3.5 rounded-2xl bg-[#ffffff] dark:bg-[#1f1f1f] border border-[#e5e5e5] dark:border-[#333] space-y-3">
+              <div className="flex items-center gap-1.5 text-xs font-semibold text-[#0d0d0d] dark:text-white">
+                <Activity className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                <span>Nút kiểm tra xúc giác thực địa (Bấm để gửi phản hồi cho AI):</span>
+              </div>
+
+              <div className="space-y-2">
+                {clinicalCardData.sensoryQuestions.map((q, qIdx) => {
+                  const currentAnswer = checkedSensoryItems[q];
+                  return (
+                    <div
+                      key={qIdx}
+                      className="p-2.5 rounded-xl bg-[#f9f9f9] dark:bg-[#161616] border border-[#e5e5e5] dark:border-[#2b2b2b] flex flex-col sm:flex-row sm:items-center justify-between gap-2"
+                    >
+                      <span className="text-xs text-[#333] dark:text-[#d4d4d4] flex-1 leading-snug">
+                        {q}
+                      </span>
+                      <div className="flex items-center gap-1.5 shrink-0 self-end sm:self-auto">
+                        <button
+                          type="button"
+                          onClick={() => handleSensoryAction(q, 'Có')}
+                          className={`px-3 py-1 text-xs font-medium rounded-lg border transition-all cursor-pointer ${
+                            currentAnswer === 'Có'
+                              ? 'bg-emerald-600 text-white border-emerald-600 shadow-xs'
+                              : 'bg-[#ffffff] dark:bg-[#262626] text-[#333] dark:text-[#e0e0e0] border-[#d4d4d4] dark:border-[#444] hover:border-emerald-600'
+                          }`}
+                        >
+                          ✓ Có
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => handleSensoryAction(q, 'Không')}
+                          className={`px-3 py-1 text-xs font-medium rounded-lg border transition-all cursor-pointer ${
+                            currentAnswer === 'Không'
+                              ? 'bg-red-600 text-white border-red-600 shadow-xs'
+                              : 'bg-[#ffffff] dark:bg-[#262626] text-[#333] dark:text-[#e0e0e0] border-[#d4d4d4] dark:border-[#444] hover:border-red-600'
+                          }`}
+                        >
+                          ✕ Không
+                        </button>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* Action Footer */}
+          <div className="flex flex-wrap items-center justify-between gap-2 pt-1 text-xs">
+            <Link
+              href="/crops"
+              className="inline-flex items-center gap-1.5 text-xs font-medium text-[#525252] hover:text-[#0d0d0d] dark:text-[#a3a3a3] dark:hover:text-white transition-colors"
+            >
+              <BookOpen className="w-3.5 h-3.5" />
+              <span>Tra cứu trong Toàn Thư (1.500+ cây)</span>
+            </Link>
+
+            <button
+              type="button"
+              onClick={() => handleCopyClinicalCard(message.content)}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl font-semibold bg-[#ffffff] hover:bg-[#f0f0f0] dark:bg-[#262626] dark:hover:bg-[#333] text-[#0d0d0d] dark:text-white border border-[#e5e5e5] dark:border-[#383838] transition-colors cursor-pointer shadow-2xs"
+            >
+              {copiedCard ? (
+                <>
+                  <Check className="w-3.5 h-3.5 text-emerald-600" />
+                  <span>Đã sao chép bệnh án!</span>
+                </>
+              ) : (
+                <>
+                  <Copy className="w-3.5 h-3.5" />
+                  <span>Xuất Phiếu Khám Bệnh</span>
+                </>
+              )}
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* 6. Action Bar */}
       {!message.isStreaming && message.content && (
         <div className="flex items-center gap-2 mt-2 pt-1 text-[#8e8e8e] opacity-80 group-hover:opacity-100 transition-opacity text-xs">
           <button
