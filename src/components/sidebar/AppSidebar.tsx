@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { useChat } from '@/context/ChatContext';
 import ProfileMenu from './ProfileMenu';
@@ -15,9 +15,13 @@ import {
   Settings,
   HelpCircle,
   BookOpen,
+  MoreHorizontal,
+  Pin,
+  Pencil,
+  Check,
 } from 'lucide-react';
 import gsap from 'gsap';
-import { TimeGroup } from '@/types/chat';
+import { TimeGroup, Conversation } from '@/types/chat';
 
 export default function AppSidebar() {
   const {
@@ -25,6 +29,8 @@ export default function AppSidebar() {
     activeConversationId,
     selectConversation,
     deleteConversation,
+    renameConversation,
+    togglePinConversation,
     createNewChat,
     isSidebarOpen,
     setIsSidebarOpen,
@@ -39,6 +45,17 @@ export default function AppSidebar() {
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearchVisible, setIsSearchVisible] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+
+  // Context Menu Popup State
+  const [menuConvId, setMenuConvId] = useState<string | null>(null);
+  const [menuPosition, setMenuPosition] = useState<{ top: number; left: number } | null>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const longPressTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Inline Rename State
+  const [editingConvId, setEditingConvId] = useState<string | null>(null);
+  const [editingTitle, setEditingTitle] = useState('');
+  const renameInputRef = useRef<HTMLInputElement>(null);
 
   const sidebarRef = useRef<HTMLElement>(null);
   const prevOpenRef = useRef(isSidebarOpen);
@@ -74,12 +91,144 @@ export default function AppSidebar() {
     prevOpenRef.current = isSidebarOpen;
   }, [isSidebarOpen]);
 
+  // Close context menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent | TouchEvent) => {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+        setMenuConvId(null);
+        setMenuPosition(null);
+      }
+    };
+
+    if (menuConvId) {
+      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener('touchstart', handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleClickOutside);
+    };
+  }, [menuConvId]);
+
+  // Focus rename input when editing starts
+  useEffect(() => {
+    if (editingConvId && renameInputRef.current) {
+      renameInputRef.current.focus();
+      renameInputRef.current.select();
+    }
+  }, [editingConvId]);
+
+  const handleOpenMenu = (convId: string, event: React.MouseEvent | React.TouchEvent) => {
+    event.stopPropagation();
+    const rect = (event.currentTarget as HTMLElement).getBoundingClientRect();
+    setMenuConvId(convId);
+    setMenuPosition({
+      top: Math.min(rect.bottom + 4, window.innerHeight - 150),
+      left: Math.min(rect.left, window.innerWidth - 170),
+    });
+  };
+
+  const handleTouchStart = (convId: string, e: React.TouchEvent) => {
+    longPressTimerRef.current = setTimeout(() => {
+      handleOpenMenu(convId, e);
+    }, 500);
+  };
+
+  const handleTouchEnd = () => {
+    if (longPressTimerRef.current) {
+      clearTimeout(longPressTimerRef.current);
+      longPressTimerRef.current = null;
+    }
+  };
+
+  const handleSaveRename = (convId: string) => {
+    const trimmed = editingTitle.trim();
+    if (trimmed) {
+      renameConversation(convId, trimmed);
+    }
+    setEditingConvId(null);
+  };
+
   // Filter conversations based on search
   const filteredConversations = conversations.filter((c) =>
     c.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  const pinnedConversations = filteredConversations.filter((c) => c.isPinned);
+  const unpinnedConversations = filteredConversations.filter((c) => !c.isPinned);
+
   const groups: TimeGroup[] = ['Today', 'Yesterday', 'Previous 7 Days'];
+
+  const renderConversationItem = (conv: Conversation) => {
+    const isActive = conv.id === activeConversationId;
+    const isEditing = editingConvId === conv.id;
+
+    return (
+      <div
+        key={conv.id}
+        onTouchStart={(e) => handleTouchStart(conv.id, e)}
+        onTouchEnd={handleTouchEnd}
+        onTouchMove={handleTouchEnd}
+        onClick={() => {
+          if (!isEditing) {
+            selectConversation(conv.id);
+            if (window.innerWidth < 768) setIsSidebarOpen(false);
+          }
+        }}
+        className={`group relative flex items-center justify-between px-3 py-2 rounded-xl text-xs transition-all cursor-pointer ${
+          isActive
+            ? 'bg-[#e9e9ea] dark:bg-[#212121] text-[#0d0d0d] dark:text-white font-medium'
+            : 'text-[#5d5d5d] dark:text-[#b4b4b4] hover:bg-[#ececee] dark:hover:bg-[#212121] hover:text-[#0d0d0d] dark:hover:text-white'
+        }`}
+      >
+        <div className="flex items-center gap-2 truncate pr-2 flex-1 min-w-0">
+          {conv.isPinned ? (
+            <Pin className="w-3.5 h-3.5 shrink-0 text-emerald-600 dark:text-emerald-400 rotate-45" strokeWidth={1.75} />
+          ) : (
+            <MessageSquare className="w-3.5 h-3.5 shrink-0 opacity-70" strokeWidth={1.75} />
+          )}
+
+          {isEditing ? (
+            <div className="flex items-center gap-1 w-full" onClick={(e) => e.stopPropagation()}>
+              <input
+                ref={renameInputRef}
+                type="text"
+                value={editingTitle}
+                onChange={(e) => setEditingTitle(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') handleSaveRename(conv.id);
+                  if (e.key === 'Escape') setEditingConvId(null);
+                }}
+                className="w-full bg-[#ffffff] dark:bg-[#2b2b2b] text-xs text-[#0d0d0d] dark:text-white px-2 py-0.5 rounded border border-[#0d0d0d] dark:border-white outline-none"
+              />
+              <button
+                type="button"
+                onClick={() => handleSaveRename(conv.id)}
+                className="p-1 hover:text-emerald-600 cursor-pointer"
+                title="Lưu"
+              >
+                <Check className="w-3.5 h-3.5" />
+              </button>
+            </div>
+          ) : (
+            <span className="truncate">{conv.title}</span>
+          )}
+        </div>
+
+        {/* 3-Dots Action Button (replaces crude trash button) */}
+        {!isEditing && (
+          <button
+            type="button"
+            onClick={(e) => handleOpenMenu(conv.id, e)}
+            title="Tùy chọn đoạn chat"
+            className="opacity-70 md:opacity-0 group-hover:opacity-100 p-1 rounded-lg hover:bg-[#eaeaea] dark:hover:bg-[#2e2e2e] text-[#8e8e8e] hover:text-[#0d0d0d] dark:hover:text-white transition-all cursor-pointer shrink-0 ml-1"
+          >
+            <MoreHorizontal className="w-4 h-4" strokeWidth={1.75} />
+          </button>
+        )}
+      </div>
+    );
+  };
 
   return (
     <>
@@ -178,66 +327,43 @@ export default function AppSidebar() {
           {/* Divider */}
           <div className="h-px bg-[#e5e5e5] dark:bg-[#262626] mx-3 my-1" />
 
-          {/* Clean History List Area without extra tabs */}
-          <div className="flex-1 overflow-y-auto overscroll-contain px-2 space-y-4 no-scrollbar">
-            {/* Recents Section */}
-            <div>
-              <div className="px-3 py-1 text-[11px] font-semibold text-[#8e8e8e] uppercase tracking-wider">
-                Gần đây
-              </div>
-
-              {filteredConversations.length === 0 ? (
-                <div className="px-3 py-2 text-xs text-[#8e8e8e]">Chưa có đoạn chat nào</div>
-              ) : (
-                groups.map((group) => {
-                  const groupConvs = filteredConversations.filter((c) => c.group === group);
-                  if (groupConvs.length === 0) return null;
-
-                  return (
-                    <div key={group} className="mt-2 space-y-0.5">
-                      <div className="px-3 py-1 text-[10px] font-medium text-[#8e8e8e]">
-                        {group === 'Today' ? 'Hôm nay' : group === 'Yesterday' ? 'Hôm qua' : '7 ngày trước'}
-                      </div>
-                      {groupConvs.map((conv) => {
-                        const isActive = conv.id === activeConversationId;
-                        return (
-                          <div
-                            key={conv.id}
-                            onClick={() => {
-                              selectConversation(conv.id);
-                              if (window.innerWidth < 768) setIsSidebarOpen(false);
-                            }}
-                            className={`group relative flex items-center justify-between px-3 py-2 rounded-xl text-xs transition-all hover:scale-[1.01] active:scale-[0.99] cursor-pointer ${
-                              isActive
-                                ? 'bg-[#e9e9ea] dark:bg-[#212121] text-[#0d0d0d] dark:text-white font-medium'
-                                : 'text-[#5d5d5d] dark:text-[#b4b4b4] hover:bg-[#ececee] dark:hover:bg-[#212121] hover:text-[#0d0d0d] dark:hover:text-white'
-                            }`}
-                          >
-                            <div className="flex items-center gap-2 truncate pr-2">
-                              <MessageSquare className="w-3.5 h-3.5 shrink-0 opacity-70" strokeWidth={1.75} />
-                              <span className="truncate">{conv.title}</span>
-                            </div>
-
-                            {/* Delete button */}
-                            <button
-                              type="button"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                deleteConversation(conv.id);
-                              }}
-                              title="Xóa cuộc trò chuyện này"
-                              className="opacity-70 md:opacity-0 group-hover:opacity-100 p-1.5 rounded-lg hover:bg-[#eaeaea] dark:hover:bg-[#2e2e2e] hover:text-red-600 text-[#8e8e8e] transition-all cursor-pointer shrink-0"
-                            >
-                              <Trash2 className="w-3.5 h-3.5" strokeWidth={1.75} />
-                            </button>
-                          </div>
-                        );
-                      })}
+          {/* Clean History List Area */}
+          <div className="flex-1 overflow-y-auto overscroll-contain px-2 space-y-3 no-scrollbar">
+            {filteredConversations.length === 0 ? (
+              <div className="px-3 py-3 text-xs text-[#8e8e8e]">Chưa có đoạn chat nào</div>
+            ) : (
+              <>
+                {/* 1. PINNED SECTION (ĐÃ GHIM) */}
+                {pinnedConversations.length > 0 && (
+                  <div className="space-y-0.5">
+                    <div className="flex items-center gap-1 px-3 py-1 text-[11px] font-semibold text-[#8e8e8e] uppercase tracking-wider">
+                      <Pin className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />
+                      <span>Đã ghim</span>
                     </div>
-                  );
-                })
-              )}
-            </div>
+                    {pinnedConversations.map((conv) => renderConversationItem(conv))}
+                  </div>
+                )}
+
+                {/* 2. RECENT / TIME GROUPS SECTION */}
+                {unpinnedConversations.length > 0 && (
+                  <div className="space-y-3">
+                    {groups.map((group) => {
+                      const groupConvs = unpinnedConversations.filter((c) => c.group === group);
+                      if (groupConvs.length === 0) return null;
+
+                      return (
+                        <div key={group} className="space-y-0.5">
+                          <div className="px-3 py-1 text-[10px] font-medium text-[#8e8e8e] uppercase tracking-wider">
+                            {group === 'Today' ? 'Hôm nay' : group === 'Yesterday' ? 'Hôm qua' : '7 ngày trước'}
+                          </div>
+                          {groupConvs.map((conv) => renderConversationItem(conv))}
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </>
+            )}
           </div>
 
           {/* Quick Actions: Help & Settings */}
@@ -311,6 +437,66 @@ export default function AppSidebar() {
           </div>
         </div>
       </aside>
+
+      {/* ChatGPT Standard Floating Context Menu Popup */}
+      {menuConvId && menuPosition && (
+        <div
+          ref={menuRef}
+          style={{ top: `${menuPosition.top}px`, left: `${menuPosition.left}px` }}
+          className="fixed z-50 min-w-[150px] p-1.5 rounded-2xl bg-[#ffffff] dark:bg-[#212121] border border-[#e5e5e5] dark:border-[#333] shadow-xl backdrop-blur-md space-y-0.5 animate-in fade-in zoom-in-95 duration-100"
+        >
+          {(() => {
+            const targetConv = conversations.find((c) => c.id === menuConvId);
+            const isPinned = targetConv?.isPinned;
+
+            return (
+              <>
+                {/* 1. Ghim / Bỏ ghim */}
+                <button
+                  type="button"
+                  onClick={() => {
+                    togglePinConversation(menuConvId);
+                    setMenuConvId(null);
+                  }}
+                  className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium text-[#0d0d0d] dark:text-[#ececec] hover:bg-[#f4f4f4] dark:hover:bg-[#2b2b2b] transition-colors cursor-pointer text-left"
+                >
+                  <Pin className={`w-3.5 h-3.5 ${isPinned ? 'text-emerald-600 dark:text-emerald-400 rotate-45' : 'text-[#5d5d5d] dark:text-[#a3a3a3]'}`} />
+                  <span>{isPinned ? 'Bỏ ghim' : 'Ghim'}</span>
+                </button>
+
+                {/* 2. Đổi tên */}
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (targetConv) {
+                      setEditingConvId(targetConv.id);
+                      setEditingTitle(targetConv.title);
+                    }
+                    setMenuConvId(null);
+                  }}
+                  className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium text-[#0d0d0d] dark:text-[#ececec] hover:bg-[#f4f4f4] dark:hover:bg-[#2b2b2b] transition-colors cursor-pointer text-left"
+                >
+                  <Pencil className="w-3.5 h-3.5 text-[#5d5d5d] dark:text-[#a3a3a3]" />
+                  <span>Đổi tên</span>
+                </button>
+
+                {/* 3. Xoá (text-red-500) */}
+                <button
+                  type="button"
+                  onClick={() => {
+                    deleteConversation(menuConvId);
+                    setMenuConvId(null);
+                  }}
+                  className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium text-red-500 hover:bg-red-50 dark:hover:bg-red-950/40 transition-colors cursor-pointer text-left"
+                >
+                  <Trash2 className="w-3.5 h-3.5 text-red-500" />
+                  <span>Xoá</span>
+                </button>
+              </>
+            );
+          })()}
+        </div>
+      )}
     </>
   );
 }
