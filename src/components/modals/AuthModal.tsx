@@ -102,7 +102,7 @@ export default function AuthModal() {
           onClick={() => setIsAuthModalOpen(false)}
           className="absolute top-5 right-5 p-2 rounded-full hover:bg-[#f2f2f2] dark:hover:bg-[#282828] text-[#5d5d5d] hover:text-[#0d0d0d] dark:text-[#8e8e8e] dark:hover:text-white transition-colors cursor-pointer"
         >
-          <X className="w-5 h-5" strokeWidth={1.75} />
+          <X className="w-5 h-5" strokeWidth={1.5} />
         </button>
 
         {/* Brand Header */}
@@ -167,7 +167,7 @@ export default function AuthModal() {
                 Họ và tên
               </label>
               <div className="relative">
-                <User className="w-4 h-4 text-[#8e8e8e] absolute left-3.5 top-3" strokeWidth={1.75} />
+                <User className="w-4 h-4 text-[#8e8e8e] absolute left-3.5 top-3" strokeWidth={1.5} />
                 <input
                   type="text"
                   placeholder="Ví dụ: Phan Trọng Khang"
@@ -184,7 +184,7 @@ export default function AuthModal() {
               Địa chỉ Email
             </label>
             <div className="relative">
-              <Mail className="w-4 h-4 text-[#8e8e8e] absolute left-3.5 top-3" strokeWidth={1.75} />
+              <Mail className="w-4 h-4 text-[#8e8e8e] absolute left-3.5 top-3" strokeWidth={1.5} />
               <input
                 type="email"
                 placeholder="name@example.com"
@@ -200,7 +200,7 @@ export default function AuthModal() {
               Mật khẩu
             </label>
             <div className="relative">
-              <Lock className="w-4 h-4 text-[#8e8e8e] absolute left-3.5 top-3" strokeWidth={1.75} />
+              <Lock className="w-4 h-4 text-[#8e8e8e] absolute left-3.5 top-3" strokeWidth={1.5} />
               <input
                 type={showPassword ? 'text' : 'password'}
                 placeholder="••••••••"
@@ -213,7 +213,7 @@ export default function AuthModal() {
                 onClick={() => setShowPassword(!showPassword)}
                 className="absolute right-3.5 top-3 text-[#8e8e8e] hover:text-[#0d0d0d] dark:hover:text-white cursor-pointer"
               >
-                {showPassword ? <EyeOff className="w-4 h-4" strokeWidth={1.75} /> : <Eye className="w-4 h-4" strokeWidth={1.75} />}
+                {showPassword ? <EyeOff className="w-4 h-4" strokeWidth={1.5} /> : <Eye className="w-4 h-4" strokeWidth={1.5} />}
               </button>
             </div>
           </div>
@@ -224,7 +224,7 @@ export default function AuthModal() {
                 Xác nhận mật khẩu
               </label>
               <div className="relative">
-                <Lock className="w-4 h-4 text-[#8e8e8e] absolute left-3.5 top-3" strokeWidth={1.75} />
+                <Lock className="w-4 h-4 text-[#8e8e8e] absolute left-3.5 top-3" strokeWidth={1.5} />
                 <input
                   type={showPassword ? 'text' : 'password'}
                   placeholder="••••••••"
@@ -243,7 +243,7 @@ export default function AuthModal() {
             className="mt-5 w-full flex items-center justify-center gap-2 py-2.5 rounded-xl bg-[#0d0d0d] hover:bg-[#262626] text-white dark:bg-white dark:hover:bg-gray-100 dark:text-black text-xs font-semibold shadow-md transition-all active:scale-[0.98] cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
           >
             <span>{loading ? 'Đang xử lý...' : mode === 'login' ? 'Đăng nhập' : 'Tạo tài khoản'}</span>
-            {!loading && <ArrowRight className="w-3.5 h-3.5" strokeWidth={1.75} />}
+            {!loading && <ArrowRight className="w-3.5 h-3.5" strokeWidth={1.5} />}
           </button>
         </form>
       </div>

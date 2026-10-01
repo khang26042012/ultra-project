@@ -12,7 +12,7 @@ export const AVAILABLE_MODELS: ModelOption[] = [
   {
     id: 'ag/gemini-3.8-flash-high',
     name: 'Gemini 3.8 Flash High',
-    description: 'Mô hình suy luận lâm sàng chuyên sâu, bóc tách ca bệnh kép và tra cứu 9Router',
+    description: 'Mô hình suy luận lâm sàng chuyên sâu, bóc tách ca bệnh kép và tra cứu Web thời gian thực',
     badge: 'Khuyên dùng',
     isDefault: true,
   },
@@ -657,7 +657,7 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
     );
   };
 
-  // Multi-step Agent Loop with 9Router Web Search & Reasoning Streaming
+  // Multi-step Agent Loop with Web Search & Reasoning Streaming
   const sendMessage = async (content: string, imageUrl?: string, thinkActive = false) => {
     const trimmedContent = content.trim();
     if ((!trimmedContent && !imageUrl) || isStreaming) return;
@@ -834,7 +834,7 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
                 else if (parsed.type === 'searching') {
                   searchingQuery = parsed.query;
                 }
-                // 3. Search sources returned from 9Router
+                // 3. Search sources returned from Web Search
                 else if (parsed.type === 'sources' && Array.isArray(parsed.sources)) {
                   const existingUrls = new Set(currentSources.map((s) => s.url));
                   const newSources = parsed.sources.filter((s: SearchSource) => !existingUrls.has(s.url));
@@ -960,9 +960,9 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
   };
 
   const userProfile = {
-    name: currentUser?.name || 'Khách',
-    email: currentUser?.email || '',
-    initials: currentUser ? getInitials(currentUser.name) : 'AV',
+    name: currentUser?.name || 'Phan Trọng Khang',
+    email: currentUser?.email || 'trongkhabgphan@gmail.com',
+    initials: currentUser ? getInitials(currentUser.name) : 'PTK',
   };
 
   return (

@@ -6,14 +6,13 @@ import AppSidebar from '@/components/sidebar/AppSidebar';
 import EmptyState from '@/components/chat/EmptyState';
 import MessageList from '@/components/chat/MessageList';
 import FloatingInputIsland from '@/components/input/FloatingInputIsland';
-import SettingsModal from '@/components/modals/SettingsModal';
 import HelpModal from '@/components/modals/HelpModal';
 import UpgradeModal from '@/components/modals/UpgradeModal';
 import AuthModal from '@/components/modals/AuthModal';
-import { PanelLeft, SquarePen } from 'lucide-react';
+import { SquarePen } from 'lucide-react';
 
 function ChatApp() {
-  const { activeConversation, isSidebarOpen, toggleSidebar, createNewChat } = useChat();
+  const { activeConversation, toggleSidebar, createNewChat } = useChat();
 
   const hasMessages = activeConversation && activeConversation.messages.length > 0;
 
@@ -24,43 +23,32 @@ function ChatApp() {
 
       {/* Main Chat Viewport */}
       <div className="flex-1 flex flex-col h-full min-w-0 relative bg-[#ffffff] dark:bg-[#171717]">
-        {/* Top Navigation Bar */}
-        <header className="sticky top-0 z-30 h-12 flex items-center justify-between px-3.5 bg-transparent shrink-0 select-none">
-          <div className="flex items-center gap-2">
-            {/* Mobile Sidebar Toggle */}
-            <button
-              type="button"
-              onClick={toggleSidebar}
-              title="Mở sidebar"
-              className="md:hidden p-1.5 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 text-[#5d5d5d] hover:text-[#0d0d0d] dark:text-[#b4b4b4] dark:hover:text-white transition-colors cursor-pointer"
-            >
-              <PanelLeft className="w-5 h-5" strokeWidth={1.75} />
-            </button>
+        {/* Floating Controls Bar: 100% chuẩn giao diện ChatGPT App */}
+        <div className="fixed top-3.5 left-3.5 right-3.5 z-30 flex items-center justify-between pointer-events-none">
+          {/* Nút mở Sidebar bên trái: Khối tròn mềm mại */}
+          <button
+            type="button"
+            onClick={toggleSidebar}
+            title="Mở menu"
+            className="pointer-events-auto w-10 h-10 rounded-full bg-white/90 dark:bg-[#212121]/90 backdrop-blur-md shadow-[0_2px_8px_rgba(0,0,0,0.08)] dark:shadow-none border border-black/5 dark:border-white/10 flex items-center justify-center text-[#0d0d0d] dark:text-white hover:scale-105 active:scale-95 transition-all cursor-pointer"
+          >
+            {/* Icon 2 vạch ngang bo tròn chuẩn ChatGPT */}
+            <div className="flex flex-col gap-1.5 items-center justify-center">
+              <span className="w-4 h-0.5 bg-current rounded-full" />
+              <span className="w-4 h-0.5 bg-current rounded-full" />
+            </div>
+          </button>
 
-            {/* Desktop Floating Sidebar Toggle Button when sidebar is collapsed */}
-            {!isSidebarOpen && (
-              <button
-                type="button"
-                onClick={toggleSidebar}
-                title="Mở sidebar"
-                className="hidden md:flex items-center justify-center p-2 rounded-xl bg-[#ffffff]/90 hover:bg-[#f2f2f2] dark:bg-[#242424]/90 dark:hover:bg-[#303030] text-[#5d5d5d] hover:text-[#0d0d0d] dark:text-[#b4b4b4] dark:hover:text-white transition-all hover:scale-[1.02] active:scale-[0.98] border border-[#e5e5e5] dark:border-[#2f2f2f] shadow-xs backdrop-blur-md cursor-pointer"
-              >
-                <PanelLeft className="w-4 h-4" strokeWidth={1.75} />
-              </button>
-            )}
-          </div>
-
-          <div className="flex items-center gap-2">
-            <button
-              type="button"
-              onClick={createNewChat}
-              title="Đoạn chat mới"
-              className="p-1.5 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 text-[#5d5d5d] hover:text-[#0d0d0d] dark:text-[#b4b4b4] dark:hover:text-white transition-colors cursor-pointer"
-            >
-              <SquarePen className="w-4 h-4" strokeWidth={1.75} />
-            </button>
-          </div>
-        </header>
+          {/* Nút Tạo Chat Mới bên phải: Khối tròn mềm mại */}
+          <button
+            type="button"
+            onClick={createNewChat}
+            title="Đoạn chat mới"
+            className="pointer-events-auto w-10 h-10 rounded-full bg-white/90 dark:bg-[#212121]/90 backdrop-blur-md shadow-[0_2px_8px_rgba(0,0,0,0.08)] dark:shadow-none border border-black/5 dark:border-white/10 flex items-center justify-center text-[#0d0d0d] dark:text-white hover:scale-105 active:scale-95 transition-all cursor-pointer"
+          >
+            <SquarePen className="w-4 h-4" strokeWidth={1.5} />
+          </button>
+        </div>
 
         <main className="flex-1 flex flex-col min-h-0 overflow-hidden relative bg-[#ffffff] dark:bg-[#171717]">
           {hasMessages ? (
@@ -78,7 +66,6 @@ function ChatApp() {
         </main>
 
         {/* Global Modals */}
-        <SettingsModal />
         <HelpModal />
         <UpgradeModal />
         <AuthModal />

@@ -508,7 +508,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
                   className="w-full h-full object-cover transition-transform duration-200 group-hover/img:scale-105"
                 />
                 <div className="absolute bottom-1.5 right-1.5 bg-black/60 text-white text-[10px] px-2 py-0.5 rounded-full backdrop-blur-xs flex items-center gap-1 opacity-90 group-hover/img:opacity-100 transition-opacity">
-                  <ZoomIn className="w-3 h-3" strokeWidth={1.75} />
+                  <ZoomIn className="w-3 h-3" strokeWidth={1.5} />
                   <span>Phóng to</span>
                 </div>
               </div>
@@ -536,7 +536,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
                 title="Phóng to (+)"
                 className="p-1.5 rounded-full hover:bg-white/20 transition-colors cursor-pointer"
               >
-                <ZoomIn className="w-4 h-4" strokeWidth={2} />
+                <ZoomIn className="w-4 h-4" strokeWidth={1.5} />
               </button>
               <button
                 type="button"
@@ -544,7 +544,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
                 title="Thu nhỏ (-)"
                 className="p-1.5 rounded-full hover:bg-white/20 transition-colors cursor-pointer"
               >
-                <ZoomOut className="w-4 h-4" strokeWidth={2} />
+                <ZoomOut className="w-4 h-4" strokeWidth={1.5} />
               </button>
               <button
                 type="button"
@@ -552,7 +552,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
                 title="Đặt lại kích thước (100%)"
                 className="p-1.5 rounded-full hover:bg-white/20 transition-colors cursor-pointer"
               >
-                <RotateCcw className="w-4 h-4" strokeWidth={2} />
+                <RotateCcw className="w-4 h-4" strokeWidth={1.5} />
               </button>
               <div className="w-px h-4 bg-white/30" />
               <button
@@ -564,7 +564,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
                 title="Đóng (Esc)"
                 className="p-1.5 rounded-full hover:bg-white/20 transition-colors text-white/90 hover:text-white cursor-pointer"
               >
-                <X className="w-4 h-4" strokeWidth={2} />
+                <X className="w-4 h-4" strokeWidth={1.5} />
               </button>
             </div>
 
@@ -650,7 +650,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
                         }}
                       />
                       <span className="truncate font-mono">{domain}</span>
-                      <ExternalLink className="w-3 h-3 group-hover/src:text-[#0d0d0d] dark:group-hover/src:text-white ml-auto" />
+                      <ExternalLink className="w-3 h-3 group-hover/src:text-[#0d0d0d] dark:group-hover/src:text-white ml-auto" strokeWidth={1.5} />
                     </div>
                     <div className="text-xs font-medium text-[#0d0d0d] dark:text-[#ececec] group-hover/src:underline line-clamp-1 mt-0.5">
                       {src.title}
@@ -742,7 +742,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
           {clinicalCardData.sensoryQuestions.length > 0 && (
             <div className="p-3.5 rounded-2xl bg-[#ffffff] dark:bg-[#1f1f1f] border border-[#e5e5e5] dark:border-[#333] space-y-3">
               <div className="flex items-center gap-1.5 text-xs font-semibold text-[#0d0d0d] dark:text-white">
-                <Activity className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                <Activity className="w-4 h-4 text-emerald-600 dark:text-emerald-400" strokeWidth={1.5} />
                 <span>Nút kiểm tra xúc giác thực địa (Bấm để gửi phản hồi cho AI):</span>
               </div>
 
@@ -794,7 +794,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
               href="/crops"
               className="inline-flex items-center gap-1.5 text-xs font-medium text-[#525252] hover:text-[#0d0d0d] dark:text-[#a3a3a3] dark:hover:text-white transition-colors"
             >
-              <BookOpen className="w-3.5 h-3.5" />
+              <BookOpen className="w-3.5 h-3.5" strokeWidth={1.5} />
               <span>Tra cứu trong Toàn Thư (1.500+ cây)</span>
             </Link>
 
@@ -805,12 +805,12 @@ export default function ChatMessage({ message }: ChatMessageProps) {
             >
               {copiedCard ? (
                 <>
-                  <Check className="w-3.5 h-3.5 text-emerald-600" />
+                  <Check className="w-3.5 h-3.5 text-emerald-600" strokeWidth={1.5} />
                   <span>Đã sao chép bệnh án!</span>
                 </>
               ) : (
                 <>
-                  <Copy className="w-3.5 h-3.5" />
+                  <Copy className="w-3.5 h-3.5" strokeWidth={1.5} />
                   <span>Xuất Phiếu Khám Bệnh</span>
                 </>
               )}
