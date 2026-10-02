@@ -50,4 +50,5 @@ export interface User {
   email: string;
   passwordHash: string;
   createdAt: string;
+  avatar_url?: string;
 }

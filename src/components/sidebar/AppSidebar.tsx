@@ -390,8 +390,16 @@ export default function AppSidebar() {
                   className="flex items-center justify-between p-2 rounded-[16px] bg-[#ffffff] dark:bg-[#212121] border border-[#e5e5e5]/80 dark:border-[#2c2c2c] hover:bg-[#f4f4f4] dark:hover:bg-[#282828] transition-all hover:scale-[1.01] active:scale-[0.99] cursor-pointer shadow-2xs"
                 >
                   <div className="flex items-center gap-2.5 truncate">
-                    <div className="w-8 h-8 shrink-0 rounded-full bg-[#0d0d0d] text-white dark:bg-[#1a1a1a] dark:border dark:border-[#3e3e3e] dark:text-[#ececec] flex items-center justify-center font-bold text-xs shadow-xs">
-                      {userProfile.initials}
+                    <div className="w-8 h-8 shrink-0 rounded-full bg-[#0d0d0d] text-white dark:bg-[#1a1a1a] dark:border dark:border-[#3e3e3e] dark:text-[#ececec] flex items-center justify-center font-bold text-xs shadow-xs overflow-hidden">
+                      {userProfile.avatar_url ? (
+                        <img
+                          src={userProfile.avatar_url}
+                          alt={userProfile.name}
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        userProfile.initials
+                      )}
                     </div>
                     <div className="truncate text-left">
                       <div className="font-semibold text-xs text-[#0d0d0d] dark:text-white truncate leading-tight">
@@ -417,8 +425,16 @@ export default function AppSidebar() {
                 className="w-full flex items-center justify-between p-2 rounded-[16px] bg-[#ffffff] dark:bg-[#212121] border border-[#e5e5e5]/80 dark:border-[#2c2c2c] hover:bg-[#f4f4f4] dark:hover:bg-[#282828] text-xs font-semibold text-[#0d0d0d] dark:text-white shadow-2xs transition-all hover:scale-[1.01] active:scale-[0.99] cursor-pointer"
               >
                 <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 shrink-0 rounded-full bg-[#0d0d0d] text-white dark:bg-white dark:text-black flex items-center justify-center font-bold text-xs shadow-xs">
-                    PTK
+                  <div className="w-8 h-8 shrink-0 rounded-full bg-[#0d0d0d] text-white dark:bg-white dark:text-black flex items-center justify-center font-bold text-xs shadow-xs overflow-hidden">
+                    {userProfile.avatar_url ? (
+                      <img
+                        src={userProfile.avatar_url}
+                        alt="PTK"
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      'PTK'
+                    )}
                   </div>
                   <div className="text-left">
                     <div className="text-xs font-semibold text-[#0d0d0d] dark:text-white">
