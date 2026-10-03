@@ -13,6 +13,7 @@ import {
   MapPin,
   Leaf,
   Check,
+  SquarePen,
 } from 'lucide-react';
 import { ChatProvider, useChat } from '@/context/ChatContext';
 import AppSidebar from '@/components/sidebar/AppSidebar';
@@ -32,7 +33,7 @@ const PAGE_SIZE = 20;
 
 function CropsEncyclopediaView() {
   const router = useRouter();
-  const { toggleSidebar } = useChat();
+  const { toggleSidebar, createNewChat, isSidebarOpen } = useChat();
 
   const [crops, setCrops] = useState<CropRecord[]>([]);
   const [totalCount, setTotalCount] = useState(0);
@@ -218,18 +219,36 @@ function CropsEncyclopediaView() {
 
       {/* 2. Main Viewport */}
       <div className="flex-1 flex flex-col h-full min-w-0 relative bg-[#ffffff] dark:bg-[#141414] overflow-hidden">
-        {/* Floating Sidebar Open Button at top-left (ChatGPT Style) */}
-        <div className="fixed top-3.5 left-3.5 z-30 pointer-events-none">
+        {/* Floating Controls Bar: Đồng bộ 100% chuẩn ChatGPT App */}
+        <div
+          className={`fixed top-3.5 right-3.5 z-30 flex items-center justify-between pointer-events-none transition-all duration-300 ${
+            isSidebarOpen ? 'md:left-[274px] left-3.5' : 'left-3.5'
+          }`}
+        >
+          {/* Nút mở Sidebar bên trái */}
           <button
             type="button"
             onClick={toggleSidebar}
-            title="Mở menu"
+            title={isSidebarOpen ? 'Đóng menu' : 'Mở menu'}
             className="pointer-events-auto w-10 h-10 rounded-full bg-white/90 dark:bg-[#212121]/90 backdrop-blur-md shadow-[0_2px_8px_rgba(0,0,0,0.08)] dark:shadow-none border border-black/5 dark:border-white/10 flex items-center justify-center text-[#0d0d0d] dark:text-white hover:scale-105 active:scale-95 transition-all cursor-pointer"
           >
             <div className="flex flex-col gap-1.5 items-center justify-center">
               <span className="w-4 h-0.5 bg-current rounded-full" />
               <span className="w-4 h-0.5 bg-current rounded-full" />
             </div>
+          </button>
+
+          {/* Nút Tạo Chat Mới bên phải: chuyển về trang chủ và tạo đoạn chat mới */}
+          <button
+            type="button"
+            onClick={() => {
+              createNewChat();
+              router.push('/');
+            }}
+            title="Đoạn chat mới"
+            className="pointer-events-auto w-10 h-10 rounded-full bg-white/90 dark:bg-[#212121]/90 backdrop-blur-md shadow-[0_2px_8px_rgba(0,0,0,0.08)] dark:shadow-none border border-black/5 dark:border-white/10 flex items-center justify-center text-[#0d0d0d] dark:text-white hover:scale-105 active:scale-95 transition-all cursor-pointer"
+          >
+            <SquarePen className="w-4 h-4" strokeWidth={1.5} />
           </button>
         </div>
 
