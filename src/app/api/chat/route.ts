@@ -26,7 +26,7 @@ const SEARCH_API_URL = rawSearchUrl
 const AI_GATEWAY_KEY =
   process.env.AI_GATEWAY_KEY ||
   process.env.NINEROUTER_API_KEY ||
-  'sk-c276eac9b4322b74-tyrxri-1fc67c68';
+  '';
 const LOCKED_MODEL = 'ag/gemini-3.8-flash-high';
 
 // Definition of In-Context Pathology Database Search Tool
