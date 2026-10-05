@@ -49,9 +49,17 @@ export default function ProfileMenu({ isOpen, onClose }: ProfileMenuProps) {
         className="flex items-center justify-between p-2.5 rounded-xl hover:bg-[#f4f4f4] dark:hover:bg-[#282828] transition-colors cursor-pointer border-b border-[#e5e5e5] dark:border-[#2b2b2b] mb-1"
       >
         <div className="flex items-center gap-2.5 truncate">
-          <div className="w-8 h-8 shrink-0 rounded-full bg-[#0d0d0d] text-white dark:bg-[#171717] dark:border dark:border-[#3e3e3e] dark:text-[#ececec] flex items-center justify-center font-bold text-xs shadow-xs">
-            {userProfile.initials}
-          </div>
+          {userProfile.avatar_url ? (
+            <img
+              src={userProfile.avatar_url}
+              alt={userProfile.name}
+              className="w-8 h-8 shrink-0 rounded-full object-cover border border-[#3e3e3e]"
+            />
+          ) : (
+            <div className="w-8 h-8 shrink-0 rounded-full bg-[#0d0d0d] text-white dark:bg-[#171717] dark:border dark:border-[#3e3e3e] dark:text-[#ececec] flex items-center justify-center font-bold text-xs shadow-xs">
+              {userProfile.initials}
+            </div>
+          )}
           <div className="truncate text-left">
             <div className="font-semibold text-xs text-[#0d0d0d] dark:text-white leading-tight truncate">
               {userProfile.name}

@@ -12,6 +12,8 @@ export interface Message {
   role: Role;
   content: string;
   imageUrl?: string;
+  annotatedImageUrl?: string;
+  visionSegmenting?: boolean;
   timestamp: string;
   isStreaming?: boolean;
   thought?: string;

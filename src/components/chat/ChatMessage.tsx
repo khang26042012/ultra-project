@@ -37,7 +37,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
   const [liked, setLiked] = useState<boolean | null>(null);
   const [showThought, setShowThought] = useState(false);
   const [showSources, setShowSources] = useState(false);
-  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const [lightboxImageUrl, setLightboxImageUrl] = useState<string | null>(null);
   const [lightboxZoom, setLightboxZoom] = useState(1);
   const [checkedSensoryItems, setCheckedSensoryItems] = useState<Record<string, string>>({});
   const messageRef = useRef<HTMLDivElement>(null);
@@ -59,9 +59,9 @@ export default function ChatMessage({ message }: ChatMessageProps) {
   // Keyboard shortcut (Escape, +, -) to control Lightbox
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
-      if (!isLightboxOpen) return;
+      if (!lightboxImageUrl) return;
       if (e.key === 'Escape') {
-        setIsLightboxOpen(false);
+        setLightboxImageUrl(null);
         setLightboxZoom(1);
       } else if (e.key === '+' || e.key === '=') {
         setLightboxZoom((prev) => Math.min(prev + 0.25, 3));
@@ -69,11 +69,11 @@ export default function ChatMessage({ message }: ChatMessageProps) {
         setLightboxZoom((prev) => Math.max(prev - 0.25, 0.5));
       }
     },
-    [isLightboxOpen]
+    [lightboxImageUrl]
   );
 
   useEffect(() => {
-    if (isLightboxOpen) {
+    if (lightboxImageUrl) {
       window.addEventListener('keydown', handleKeyDown);
       document.body.style.overflow = 'hidden';
     } else {
@@ -83,7 +83,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
       window.removeEventListener('keydown', handleKeyDown);
       document.body.style.overflow = '';
     };
-  }, [isLightboxOpen, handleKeyDown]);
+  }, [lightboxImageUrl, handleKeyDown]);
 
   const handleCopy = async () => {
     try {
@@ -469,6 +469,35 @@ export default function ChatMessage({ message }: ChatMessageProps) {
           continue;
         }
 
+        // Markdown image: ![alt](url)
+        const mdImgMatch = line.trim().match(/^!\[(.*?)\]\((.*?)\)$/);
+        if (mdImgMatch) {
+          const imgAlt = mdImgMatch[1];
+          const imgSrc = mdImgMatch[2];
+          elements.push(
+            <div
+              key={i}
+              onClick={() => {
+                setLightboxZoom(1);
+                setLightboxImageUrl(imgSrc);
+              }}
+              className="my-3 overflow-hidden rounded-2xl border border-black/10 dark:border-white/10 bg-black/5 max-w-lg cursor-pointer group/mdimg relative"
+            >
+              <img
+                src={imgSrc}
+                alt={imgAlt || 'Ảnh chẩn đoán'}
+                className="w-full max-h-[360px] object-contain transition-transform duration-200 group-hover/mdimg:scale-[1.01]"
+              />
+              <div className="absolute bottom-2 right-2 bg-black/70 text-white text-[11px] px-2.5 py-1 rounded-full backdrop-blur-xs flex items-center gap-1 opacity-80 group-hover/mdimg:opacity-100 transition-opacity">
+                <ZoomIn className="w-3 h-3" strokeWidth={1.5} />
+                <span>{imgAlt || 'Phóng to'}</span>
+              </div>
+            </div>
+          );
+          i++;
+          continue;
+        }
+
         // Standard paragraph
         elements.push(
           <p key={i} className="leading-7">
@@ -498,7 +527,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
               <div
                 onClick={() => {
                   setLightboxZoom(1);
-                  setIsLightboxOpen(true);
+                  setLightboxImageUrl(message.imageUrl || null);
                 }}
                 className="relative mb-2.5 overflow-hidden rounded-2xl border border-black/10 dark:border-white/10 bg-black/5 max-w-[220px] max-h-[160px] cursor-pointer group/img"
               >
@@ -517,73 +546,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
           </div>
         </div>
 
-        {/* Image Lightbox Modal */}
-        {isLightboxOpen && message.imageUrl && (
-          <div
-            onClick={() => {
-              setIsLightboxOpen(false);
-              setLightboxZoom(1);
-            }}
-            className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex flex-col items-center justify-center p-4 select-none animate-in fade-in duration-150"
-          >
-            <div
-              onClick={(e) => e.stopPropagation()}
-              className="absolute top-4 right-4 flex items-center gap-2 bg-black/50 p-1.5 rounded-full backdrop-blur-md border border-white/20 text-white z-10"
-            >
-              <button
-                type="button"
-                onClick={() => setLightboxZoom((prev) => Math.min(prev + 0.25, 3))}
-                title="Phóng to (+)"
-                className="p-1.5 rounded-full hover:bg-white/20 transition-colors cursor-pointer"
-              >
-                <ZoomIn className="w-4 h-4" strokeWidth={1.5} />
-              </button>
-              <button
-                type="button"
-                onClick={() => setLightboxZoom((prev) => Math.max(prev - 0.25, 0.5))}
-                title="Thu nhỏ (-)"
-                className="p-1.5 rounded-full hover:bg-white/20 transition-colors cursor-pointer"
-              >
-                <ZoomOut className="w-4 h-4" strokeWidth={1.5} />
-              </button>
-              <button
-                type="button"
-                onClick={() => setLightboxZoom(1)}
-                title="Đặt lại kích thước (100%)"
-                className="p-1.5 rounded-full hover:bg-white/20 transition-colors cursor-pointer"
-              >
-                <RotateCcw className="w-4 h-4" strokeWidth={1.5} />
-              </button>
-              <div className="w-px h-4 bg-white/30" />
-              <button
-                type="button"
-                onClick={() => {
-                  setIsLightboxOpen(false);
-                  setLightboxZoom(1);
-                }}
-                title="Đóng (Esc)"
-                className="p-1.5 rounded-full hover:bg-white/20 transition-colors text-white/90 hover:text-white cursor-pointer"
-              >
-                <X className="w-4 h-4" strokeWidth={1.5} />
-              </button>
-            </div>
 
-            <div
-              onClick={(e) => e.stopPropagation()}
-              className="relative max-w-4xl max-h-[85vh] overflow-hidden flex items-center justify-center"
-            >
-              <img
-                src={message.imageUrl}
-                alt="Chi tiết ảnh bệnh cây trồng"
-                style={{ transform: `scale(${lightboxZoom})` }}
-                className="max-w-full max-h-[80vh] object-contain rounded-xl shadow-2xl transition-transform duration-200"
-              />
-            </div>
-            <div className="absolute bottom-4 text-xs text-white/70">
-              Nhấn ESC hoặc bấm ra ngoài để đóng • Bấm +/- để thu phóng
-            </div>
-          </div>
-        )}
       </>
     );
   }
@@ -605,10 +568,51 @@ export default function ChatMessage({ message }: ChatMessageProps) {
         <span>AgriVision</span>
       </div>
 
-      {/* 1. Live Searching Indicator Badge */}
+      {/* 1. Live Searching & Computer Vision Indicator Badges */}
       {message.searchingQuery && (
         <div className="inline-flex items-center text-xs font-medium text-[#737373] dark:text-[#a3a3a3] animate-pulse mb-2 select-none">
           <span>🔍 Đang tra cứu dữ liệu...</span>
+        </div>
+      )}
+
+      {message.visionSegmenting && (
+        <div className="inline-flex items-center gap-2 text-xs font-mono text-[#00b4d8] dark:text-[#00F2FE] animate-pulse mb-2.5 select-none px-3 py-1.5 rounded-full bg-[#00F2FE]/10 border border-[#00F2FE]/30">
+          <span className="w-2 h-2 rounded-full bg-[#00F2FE] animate-ping" />
+          <span>Bóc tách tổn thương mô nấm bệnh qua Roboflow Computer Vision...</span>
+        </div>
+      )}
+
+      {/* High-Precision Computer Vision HUD Card */}
+      {message.annotatedImageUrl && (
+        <div className="my-3 rounded-2xl overflow-hidden border border-[#00F2FE]/40 bg-[#0a1128]/95 dark:bg-[#020617]/95 text-white shadow-lg">
+          <div className="px-4 py-2 bg-[#00F2FE]/10 border-b border-[#00F2FE]/30 flex flex-wrap items-center justify-between gap-2">
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-[#00F2FE] animate-pulse shadow-[0_0_8px_#00F2FE]" />
+              <span className="font-mono text-xs font-bold tracking-wider text-[#00F2FE]">
+                ROBOFLOW INSTANCE SEGMENTATION • AI HUD
+              </span>
+            </div>
+            <span className="text-[10.5px] font-mono px-2 py-0.5 rounded bg-[#00F2FE]/20 text-[#00F2FE] border border-[#00F2FE]/40">
+              Gauss Shoelace Formula
+            </span>
+          </div>
+          <div
+            onClick={() => {
+              setLightboxZoom(1);
+              setLightboxImageUrl(message.annotatedImageUrl || null);
+            }}
+            className="relative max-w-full max-h-[380px] overflow-hidden flex items-center justify-center bg-black/70 cursor-pointer group/hud"
+          >
+            <img
+              src={message.annotatedImageUrl}
+              alt="AgriVision AI HUD: Phân tích tổn thương mô"
+              className="w-full max-h-[380px] object-contain transition-transform duration-300 group-hover/hud:scale-[1.01]"
+            />
+            <div className="absolute bottom-2 right-2 bg-black/75 backdrop-blur-md text-[#00F2FE] text-xs px-2.5 py-1 rounded-full border border-[#00F2FE]/30 flex items-center gap-1.5 opacity-90 group-hover/hud:opacity-100 transition-opacity">
+              <ZoomIn className="w-3.5 h-3.5" strokeWidth={1.5} />
+              <span>Phóng to toàn màn hình HUD</span>
+            </div>
+          </div>
         </div>
       )}
 
@@ -860,6 +864,74 @@ export default function ChatMessage({ message }: ChatMessageProps) {
           >
             <RotateCcw className="w-4 h-4" strokeWidth={1.5} />
           </button>
+        </div>
+      )}
+
+      {/* Unified Image Lightbox Modal (Supports User Uploads, AI HUD & Markdown Images) */}
+      {lightboxImageUrl && (
+        <div
+          onClick={() => {
+            setLightboxImageUrl(null);
+            setLightboxZoom(1);
+          }}
+          className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex flex-col items-center justify-center p-4 select-none animate-in fade-in duration-150"
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="absolute top-4 right-4 flex items-center gap-2 bg-black/60 p-1.5 rounded-full backdrop-blur-md border border-white/20 text-white z-10"
+          >
+            <button
+              type="button"
+              onClick={() => setLightboxZoom((prev) => Math.min(prev + 0.25, 3))}
+              title="Phóng to (+)"
+              className="p-1.5 rounded-full hover:bg-white/20 transition-colors cursor-pointer"
+            >
+              <ZoomIn className="w-4 h-4" strokeWidth={1.5} />
+            </button>
+            <button
+              type="button"
+              onClick={() => setLightboxZoom((prev) => Math.max(prev - 0.25, 0.5))}
+              title="Thu nhỏ (-)"
+              className="p-1.5 rounded-full hover:bg-white/20 transition-colors cursor-pointer"
+            >
+              <ZoomOut className="w-4 h-4" strokeWidth={1.5} />
+            </button>
+            <button
+              type="button"
+              onClick={() => setLightboxZoom(1)}
+              title="Đặt lại kích thước (100%)"
+              className="p-1.5 rounded-full hover:bg-white/20 transition-colors cursor-pointer"
+            >
+              <RotateCcw className="w-4 h-4" strokeWidth={1.5} />
+            </button>
+            <div className="w-px h-4 bg-white/30" />
+            <button
+              type="button"
+              onClick={() => {
+                setLightboxImageUrl(null);
+                setLightboxZoom(1);
+              }}
+              title="Đóng (Esc)"
+              className="p-1.5 rounded-full hover:bg-white/20 transition-colors text-white/90 hover:text-white cursor-pointer"
+            >
+              <X className="w-4 h-4" strokeWidth={1.5} />
+            </button>
+          </div>
+
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="relative max-w-5xl max-h-[85vh] overflow-hidden flex items-center justify-center"
+          >
+            <img
+              src={lightboxImageUrl}
+              alt="Chi tiết ảnh phóng to"
+              style={{ transform: `scale(${lightboxZoom})` }}
+              className="max-w-full max-h-[80vh] object-contain rounded-xl shadow-2xl transition-transform duration-200"
+            />
+          </div>
+          <div className="absolute bottom-4 text-xs text-white/70">
+            Nhấn ESC hoặc bấm ra ngoài để đóng • Bấm +/- để thu phóng
+          </div>
         </div>
       )}
     </div>

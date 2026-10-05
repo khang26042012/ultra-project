@@ -19,7 +19,9 @@ import {
   Pin,
   Pencil,
   Check,
+  FlaskConical,
 } from 'lucide-react';
+import TankMixModal from '@/components/tankMix/TankMixModal';
 import gsap from 'gsap';
 import { TimeGroup, Conversation } from '@/types/chat';
 
@@ -45,6 +47,7 @@ export default function AppSidebar() {
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearchVisible, setIsSearchVisible] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+  const [isTankMixOpen, setIsTankMixOpen] = useState(false);
 
   // Context Menu Popup State
   const [menuConvId, setMenuConvId] = useState<string | null>(null);
@@ -317,7 +320,7 @@ export default function AppSidebar() {
               <span>Đoạn chat mới</span>
             </button>
 
-            {/* Clean Monochrome Toàn thư cây trồng Button (badge removed) */}
+            {/* Clean Monochrome Toàn thư cây trồng Button */}
             <Link
               href="/crops"
               onClick={() => {
@@ -328,6 +331,19 @@ export default function AppSidebar() {
               <BookOpen className="w-4 h-4 text-[#0d0d0d] dark:text-white shrink-0" strokeWidth={1.5} />
               <span className="flex-1 text-left truncate">Toàn thư cây trồng</span>
             </Link>
+
+            {/* Virtual Spray Tank Simulator Button */}
+            <button
+              type="button"
+              onClick={() => {
+                setIsTankMixOpen(true);
+                if (window.innerWidth < 768) setIsSidebarOpen(false);
+              }}
+              className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl bg-[#ffffff] hover:bg-[#f0f0f0] dark:bg-[#212121] dark:hover:bg-[#2a2a2a] text-[#0d0d0d] dark:text-[#ececec] text-xs font-semibold transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer border border-[#e5e5e5] dark:border-[#2f2f2f] shadow-xs text-left"
+            >
+              <FlaskConical className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" strokeWidth={1.5} />
+              <span className="flex-1 text-left truncate">Bình phun ảo BVTV</span>
+            </button>
           </div>
 
           {/* Divider */}
@@ -518,6 +534,9 @@ export default function AppSidebar() {
           })()}
         </div>
       )}
+
+      {/* Virtual Spray Tank WALES Modal */}
+      <TankMixModal isOpen={isTankMixOpen} onClose={() => setIsTankMixOpen(false)} />
     </>
   );
 }
