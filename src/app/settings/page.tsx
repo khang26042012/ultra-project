@@ -318,28 +318,18 @@ function SettingsView() {
                   </button>
                 )}
 
+                {/* Tạm ẩn Bình phun ảo BVTV theo yêu cầu */}
+                {/*
                 {(matchesSearch('bình phun') || matchesSearch('pha thuốc') || matchesSearch('wales') || matchesSearch('xung đột')) && (
                   <button
                     type="button"
                     onClick={() => setIsTankMixOpen(true)}
                     className="w-full flex items-center justify-between p-3.5 hover:bg-[#f2f2f2] dark:hover:bg-[#222222] transition-colors cursor-pointer text-left"
                   >
-                    <div className="flex items-center gap-3 min-w-0">
-                      <div className="w-8 h-8 rounded-xl bg-cyan-50 dark:bg-cyan-950/40 text-cyan-600 dark:text-cyan-400 flex items-center justify-center shrink-0">
-                        <FlaskConical className="w-4 h-4" strokeWidth={1.5} />
-                      </div>
-                      <div>
-                        <div className="text-sm font-medium text-[#0d0d0d] dark:text-white">
-                          Bình phun ảo BVTV (Chuẩn WALES)
-                        </div>
-                        <div className="text-[11px] text-[#737373] dark:text-[#8e8e8e]">
-                          Mô phỏng xung đột hóa sinh, kết tủa & thứ tự hòa tan cho bình 16L, 25L, 200L
-                        </div>
-                      </div>
-                    </div>
-                    <ChevronRight className="w-4 h-4 text-[#8e8e8e] shrink-0" strokeWidth={1.5} />
+                    ...
                   </button>
                 )}
+                */}
               </div>
             </div>
           )}
@@ -630,7 +620,7 @@ function SettingsView() {
                       </span>
                     </div>
                     <span className="text-xs text-[#737373] dark:text-[#8e8e8e] text-right">
-                      Phan Trọng Khang (Lớp 9¹, THCS Vĩnh An)
+                      Phan Trọng Khang (Lớp 9¹, THCS Vĩnh An, xã Ba Tri, Vĩnh Long)
                     </span>
                   </div>
                 )}
