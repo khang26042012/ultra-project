@@ -332,20 +332,20 @@ export default function AppSidebar() {
               <span className="flex-1 text-left truncate">Toàn thư cây trồng</span>
             </Link>
 
-            {/* Virtual Spray Tank Simulator Button (Tạm ẩn theo yêu cầu) */}
-            {/*
-            <button
-              type="button"
-              onClick={() => {
-                setIsTankMixOpen(true);
-                if (window.innerWidth < 768) setIsSidebarOpen(false);
-              }}
-              className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl bg-[#ffffff] hover:bg-[#f0f0f0] dark:bg-[#212121] dark:hover:bg-[#2a2a2a] text-[#0d0d0d] dark:text-[#ececec] text-xs font-semibold transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer border border-[#e5e5e5] dark:border-[#2f2f2f] shadow-xs text-left"
-            >
-              <FlaskConical className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" strokeWidth={1.5} />
-              <span className="flex-1 text-left truncate">Bình phun ảo BVTV</span>
-            </button>
-            */}
+            {/* Virtual Spray Tank Simulator Button (Tạm ẩn) */}
+            {false && (
+              <button
+                type="button"
+                onClick={() => {
+                  setIsTankMixOpen(true);
+                  if (window.innerWidth < 768) setIsSidebarOpen(false);
+                }}
+                className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl bg-[#ffffff] hover:bg-[#f0f0f0] dark:bg-[#212121] dark:hover:bg-[#2a2a2a] text-[#0d0d0d] dark:text-[#ececec] text-xs font-semibold"
+              >
+                <FlaskConical className="w-4 h-4 text-emerald-600 shrink-0" strokeWidth={1.5} />
+                <span className="flex-1 text-left truncate">Bình phun ảo BVTV</span>
+              </button>
+            )}
           </div>
 
           {/* Divider */}

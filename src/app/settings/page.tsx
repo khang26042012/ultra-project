@@ -318,18 +318,16 @@ function SettingsView() {
                   </button>
                 )}
 
-                {/* Tạm ẩn Bình phun ảo BVTV theo yêu cầu */}
-                {/*
-                {(matchesSearch('bình phun') || matchesSearch('pha thuốc') || matchesSearch('wales') || matchesSearch('xung đột')) && (
+                {/* Tạm ẩn Bình phun ảo BVTV */}
+                {false && (
                   <button
                     type="button"
                     onClick={() => setIsTankMixOpen(true)}
-                    className="w-full flex items-center justify-between p-3.5 hover:bg-[#f2f2f2] dark:hover:bg-[#222222] transition-colors cursor-pointer text-left"
+                    className="w-full flex items-center justify-between p-3.5"
                   >
-                    ...
+                    <span>Bình phun ảo BVTV</span>
                   </button>
                 )}
-                */}
               </div>
             </div>
           )}
