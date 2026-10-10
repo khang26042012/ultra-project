@@ -1,7 +1,7 @@
 # 🌾 AgriVision (Ultra Project) — Bác Sĩ Cây Trồng Lâm Sàng AI & Toàn Thư Bệnh Học 1.500+ Cây Trồng
 
-> **Công trình nghiên cứu khoa học sáng tạo tiêu biểu của tác giả trẻ: Bạn Phan Trọng Khang**  
-> *Học sinh lớp 9¹, Trường THCS Vĩnh An, huyện Mang Thít, tỉnh Vĩnh Long.*  
+> **Công trình nghiên cứu khoa học kỹ thuật dành cho học sinh trung học (Năm học 2026 - 2027)**  
+> *Lĩnh vực: Hệ thống phần mềm (Mã 08) — Cuộc thi KHKT cấp tỉnh.*  
 > **Website chính thức:** [https://ultra-project.onrender.com](https://ultra-project.onrender.com)  
 > **Kho lưu trữ GitHub:** [https://github.com/khang26042012/ultra-project](https://github.com/khang26042012/ultra-project)
 
@@ -130,5 +130,5 @@ npm run build
 ## 🏆 THÔNG TIN BẢN QUYỀN
 
 Dự án được sáng lập và phát triển bởi:
-* **Tác giả:** **Phan Trọng Khang** (Học sinh lớp 9¹, Trường THCS Vĩnh An, tỉnh Vĩnh Long).
+* **Đề tài dự thi:** AgriVision - Phần mềm hệ thống nông nghiệp thông minh kết hợp trí tuệ nhân tạo AI.
 * **Mã nguồn mở theo giấy phép MIT License.**
