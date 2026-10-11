@@ -160,7 +160,7 @@ export default function HelpModal() {
         {/* Modal Footer */}
         <div className="p-3 px-4 sm:px-5 border-t border-[#e5e5e5] dark:border-[#333333] flex items-center justify-between bg-[#fbfbfb] dark:bg-[#181818] shrink-0 gap-3">
           <span className="text-[11px] text-[#8e8e8e] leading-tight">
-            AgriVision v1.0 • Phát triển bởi Phan Trọng Khang (THCS Vĩnh An)
+            AgriVision v1.0 • Phát triển bởi Tác giả đề tài AgriVision (Đơn vị nghiên cứu)
           </span>
           <button
             type="button"
