@@ -150,7 +150,7 @@ function SettingsView() {
     }
   };
 
-  const userName = userProfile?.name || 'Phan Trọng Khang';
+  const userName = userProfile?.name || 'Tác giả đề tài AgriVision';
   const userEmail = userProfile?.email || 'trongkhabgphan@gmail.com';
   const userInitials = userProfile?.initials || 'PTK';
 
@@ -618,7 +618,7 @@ function SettingsView() {
                       </span>
                     </div>
                     <span className="text-xs text-[#737373] dark:text-[#8e8e8e] text-right">
-                      Phan Trọng Khang (Lớp 9¹, THCS Vĩnh An, xã Ba Tri, Vĩnh Long)
+                      Tác giả đề tài AgriVision (Học sinh trung học, Đơn vị nghiên cứu, xã Ba Tri, Vĩnh Long)
                     </span>
                   </div>
                 )}
