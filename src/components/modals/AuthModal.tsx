@@ -170,7 +170,7 @@ export default function AuthModal() {
                 <User className="w-4 h-4 text-[#8e8e8e] absolute left-3.5 top-3" strokeWidth={1.5} />
                 <input
                   type="text"
-                  placeholder="Ví dụ: Phan Trọng Khang"
+                  placeholder="Ví dụ: Tác giả đề tài AgriVision"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   className="w-full pl-10 pr-4 py-2.5 bg-[#f9f9f9] dark:bg-[#171717] text-xs text-[#0d0d0d] dark:text-white placeholder-[#8e8e8e] rounded-xl border border-[#e5e5e5] dark:border-[#333333] focus:border-[#0d0d0d] dark:focus:border-white outline-none transition-colors"
