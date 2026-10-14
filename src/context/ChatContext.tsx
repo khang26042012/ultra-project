@@ -982,7 +982,7 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
         ? { ...currentUser, avatar_url: compressedBase64 }
         : {
             id: 'guest',
-            name: 'Phan Trọng Khang',
+            name: 'Tác giả đề tài AgriVision',
             email: 'trongkhabgphan@gmail.com',
             passwordHash: '',
             createdAt: new Date().toISOString(),
@@ -1018,7 +1018,7 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
   }, [currentUser]);
 
   const userProfile = {
-    name: currentUser?.name || 'Phan Trọng Khang',
+    name: currentUser?.name || 'Tác giả đề tài AgriVision',
     email: currentUser?.email || 'trongkhabgphan@gmail.com',
     initials: currentUser ? getInitials(currentUser.name) : 'PTK',
     avatar_url: currentUser?.avatar_url || (typeof window !== 'undefined' ? localStorage.getItem('agrivision_custom_avatar') || undefined : undefined),
