@@ -12,7 +12,7 @@ import {
   Trash2,
   MessageSquare,
   X,
-  LogIn,
+  LogIn, ChevronRight,
   HelpCircle,
   BookOpen,
   MoreHorizontal,
@@ -447,30 +447,27 @@ export default function AppSidebar() {
             ) : (
               <button
                 type="button"
-                onClick={() => router.push('/settings')}
-                className="w-full flex items-center justify-between p-2 rounded-[16px] bg-[#ffffff] dark:bg-[#212121] border border-[#e5e5e5]/80 dark:border-[#2c2c2c] hover:bg-[#f4f4f4] dark:hover:bg-[#282828] text-xs font-semibold text-[#0d0d0d] dark:text-white shadow-2xs transition-all hover:scale-[1.01] active:scale-[0.99] cursor-pointer"
+                data-testid="sidebar-login-button"
+                onClick={() => {
+                  setIsAuthModalOpen(true);
+                  if (window.innerWidth < 768) setIsSidebarOpen(false);
+                }}
+                className="w-full flex items-center justify-between p-2.5 rounded-[16px] bg-[#0d0d0d] hover:bg-[#262626] text-white dark:bg-[#242424] dark:hover:bg-[#303030] dark:border dark:border-[#383838] shadow-xs transition-all hover:scale-[1.01] active:scale-[0.99] cursor-pointer"
               >
                 <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 shrink-0 rounded-full bg-[#0d0d0d] text-white dark:bg-white dark:text-black flex items-center justify-center font-bold text-xs shadow-xs overflow-hidden">
-                    {userProfile.avatar_url ? (
-                      <img
-                        src={userProfile.avatar_url}
-                        alt="PTK"
-                        className="w-full h-full object-cover"
-                      />
-                    ) : (
-                      'PTK'
-                    )}
+                  <div className="w-8 h-8 shrink-0 rounded-full bg-white/20 dark:bg-white/10 flex items-center justify-center font-bold text-xs">
+                    <LogIn className="w-4 h-4 text-white" />
                   </div>
                   <div className="text-left">
-                    <div className="text-xs font-semibold text-[#0d0d0d] dark:text-white">
-                      Tác giả đề tài AgriVision
+                    <div className="font-semibold text-xs text-white leading-tight">
+                      Đăng nhập / Đăng ký
                     </div>
-                    <div className="text-[10px] text-[#8e8e8e] font-normal">
-                      Cài đặt & Tài khoản
+                    <div className="text-[10px] text-white/70 mt-0.5">
+                      Tạo tài khoản hoặc Đăng nhập
                     </div>
                   </div>
                 </div>
+                <ChevronRight className="w-4 h-4 text-white/60" strokeWidth={1.5} />
               </button>
             )}
           </div>
