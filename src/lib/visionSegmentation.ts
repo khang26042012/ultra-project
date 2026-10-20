@@ -47,7 +47,10 @@ export function calculateShoelaceArea(points: PolygonPoint[]): number {
 // Clean raw base64 string
 export function sanitizeBase64(base64: string): string {
   if (!base64) return '';
-  return base64.replace(/^data:image\/[a-zA-Z+]+;base64,/, '').trim();
+  if (base64.includes(';base64,')) {
+    return base64.split(';base64,')[1].trim();
+  }
+  return base64.replace(/^data:image\/[a-zA-Z0-9.+_-]+;base64,/i, '').trim();
 }
 
 // Translate common English crop lesion classes to Vietnamese agronomy terminology
@@ -146,12 +149,17 @@ export function renderAgriTechHudSvg(
   predictions: LesionPrediction[],
   totalNecrosis: number
 ): string {
+  const cleanBase64 = sanitizeBase64(rawBase64);
+  let mimeType = 'image/jpeg';
+  if (cleanBase64.startsWith('iVBORw0KGgo')) mimeType = 'image/png';
+  else if (cleanBase64.startsWith('UklGR')) mimeType = 'image/webp';
+
   const fullBase64 = rawBase64.startsWith('data:')
     ? rawBase64
-    : `data:image/jpeg;base64,${rawBase64}`;
+    : `data:${mimeType};base64,${cleanBase64}`;
 
   // SVG Header & Defs with Neon Glow Filter
-  let svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" width="100%" height="100%">
+  let svg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 ${width} ${height}" width="100%" height="100%">
   <defs>
     <filter id="neon-cyan-glow" x="-25%" y="-25%" width="150%" height="150%">
       <feDropShadow dx="0" dy="0" stdDeviation="1.5" flood-color="#00F2FE" flood-opacity="0.95"/>
@@ -166,7 +174,7 @@ export function renderAgriTechHudSvg(
   </defs>
 
   <!-- Original High-Res Image -->
-  <image href="${fullBase64}" width="${width}" height="${height}" preserveAspectRatio="xMidYMid meet" />
+  <image href="${fullBase64}" xlink:href="${fullBase64}" width="${width}" height="${height}" preserveAspectRatio="xMidYMid meet" />
 `;
 
   // Global Diagnostic Watermark Header (Top Left HUD status)
@@ -325,8 +333,32 @@ export async function segmentAndAnnotateCropLesion(
               }))
             : [];
 
-          const area = calculateShoelaceArea(rawPoints);
-          const necPercent = parseFloat(((area / totalImageArea) * 100).toFixed(1));
+          if (
+            rawPoints.length < 3 &&
+            typeof p.width === 'number' &&
+            typeof p.height === 'number' &&
+            p.width > 0 &&
+            p.height > 0
+          ) {
+            const halfW = p.width / 2;
+            const halfH = p.height / 2;
+            const cx = p.x || halfW;
+            const cy = p.y || halfH;
+            rawPoints.push(
+              { x: Math.round(cx - halfW), y: Math.round(cy - halfH) },
+              { x: Math.round(cx + halfW), y: Math.round(cy - halfH) },
+              { x: Math.round(cx + halfW), y: Math.round(cy + halfH) },
+              { x: Math.round(cx - halfW), y: Math.round(cy + halfH) }
+            );
+          }
+
+          let area = calculateShoelaceArea(rawPoints);
+          if (area === 0 && p.width && p.height) {
+            area = p.width * p.height * 0.7;
+          }
+          const necPercent = parseFloat(
+            Math.max(0.5, (area / totalImageArea) * 100).toFixed(1)
+          );
 
           return {
             class: p.class || 'plant_disease',

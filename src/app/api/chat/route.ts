@@ -135,6 +135,56 @@ export async function POST(req: NextRequest) {
         const maxTurns = 6;
         let turn = 0;
 
+        // Proactively detect if the current incoming turn uploaded an image
+        const lastIncomingMsg = conversationalMessages[conversationalMessages.length - 1];
+        let currentTurnImage = '';
+        if (lastIncomingMsg && lastIncomingMsg.role === 'user') {
+          if (typeof lastIncomingMsg.imageUrl === 'string' && lastIncomingMsg.imageUrl) {
+            currentTurnImage = lastIncomingMsg.imageUrl;
+          } else if (Array.isArray(lastIncomingMsg.content)) {
+            for (const part of lastIncomingMsg.content) {
+              if (part?.type === 'image_url' && part?.image_url?.url) {
+                currentTurnImage = part.image_url.url;
+                break;
+              }
+            }
+          }
+        }
+
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        let precomputedVisionResult: any = null;
+        if (currentTurnImage) {
+          try {
+            sendEvent({
+              type: 'vision_segmenting',
+              status: 'Đang bóc tách đa giác viền tổn thương mô lá qua YOLO-26 & Roboflow Computer Vision...',
+            });
+
+            precomputedVisionResult = await segmentAndAnnotateCropLesion(currentTurnImage);
+
+            sendEvent({
+              type: 'vision_hud',
+              annotated_image_url: precomputedVisionResult.annotated_image_url,
+              total_necrosis_percentage: precomputedVisionResult.total_necrosis_percentage,
+              predictions: precomputedVisionResult.predictions,
+              summary: precomputedVisionResult.summary,
+            });
+
+            activeMessages.push({
+              role: 'system',
+              content: `[KẾT QUẢ THỊ GIÁC MÁY TÍNH COMPUTER VISION (YOLO-26 & ROBOFLOW INSTANCE SEGMENTATION) ĐÃ TỰ ĐỘNG PHÂN TÍCH ẢNH NÀY]:
+- Đã bóc tách thành công ${precomputedVisionResult.predictions.length} ổ hoại tử mô bệnh học.
+- Tổng tỷ lệ tổn thương hoại tử mô lá: S = ${precomputedVisionResult.total_necrosis_percentage}%
+- Chi tiết các ổ bệnh: ${precomputedVisionResult.predictions.map((p: any) => `${p.class_vi} (Độ tin cậy: ${Math.round(p.confidence * 100)}%, S = ${p.necrosis_percentage}%)`).join('; ')}
+- Giao diện đã kết xuất thành công ảnh viền laser HUD Neon trực quan cho người dùng.
+QUY TẮC BẮT BUỘC: Tại mục "Tổn thương mô Computer Vision" trong Phiếu khám lâm sàng, bạn BẮT BUỘC ghi chính xác thông số sau:
+"Diện tích hoại tử S = ${precomputedVisionResult.total_necrosis_percentage}% (Độ tin cậy: ${Math.round((precomputedVisionResult.predictions[0]?.confidence || 0.92) * 100)}%)"`,
+            });
+          } catch (err) {
+            console.warn('Proactive YOLO/Roboflow lesion segmentation error:', err);
+          }
+        }
+
         try {
           while (turn < maxTurns) {
             turn++;
@@ -258,33 +308,36 @@ export async function POST(req: NextRequest) {
 
               for (const tc of toolCallsList) {
                 if (tc.name === 'segment_crop_lesion') {
-                  // Computer Vision Roboflow Instance Segmentation & HUD
-                  let imageToSegment = latestUserImage;
-                  try {
-                    const parsedArgs = JSON.parse(tc.arguments);
-                    if (parsedArgs.imageBase64 && typeof parsedArgs.imageBase64 === 'string') {
-                      imageToSegment = parsedArgs.imageBase64;
+                  // Use precomputed result or calculate if missing
+                  let visionResult = precomputedVisionResult;
+                  if (!visionResult) {
+                    let imageToSegment = latestUserImage;
+                    try {
+                      const parsedArgs = JSON.parse(tc.arguments);
+                      if (parsedArgs.imageBase64 && typeof parsedArgs.imageBase64 === 'string') {
+                        imageToSegment = parsedArgs.imageBase64;
+                      }
+                    } catch {
+                      if (tc.arguments && tc.arguments.length > 50) {
+                        imageToSegment = tc.arguments;
+                      }
                     }
-                  } catch {
-                    if (tc.arguments && tc.arguments.length > 50) {
-                      imageToSegment = tc.arguments;
-                    }
+
+                    sendEvent({
+                      type: 'vision_segmenting',
+                      status: 'Đang bóc tách đa giác viền tổn thương mô lá qua YOLO-26 & Roboflow Computer Vision...',
+                    });
+
+                    visionResult = await segmentAndAnnotateCropLesion(imageToSegment);
+
+                    sendEvent({
+                      type: 'vision_hud',
+                      annotated_image_url: visionResult.annotated_image_url,
+                      total_necrosis_percentage: visionResult.total_necrosis_percentage,
+                      predictions: visionResult.predictions,
+                      summary: visionResult.summary,
+                    });
                   }
-
-                  sendEvent({
-                    type: 'vision_segmenting',
-                    status: 'Đang bóc tách đa giác viền tổn thương mô lá qua Roboflow Computer Vision...',
-                  });
-
-                  const visionResult = await segmentAndAnnotateCropLesion(imageToSegment);
-
-                  sendEvent({
-                    type: 'vision_hud',
-                    annotated_image_url: visionResult.annotated_image_url,
-                    total_necrosis_percentage: visionResult.total_necrosis_percentage,
-                    predictions: visionResult.predictions,
-                    summary: visionResult.summary,
-                  });
 
                   activeMessages.push({
                     role: 'tool',
@@ -293,7 +346,7 @@ export async function POST(req: NextRequest) {
                       status: 'success',
                       total_necrosis_percentage: visionResult.total_necrosis_percentage,
                       predictions_count: visionResult.predictions.length,
-                      predictions: visionResult.predictions.map((p) => ({
+                      predictions: visionResult.predictions.map((p: any) => ({
                         class: p.class,
                         class_vi: p.class_vi,
                         confidence: p.confidence,

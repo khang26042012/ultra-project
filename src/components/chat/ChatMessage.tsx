@@ -1408,7 +1408,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
       {message.visionSegmenting && (
         <div className="inline-flex items-center gap-2 text-xs font-mono text-[#00b4d8] dark:text-[#00F2FE] animate-pulse mb-2.5 select-none px-3 py-1.5 rounded-full bg-[#00F2FE]/10 border border-[#00F2FE]/30">
           <span className="w-2 h-2 rounded-full bg-[#00F2FE] animate-ping" />
-          <span>Bóc tách tổn thương mô nấm bệnh qua Roboflow Computer Vision...</span>
+          <span>Bóc tách tổn thương mô nấm bệnh qua YOLO-26 & Roboflow Computer Vision...</span>
         </div>
       )}
 
@@ -1419,7 +1419,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-[#00F2FE] animate-pulse shadow-[0_0_8px_#00F2FE]" />
               <span className="font-mono text-xs font-bold tracking-wider text-[#00F2FE]">
-                ROBOFLOW INSTANCE SEGMENTATION • AI HUD
+                YOLO-26 & ROBOFLOW COMPUTER VISION • AI HUD
               </span>
             </div>
             <span className="text-[10.5px] font-mono px-2 py-0.5 rounded bg-[#00F2FE]/20 text-[#00F2FE] border border-[#00F2FE]/40">
