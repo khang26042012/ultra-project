@@ -157,7 +157,7 @@ export async function POST(req: NextRequest) {
           try {
             sendEvent({
               type: 'vision_segmenting',
-              status: 'Đang bóc tách đa giác viền tổn thương mô lá qua YOLO-26 & Roboflow Computer Vision...',
+              status: 'Đang khoanh vùng tổn thương mô lá...',
             });
 
             precomputedVisionResult = await segmentAndAnnotateCropLesion(currentTurnImage);
@@ -325,7 +325,7 @@ QUY TẮC BẮT BUỘC: Tại mục "Tổn thương mô Computer Vision" trong P
 
                     sendEvent({
                       type: 'vision_segmenting',
-                      status: 'Đang bóc tách đa giác viền tổn thương mô lá qua YOLO-26 & Roboflow Computer Vision...',
+                      status: 'Đang khoanh vùng tổn thương mô lá...',
                     });
 
                     visionResult = await segmentAndAnnotateCropLesion(imageToSegment);
