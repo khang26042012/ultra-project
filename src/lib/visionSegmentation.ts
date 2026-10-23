@@ -159,7 +159,7 @@ export function renderAgriTechHudSvg(
     : `data:${mimeType};base64,${cleanBase64}`;
 
   // SVG Header & Defs with Neon Glow Filter
-  let svg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 ${width} ${height}" width="100%" height="100%">
+  let svg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 ${width} ${height}" width="${width}" height="${height}">
   <defs>
     <filter id="neon-cyan-glow" x="-25%" y="-25%" width="150%" height="150%">
       <feDropShadow dx="0" dy="0" stdDeviation="1.5" flood-color="#00F2FE" flood-opacity="0.95"/>

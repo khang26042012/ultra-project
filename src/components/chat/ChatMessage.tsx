@@ -585,7 +585,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
         {/* Center Image Container */}
         <div
           onClick={(e) => e.stopPropagation()}
-          className="relative max-w-full max-h-[85vh] overflow-auto flex items-center justify-center p-2 no-scrollbar"
+          className="relative w-full max-w-5xl max-h-[85vh] flex items-center justify-center p-2 overflow-auto no-scrollbar"
         >
           <img
             src={lightboxImageUrl}
@@ -594,7 +594,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
               transform: `scale(${lightboxZoom})`,
               transformOrigin: 'center center',
             }}
-            className="max-w-full max-h-[80vh] w-auto h-auto object-contain rounded-2xl shadow-2xl transition-transform duration-200 cursor-zoom-in"
+            className="max-w-[92vw] max-h-[80vh] w-auto h-auto min-w-[260px] min-h-[260px] object-contain rounded-2xl shadow-2xl transition-transform duration-200 cursor-zoom-in select-none bg-black/40"
             onClick={() => setLightboxZoom((prev) => (prev > 1 ? 1 : 2))}
           />
         </div>
@@ -753,10 +753,19 @@ export default function ChatMessage({ message }: ChatMessageProps) {
         </div>
       )}
 
-      {/* 3. Thinking UI Standard */}
+      {/* 3. Thinking UI: Khi đang thinking thì để ra ngoài, xong thì thu gọn lại */}
       {isCurrentlyThinking && (
-        <div className="inline-flex items-center text-xs font-medium text-[#737373] dark:text-[#a3a3a3] animate-pulse mb-2.5 select-none">
-          <span>Đang suy nghĩ...</span>
+        <div className="my-2.5 p-3 rounded-2xl bg-black/[0.03] dark:bg-white/[0.04] border border-black/5 dark:border-white/5 space-y-1.5 select-none animate-in fade-in duration-150">
+          <div className="inline-flex items-center gap-2 text-xs font-medium text-emerald-600 dark:text-emerald-400">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
+            <span>Đang suy nghĩ...</span>
+          </div>
+          {message.thought && (
+            <div className="border-l-2 border-emerald-500/40 pl-3 max-h-64 overflow-y-auto text-[13px] text-[#5d5d5d] dark:text-[#a3a3a3] font-sans leading-relaxed whitespace-pre-wrap">
+              {message.thought}
+              <span className="inline-block w-1.5 h-3.5 ml-1 bg-emerald-500/70 animate-pulse align-middle" />
+            </div>
+          )}
         </div>
       )}
 
@@ -765,7 +774,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
           <button
             type="button"
             onClick={() => setShowThought(!showThought)}
-            className="inline-flex items-center gap-1 text-xs font-medium text-[#737373] hover:text-[#0d0d0d] dark:text-[#a3a3a3] dark:hover:text-white transition-colors cursor-pointer"
+            className="inline-flex items-center gap-1.5 text-xs font-medium text-[#737373] hover:text-[#0d0d0d] dark:text-[#a3a3a3] dark:hover:text-white transition-colors cursor-pointer py-1 px-2.5 rounded-lg hover:bg-black/5 dark:hover:bg-white/5"
           >
             <span>
               {message.thinkingSeconds
