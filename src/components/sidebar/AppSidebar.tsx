@@ -220,7 +220,7 @@ export default function AppSidebar() {
             </div>
           </div>
 
-          {/* Footer Profile / Auth Bar & Author Attribution */}
+          {/* Footer Profile / Auth Bar */}
           <div className="p-3 border-t border-[#e5e5e5] dark:border-[#262626] relative">
             {currentUser ? (
               <>
@@ -259,19 +259,6 @@ export default function AppSidebar() {
                 <span>Đăng nhập / Đăng ký</span>
               </button>
             )}
-
-            {/* Author Attribution Badge */}
-            <div className="mt-2.5 pt-2 border-t border-[#e5e5e5] dark:border-[#262626] text-center select-text">
-              <div className="text-[11px] font-medium text-[#0d0d0d] dark:text-white leading-tight">
-                AgriVision v1.0
-              </div>
-              <div className="text-[10px] text-[#5d5d5d] dark:text-[#a0a0a0] mt-0.5">
-                Tác giả: <span className="font-semibold text-[#0d0d0d] dark:text-white">Phan Trọng Khang</span>
-              </div>
-              <div className="text-[9.5px] text-[#8e8e8e] dark:text-[#777]">
-                Lớp 9¹, THCS Vĩnh An (Vĩnh Long)
-              </div>
-            </div>
           </div>
         </div>
       </aside>

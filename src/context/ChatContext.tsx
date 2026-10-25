@@ -1,7 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useState, useEffect, useRef, useCallback } from 'react';
-import { Conversation, Message, ModelOption, ThemeMode, User } from '@/types/chat';
+import { Conversation, Message, ModelOption, ThemeMode, User, SearchSource } from '@/types/chat';
 import { getInitials } from '@/lib/utils';
 
 export const NINEROUTER_API_URL = 'http://nvnmc.asia:26627/v1/chat/completions';
@@ -11,7 +11,7 @@ export const AVAILABLE_MODELS: ModelOption[] = [
   {
     id: 'ag/gemini-3.8-flash-high',
     name: 'Gemini 3.8 Flash High',
-    description: 'High-reasoning multimodal profile for AgriVision',
+    description: 'High-reasoning multimodal profile for AgriVision with 9Router Web Search',
     badge: 'Pro',
     isDefault: true,
   },
@@ -368,7 +368,7 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
     );
   };
 
-  // Real AI Streaming via AI Gateway (locked to ag/gemini-3.8-flash-high with Multimodal & Context Window)
+  // Multi-step Agent Loop with 9Router Web Search & ChatGPT/Claude Reasoning Streaming
   const sendMessage = async (content: string, imageUrl?: string, thinkActive = false) => {
     const trimmedContent = content.trim();
     if ((!trimmedContent && !imageUrl) || isStreaming) return;
@@ -422,7 +422,8 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
       content: '',
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       isStreaming: true,
-      thought: thinkActive ? 'AgriVision đang phân tích triệu chứng...' : undefined,
+      isThinking: thinkActive,
+      thought: '',
     };
 
     updateAndPersistConversations((prev) =>
@@ -453,6 +454,14 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
       };
     });
 
+    const startTime = Date.now();
+    let accumulatedContent = '';
+    let accumulatedThought = '';
+    let isThinking = false;
+    let thinkingSeconds = 0;
+    let searchingQuery: string | undefined = undefined;
+    let currentSources: SearchSource[] = [];
+
     try {
       const response = await fetch('/api/chat', {
         method: 'POST',
@@ -473,7 +482,6 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
 
       const reader = response.body?.getReader();
       const decoder = new TextDecoder('utf-8');
-      let accumulatedContent = '';
 
       if (reader) {
         let buffer = '';
@@ -496,31 +504,75 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
               const dataStr = trimmed.slice(6);
               try {
                 const parsed = JSON.parse(dataStr);
-                const token = parsed.choices?.[0]?.delta?.content || '';
-                if (token) {
-                  accumulatedContent += token;
 
-                  setConversations((prev) =>
-                    prev.map((c) =>
-                      c.id === targetConvId
-                        ? {
-                            ...c,
-                            messages: c.messages.map((m) =>
-                              m.id === aiMessageId
-                                ? { ...m, content: accumulatedContent, isStreaming: true }
-                                : m
-                            ),
-                          }
-                        : c
-                    )
-                  );
+                // 1. Thinking / Reasoning token
+                if (parsed.type === 'thought' && parsed.token) {
+                  isThinking = true;
+                  accumulatedThought += parsed.token;
                 }
+                // 2. Searching indicator
+                else if (parsed.type === 'searching') {
+                  searchingQuery = parsed.query;
+                }
+                // 3. Search sources returned from 9Router
+                else if (parsed.type === 'sources' && Array.isArray(parsed.sources)) {
+                  currentSources = [...currentSources, ...parsed.sources];
+                  searchingQuery = undefined;
+                }
+                // 4. Content token
+                else if (parsed.type === 'content' && parsed.token) {
+                  if (isThinking) {
+                    isThinking = false;
+                    thinkingSeconds = Math.max(1, Math.round((Date.now() - startTime) / 1000));
+                  }
+                  accumulatedContent += parsed.token;
+                }
+                // 5. Fallback delta.content
+                else if (parsed.choices?.[0]?.delta?.content) {
+                  if (isThinking) {
+                    isThinking = false;
+                    thinkingSeconds = Math.max(1, Math.round((Date.now() - startTime) / 1000));
+                  }
+                  accumulatedContent += parsed.choices[0].delta.content;
+                }
+
+                setConversations((prev) =>
+                  prev.map((c) =>
+                    c.id === targetConvId
+                      ? {
+                          ...c,
+                          messages: c.messages.map((m) =>
+                            m.id === aiMessageId
+                              ? {
+                                  ...m,
+                                  content: accumulatedContent,
+                                  thought: accumulatedThought || undefined,
+                                  isThinking,
+                                  thinkingSeconds:
+                                    thinkingSeconds ||
+                                    (accumulatedThought
+                                      ? Math.max(1, Math.round((Date.now() - startTime) / 1000))
+                                      : undefined),
+                                  searchingQuery,
+                                  sources: currentSources.length > 0 ? currentSources : undefined,
+                                  isStreaming: true,
+                                }
+                              : m
+                          ),
+                        }
+                      : c
+                  )
+                );
               } catch {
                 // Ignore incomplete JSON chunks in SSE stream
               }
             }
           }
         }
+      }
+
+      if (accumulatedThought && !thinkingSeconds) {
+        thinkingSeconds = Math.max(1, Math.round((Date.now() - startTime) / 1000));
       }
 
       // Mark streaming complete and persist to storage
@@ -531,7 +583,20 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
                 ...c,
                 messages: c.messages.map((m) =>
                   m.id === aiMessageId
-                    ? { ...m, isStreaming: false }
+                    ? {
+                        ...m,
+                        content: accumulatedContent,
+                        thought: accumulatedThought || undefined,
+                        isStreaming: false,
+                        isThinking: false,
+                        searchingQuery: undefined,
+                        thinkingSeconds:
+                          thinkingSeconds ||
+                          (accumulatedThought
+                            ? Math.max(1, Math.round((Date.now() - startTime) / 1000))
+                            : undefined),
+                        sources: currentSources.length > 0 ? currentSources : undefined,
+                      }
                     : m
                 ),
               }
@@ -556,6 +621,8 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
                         ...m,
                         content: `⚠️ **Lỗi kết nối AgriVision**: ${errorMessage}\n\nVui lòng kiểm tra lại đường truyền mạng.`,
                         isStreaming: false,
+                        isThinking: false,
+                        searchingQuery: undefined,
                       }
                     : m
                 ),

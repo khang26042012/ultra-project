@@ -3,7 +3,18 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Message } from '@/types/chat';
 import CodeBlock from './CodeBlock';
-import { Copy, Check, ThumbsUp, ThumbsDown, RotateCcw, ChevronDown, ChevronRight } from 'lucide-react';
+import {
+  Copy,
+  Check,
+  ThumbsUp,
+  ThumbsDown,
+  RotateCcw,
+  ChevronDown,
+  ChevronRight,
+  Search,
+  Globe,
+  ExternalLink,
+} from 'lucide-react';
 import gsap from 'gsap';
 
 interface ChatMessageProps {
@@ -14,6 +25,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
   const [copied, setCopied] = useState(false);
   const [liked, setLiked] = useState<boolean | null>(null);
   const [showThought, setShowThought] = useState(false);
+  const [showSources, setShowSources] = useState(false);
   const messageRef = useRef<HTMLDivElement>(null);
 
   // GSAP 60 FPS Message Reveal Animation (Fade & Slide In)
@@ -53,17 +65,41 @@ export default function ChatMessage({ message }: ChatMessageProps) {
         <div key={index} className="space-y-2.5">
           {lines.map((line, lIdx) => {
             if (line.startsWith('### ')) {
-              return <h3 key={lIdx} className="text-base font-semibold text-[#0d0d0d] dark:text-[#ececec] mt-3.5 mb-1.5">{line.replace('### ', '')}</h3>;
+              return (
+                <h3
+                  key={lIdx}
+                  className="text-base font-semibold text-[#0d0d0d] dark:text-[#ececec] mt-3.5 mb-1.5"
+                >
+                  {line.replace('### ', '')}
+                </h3>
+              );
             }
             if (line.startsWith('## ')) {
-              return <h2 key={lIdx} className="text-lg font-bold text-[#0d0d0d] dark:text-[#ececec] mt-4 mb-2">{line.replace('## ', '')}</h2>;
+              return (
+                <h2
+                  key={lIdx}
+                  className="text-lg font-bold text-[#0d0d0d] dark:text-[#ececec] mt-4 mb-2"
+                >
+                  {line.replace('## ', '')}
+                </h2>
+              );
             }
             if (line.startsWith('# ')) {
-              return <h1 key={lIdx} className="text-xl font-bold text-[#0d0d0d] dark:text-[#ececec] mt-5 mb-2.5">{line.replace('# ', '')}</h1>;
+              return (
+                <h1
+                  key={lIdx}
+                  className="text-xl font-bold text-[#0d0d0d] dark:text-[#ececec] mt-5 mb-2.5"
+                >
+                  {line.replace('# ', '')}
+                </h1>
+              );
             }
             if (line.startsWith('> ')) {
               return (
-                <blockquote key={lIdx} className="border-l-2 border-[#0d0d0d] dark:border-white pl-3 italic text-[#5d5d5d] dark:text-[#b4b4b4] my-2">
+                <blockquote
+                  key={lIdx}
+                  className="border-l-2 border-[#0d0d0d] dark:border-white pl-3 italic text-[#5d5d5d] dark:text-[#b4b4b4] my-2"
+                >
                   {line.replace('> ', '')}
                 </blockquote>
               );
@@ -90,7 +126,11 @@ export default function ChatMessage({ message }: ChatMessageProps) {
             }
             if (!line.trim()) return <div key={lIdx} className="h-1" />;
 
-            return <p key={lIdx} className="leading-7">{formatInlineMarkdown(line)}</p>;
+            return (
+              <p key={lIdx} className="leading-7">
+                {formatInlineMarkdown(line)}
+              </p>
+            );
           })}
         </div>
       );
@@ -113,7 +153,11 @@ export default function ChatMessage({ message }: ChatMessageProps) {
       const boldParts = sub.split(/(\*\*[^*]+\*\*)/g);
       return boldParts.map((bSub, bI) => {
         if (bSub.startsWith('**') && bSub.endsWith('**')) {
-          return <strong key={bI} className="font-semibold text-[#0d0d0d] dark:text-white">{bSub.slice(2, -2)}</strong>;
+          return (
+            <strong key={bI} className="font-semibold text-[#0d0d0d] dark:text-white">
+              {bSub.slice(2, -2)}
+            </strong>
+          );
         }
         return bSub;
       });
@@ -139,6 +183,9 @@ export default function ChatMessage({ message }: ChatMessageProps) {
     );
   }
 
+  const isCurrentlyThinking = message.isThinking && message.isStreaming;
+  const hasSettledThought = !isCurrentlyThinking && !!message.thought;
+
   // Assistant Bubble with Monochrome AgriVision Branding
   return (
     <div ref={messageRef} className="w-full mb-8 text-[#0d0d0d] dark:text-[#ececec] text-[15px] group">
@@ -150,36 +197,116 @@ export default function ChatMessage({ message }: ChatMessageProps) {
         <span>AgriVision</span>
       </div>
 
-      {/* Optional Thought accordion if deep reasoning is active */}
-      {message.thought && (
-        <div className="mb-3 border border-[#e5e5e5] dark:border-[#383838] rounded-xl overflow-hidden bg-[#f9f9f9] dark:bg-[#181818] max-w-2xl">
+      {/* 1. Live Searching Indicator Badge */}
+      {message.searchingQuery && (
+        <div className="inline-flex items-center gap-2 mb-2.5 py-1 px-3 rounded-full bg-[#f4f4f4] dark:bg-[#212121] border border-[#e5e5e5] dark:border-[#383838] text-xs text-[#5d5d5d] dark:text-[#a3a3a3] animate-pulse">
+          <Search className="w-3.5 h-3.5 text-[#0d0d0d] dark:text-white shrink-0" strokeWidth={1.75} />
+          <span>
+            Đang tra cứu dữ liệu thực tế: <strong className="font-semibold text-[#0d0d0d] dark:text-white">&ldquo;{message.searchingQuery}&rdquo;</strong>...
+          </span>
+        </div>
+      )}
+
+      {/* 2. Web Search Sources Dropdown Bar (9Router) */}
+      {message.sources && message.sources.length > 0 && (
+        <div className="mb-3 select-none">
           <button
-            onClick={() => setShowThought(!showThought)}
-            className="w-full px-3.5 py-2 flex items-center justify-between text-xs font-medium text-[#5d5d5d] dark:text-[#b4b4b4] hover:bg-[#f0f0f0] dark:hover:bg-[#212121] transition-colors cursor-pointer"
+            type="button"
+            onClick={() => setShowSources(!showSources)}
+            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#f4f4f4] hover:bg-[#eaeaea] dark:bg-[#212121] dark:hover:bg-[#2c2c2c] border border-[#e5e5e5] dark:border-[#383838] text-xs font-medium text-[#5d5d5d] hover:text-[#0d0d0d] dark:text-[#a3a3a3] dark:hover:text-white transition-all cursor-pointer"
           >
-            <span className="flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-[#0d0d0d] dark:bg-white animate-pulse" />
-              Tiến trình suy luận
-            </span>
-            {showThought ? <ChevronDown className="w-3.5 h-3.5" strokeWidth={1.75} /> : <ChevronRight className="w-3.5 h-3.5" strokeWidth={1.75} />}
+            <Globe className="w-3.5 h-3.5 text-[#0d0d0d] dark:text-white" strokeWidth={1.75} />
+            <span>Đã tham khảo {message.sources.length} nguồn thông tin thực tế</span>
+            {showSources ? (
+              <ChevronDown className="w-3 h-3 ml-0.5" strokeWidth={2} />
+            ) : (
+              <ChevronRight className="w-3 h-3 ml-0.5" strokeWidth={2} />
+            )}
           </button>
+
+          {showSources && (
+            <div className="mt-2.5 pl-3.5 border-l-2 border-[#e5e5e5] dark:border-[#383838] space-y-2 py-1 max-h-60 overflow-y-auto">
+              {message.sources.map((src, sIdx) => {
+                let domain = '';
+                try {
+                  domain = new URL(src.url).hostname.replace('www.', '');
+                } catch {
+                  domain = 'web';
+                }
+                return (
+                  <a
+                    key={sIdx}
+                    href={src.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex flex-col group/src text-left p-2 rounded-xl hover:bg-[#f4f4f4] dark:hover:bg-[#212121] transition-colors border border-transparent hover:border-[#e5e5e5] dark:hover:border-[#333]"
+                  >
+                    <div className="flex items-center gap-1.5 text-[11px] text-[#8e8e8e]">
+                      <ExternalLink className="w-3 h-3 group-hover/src:text-[#0d0d0d] dark:group-hover/src:text-white" />
+                      <span className="truncate font-mono">{domain}</span>
+                    </div>
+                    <div className="text-xs font-medium text-[#0d0d0d] dark:text-[#ececec] group-hover/src:underline line-clamp-1 mt-0.5">
+                      {src.title}
+                    </div>
+                    {src.snippet && (
+                      <div className="text-[11px] text-[#737373] dark:text-[#8e8e8e] line-clamp-2 mt-0.5 leading-snug">
+                        {src.snippet}
+                      </div>
+                    )}
+                  </a>
+                );
+              })}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* 3. Thinking UI Standard (ChatGPT o1/o3 & Claude) */}
+      {/* 3A: Live Streaming Thinking */}
+      {isCurrentlyThinking && (
+        <div className="flex items-center gap-1.5 text-xs text-[#737373] dark:text-[#a3a3a3] animate-pulse mb-2.5 select-none font-medium">
+          <span>💭</span>
+          <span>Đang suy nghĩ...</span>
+        </div>
+      )}
+
+      {/* 3B: Settled Thinking (Auto-collapsed into 1 single thin line with Left Accent Border when expanded) */}
+      {hasSettledThought && (
+        <div className="mb-2.5 select-none">
+          <button
+            type="button"
+            onClick={() => setShowThought(!showThought)}
+            className="inline-flex items-center gap-1 text-xs font-medium text-[#737373] hover:text-[#0d0d0d] dark:text-[#a3a3a3] dark:hover:text-white transition-colors cursor-pointer"
+          >
+            <span>
+              {message.thinkingSeconds
+                ? `Đã suy luận trong ${message.thinkingSeconds}s`
+                : 'Tiến trình suy luận'}
+            </span>
+            {showThought ? (
+              <ChevronDown className="w-3 h-3" strokeWidth={2} />
+            ) : (
+              <ChevronRight className="w-3 h-3" strokeWidth={2} />
+            )}
+          </button>
+
           {showThought && (
-            <div className="px-3.5 py-2.5 text-xs text-[#5d5d5d] dark:text-[#8e8e8e] border-t border-[#e5e5e5] dark:border-[#383838] bg-[#f4f4f4] dark:bg-[#121212] leading-relaxed font-mono">
+            <div className="border-l-2 border-[#e5e5e5] dark:border-[#383838] pl-3.5 my-2 max-h-72 overflow-y-auto text-[13px] text-[#5d5d5d] dark:text-[#a3a3a3] font-sans leading-relaxed whitespace-pre-wrap">
               {message.thought}
             </div>
           )}
         </div>
       )}
 
-      {/* Direct Content: Minimalist, clean, immediate */}
+      {/* 4. Direct Content: Minimalist, clean, immediate */}
       <div className="leading-relaxed">
         {renderFormattedContent(message.content)}
-        {message.isStreaming && (
+        {message.isStreaming && !isCurrentlyThinking && (
           <span className="inline-block w-2 h-4 ml-1.5 bg-[#0d0d0d] dark:bg-[#ececec] rounded-xs animate-pulse align-middle" />
         )}
       </div>
 
-      {/* Action Bar */}
+      {/* 5. Action Bar */}
       {!message.isStreaming && message.content && (
         <div className="flex items-center gap-2 mt-2 pt-1 text-[#8e8e8e] opacity-80 group-hover:opacity-100 transition-opacity text-xs">
           <button
@@ -187,7 +314,11 @@ export default function ChatMessage({ message }: ChatMessageProps) {
             title="Sao chép tin nhắn"
             className="p-1.5 rounded-md hover:bg-[#f0f0f0] dark:hover:bg-[#2f2f2f] text-[#5d5d5d] hover:text-[#0d0d0d] dark:text-[#8e8e8e] dark:hover:text-[#ececec] transition-colors cursor-pointer"
           >
-            {copied ? <Check className="w-4 h-4 text-[#0d0d0d] dark:text-white" strokeWidth={1.75} /> : <Copy className="w-4 h-4" strokeWidth={1.75} />}
+            {copied ? (
+              <Check className="w-4 h-4 text-[#0d0d0d] dark:text-white" strokeWidth={1.75} />
+            ) : (
+              <Copy className="w-4 h-4" strokeWidth={1.75} />
+            )}
           </button>
 
           <button
