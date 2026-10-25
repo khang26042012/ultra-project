@@ -91,7 +91,7 @@ cp .env.example .env.local
 Điền thông tin Gateway của bạn:
 ```env
 AI_GATEWAY_URL=http://nvnmc.asia:26627/v1/chat/completions
-AI_GATEWAY_KEY=sk-c276eac9b4322b74-tyrxri-1fc67c68
+AI_GATEWAY_KEY=your_ai_gateway_key_here
 DEFAULT_MODEL=ag/gemini-3.8-flash
 ```
 
