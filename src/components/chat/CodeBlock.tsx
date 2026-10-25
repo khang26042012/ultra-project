@@ -18,7 +18,7 @@ export default function CodeBlock({ language, code }: CodeBlockProps) {
       await navigator.clipboard.writeText(code);
       setCopied(true);
 
-      // GSAP bounce scale effect on button
+      // GSAP bounce scale effect on button (60 FPS)
       if (copyBtnRef.current) {
         gsap.fromTo(
           copyBtnRef.current,
@@ -34,8 +34,8 @@ export default function CodeBlock({ language, code }: CodeBlockProps) {
   };
 
   return (
-    <div className="my-3.5 rounded-xl overflow-hidden border border-[#383838] dark:border-[#383838] bg-[#0d0d0d] text-sm shadow-md">
-      <div className="flex items-center justify-between px-4 py-2 bg-[#212121] text-xs font-mono text-[#b4b4b4]">
+    <div className="my-3.5 rounded-xl overflow-hidden border border-[#e5e5e5] dark:border-[#383838] bg-[#0d0d0d] text-sm shadow-md">
+      <div className="flex items-center justify-between px-4 py-2 bg-[#1a1a1a] text-xs font-mono text-[#b4b4b4]">
         <span className="lowercase font-semibold">{language || 'code'}</span>
         <button
           ref={copyBtnRef}
@@ -44,12 +44,12 @@ export default function CodeBlock({ language, code }: CodeBlockProps) {
         >
           {copied ? (
             <>
-              <Check className="w-3.5 h-3.5 text-emerald-400" />
-              <span className="text-emerald-400 font-sans">Copied!</span>
+              <Check className="w-3.5 h-3.5 text-white" strokeWidth={1.75} />
+              <span className="text-white font-sans font-medium">Copied!</span>
             </>
           ) : (
             <>
-              <Copy className="w-3.5 h-3.5" />
+              <Copy className="w-3.5 h-3.5 text-[#b4b4b4]" strokeWidth={1.75} />
               <span className="font-sans">Copy code</span>
             </>
           )}
