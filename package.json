@@ -1,17 +1,17 @@
 {
-  "name": "ai-site-cloner",
-  "version": "0.3.0",
+  "name": "ultra-project",
+  "version": "1.0.0",
   "private": true,
-  "description": "Clone any website into a pixel-accurate Next.js codebase with AI — scripted Playwright extraction (no eyeballing), spec-gated parallel builder agents, and scored pixel-diff QA at phone/tablet/desktop",
-  "author": "Mahanaicoach",
+  "description": "Ultra AI Project — Pixel-Perfect ChatGPT Clone & Multi-Agent AI Workspace with GSAP Animations and Modular Skills Ecosystem",
+  "author": "Phan Trọng Khang (khang26042012)",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Mahanaicoach/ai-site-cloner.git"
+    "url": "git+https://github.com/khang26042012/ultra-project.git"
   },
-  "homepage": "https://github.com/Mahanaicoach/ai-site-cloner#readme",
+  "homepage": "https://github.com/khang26042012/ultra-project#readme",
   "bugs": {
-    "url": "https://github.com/Mahanaicoach/ai-site-cloner/issues"
+    "url": "https://github.com/khang26042012/ultra-project/issues"
   },
   "engines": {
     "node": ">=22"
