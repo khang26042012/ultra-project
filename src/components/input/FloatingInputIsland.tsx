@@ -61,7 +61,7 @@ export default function FloatingInputIsland() {
 
   const canSend = (input.trim().length > 0 || selectedImage !== null) && !isStreaming && !isCompressing;
 
-  // Auto-resize textarea
+  // Auto-resize textarea from 1 line up to 6 lines (~180px)
   useEffect(() => {
     if (textareaRef.current) {
       textareaRef.current.style.height = 'auto';
@@ -86,7 +86,7 @@ export default function FloatingInputIsland() {
     if (islandRef.current) {
       gsap.to(islandRef.current, {
         scale: 1.005,
-        duration: 0.25,
+        duration: 0.2,
         ease: 'power2.out',
       });
     }
@@ -96,7 +96,7 @@ export default function FloatingInputIsland() {
     if (islandRef.current) {
       gsap.to(islandRef.current, {
         scale: 1,
-        duration: 0.25,
+        duration: 0.2,
         ease: 'power2.out',
       });
     }
@@ -164,10 +164,10 @@ export default function FloatingInputIsland() {
   };
 
   return (
-    <div className="w-full max-w-3xl mx-auto px-4 pb-4 select-none">
+    <div className="w-full max-w-3xl mx-auto px-3 sm:px-4 pb-4 select-none">
       <div
         ref={islandRef}
-        className="relative rounded-[28px] bg-[#ffffff] dark:bg-[#2f2f2f] border border-[#e5e5e5] dark:border-[#3e3e3e] shadow-lg dark:shadow-xl p-3 focus-within:border-[#0d0d0d] dark:focus-within:border-[#525252] transition-colors will-change-transform"
+        className="relative rounded-[26px] bg-[#ffffff] dark:bg-[#212121] border border-black/10 dark:border-white/10 shadow-[0_2px_12px_rgba(0,0,0,0.08)] dark:shadow-none p-3 focus-within:border-black/25 dark:focus-within:border-white/25 transition-all will-change-transform"
       >
         {/* Hidden File Input for Image Upload / Camera Capture */}
         <input
@@ -180,7 +180,7 @@ export default function FloatingInputIsland() {
 
         {/* Thumbnail Preview Area with Remove Button */}
         {selectedImage && (
-          <div className="relative inline-flex items-center gap-2.5 mb-2.5 p-1.5 pr-3 bg-[#f7f7f8] dark:bg-[#212121] border border-[#e5e5e5] dark:border-[#383838] rounded-2xl shadow-xs">
+          <div className="relative inline-flex items-center gap-2.5 mb-2.5 p-1.5 pr-3 bg-[#f7f7f8] dark:bg-[#181818] border border-[#e5e5e5] dark:border-[#333] rounded-2xl shadow-xs">
             <div className="relative w-12 h-12 rounded-xl overflow-hidden border border-[#dedede] dark:border-[#444] bg-black/5 shrink-0">
               <img
                 src={selectedImage}
@@ -193,7 +193,7 @@ export default function FloatingInputIsland() {
                 {imageName || 'Ảnh cây trồng'}
               </span>
               <span className="text-[10px] text-[#5d5d5d] dark:text-[#8e8e8e] flex items-center gap-1">
-                <ImageIcon className="w-3 h-3 text-[#0d0d0d] dark:text-white" strokeWidth={1.75} />
+                <ImageIcon className="w-3 h-3 text-[#0d0d0d] dark:text-white" strokeWidth={1.5} />
                 <span>Sẵn sàng chẩn đoán vi mô</span>
               </span>
             </div>
@@ -203,12 +203,12 @@ export default function FloatingInputIsland() {
               title="Hủy ảnh"
               className="ml-1 p-1 rounded-full hover:bg-[#eaeaea] dark:hover:bg-[#333] text-[#5d5d5d] hover:text-[#0d0d0d] dark:text-[#b4b4b4] dark:hover:text-white transition-colors cursor-pointer"
             >
-              <X className="w-3.5 h-3.5" strokeWidth={2} />
+              <X className="w-3.5 h-3.5" strokeWidth={1.75} />
             </button>
           </div>
         )}
 
-        {/* Textarea */}
+        {/* Textarea: Auto-resize up to 6 lines */}
         <textarea
           ref={textareaRef}
           value={input}
@@ -234,9 +234,9 @@ export default function FloatingInputIsland() {
               onClick={handleFileClick}
               disabled={isCompressing || isStreaming}
               title="Đính kèm ảnh hoặc chụp từ camera"
-              className="p-1.5 rounded-full hover:bg-[#f2f2f2] dark:hover:bg-[#3d3d3d] text-[#5d5d5d] hover:text-[#0d0d0d] dark:text-[#b4b4b4] dark:hover:text-white transition-all hover:scale-[1.05] active:scale-[0.95] cursor-pointer"
+              className="p-1.5 rounded-full hover:bg-[#f2f2f2] dark:hover:bg-[#333] text-[#5d5d5d] hover:text-[#0d0d0d] dark:text-[#b4b4b4] dark:hover:text-white transition-all hover:scale-[1.05] active:scale-[0.95] cursor-pointer"
             >
-              <Plus className="w-4 h-4" strokeWidth={2} />
+              <Plus className="w-4 h-4" strokeWidth={1.75} />
             </button>
             {isCompressing && (
               <span className="text-[11px] text-[#8e8e8e] italic animate-pulse">
@@ -256,7 +256,7 @@ export default function FloatingInputIsland() {
               className={`p-1.5 rounded-full transition-all will-change-transform ${
                 canSend
                   ? 'bg-[#0d0d0d] text-white hover:opacity-90 dark:bg-white dark:text-[#0d0d0d] shadow-md hover:scale-[1.05] active:scale-[0.95] cursor-pointer'
-                  : 'bg-[#e5e5e5] text-[#8e8e8e] dark:bg-[#2f2f2f] dark:text-[#676767] cursor-not-allowed'
+                  : 'bg-[#e5e5e5] text-[#8e8e8e] dark:bg-[#2b2b2b] dark:text-[#555] cursor-not-allowed'
               }`}
             >
               <ArrowUp className="w-4 h-4" strokeWidth={2} />
