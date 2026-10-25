@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Ultra Project — Next-Gen AI Workspace",
-  description: "Pixel-perfect ChatGPT Clone & Multi-Agent AI Workspace with GSAP Animations",
+  title: "AgriVision — Chuyên gia AI Nông nghiệp & Dịch bệnh Cây trồng",
+  description: "AgriVision — Hệ thống AI chẩn đoán dịch bệnh cây trồng & Trợ lý nông nghiệp thông minh",
   icons: {
     icon: "/favicon.svg",
   },

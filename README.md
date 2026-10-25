@@ -1,6 +1,6 @@
 # ⚡ Ultra Project — Pixel-Perfect Next.js AI Workspace
 
-Một không gian làm việc AI thế hệ mới (**Ultra AI Project**) đạt chuẩn **Pixel-Perfect** mô phỏng hoàn hảo trải nghiệm **ChatGPT & Claude**, được xây dựng trên nền tảng **Next.js 16 (App Router)**, **React 19**, **GSAP Animations 60 FPS**, **Tailwind CSS**, và **Shadcn UI**.
+Một không gian làm việc AI thế hệ mới (**Ultra AI Project**) đạt chuẩn **Pixel-Perfect** mô phỏng hoàn hảo trải nghiệm **AgriVision & Claude**, được xây dựng trên nền tảng **Next.js 16 (App Router)**, **React 19**, **GSAP Animations 60 FPS**, **Tailwind CSS**, và **Shadcn UI**.
 
 Ứng dụng tích hợp hệ thống điều phối mô hình đa phương thức (Multimodal AI Gateway) hỗ trợ luồng streaming ký tự thời gian thực (SSE) và hệ sinh thái kỹ năng mở rộng (**Modular Skills**).
 

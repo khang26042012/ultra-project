@@ -3,29 +3,29 @@
 import React, { useState } from 'react';
 import { useChat } from '@/context/ChatContext';
 import FloatingInputIsland from '@/components/input/FloatingInputIsland';
-import { Image, PenLine, Globe, X } from 'lucide-react';
+import { Sprout, Leaf, ShieldAlert, X } from 'lucide-react';
 
 export default function EmptyState() {
   const { sendMessage } = useChat();
 
   const [suggestions, setSuggestions] = useState([
     {
-      id: 'image',
-      icon: <Image className="w-4 h-4 text-[#b4b4b4]" />,
-      text: 'Create an image or sticker',
-      prompt: 'Create a vibrant 3D cartoon sticker of a friendly robot coder',
+      id: 'disease',
+      icon: <ShieldAlert className="w-4 h-4 text-[#10a37f]" />,
+      text: 'Chẩn đoán bệnh cây',
+      prompt: 'Lá cây bị đốm vàng viền nâu, cháy từ chóp vào là bệnh gì và cách chữa?',
     },
     {
-      id: 'write',
-      icon: <PenLine className="w-4 h-4 text-[#b4b4b4]" />,
-      text: 'Write or edit',
-      prompt: 'Write a persuasive product announcement email for an AI coding tool',
+      id: 'nutrition',
+      icon: <Leaf className="w-4 h-4 text-[#10a37f]" />,
+      text: 'Chăm sóc & Dinh dưỡng',
+      prompt: 'Quy trình bón phân và bổ sung vi lượng cho cây ăn trái giai đoạn ra hoa',
     },
     {
-      id: 'search',
-      icon: <Globe className="w-4 h-4 text-[#b4b4b4]" />,
-      text: 'Search the web',
-      prompt: 'Search the web for the latest updates on Next.js 15 and React 19',
+      id: 'pest',
+      icon: <Sprout className="w-4 h-4 text-[#10a37f]" />,
+      text: 'Phòng trừ sâu rầy',
+      prompt: 'Biện pháp sinh học phòng ngừa rầy phấn trắng và bọ trĩ hiệu quả',
     },
   ]);
 
@@ -39,8 +39,11 @@ export default function EmptyState() {
       {/* Hero Greeting */}
       <div className="text-center mb-8">
         <h1 className="text-3xl sm:text-4xl font-semibold text-[#ececec] dark:text-[#ececec] tracking-tight">
-          Ready when you are.
+          AgriVision — Trợ lý AI Cây Trồng
         </h1>
+        <p className="text-sm text-[#8e8e8e] mt-2">
+          Nhập mô tả triệu chứng hoặc đính kèm ảnh để chẩn đoán dịch bệnh tức thì
+        </p>
       </div>
 
       {/* Center Input Box */}
@@ -64,7 +67,7 @@ export default function EmptyState() {
               <button
                 type="button"
                 onClick={(e) => dismissSuggestion(item.id, e)}
-                title="Dismiss suggestion"
+                title="Đóng gợi ý"
                 className="opacity-0 group-hover:opacity-100 hover:text-white text-[#8e8e8e] transition-opacity p-0.5 rounded-full"
               >
                 <X className="w-3 h-3" />
