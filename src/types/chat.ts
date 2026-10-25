@@ -1,9 +1,10 @@
-export type Role = 'user' | 'assistant';
+export type Role = 'user' | 'assistant' | 'system';
 
 export interface Message {
   id: string;
   role: Role;
   content: string;
+  imageUrl?: string;
   timestamp: string;
   isStreaming?: boolean;
   thought?: string;

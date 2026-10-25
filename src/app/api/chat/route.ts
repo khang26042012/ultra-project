@@ -1,14 +1,33 @@
 import { NextRequest } from 'next/server';
+import { AGRIVISION_MASTER_SYSTEM_PROMPT } from '@/lib/systemPrompt';
 
 export const runtime = 'nodejs';
 
 // Configurable AI Gateway endpoint with fallback to active high-performance server
 const AI_GATEWAY_URL = process.env.AI_GATEWAY_URL || process.env.NINEROUTER_API_URL || 'http://nvnmc.asia:26627/v1/chat/completions';
 const AI_GATEWAY_KEY = process.env.AI_GATEWAY_KEY || process.env.NINEROUTER_API_KEY || 'sk-c276eac9b4322b74-tyrxri-1fc67c68';
+const LOCKED_MODEL = 'ag/gemini-3.8-flash-high';
 
 export async function POST(req: NextRequest) {
   try {
-    const { model, messages } = await req.json();
+    const { messages } = await req.json();
+
+    // Clean and ensure context window history
+    const incomingMessages = Array.isArray(messages) ? messages : [];
+
+    // Filter out existing system prompts if any, so we strictly inject the Master Clinical Pathology prompt
+    const conversationalMessages = incomingMessages.filter(
+      (m: { role?: string }) => m.role !== 'system'
+    );
+
+    // Build complete messages array with Master System Prompt at the top
+    const completeMessages = [
+      {
+        role: 'system',
+        content: AGRIVISION_MASTER_SYSTEM_PROMPT,
+      },
+      ...conversationalMessages,
+    ];
 
     const upstreamResponse = await fetch(AI_GATEWAY_URL, {
       method: 'POST',
@@ -17,8 +36,8 @@ export async function POST(req: NextRequest) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: model || 'ag/gemini-3.8-flash-high',
-        messages,
+        model: LOCKED_MODEL, // Firmly locked to ag/gemini-3.8-flash-high
+        messages: completeMessages,
         stream: true,
       }),
     });
