@@ -42,7 +42,7 @@ interface ChatContextType {
   userProfile: {
     name: string;
     email: string;
-    plan: string;
+    plan?: string;
     initials: string;
   };
 }
@@ -54,7 +54,7 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
   const [activeConversationId, setActiveConversationId] = useState<string | null>(null);
   const [selectedModel, setSelectedModel] = useState<string>('ag/gemini-3.8-flash-high');
   const [theme, setThemeState] = useState<ThemeMode>('dark');
-  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState<boolean>(false);
   const [isUpgradeOpen, setIsUpgradeOpen] = useState<boolean>(false);
   const [isStreaming, setIsStreaming] = useState<boolean>(false);
@@ -80,6 +80,9 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     document.documentElement.classList.add('dark');
+    if (typeof window !== 'undefined') {
+      setIsSidebarOpen(window.innerWidth >= 768);
+    }
   }, []);
 
   const toggleSidebar = () => {
@@ -307,7 +310,6 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
   const userProfile = {
     name: 'phabtronfkhang',
     email: 'khang26042012@gmail.com',
-    plan: 'Pro Plan',
     initials: 'AV',
   };
 
