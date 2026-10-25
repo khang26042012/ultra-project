@@ -11,6 +11,8 @@ import {
   MessageSquare,
   X,
   LogIn,
+  Settings,
+  HelpCircle,
 } from 'lucide-react';
 import gsap from 'gsap';
 import { TimeGroup } from '@/types/chat';
@@ -26,6 +28,8 @@ export default function AppSidebar() {
     setIsSidebarOpen,
     toggleSidebar,
     setIsAuthModalOpen,
+    setIsSettingsOpen,
+    setIsHelpOpen,
     currentUser,
     userProfile,
   } = useChat();
@@ -218,6 +222,32 @@ export default function AppSidebar() {
                 })
               )}
             </div>
+          </div>
+
+          {/* Quick Actions: Help & Settings */}
+          <div className="px-2.5 py-1.5 space-y-0.5 border-t border-[#e5e5e5] dark:border-[#262626]">
+            <button
+              type="button"
+              onClick={() => {
+                setIsHelpOpen(true);
+                if (window.innerWidth < 768) setIsSidebarOpen(false);
+              }}
+              className="w-full flex items-center gap-2.5 px-2.5 py-2 rounded-xl hover:bg-[#eaeaea] dark:hover:bg-[#212121] text-xs font-medium text-[#5d5d5d] dark:text-[#b4b4b4] hover:text-[#0d0d0d] dark:hover:text-white transition-colors cursor-pointer"
+            >
+              <HelpCircle className="w-4 h-4 shrink-0" strokeWidth={1.75} />
+              <span>Trợ giúp & Hướng dẫn</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setIsSettingsOpen(true);
+                if (window.innerWidth < 768) setIsSidebarOpen(false);
+              }}
+              className="w-full flex items-center gap-2.5 px-2.5 py-2 rounded-xl hover:bg-[#eaeaea] dark:hover:bg-[#212121] text-xs font-medium text-[#5d5d5d] dark:text-[#b4b4b4] hover:text-[#0d0d0d] dark:hover:text-white transition-colors cursor-pointer"
+            >
+              <Settings className="w-4 h-4 shrink-0" strokeWidth={1.75} />
+              <span>Cài đặt hệ thống</span>
+            </button>
           </div>
 
           {/* Footer Profile / Auth Bar */}

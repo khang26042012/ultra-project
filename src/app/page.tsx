@@ -7,6 +7,7 @@ import EmptyState from '@/components/chat/EmptyState';
 import MessageList from '@/components/chat/MessageList';
 import FloatingInputIsland from '@/components/input/FloatingInputIsland';
 import SettingsModal from '@/components/modals/SettingsModal';
+import HelpModal from '@/components/modals/HelpModal';
 import UpgradeModal from '@/components/modals/UpgradeModal';
 import AuthModal from '@/components/modals/AuthModal';
 import { PanelLeft, SquarePen } from 'lucide-react';
@@ -23,8 +24,8 @@ function ChatApp() {
 
       {/* Main Chat Viewport */}
       <div className="flex-1 flex flex-col h-full min-w-0 relative bg-[#ffffff] dark:bg-[#171717]">
-        {/* Mobile Top Navigation Bar (ChatGPT / Claude standard) */}
-        <header className="md:hidden sticky top-0 z-30 h-12 flex items-center justify-between px-3 bg-white/80 dark:bg-[#171717]/80 backdrop-blur-md border-b border-[#e5e5e5]/80 dark:border-[#262626]/80 shrink-0 select-none">
+        {/* Mobile Top Navigation Bar */}
+        <header className="md:hidden sticky top-0 z-30 h-12 flex items-center justify-between px-3 bg-transparent shrink-0 select-none">
           <button
             type="button"
             onClick={toggleSidebar}
@@ -33,12 +34,6 @@ function ChatApp() {
           >
             <PanelLeft className="w-5 h-5" strokeWidth={1.75} />
           </button>
-          <div className="flex items-center gap-1.5 font-semibold text-sm text-[#0d0d0d] dark:text-white">
-            <span className="w-5 h-5 rounded-md bg-[#0d0d0d] text-white dark:bg-white dark:text-black flex items-center justify-center font-bold text-[10px] shadow-xs">
-              AV
-            </span>
-            <span>AgriVision</span>
-          </div>
           <button
             type="button"
             onClick={createNewChat}
@@ -79,6 +74,7 @@ function ChatApp() {
 
         {/* Global Modals */}
         <SettingsModal />
+        <HelpModal />
         <UpgradeModal />
         <AuthModal />
       </div>
