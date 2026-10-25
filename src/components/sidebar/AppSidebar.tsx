@@ -10,6 +10,7 @@ import {
   Trash2,
   X,
   MessageSquare,
+  LogIn,
 } from 'lucide-react';
 import { TimeGroup } from '@/types/chat';
 import gsap from 'gsap';
@@ -25,6 +26,8 @@ export default function AppSidebar() {
     setIsSidebarOpen,
     toggleSidebar,
     userProfile,
+    currentUser,
+    setIsAuthModalOpen,
   } = useChat();
 
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
@@ -219,29 +222,45 @@ export default function AppSidebar() {
             </div>
           </div>
 
-          {/* Footer Profile Bar */}
+          {/* Footer Profile / Auth Bar */}
           <div className="p-3 border-t border-[#e5e5e5] dark:border-[#262626] relative">
-            <div
-              onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
-              className="flex items-center justify-between p-2 rounded-xl hover:bg-[#eaeaea] dark:hover:bg-[#212121] transition-all hover:scale-[1.01] active:scale-[0.99] cursor-pointer"
-            >
-              <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-full bg-[#0d0d0d] text-white dark:bg-[#2a2a2a] dark:border dark:border-[#444] dark:text-[#ececec] flex items-center justify-center font-bold text-xs shadow-xs">
-                  {userProfile.initials}
-                </div>
-                <div className="truncate">
-                  <div className="font-medium text-xs text-[#0d0d0d] dark:text-white truncate leading-tight">
-                    {userProfile.name}
+            {currentUser ? (
+              <>
+                <div
+                  onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
+                  className="flex items-center justify-between p-2 rounded-xl hover:bg-[#eaeaea] dark:hover:bg-[#212121] transition-all hover:scale-[1.01] active:scale-[0.99] cursor-pointer"
+                >
+                  <div className="flex items-center gap-2.5 truncate">
+                    <div className="w-8 h-8 shrink-0 rounded-full bg-[#0d0d0d] text-white dark:bg-[#2a2a2a] dark:border dark:border-[#444] dark:text-[#ececec] flex items-center justify-center font-bold text-xs shadow-xs">
+                      {userProfile.initials}
+                    </div>
+                    <div className="truncate text-left">
+                      <div className="font-medium text-xs text-[#0d0d0d] dark:text-white truncate leading-tight">
+                        {userProfile.name}
+                      </div>
+                      <div className="text-[10px] text-[#8e8e8e] truncate mt-0.5">
+                        {userProfile.email}
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
 
-            {/* Profile Menu Dropup */}
-            <ProfileMenu
-              isOpen={isProfileMenuOpen}
-              onClose={() => setIsProfileMenuOpen(false)}
-            />
+                {/* Profile Menu Dropup */}
+                <ProfileMenu
+                  isOpen={isProfileMenuOpen}
+                  onClose={() => setIsProfileMenuOpen(false)}
+                />
+              </>
+            ) : (
+              <button
+                type="button"
+                onClick={() => setIsAuthModalOpen(true)}
+                className="w-full flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl bg-[#0d0d0d] hover:bg-[#262626] text-white dark:bg-white dark:hover:bg-gray-100 dark:text-black text-xs font-semibold shadow-xs transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
+              >
+                <LogIn className="w-4 h-4" strokeWidth={1.75} />
+                <span>Đăng nhập / Đăng ký</span>
+              </button>
+            )}
           </div>
         </div>
       </aside>

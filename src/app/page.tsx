@@ -8,6 +8,7 @@ import MessageList from '@/components/chat/MessageList';
 import FloatingInputIsland from '@/components/input/FloatingInputIsland';
 import SettingsModal from '@/components/modals/SettingsModal';
 import UpgradeModal from '@/components/modals/UpgradeModal';
+import AuthModal from '@/components/modals/AuthModal';
 import { PanelLeft } from 'lucide-react';
 
 function ChatApp() {
@@ -53,6 +54,7 @@ function ChatApp() {
         {/* Global Modals */}
         <SettingsModal />
         <UpgradeModal />
+        <AuthModal />
       </div>
     </div>
   );
