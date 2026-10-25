@@ -1,29 +1,44 @@
-# 🌾 BẢN NHIỆM VỤ NÂNG CẤP TOÀN DIỆN: AGENT LOOP, WEB SEARCH 9ROUTER, STREAM THINKING & PROMPT CACHE
-### Áp dụng cho: Repository `ultra-project` (Mô hình `ag/gemini-3.8-flash-high`)
+# 🌾 BẢN GIAO VIỆC NÂNG CẤP TOÀN DIỆN CHO ANTIGRAVITY AGENT
+### Dự án: AgriVision (Repository: `ultra-project`)
+### Phạm vi: Xóa Data Sidebar + Tích Hợp 9Router Search + Giao Diện Thinking Chuẩn ChatGPT/Claude + Agent Loop Đa Bước & Prompt Cache
 
 ---
 
-## 📋 DANH SÁCH CÁC HẠNG MỤC CẦN NÂNG CẤP (TASKS):
+## 🛠️ CHI TIẾT 5 NHIỆM VỤ CẦN THỰC HIỆN TRỰC TIẾP:
 
-### Task 1: Xóa Bỏ Hoàn Toàn Thông Tin Tác Giả Ở Chân Sidebar
-- **Vị trí:** `src/components/sidebar/AppSidebar.tsx`
+### 1. XÓA BỎ KHỐI THÔNG TIN TÁC GIẢ Ở CHÂN SIDEBAR
+- **Tệp chỉnh sửa:** `src/components/sidebar/AppSidebar.tsx`
 - **Hành động:** 
-  - Tìm và xóa bỏ hoàn toàn khối `{/* Author Attribution Badge */}` (gồm dòng `AgriVision v1.0`, `Tác giả: Phan Trọng Khang`, `Lớp 9¹, THCS Vĩnh An (Vĩnh Long)` và đường kẻ `border-t`).
-  - Chân Sidebar chỉ giữ lại nút Đăng nhập / Profile menu người dùng.
+  - Tìm và xóa bỏ hoàn toàn khối `{/* Author Attribution Badge */}` (gồm dòng chữ `AgriVision v1.0`, `Tác giả: Phan Trọng Khang`, `Lớp 9¹, THCS Vĩnh An (Vĩnh Long)` và đường viền `border-t`).
+  - Chân Sidebar chỉ giữ lại nút Đăng nhập / Profile Menu người dùng sạch sẽ.
 
 ---
 
-### Task 2: Tích Hợp Web Search Engine Từ 9Router
-- **Endpoint đã kiểm thử thành công (HTTP 200 OK):**
+### 2. THIẾT KẾ GIAO DIỆN THINKING CHUẨN CHATGPT (o1/o3) & CLAUDE (THAY THẾ HỘP CARD CŨ)
+- **Tệp chỉnh sửa:** `src/components/chat/ChatMessage.tsx`
+- **Hành động:** 
+  - Loại bỏ hoàn toàn khối hộp card viền xám đóng khung thô kệch cũ.
+  - Áp dụng chuẩn thiết kế tối giản đẳng cấp của ChatGPT & Claude:
+    1. **Khi đang stream suy luận:** Hiển thị một dòng text tối giản có hiệu ứng shimmer/pulse nhẹ nhàng: `💭 Đang suy nghĩ...` (màu xám `text-[#737373]`, không khung viền).
+    2. **Khi đã suy luận xong (Settled):** **TỰ ĐỘNG THU GỌN** thành duy nhất một dòng text mỏng nằm ngay trên câu trả lời chính:  
+       `Đã suy luận trong Xs ▾` (hoặc `Tiến trình suy luận ▾`).  
+       - Style: `text-xs font-medium text-[#737373] hover:text-[#0d0d0d] dark:text-[#a3a3a3] dark:hover:text-white transition-colors cursor-pointer`.
+    3. **Khi người dùng click mở ra (Expanded):** Hiển thị dạng **Khối thụt lề có vạch kẻ đứng thanh mảnh bên trái (Left Accent Border)**:  
+       `border-l-2 border-[#e5e5e5] dark:border-[#383838] pl-3.5 my-2 max-h-72 overflow-y-auto text-[13px] text-[#5d5d5d] dark:text-[#a3a3a3] font-sans leading-relaxed`. Dùng font chữ thường (sans-serif) dễ đọc, tuyệt đối không dùng font monospace code terminal thô ráp.
+
+---
+
+### 3. TÍCH HỢP WEB SEARCH ENGINE TỪ 9ROUTER (ĐÃ KIỂM THỬ HTTP 200 OK)
+- **Endpoint 9Router:**
   - **URL:** `http://nvnmc.asia:26627/v1/search`
   - **Headers:** 
     - `Authorization: Bearer sk-c276eac9b4322b74-tyrxri-1fc67c68`
     - `Content-Type: application/json`
-  - **Payload mẫu:**
+  - **Payload gửi đi:**
     ```json
     {
       "model": "ag",
-      "query": "<từ khóa tìm kiếm>",
+      "query": "<từ khóa tra cứu thực tế>",
       "search_type": "web",
       "max_results": 5
     }
@@ -32,57 +47,33 @@
 
 ---
 
-### Task 3: Cập Nhật Master System Prompt Với Quy Định Tra Cứu Khắt Khe (Search Policy)
-- **Vị trí:** `src/lib/systemPrompt.ts` (và `src/lib/system_prompt.md`)
-- **Nội dung bổ sung vào mục Quy Tắc Bắt Buộc:**
-  > **🛑 ĐIỀU LỆ TRA CỨU THỰC TẾ (WEB SEARCH POLICY):**
+### 4. CẬP NHẬT MASTER SYSTEM PROMPT VỚI QUY ĐỊNH TRA CỨU KHẮT KHE (SEARCH POLICY)
+- **Tệp chỉnh sửa:** `src/lib/systemPrompt.ts` (và `src/lib/system_prompt.md`)
+- **Bổ sung điều lệ bắt buộc tra cứu:**
+  > **🛑 ĐIỀU LỆ TRA CỨU WEB BẮT BUỘC (SEARCH-FIRST POLICY):**
   > 1. Khi đề cập đến **tên thuốc bảo vệ thực vật, tên thương phẩm, hoạt chất sinh học, nồng độ pha chế, danh mục thuốc được phép lưu hành theo quy định Cục BVTV tại Việt Nam**: Nếu chưa chắc chắn 100% hoặc thông tin cần cập nhật mới nhất ➔ **BẮT BUỘC PHẢI GỌI TOOL `web_search` ĐỂ TRA CỨU NGAY**!
   > 2. Khi phân tích tình hình dịch bệnh mùa vụ, diễn biến thời tiết, hạn mặn tại **tỉnh Vĩnh Long và Đồng bằng sông Cửu Long**: **BẮT BUỘC PHẢI TRA CỨU THỰC TẾ** để có số liệu chính xác từ Chi cục Trồng trọt & BVTV Vĩnh Long.
-  > 3. Tuyệt đối không bịa đặt tên thuốc, liều lượng phun hay giá cả thị trường nếu chưa được kiểm chứng qua kết quả tìm kiếm.
+  > 3. Cấm tuyệt đối bịa đặt tên thuốc, liều lượng phun hay giá cả thị trường nếu chưa được kiểm chứng qua kết quả tìm kiếm thực tế.
 
 ---
 
-### Task 4: Hiển Thị Luồng Suy Luận `<think>` (Stream Thinking Accordion theo chuẩn DSH)
-- Khi mô hình `ag/gemini-3.8-flash-high` gửi stream, chuỗi tư duy nằm trong `delta.reasoning_content` (hoặc bọc trong thẻ `<think>...</think>`).
-- **Xây dựng Component `ThinkingBlock.tsx` trong tin nhắn chat:**
-  - **Trong lúc đang stream suy luận:**
-    - Khối Thinking mở ra ở đầu tin nhắn với hiệu ứng động: Icon 🧠 xoay nhẹ hoặc nhấp nháy, hiển thị dòng suy luận đang chạy theo thời gian thực (`live reasoning throughput`).
-  - **Khi kết thúc suy luận (Settled / Bắt đầu ra câu trả lời chính):**
-    - Khối Thinking **TỰ ĐỘNG THU GỌN (COLLAPSE)** lại thành một thanh toggle nhỏ gọn thanh lịch:  
-      `💭 Đã suy luận trong Xs (Bấm để xem chi tiết)`.
-    - Người dùng có thể bấm vào để mở rộng/thu gọn xem toàn bộ Chain-of-Thought bất kỳ lúc nào.
-    - Màu sắc Light Mode: Nền xám nhạt `bg-[#f4f4f4]`, viền mảnh `border border-[#e5e5e5]`, chữ xám đen `text-[#5d5d5d]`.
+### 5. KIẾN TRÚC AGENT LOOP ĐA BƯỚC & GIAO DIỆN TOOL CALL SEARCH (CHUẨN DSH)
+- **Tệp chỉnh sửa:** `src/app/api/chat/route.ts` & `src/components/chat/ChatMessage.tsx`
+- **Quy trình Agent Loop:**
+  1. Khai báo Tool `web_search` trong request gửi đến Gemini Gateway.
+  2. Khi mô hình trả về `tool_calls` yêu cầu tìm kiếm:
+     - Gửi event stream về giao diện hiển thị badge: `🔍 Đang tra cứu dữ liệu thực tế: "<query>"...`.
+     - Thực hiện gọi API `POST http://nvnmc.asia:26627/v1/search`.
+     - Đóng gói kết quả trả về vào message `role: "tool"` và tiếp tục vòng lặp gọi lại Gemini.
+     - Vòng lặp tự động lặp lại (hỗ trợ gọi nhiều lần API liên tiếp) cho đến khi hoàn tất câu trả lời cuối cùng.
+  3. **Giao diện hiển thị nguồn tin:** Khi có kết quả tìm kiếm, hiển thị thanh nguồn trích dẫn nhỏ gọn: `🌐 Đã tham khảo 5 nguồn thông tin thực tế` (bấm vào mở danh sách link có tiêu đề và favicon).
+  4. **Tối ưu Prompt Cache Token:** Giữ nguyên System Prompt và Tool Definitions ở vị trí đầu tiên của mảng tin nhắn (Static Prefix) để kích hoạt cơ chế Server-side Prompt Caching của Gateway, giảm 90% chi phí và tăng tốc độ phản hồi.
 
 ---
 
-### Task 5: Kiến Trúc Agent Loop Đa Bước & Giao Diện Gọi Tool Search (Mổ xẻ từ DeepSeek Harness)
-1. **Kiến trúc Vòng lặp Agent (`src/app/api/chat/route.ts` - Agent Loop Pattern):**
-   - Định nghĩa Tool `web_search` theo chuẩn Function Calling của OpenAI/Gemini:
-     ```json
-     {
-       "type": "function",
-       "function": {
-         "name": "web_search",
-         "description": "Tra cứu thông tin thực tế mới nhất về sâu bệnh, danh mục thuốc BVTV, tiêu chuẩn VietGAP và tình hình dịch hại tại Vĩnh Long.",
-         "parameters": {
-           "type": "object",
-           "properties": {
-             "query": { "type": "string", "description": "Từ khóa tìm kiếm chính xác" }
-           },
-           "required": ["query"]
-         }
-       }
-     }
-     ```
-   - **Vòng lặp đa bước (Loop API):**
-     - Khi Gemini trả về `tool_calls`:
-       1. Bắn sự kiện SSE về Frontend hiển thị trạng thái: `🔍 Đang tra cứu: "<query>"...`.
-       2. Gọi API `POST http://nvnmc.asia:26627/v1/search`.
-       3. Đóng gói kết quả tìm kiếm vào tin nhắn `role: "tool"` và tiếp tục gọi lại Gemini (`loop boundary`).
-       4. Vòng lặp tiếp tục tối đa 5 bước cho đến khi Gemini hoàn tất toàn bộ câu trả lời cuối cùng.
-2. **Giao Diện Hiển Thị Tool Call (Frontend Tool Presentation):**
-   - Khi đang tìm kiếm: Khối badge hiển thị nhấp nháy tinh tế: `🔍 Đang tra cứu dữ liệu thực tế: "..."`.
-   - Khi tìm xong: Hiển thị thanh nguồn trích dẫn: `🌐 Đã tham khảo N nguồn tin tức` (người dùng bấm vào có thể xem danh sách link nguồn có favicon và tiêu đề).
-3. **Tối Ưu Hóa Cache Prompt Token (DSH Prompt Cache Stability):**
-   - Đảm bảo **System Prompt** và danh mục **Tool Definitions** luôn được giữ nguyên vẹn ở vị trí đầu tiên của mảng tin nhắn (Static Prefix).
-   - Tuyệt đối không chèn timestamp ngẫu nhiên vào System Prompt để tận dụng tối đa cơ chế **Prompt Prefix Caching** của Gateway, giúp giảm 90% chi phí token và tăng tốc độ phản hồi tức thì.
+## 🚀 LỆNH COMMIT & PUSH:
+```bash
+git add -A
+git commit -m "feat(agrivision): clean sidebar author, integrate 9router web search, upgrade chatgpt/claude thinking UI, and implement multi-step agent loop with prompt caching"
+git push origin main
+```
