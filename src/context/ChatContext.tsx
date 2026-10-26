@@ -208,7 +208,6 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
 
           localStorage.setItem(key, JSON.stringify(loaded));
           setConversations(loaded);
-          setActiveConversationId(loaded[0].id);
           return;
         }
       } catch (sbErr) {
@@ -227,7 +226,6 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
     }
 
     setConversations(loaded || []);
-    setActiveConversationId(loaded && loaded.length > 0 ? loaded[0].id : null);
   }, [getChatStorageKey]);
 
   // Apply theme class to HTML element with persistence

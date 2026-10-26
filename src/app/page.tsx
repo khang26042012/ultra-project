@@ -12,7 +12,7 @@ import AuthModal from '@/components/modals/AuthModal';
 import { SquarePen } from 'lucide-react';
 
 function ChatApp() {
-  const { activeConversation, toggleSidebar, createNewChat } = useChat();
+  const { activeConversation, isSidebarOpen, toggleSidebar, createNewChat } = useChat();
 
   const hasMessages = activeConversation && activeConversation.messages.length > 0;
 
@@ -24,7 +24,11 @@ function ChatApp() {
       {/* Main Chat Viewport */}
       <div className="flex-1 flex flex-col h-full min-w-0 relative bg-[#ffffff] dark:bg-[#171717]">
         {/* Floating Controls Bar: 100% chuẩn giao diện ChatGPT App */}
-        <div className="fixed top-3.5 left-3.5 right-3.5 z-30 flex items-center justify-between pointer-events-none">
+        <div
+          className={`fixed top-3.5 right-3.5 z-30 flex items-center justify-between pointer-events-none transition-all duration-300 ${
+            isSidebarOpen ? 'md:left-[274px] left-3.5' : 'left-3.5'
+          }`}
+        >
           {/* Nút mở Sidebar bên trái: Khối tròn mềm mại */}
           <button
             type="button"

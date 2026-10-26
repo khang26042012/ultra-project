@@ -173,6 +173,7 @@ export default function AppSidebar() {
           if (!isEditing) {
             selectConversation(conv.id);
             if (window.innerWidth < 768) setIsSidebarOpen(false);
+            router.push('/');
           }
         }}
         className={`group relative flex items-center justify-between px-3 py-2 rounded-xl text-xs transition-all cursor-pointer ${
@@ -248,12 +249,18 @@ export default function AppSidebar() {
         <div className="w-64 min-w-[260px] flex flex-col h-full">
           {/* Top Header */}
           <div className="h-14 px-3 flex items-center justify-between">
-            <span className="font-semibold text-[#0d0d0d] dark:text-white tracking-tight text-base pl-1 flex items-center gap-2">
+            <Link
+              href="/"
+              onClick={() => {
+                if (window.innerWidth < 768) setIsSidebarOpen(false);
+              }}
+              className="font-semibold text-[#0d0d0d] dark:text-white tracking-tight text-base pl-1 flex items-center gap-2 hover:opacity-80 transition-opacity"
+            >
               <span className="w-5 h-5 rounded-md bg-[#0d0d0d] text-white dark:bg-white dark:text-black flex items-center justify-center font-bold text-[10px] shadow-xs">
                 AV
               </span>
               <span>AgriVision</span>
-            </span>
+            </Link>
 
             <div className="flex items-center gap-1">
               <button
@@ -302,6 +309,7 @@ export default function AppSidebar() {
               onClick={() => {
                 createNewChat();
                 if (window.innerWidth < 768) setIsSidebarOpen(false);
+                router.push('/');
               }}
               className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl bg-[#ffffff] hover:bg-[#f0f0f0] dark:bg-[#212121] dark:hover:bg-[#2a2a2a] text-[#0d0d0d] dark:text-[#ececec] text-xs font-semibold transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer border border-[#e5e5e5] dark:border-[#2f2f2f] shadow-xs"
             >
