@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
+import Link from 'next/link';
 import { useChat } from '@/context/ChatContext';
 import ProfileMenu from './ProfileMenu';
 import {
@@ -13,6 +14,7 @@ import {
   LogIn,
   Settings,
   HelpCircle,
+  BookOpen,
 } from 'lucide-react';
 import gsap from 'gsap';
 import { TimeGroup } from '@/types/chat';
@@ -145,8 +147,8 @@ export default function AppSidebar() {
             </div>
           )}
 
-          {/* New Chat Button */}
-          <div className="px-3 py-1.5">
+          {/* Action Buttons: New Chat & Crop Encyclopedia */}
+          <div className="px-3 py-1.5 space-y-1.5">
             <button
               onClick={() => {
                 createNewChat();
@@ -157,6 +159,20 @@ export default function AppSidebar() {
               <SquarePen className="w-4 h-4 text-[#0d0d0d] dark:text-white" strokeWidth={1.75} />
               <span>Đoạn chat mới</span>
             </button>
+
+            <Link
+              href="/crops"
+              onClick={() => {
+                if (window.innerWidth < 768) setIsSidebarOpen(false);
+              }}
+              className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl bg-[#ffffff] hover:bg-[#f0f0f0] dark:bg-[#212121] dark:hover:bg-[#2a2a2a] text-[#0d0d0d] dark:text-[#ececec] text-xs font-semibold transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer border border-[#e5e5e5] dark:border-[#2f2f2f] shadow-xs"
+            >
+              <BookOpen className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" strokeWidth={1.75} />
+              <span className="flex-1 text-left truncate">Toàn thư cây trồng</span>
+              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300">
+                1.500+
+              </span>
+            </Link>
           </div>
 
           {/* Divider */}
@@ -202,7 +218,7 @@ export default function AppSidebar() {
                               <span className="truncate">{conv.title}</span>
                             </div>
 
-                            {/* Delete button (accessible on hover on PC, visible on mobile) */}
+                            {/* Delete button */}
                             <button
                               type="button"
                               onClick={(e) => {

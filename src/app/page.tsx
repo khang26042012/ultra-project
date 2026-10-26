@@ -10,7 +10,8 @@ import SettingsModal from '@/components/modals/SettingsModal';
 import HelpModal from '@/components/modals/HelpModal';
 import UpgradeModal from '@/components/modals/UpgradeModal';
 import AuthModal from '@/components/modals/AuthModal';
-import { PanelLeft, SquarePen } from 'lucide-react';
+import Link from 'next/link';
+import { BookOpen, PanelLeft, SquarePen } from 'lucide-react';
 
 function ChatApp() {
   const { activeConversation, isSidebarOpen, toggleSidebar, createNewChat } = useChat();
@@ -24,38 +25,54 @@ function ChatApp() {
 
       {/* Main Chat Viewport */}
       <div className="flex-1 flex flex-col h-full min-w-0 relative bg-[#ffffff] dark:bg-[#171717]">
-        {/* Mobile Top Navigation Bar */}
-        <header className="md:hidden sticky top-0 z-30 h-12 flex items-center justify-between px-3 bg-transparent shrink-0 select-none">
-          <button
-            type="button"
-            onClick={toggleSidebar}
-            title="Mở sidebar"
-            className="p-1.5 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 text-[#5d5d5d] hover:text-[#0d0d0d] dark:text-[#b4b4b4] dark:hover:text-white transition-colors cursor-pointer"
-          >
-            <PanelLeft className="w-5 h-5" strokeWidth={1.75} />
-          </button>
-          <button
-            type="button"
-            onClick={createNewChat}
-            title="Đoạn chat mới"
-            className="p-1.5 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 text-[#5d5d5d] hover:text-[#0d0d0d] dark:text-[#b4b4b4] dark:hover:text-white transition-colors cursor-pointer"
-          >
-            <SquarePen className="w-4 h-4" strokeWidth={1.75} />
-          </button>
-        </header>
-
-        {/* Desktop Floating Sidebar Toggle Button when sidebar is collapsed */}
-        {!isSidebarOpen && (
-          <div className="hidden md:block absolute top-3.5 left-3.5 z-30">
+        {/* Top Navigation Bar */}
+        <header className="sticky top-0 z-30 h-12 flex items-center justify-between px-3.5 bg-transparent shrink-0 select-none">
+          <div className="flex items-center gap-2">
+            {/* Mobile Sidebar Toggle */}
             <button
+              type="button"
               onClick={toggleSidebar}
               title="Mở sidebar"
-              className="p-2 rounded-xl bg-[#ffffff]/90 hover:bg-[#f2f2f2] dark:bg-[#242424]/90 dark:hover:bg-[#303030] text-[#5d5d5d] hover:text-[#0d0d0d] dark:text-[#b4b4b4] dark:hover:text-white transition-all hover:scale-[1.02] active:scale-[0.98] border border-[#e5e5e5] dark:border-[#2f2f2f] shadow-sm backdrop-blur-md cursor-pointer"
+              className="md:hidden p-1.5 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 text-[#5d5d5d] hover:text-[#0d0d0d] dark:text-[#b4b4b4] dark:hover:text-white transition-colors cursor-pointer"
             >
-              <PanelLeft className="w-4 h-4" strokeWidth={1.75} />
+              <PanelLeft className="w-5 h-5" strokeWidth={1.75} />
+            </button>
+
+            {/* Desktop Floating Sidebar Toggle Button when sidebar is collapsed */}
+            {!isSidebarOpen && (
+              <button
+                type="button"
+                onClick={toggleSidebar}
+                title="Mở sidebar"
+                className="hidden md:flex items-center justify-center p-2 rounded-xl bg-[#ffffff]/90 hover:bg-[#f2f2f2] dark:bg-[#242424]/90 dark:hover:bg-[#303030] text-[#5d5d5d] hover:text-[#0d0d0d] dark:text-[#b4b4b4] dark:hover:text-white transition-all hover:scale-[1.02] active:scale-[0.98] border border-[#e5e5e5] dark:border-[#2f2f2f] shadow-xs backdrop-blur-md cursor-pointer"
+              >
+                <PanelLeft className="w-4 h-4" strokeWidth={1.75} />
+              </button>
+            )}
+          </div>
+
+          <div className="flex items-center gap-2">
+            {/* Quick Link to Crop Pathology Encyclopedia */}
+            <Link
+              href="/crops"
+              title="Tra cứu Toàn thư Bệnh học 1.500+ loài cây trồng"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-emerald-50 hover:bg-emerald-100 text-emerald-800 dark:bg-emerald-950/40 dark:hover:bg-emerald-900/50 dark:text-emerald-300 border border-emerald-200/80 dark:border-emerald-800/60 shadow-xs transition-all cursor-pointer backdrop-blur-sm"
+            >
+              <BookOpen className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" strokeWidth={1.75} />
+              <span className="hidden sm:inline">Toàn thư bệnh học</span>
+              <span className="text-[10px] px-1.5 py-0.5 bg-emerald-200/70 dark:bg-emerald-800/80 rounded-full font-semibold">1.500+</span>
+            </Link>
+
+            <button
+              type="button"
+              onClick={createNewChat}
+              title="Đoạn chat mới"
+              className="md:hidden p-1.5 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 text-[#5d5d5d] hover:text-[#0d0d0d] dark:text-[#b4b4b4] dark:hover:text-white transition-colors cursor-pointer"
+            >
+              <SquarePen className="w-4 h-4" strokeWidth={1.75} />
             </button>
           </div>
-        )}
+        </header>
 
         <main className="flex-1 flex flex-col min-h-0 overflow-hidden relative bg-[#ffffff] dark:bg-[#171717]">
           {hasMessages ? (

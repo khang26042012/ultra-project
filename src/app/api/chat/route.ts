@@ -1,10 +1,14 @@
 import { NextRequest } from 'next/server';
 import { AGRIVISION_MASTER_SYSTEM_PROMPT } from '@/lib/systemPrompt';
+import { searchCropKnowledge } from '@/lib/cropSearch';
 
 export const runtime = 'nodejs';
 
 // Configurable AI Gateway & 9Router Search endpoints
-const rawGatewayUrl = process.env.AI_GATEWAY_URL || process.env.NINEROUTER_API_URL || 'http://nvnmc.asia:26627/v1/chat/completions';
+const rawGatewayUrl =
+  process.env.AI_GATEWAY_URL ||
+  process.env.NINEROUTER_API_URL ||
+  'http://nvnmc.asia:26627/v1/chat/completions';
 const AI_GATEWAY_URL = rawGatewayUrl.endsWith('/chat/completions')
   ? rawGatewayUrl
   : `${rawGatewayUrl.replace(/\/+$/, '')}/chat/completions`;
@@ -12,25 +16,57 @@ const AI_GATEWAY_URL = rawGatewayUrl.endsWith('/chat/completions')
 const rawSearchUrl = process.env.SEARCH_API_URL;
 const SEARCH_API_URL = rawSearchUrl
   ? rawSearchUrl
-  : (rawGatewayUrl.includes('/chat/completions')
-      ? rawGatewayUrl.replace('/chat/completions', '/search')
-      : `${rawGatewayUrl.replace(/\/+$/, '')}/search`);
+  : rawGatewayUrl.includes('/chat/completions')
+  ? rawGatewayUrl.replace('/chat/completions', '/search')
+  : `${rawGatewayUrl.replace(/\/+$/, '')}/search`;
 
-const AI_GATEWAY_KEY = process.env.AI_GATEWAY_KEY || process.env.NINEROUTER_API_KEY || 'sk-c276eac9b4322b74-tyrxri-1fc67c68';
+const AI_GATEWAY_KEY =
+  process.env.AI_GATEWAY_KEY ||
+  process.env.NINEROUTER_API_KEY ||
+  'sk-c276eac9b4322b74-tyrxri-1fc67c68';
 const LOCKED_MODEL = 'ag/gemini-3.8-flash-high';
+
+// Definition of In-Context Pathology Database Search Tool
+const SEARCH_CROP_DATABASE_TOOL = {
+  type: 'function',
+  function: {
+    name: 'search_crop_database',
+    description:
+      'Tra cứu hồ sơ bệnh học thực vật chuẩn xác trong kho tri thức nội tại AgriVision (1.000 cây trồng Việt Nam & thế giới). Dùng ngay khi người dùng hỏi về bệnh cây trồng, triệu chứng vàng lá, thối rễ, xì mủ, sâu bệnh, hoặc sau khi phân tích hình ảnh cây trồng.',
+    parameters: {
+      type: 'object',
+      properties: {
+        crop_name: {
+          type: 'string',
+          description:
+            'Tên cây trồng cần tra cứu (ví dụ: "sầu riêng", "bưởi năm roi", "cà chua", "lúa", "việt quất",...)',
+        },
+        symptoms: {
+          type: 'array',
+          items: { type: 'string' },
+          description:
+            'Danh sách các triệu chứng quan sát được (ví dụ: ["xì mủ thân", "thối rễ", "vàng lá gân xanh", "cháy đọt"])',
+        },
+      },
+      required: ['crop_name'],
+    },
+  },
+};
 
 // Definition of 9Router Web Search Tool (OpenAI Function Calling format)
 const WEB_SEARCH_TOOL = {
   type: 'function',
   function: {
     name: 'web_search',
-    description: 'Tra cứu thông tin thực tế trên web về thuốc bảo vệ thực vật, danh mục thuốc BVTV được phép lưu hành tại Việt Nam, giá cả vật tư, dịch bệnh cây trồng, khuyến nông Vĩnh Long và Đồng bằng sông Cửu Long.',
+    description:
+      'Tra cứu thông tin thực tế trên web về thuốc bảo vệ thực vật, danh mục thuốc BVTV được phép lưu hành tại Việt Nam, giá cả vật tư, dịch bệnh cây trồng, khuyến nông Vĩnh Long và Đồng bằng sông Cửu Long.',
     parameters: {
       type: 'object',
       properties: {
         query: {
           type: 'string',
-          description: 'Từ khóa tra cứu thực tế trên web (ví dụ: "thuốc sinh học trị rầy nâu hại lúa Vĩnh Long")',
+          description:
+            'Từ khóa tra cứu thực tế trên web (ví dụ: "thuốc sinh học trị rầy nâu hại lúa Vĩnh Long")',
         },
       },
       required: ['query'],
@@ -44,7 +80,7 @@ async function executeWebSearch(query: string) {
     const res = await fetch(SEARCH_API_URL, {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${AI_GATEWAY_KEY}`,
+        Authorization: `Bearer ${AI_GATEWAY_KEY}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
@@ -102,29 +138,33 @@ export async function POST(req: NextRequest) {
           controller.enqueue(encoder.encode(`data: ${JSON.stringify(obj)}\n\n`));
         };
 
-        const maxTurns = 5;
+        const maxTurns = 6;
         let turn = 0;
 
         try {
           while (turn < maxTurns) {
             turn++;
 
+            // Available tools list: Local Pathology RAG tool is ALWAYS available; web_search according to flag
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const toolsList: any[] = [SEARCH_CROP_DATABASE_TOOL];
+            if (webSearchEnabled !== false) {
+              toolsList.push(WEB_SEARCH_TOOL);
+            }
+
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const requestPayload: any = {
               model: targetModel,
               messages: activeMessages,
               stream: true,
+              tools: toolsList,
+              tool_choice: 'auto',
             };
-
-            if (webSearchEnabled !== false) {
-              requestPayload.tools = [WEB_SEARCH_TOOL];
-              requestPayload.tool_choice = 'auto';
-            }
 
             const gatewayRes = await fetch(AI_GATEWAY_URL, {
               method: 'POST',
               headers: {
-                'Authorization': `Bearer ${AI_GATEWAY_KEY}`,
+                Authorization: `Bearer ${AI_GATEWAY_KEY}`,
                 'Content-Type': 'application/json',
               },
               body: JSON.stringify(requestPayload),
@@ -193,7 +233,8 @@ export async function POST(req: NextRequest) {
                         }
                         if (tc.id) toolCallsMap[idx].id = tc.id;
                         if (tc.function?.name) toolCallsMap[idx].name = tc.function.name;
-                        if (tc.function?.arguments) toolCallsMap[idx].arguments += tc.function.arguments;
+                        if (tc.function?.arguments)
+                          toolCallsMap[idx].arguments += tc.function.arguments;
                       }
                     }
                   } catch {
@@ -205,7 +246,7 @@ export async function POST(req: NextRequest) {
 
             const toolCallsList = Object.values(toolCallsMap);
 
-            // If Gemini Gateway requested tool calls (Web Search)
+            // If Gemini Gateway requested tool calls (Local Pathology Search or Web Search)
             if (toolCallsList.length > 0) {
               // Append assistant message with tool_calls to activeMessages
               activeMessages.push({
@@ -222,47 +263,94 @@ export async function POST(req: NextRequest) {
               });
 
               for (const tc of toolCallsList) {
-                let query = '';
-                try {
-                  const parsedArgs = JSON.parse(tc.arguments);
-                  query = parsedArgs.query || '';
-                } catch {
-                  query = tc.arguments;
+                if (tc.name === 'search_crop_database') {
+                  let cropName = '';
+                  let symptoms: string[] = [];
+                  try {
+                    const parsedArgs = JSON.parse(tc.arguments);
+                    cropName = parsedArgs.crop_name || '';
+                    symptoms = Array.isArray(parsedArgs.symptoms) ? parsedArgs.symptoms : [];
+                  } catch {
+                    cropName = tc.arguments;
+                  }
+
+                  // Send UI event that local database is being searched
+                  sendEvent({
+                    type: 'database_search',
+                    crop: cropName,
+                    symptoms,
+                  });
+
+                  // Execute local In-Context Pathology search
+                  const searchResult = searchCropKnowledge(cropName, symptoms);
+
+                  // Append tool result to activeMessages
+                  activeMessages.push({
+                    role: 'tool',
+                    tool_call_id: tc.id,
+                    content: JSON.stringify({
+                      status: 'success',
+                      crop_queried: cropName,
+                      found: searchResult.success,
+                      total_in_database: searchResult.total_crops_in_db,
+                      best_match_profile: searchResult.best_match,
+                      other_related_crops: searchResult.results.slice(1).map((r) => ({
+                        crop_name: r.crop_name,
+                        scientific_name: r.scientific_name,
+                        matched_disease: r.matched_disease?.ten_benh,
+                      })),
+                    }),
+                  });
+                } else if (tc.name === 'web_search') {
+                  let query = '';
+                  try {
+                    const parsedArgs = JSON.parse(tc.arguments);
+                    query = parsedArgs.query || '';
+                  } catch {
+                    query = tc.arguments;
+                  }
+
+                  // Send live searching status to UI
+                  sendEvent({ type: 'searching', query });
+
+                  // Execute real search on 9Router
+                  const searchData = await executeWebSearch(query);
+
+                  // Send sources to UI
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  const formattedSources = searchData.results.map((r: any) => ({
+                    title: r.title || 'Nguồn kiểm chứng',
+                    url: r.url || '',
+                    snippet: r.snippet || '',
+                    favicon: r.favicon_url || undefined,
+                  }));
+
+                  sendEvent({
+                    type: 'sources',
+                    sources: formattedSources,
+                  });
+
+                  // Append tool response to activeMessages
+                  activeMessages.push({
+                    role: 'tool',
+                    tool_call_id: tc.id,
+                    content: JSON.stringify({
+                      query,
+                      results: searchData.results,
+                      summary: searchData.answer || '',
+                    }),
+                  });
+                } else {
+                  // Unknown tool fallback
+                  activeMessages.push({
+                    role: 'tool',
+                    tool_call_id: tc.id,
+                    content: JSON.stringify({ status: 'tool_not_supported', tool: tc.name }),
+                  });
                 }
-
-                // Send live searching status to UI
-                sendEvent({ type: 'searching', query });
-
-                // Execute real search on 9Router
-                const searchData = await executeWebSearch(query);
-
-                // Send sources to UI
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                const formattedSources = searchData.results.map((r: any) => ({
-                  title: r.title || 'Nguồn kiểm chứng',
-                  url: r.url || '',
-                  snippet: r.snippet || '',
-                  favicon: r.favicon_url || undefined,
-                }));
-
-                sendEvent({
-                  type: 'sources',
-                  sources: formattedSources,
-                });
-
-                // Append tool response to activeMessages
-                activeMessages.push({
-                  role: 'tool',
-                  tool_call_id: tc.id,
-                  content: JSON.stringify({
-                    query,
-                    results: searchData.results,
-                    summary: searchData.answer || '',
-                  }),
-                });
               }
 
-              // Continue the multi-step Agent Loop with search results in context
+              // Continue the multi-step Agent Loop with tool results in context
               continue;
             }
 
@@ -286,7 +374,7 @@ export async function POST(req: NextRequest) {
       headers: {
         'Content-Type': 'text/event-stream; charset=utf-8',
         'Cache-Control': 'no-cache, no-transform',
-        'Connection': 'keep-alive',
+        Connection: 'keep-alive',
       },
     });
   } catch (err: unknown) {
