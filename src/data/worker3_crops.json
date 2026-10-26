@@ -1,0 +1,2313 @@
+[
+  {
+    "id": "imp_crop_001",
+    "topic": "Cay_Nhap_Khau_Kinh_Te_Cao",
+    "name_vi": "Việt quất nhiệt đới (Southern Highbush)",
+    "scientific_name": "Vaccinium darrowii × corymbosum",
+    "dia_ban_pho_bien": [
+      "Đà Lạt",
+      "Lạc Dương (Lâm Đồng)",
+      "Mộc Châu (Sơn La)",
+      "Măng Đen (Kon Tum)"
+    ],
+    "dac_tinh_sinh_thai": "Cây bụi lâu năm, yêu cầu nhà màng công nghệ cao, giá thể mùn xơ dừa bóc vỏ phối trộn perlite hoặc than bùn rêu peatmoss, đất chua nghiêm ngặt với độ pH từ 4.5 - 5.2, không chịu được úng rễ hoặc nước tưới nhiễm mặn.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh thối lở cổ rễ và héo xanh rũ ngọn (Phytophthora Root Rot)",
+        "muc_do_nguy_hiem": "Cực kỳ nghiêm trọng (Hiểm nghèo)",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Phytophthora cinnamomi"
+        },
+        "trieu_chung_dien_hinh": [
+          "Lá chuyển từ xanh bóng sang vàng úa rồi ngả màu nâu đồng đỏ cháy, teo héo rũ từ chóp cành non xuống thân chính",
+          "Các chồi sinh trưởng còi cọc, ngừng bung đọt mới, hoa rụng sớm trơ cuống khô",
+          "Bộ rễ tơ hút dinh dưỡng bị thối mủn đen, vỏ rễ tuột khỏi lõi gỗ khi kéo nhẹ, phần cổ rễ sát giá thể có vết thâm ướt đổi màu nâu sẫm"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với ngộ độc dinh dưỡng hoặc cháy rễ do phân bón EC cao: Ngộ độc phân bón làm cháy rìa lá màu nâu giòn đồng loạt cả chậu nhưng lõi thân không thâm nâu; bệnh Phytophthora gây thối lõi cổ rễ ướt thối và rũ từng nhánh một.",
+        "kiem_tra_thuc_dia": "Nhấc chậu cây kiểm tra chùm rễ tơ dưới đáy: rễ khỏe có màu trắng ngà hoặc vàng rơm sáng, rễ nhiễm bệnh có màu nâu thối đen, bốc mùi hôi mốc ủ nước, dùng dao cạo vỏ cổ rễ thấy mạch gỗ chuyển màu nâu sô-cô-la.",
+        "phac_do_vietgap": {
+          "canh_tac": "Kê cao chậu thoát nước triệt để, kiểm tra hệ thống châm phân nhỏ giọt định kỳ tránh tích đọng ẩm độ cục bộ, duy trì độ ẩm giá thể 60 - 70%.",
+          "sinh_hoc": "Tưới định kỳ 15 ngày/lần chế phẩm nấm đối kháng Trichoderma asperellum kết hợp xạ khuẩn Streptomyces và tưới phòng hoạt chất sinh học Metalaxyl-M hoặc Phosphonate sinh học.",
+          "khuyen_cao_chuyen_gia": "Liên hệ Trung tâm Khuyến nông & Dịch vụ Nông nghiệp Lâm Đồng để xét nghiệm mẫu mô rễ nếu phát hiện tỷ lệ héo rũ vượt 5% trong nhà kính."
+        }
+      },
+      {
+        "ten_benh": "Bệnh thán thư thối khô quả non và đốm cành (Anthracnose Fruit Rot)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Colletotrichum gloeosporioides / Colletotrichum acutatum"
+        },
+        "trieu_chung_dien_hinh": [
+          "Quả việt quất chín hoặc gần chín xuất hiện các đốm tròn hơi lõm, vỏ quả nhăn nheo co rúm lại như hạt nho khô",
+          "Trong điều kiện sương mù ẩm ướt trong nhà màng, trên bề mặt vết lõm ứa ra các giọt chất nhờn màu cam cá hồi hoặc hồng san hô chứa bào tử nấm",
+          "Lá non xuất hiện các đốm hoại tử màu nâu tròn viền đỏ tím, cuống chùm quả bị thâm đen làm cả chùm teo tóp"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với bệnh mốc xám Botrytis: Thán thư tạo khối giọt bào tử nhầy sền sệt màu cam hồng khi ẩm; trong khi mốc xám Botrytis tạo lớp lông nhung sợi nấm màu tro xám khô xốp.",
+        "kiem_tra_thuc_dia": "Dùng ngón tay sờ vào chùm quả mềm nhũn, miết nhẹ thấy dịch nhầy màu cam dính tay; quan sát kính lúp 20x thấy các ổ nấm mọc vòng đồng tâm trên vỏ quả.",
+        "phac_do_vietgap": {
+          "canh_tac": "Tỉa thông thoáng tán cây sau mỗi đợt hái quả, kiểm soát độ ẩm nhà màng dưới 80% bằng hệ thống quạt đối lưu, thu gom toàn bộ quả mummified (quả khô teo) đem đốt bỏ.",
+          "sinh_hoc": "Phun phòng luân phiên nấm vi sinh Bacillus amyloliquefaciens (D747) kết hợp Nano Bạc Đồng sinh học và chiết xuất tinh dầu vỏ quế.",
+          "khuyen_cao_chuyen_gia": "Phun phòng ngừa trước giai đoạn nở hoa và giai đoạn quả xanh chuyển màu quả chín theo chuẩn GlobalGAP/VietGAP."
+        }
+      },
+      {
+        "ten_benh": "Bệnh phấn trắng lá việt quất (Powdery Mildew)",
+        "muc_do_nguy_hiem": "Trung bình",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Microsphaera vaccinii / Erysiphe vaccinii"
+        },
+        "trieu_chung_dien_hinh": [
+          "Bề mặt trên và dưới phiến lá phủ một lớp bột mịn màu trắng như rắc bột mì, thường phát triển mạnh trên lộc non",
+          "Lá non bị biến dạng, mép lá cuộn ngược lên trên, mặt sau phiến lá đôi khi có các vệt màu tím đỏ thâm quầng",
+          "Cây giảm quang hợp trầm trọng, đọt non chùn ngắn, quả chậm lớn và mất lớp phấn sáp tự nhiên"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với cặn muối khoáng phân bón lá: Phấn trắng cạo nhẹ thấy sợi tơ nấm bám vào mô lá bên dưới bị thâm nhạt; cặn muối khoáng lau sạch bằng nước lá vẫn phẳng xanh bình thường.",
+        "kiem_tra_thuc_dia": "Dùng tay xoa nhẹ lên phiến lá phủ bột trắng, bột dính vào tay như bụi phấn, lá bên dưới có quầng đỏ tím nhẹ.",
+        "phac_do_vietgap": {
+          "canh_tac": "Tăng cường chiếu sáng trong nhà màng, ngắt bớt lá già gốc tăng độ thông thoáng, tránh bón thừa đạm nitrate.",
+          "sinh_hoc": "Phun chế phẩm sinh học Bacillus subtilis kết hợp dầu khoáng nông nghiệp hữu cơ SK Enspray 99EC hoặc Kali Phosphite nồng độ 0.2%.",
+          "khuyen_cao_chuyen_gia": "Can thiệp sớm ngay khi tỷ lệ chồi non nhiễm phấn trắng chớm đạt 2 - 3% diện tích tán."
+        }
+      }
+    ]
+  },
+  {
+    "id": "imp_crop_002",
+    "topic": "Cay_Nhap_Khau_Kinh_Te_Cao",
+    "name_vi": "Dâu tây New Zealand / Hàn Quốc (Hana, Maehyang, Tochiotome)",
+    "scientific_name": "Fragaria × ananassa",
+    "dia_ban_pho_bien": [
+      "Đà Lạt (Lâm Đồng)",
+      "Mộc Châu (Sơn La)",
+      "Măng Đen (Kon Tum)",
+      "Sa Pa (Lào Cai)"
+    ],
+    "dac_tinh_sinh_thai": "Cây thân thảo lâu năm, canh tác công nghệ cao trên giàn thủy canh giá thể xơ dừa cao 1m hoặc luống phủ bạt nhà kính, nhiệt độ ngày 20 - 24°C, đêm 12 - 16°C, pH giá thể tối ưu 5.8 - 6.2, EC dung dịch tưới 1.2 - 1.6 mS/cm.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh mốc xám thối nhũn quả dâu tây (Gray Mold Fruit Rot)",
+        "muc_do_nguy_hiem": "Cực kỳ nghiêm trọng (Hiểm nghèo)",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Botrytis cinerea"
+        },
+        "trieu_chung_dien_hinh": [
+          "Vết bệnh bắt đầu từ đài hoa hoặc vùng tiếp xúc giữa quả với giá thể ẩm ướt thành đốm úng nước màu nâu nhạt",
+          "Thịt quả nhanh chóng bị nhũn nát, biến màu nâu thối, sau đó toàn bộ bề mặt quả bao phủ một lớp sợi nấm và bào tử màu xám tro dày đặc như nhung",
+          "Chùm quả lây lan chéo dữ dội, cuống hoa bị cháy đen làm teo héo toàn bộ các nụ bên cạnh"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với bệnh thối nhũn vi khuẩn: Mốc xám có màng lông nhung bào tử màu xám bốc khói bụi khi gõ nhẹ; thối nhũn vi khuẩn quả chảy nước nhớt nhầy bốc mùi hôi thối nồng nặc không có màng lông.",
+        "kiem_tra_thuc_dia": "Gõ nhẹ vào quả dâu bệnh: thấy đám bụi bào tử màu xám bay lơ lửng trong không khí; phần thịt quả bên trong nhũn nhưng không dính nhớt hôi.",
+        "phac_do_vietgap": {
+          "canh_tac": "Tỉa bỏ toàn bộ lá già, lá sát gốc và quả dị hình; không tưới phun mưa lên tán hoa; duy trì độ ẩm nhà màng dưới 75% bằng quạt hút.",
+          "sinh_hoc": "Phun định kỳ nấm đối kháng Chaetomium cupreum kết hợp vi khuẩn Bacillus subtilis chủng QST 713 và dịch chiết tỏi ớt lên chùm hoa quả non.",
+          "khuyen_cao_chuyen_gia": "Áp dụng biện pháp ngắt lá bệnh vào buổi trưa khô ráo và cho vào túi nilon buộc kín mang ra khỏi vườn tiêu hủy."
+        }
+      },
+      {
+        "ten_benh": "Bệnh đốm mắt cua dâu tây (Common Leaf Spot)",
+        "muc_do_nguy_hiem": "Cao",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Mycosphaerella fragariae (anamorph: Ramularia tulasnei)"
+        },
+        "trieu_chung_dien_hinh": [
+          "Vết bệnh trên phiến lá dâu tây ban đầu là chấm nhỏ màu nâu đỏ tím",
+          "Vết đốm lan rộng từ 3 - 6mm, phần tâm hoại tử khô chuyển sang màu trắng xám hoặc trắng bạc, viền xung quanh có gờ sắc nét màu đỏ tía hoặc tím thẫm rất rõ hình mắt chim/mắt cua",
+          "Nhiều đốm liên kết lại làm lá khô cháy rách từng mảng, cuống lá và ngó dâu bị thâm lõm dài"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với Đốm góc lá vi khuẩn (Angular Leaf Spot): Đốm mắt cua có tâm trắng bạc viền đỏ tròn; Đốm góc lá vi khuẩn bị chặn bởi gân lá tạo góc đa giác và ngậm nước soi ngược sáng.",
+        "kiem_tra_thuc_dia": "Quan sát tâm đốm bệnh bằng kính lúp thấy tâm trắng sáng rực, viền đỏ tím gờ nổi rõ ràng không bị giới hạn bởi gân lá nhánh.",
+        "phac_do_vietgap": {
+          "canh_tac": "Vệ sinh giàn dâu định kỳ, ngắt sạch lá già tầng đáy, tránh mật độ cây quá dày trên chậu máng.",
+          "sinh_hoc": "Phun phòng dịch nano đồng Chitosan kết hợp nấm Trichoderma harzianum nồng độ 0.3%.",
+          "khuyen_cao_chuyen_gia": "Tuân thủ cách ly phân bón lá có hàm lượng đạm cao khi thời tiết chuyển lạnh có sương đọng ban đêm."
+        }
+      },
+      {
+        "ten_benh": "Bệnh xì mủ đốm góc lá vi khuẩn dâu tây (Angular Leaf Spot)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Vi khuẩn",
+          "ten_khoa_hoc": "Xanthomonas fragariae"
+        },
+        "trieu_chung_dien_hinh": [
+          "Mặt dưới lá xuất hiện các vết đốm sũng nước hình góc cạnh nhỏ, bị giới hạn hoàn toàn bởi các gân phụ của lá dâu tây",
+          "Khi đưa phiến lá soi ngược lên ánh sáng mặt trời, vết bệnh có màu xanh lục nhạt bán trong suốt dạng ngậm dầu mỡ bóng loáng",
+          "Sáng sớm hoặc khi trời ẩm ướt, mặt dưới vết bệnh ứa ra các giọt dịch vi khuẩn nhầy màu trắng đục dính nhớt, khi khô lại tạo lớp vảy sáng bóng như keo nến",
+          "Đài hoa bị thâm đen cháy xém làm quả non dị hình teo tóp"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với nấm đốm mắt cua: Đốm vi khuẩn có hình đa giác góc cạnh ngậm nước soi ngược sáng thấy thấu quang; mắt cua hình tròn có tâm trắng viền đỏ không thấu quang.",
+        "kiem_tra_thuc_dia": "Đặt phiến lá lên lòng bàn tay soi ngược nguồn sáng nhà kính: thấy các ô đa giác xanh trong ngậm nước sáng rực; dùng ngón tay quẹt mặt dưới khi ẩm thấy nhớt dính.",
+        "phac_do_vietgap": {
+          "canh_tac": "Sử dụng ngó giống dâu tây cấy mô sạch bệnh F0, tiệt trùng kéo tỉa bằng cồn 70 độ giữa các khóm cây, tuyệt đối không tưới phun mưa áp lực cao.",
+          "sinh_hoc": "Phun kháng sinh sinh học nguồn gốc vi sinh Kasugamycin kết hợp Nano Bạc và chủng vi khuẩn Bacillus amyloliquefaciens.",
+          "khuyen_cao_chuyen_gia": "Báo cáo Trạm Trồng trọt & BVTV địa phương khi phát hiện ổ bệnh lây lan ngó giống mới nhập khẩu."
+        }
+      }
+    ]
+  },
+  {
+    "id": "imp_crop_003",
+    "topic": "Cay_Nhap_Khau_Kinh_Te_Cao",
+    "name_vi": "Nho mẫu đơn Nhật Bản (Shine Muscat Grape)",
+    "scientific_name": "Vitis vinifera 'Shine Muscat'",
+    "dia_ban_pho_bien": [
+      "Đà Lạt (Lâm Đồng)",
+      "Đơn Dương (Lâm Đồng)",
+      "Ninh Phước (Ninh Thuận)",
+      "Tuy Phong (Bình Thuận)"
+    ],
+    "dac_tinh_sinh_thai": "Cây thân leo gỗ cao cấp du nhập từ Nhật Bản, bắt buộc canh tác trong nhà màng vòm thông gió cao che mưa tuyệt đối, đất phù sa pha cát hoặc đất đỏ bazan thoát nước cực tốt, giàn chữ Y hoặc giàn ngang thông thoáng, pH đất 6.0 - 6.8.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh sương mai hại nho mẫu đơn (Downy Mildew)",
+        "muc_do_nguy_hiem": "Cực kỳ nghiêm trọng (Hiểm nghèo)",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Plasmopara viticola"
+        },
+        "trieu_chung_dien_hinh": [
+          "Mặt trên phiến lá xuất hiện các vệt loang màu vàng nhạt như vết dầu loang (oil spots), ranh giới không rõ ràng",
+          "Mặt dưới phiến lá đối diện ngay vết loang mọc lên một lớp lông tơ nấm màu trắng như bông tuyết mịn",
+          "Vết bệnh nhanh chóng chuyển sang màu nâu đỏ làm lá khô cháy giòn từ mép vào, rụng sớm hàng loạt trơ cành",
+          "Chùm hoa và quả nho non bị nhiễm bệnh cong queo lại, chuyển màu nâu xám và khô cứng rụng rụi"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với bệnh phấn trắng: Sương mai có lớp tơ nấm tập trung mặt dưới lá kèm vết loang dầu vàng ở mặt trên; phấn trắng phủ bột trắng phấn xám ở cả 2 mặt lá và làm nứt toác vỏ quả chín.",
+        "kiem_tra_thuc_dia": "Lật mặt dưới lá non vào sáng sớm: dùng ngón tay vuốt nhẹ thấy lớp lông nhung trắng mượt như bông gòn ướt, lá mềm giòn bất thường.",
+        "phac_do_vietgap": {
+          "canh_tac": "Bảo dưỡng mái che ni lông nhà màng không bị rách dột nước mưa; cắt tỉa lách chồi nách tạo độ thoáng gió tuyệt đối; bao chùm quả bằng túi chuyên dụng Nhật Bản.",
+          "sinh_hoc": "Phun phòng Phosphonate sinh học (Kali Phosphite), Nano Đồng sinh học kết hợp chế phẩm nấm đối kháng Trichoderma định kỳ 10 ngày/lần trong mùa ẩm.",
+          "khuyen_cao_chuyen_gia": "Phun phòng chủ động giai đoạn nho nhú chùm hoa đến khi quả bằng hạt ngô, đảm bảo cách ly VietGAP."
+        }
+      },
+      {
+        "ten_benh": "Bệnh phấn trắng nứt vỏ quả nho mẫu đơn (Powdery Mildew)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Erysiphe necator (syn. Uncinula necator)"
+        },
+        "trieu_chung_dien_hinh": [
+          "Các chồi non, cành mang quả và cuống lá phủ một lớp bột màu trắng xám tro, ngửi thấy mùi mốc tanh nhẹ",
+          "Quả nho mẫu đơn non bị bao phủ bởi lớp phấn trắng, biểu bì quả bị chai cứng mất đàn hồi",
+          "Khi ruột quả bên trong lớn nhanh mà vỏ ngoài bị chai, quả nho bị nứt toác dọc để lộ hạt và múi thịt, vi khuẩn hoại sinh nhanh chóng làm thối rữa cả chùm"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với nứt quả sinh lý do sốc nước: Nứt quả sinh lý mép vết nứt tươi xanh sạch sẽ; nứt do phấn trắng luôn có lớp bột nấm mốc trắng xám bao quanh và vết nứt chai bần sần sùi.",
+        "kiem_tra_thuc_dia": "Miết ngón tay lên vỏ quả non: thấy lớp bột xám dính chặt, làm lộ mảng sẹo rám màu xám chì bên dưới vỏ quả.",
+        "phac_do_vietgap": {
+          "canh_tac": "Tỉa bỏ bớt lá che khuất chùm quả đón ánh nắng tán xạ đồng đều, ngắt tỉa quả non đạt mật độ 35 - 45 quả/chùm tiêu chuẩn.",
+          "sinh_hoc": "Phun phòng chế phẩm lưu huỳnh sinh học vi mịn (Wettable Sulfur) hoặc chế phẩm vi sinh Bacillus subtilis trước khi bao trái 3 ngày.",
+          "khuyen_cao_chuyen_gia": "Không phun lưu huỳnh khi nhiệt độ nhà kính vượt quá 32°C vì dễ gây cháy biểu bì quả non."
+        }
+      },
+      {
+        "ten_benh": "Bệnh thán thư sẹo quả đen sùi (Black Rot / Anthracnose)",
+        "muc_do_nguy_hiem": "Cao",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Elsinoë ampelina / Guignardia bidwellii"
+        },
+        "trieu_chung_dien_hinh": [
+          "Trên cành non xuất hiện các vết lõm hình bầu dục tròn viền đen sẫm gờ nổi cao, tâm vết lõm màu xám tro",
+          "Trên vỏ quả nho xuất hiện vết đốm tròn trũng sâu màu nâu đen có viền tím đậm xung quanh như vết 'mắt chim' (bird's eye rot)",
+          "Thịt quả chỗ vết đốm bị chai cứng, quả teo quắt lại thành hòn đá đen cứng gắn chặt trên cuống chùm"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với vết bọ trĩ chích: Vết bọ trĩ cào rách biểu bì tạo mạng lưới sẹo sần sùi màu da lươn màu nâu vàng nông trên bề mặt vỏ; sẹo thán thư lõm sâu hình miệng bát tròn viền đen tím rõ.",
+        "kiem_tra_thuc_dia": "Dùng móng tay ấn vào mép vết đốm quả: mô thịt chai cứng trơ lì, viền nổi gờ nhô cao sắc nét màu tím than.",
+        "phac_do_vietgap": {
+          "canh_tac": "Quét vôi tôi pha đồng sulfat khử trùng thân nho già sau khi cắt cành ngủ đông tỉa cành.",
+          "sinh_hoc": "Sử dụng chế phẩm sinh học kháng nấm Chitosan phối hợp dung dịch vi sinh đối kháng Streptomyces lydicus.",
+          "khuyen_cao_chuyen_gia": "Tuân thủ nghiêm ngặt kỹ thuật tỉa chùm và bao bọc chùm nho bằng giấy chuyên dụng nhập khẩu có tẩm vi sinh bảo vệ."
+        }
+      }
+    ]
+  },
+  {
+    "id": "imp_crop_004",
+    "topic": "Rau_Cu_Gia_Vi_Va_Nam",
+    "name_vi": "Măng tây xanh công nghệ cao (Green Asparagus)",
+    "scientific_name": "Asparagus officinalis",
+    "dia_ban_pho_bien": [
+      "Ninh Phước (Ninh Thuận)",
+      "Bắc Bình (Bình Thuận)",
+      "Đơn Dương (Lâm Đồng)",
+      "Củ Chi (TP.HCM)",
+      "Trà Ôn (Vĩnh Long)"
+    ],
+    "dac_tinh_sinh_thai": "Cây rau kinh tế cao lâu năm, ưa đất cát pha phù sa thoát nước nhanh, độ dày tầng canh tác sâu > 50cm, pH đất từ 6.5 - 7.5, rất sợ úng ngập rễ dù chỉ 24 giờ, đòi hỏi công nghệ tưới ngầm nhỏ giọt kết hợp bón phân hòa tan.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh thối khô gốc thân và thối rễ măng tây (Fusarium Crown and Root Rot)",
+        "muc_do_nguy_hiem": "Cực kỳ nghiêm trọng (Hiểm nghèo)",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Fusarium oxysporum f. sp. asparagi"
+        },
+        "trieu_chung_dien_hinh": [
+          "Các chồi măng mới nhú bị teo tóp, cong queo hình móc câu, đầu ngọn chồi khô quắt và chuyển sang màu nâu đen",
+          "Gốc thân cây mẹ sát mặt đất xuất hiện các vệt loét khô màu nâu đỏ, mạch dẫn bên trong gốc thân bị thâm hóa gỗ",
+          "Toàn bộ cành tán lá kim phía trên bị vàng rực từ gốc lên ngọn rồi héo rũ, bộ rễ củ ngầm bị thối rỗng ruột trơ sợi xơ"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với măng bị sâu cắn gốc: Cây bị sâu cắn có vết gặm khuyết cơ học nham nhở tươi mép; cây bị Fusarium mạch dẫn gốc thâm nâu đen lan dần từ rễ lên, mô nứt nẻ có sợi nấm trắng hồng mịn.",
+        "kiem_tra_thuc_dia": "Dùng dao rạch dọc gốc thân sát cổ rễ: thấy các bó mạch dẫn dẫn nước hóa nâu đen chạy dài theo thân; bới rễ ngầm thấy rễ mủn xốp đứt đoạn.",
+        "phac_do_vietgap": {
+          "canh_tac": "Lên liếp cao tối thiểu 30 - 40cm, tạo rãnh thoát nước sâu giữa các hàng măng; thay thế bụi măng bệnh nặng bằng đất mới tiệt trùng vôi tả.",
+          "sinh_hoc": "Xử lý đất định kỳ hàng tháng bằng nấm đối kháng Trichoderma viride kết hợp xạ khuẩn phân giải cellulose Streptomyces và vi khuẩn phân giải lân.",
+          "khuyen_cao_chuyen_gia": "Khử trùng hệ thống tưới nhỏ giọt bằng Hydrogen Peroxide nông nghiệp nồng độ 100ppm định kỳ chống đóng cặn nấm bệnh."
+        }
+      },
+      {
+        "ten_benh": "Bệnh gỉ sắt măng tây (Asparagus Rust)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Puccinia asparagi"
+        },
+        "trieu_chung_dien_hinh": [
+          "Trên cành nhỏ và lá kim xuất hiện các ổ nổi mụn sần sùi hình bầu dục màu vàng cam hoặc nâu đỏ như bột gỉ sắt",
+          "Biểu bì cây bị nứt toác giải phóng vô số bụi phấn bào tử màu nâu đỏ bám dính vào quần áo công nhân",
+          "Cuối vụ bào tử chuyển sang màu đen sẫm (bào tử đông), làm cành lá măng tây khô cháy trơ trụi như bị lửa đốt, giảm 70% năng suất chồi vụ sau"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với bệnh đốm tím Stemphylium: Gỉ sắt có ổ mụn nổi gờ cộm nứt giải phóng bụi phấn bột dính tay; Stemphylium chỉ là vết đốm trơn phẳng màu tím không có bột phấn gỉ bám dính.",
+        "kiem_tra_thuc_dia": "Dùng ngón tay miết dọc thân cành măng tây: thấy bột màu nâu đỏ gỉ sắt dính đầy đầu ngón tay như phấn hoa khô ráp.",
+        "phac_do_vietgap": {
+          "canh_tac": "Sau mỗi chu kỳ thu hoạch 60 - 75 ngày, cắt xả toàn bộ cây mẹ già đem đốt tiêu hủy cách ly khỏi nông trại.",
+          "sinh_hoc": "Phun phòng luân phiên các dòng vi sinh đối kháng Bacillus subtilis kết hợp tinh dầu tỏi quế và hoạt chất đồng sinh học hữu cơ.",
+          "khuyen_cao_chuyen_gia": "Cắt bớt mật độ thân mẹ giữ 3 - 5 thân khỏe/bụi để gió lưu thông làm khô nhanh sương sáng sớm đọng trên cành tán lá kim."
+        }
+      },
+      {
+        "ten_benh": "Bệnh đốm tím thắt ngọn măng tây (Purple Spot)",
+        "muc_do_nguy_hiem": "Cao",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Stemphylium vesicarium"
+        },
+        "trieu_chung_dien_hinh": [
+          "Trên thân mồi non xuất hiện các đốm nhỏ hình thoi dài màu tím thẫm hoặc tím nâu, tâm hơi lõm xuống",
+          "Vết đốm phát triển bao quanh chu vi thân làm thân măng bị thắt nghẽn, gãy gập ngang thân khi có gió nhẹ",
+          "Các chồi măng thu hoạch bị sẹo tím lốm đốm làm mất hoàn toàn giá trị thương phẩm xuất khẩu"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với vết xước cơ học do gió quẹt cát: Vết xước cát cọ phẳng xơ xác không có viền tím đậm; Stemphylium có viền tím sẫm hình thoi đồng tâm lõm giữa ranh giới rất sắc sảo.",
+        "kiem_tra_thuc_dia": "Quan sát thân chồi măng non: thấy các vết thắt hình thoi màu tím than lõm nhẹ, nắn thấy mô chỗ vết thắt giòn rụm dễ gãy.",
+        "phac_do_vietgap": {
+          "canh_tac": "Trồng hàng cây chắn gió quanh trang trại cát pha ven biển để ngăn hạt cát quất xước biểu bì tạo cửa ngõ xâm nhiễm.",
+          "sinh_hoc": "Phun nano Chitosan kích kháng dày biểu bì kết hợp phun nấm Chaetomium liều lượng 2g/lít nước.",
+          "khuyen_cao_chuyen_gia": "Phun sau mỗi đợt mưa rào kết hợp cắt tỉa ngọn măng gãy để tránh lây lan qua giọt nước bắn."
+        }
+      }
+    ]
+  },
+  {
+    "id": "imp_crop_005",
+    "topic": "Cay_Nhap_Khau_Kinh_Te_Cao",
+    "name_vi": "Phong lan Vanilla / Hương Vani nhiệt đới (Vanilla Orchid)",
+    "scientific_name": "Vanilla planifolia",
+    "dia_ban_pho_bien": [
+      "Đà Lạt (Lâm Đồng)",
+      "Phú Quốc (Kiên Giang)",
+      "Đắk Lắk",
+      "Gia Lai",
+      "Bình Dương"
+    ],
+    "dac_tinh_sinh_thai": "Dây leo biểu sinh thuộc họ Lan, trồng trong nhà lưới che 50 - 60% ánh sáng, cần trụ sống hoặc trụ bê tông bọc xơ dừa, giá thể thảm mục giàu hữu cơ, lá mục hoai mục phối mùn dừa xốp, độ ẩm không khí cao 75 - 85%, pH giá thể 5.5 - 6.5.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh thối thân đen lụi rễ Vani (Fusarium Stem and Root Rot)",
+        "muc_do_nguy_hiem": "Cực kỳ nghiêm trọng (Hiểm nghèo)",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Fusarium oxysporum f. sp. vanillae"
+        },
+        "trieu_chung_dien_hinh": [
+          "Các rễ bám trên trụ và rễ đất bị thối nhũn, chuyển màu nâu đen rồi khô quắt teo rỗng ruột",
+          "Thân leo tại các đốt xuất hiện vết úng nước thâm đen, sau đó mô thân bị teo tóp, nhăn nheo, gãy gập",
+          "Đoạn thân phía trên vị trí thối bị mất nguồn cung cấp nước, lá ngả vàng héo rũ, quả vani non bị rụng cuống hoàng loạt"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với bệnh cháy nắng thân leo: Vết cháy nắng khô màu trắng bạc chỉ ở mặt hướng sáng và không lây dọc thân; bệnh Fusarium làm thâm đen cả chu vi thân và thối rỗng lõi mạch dẫn từ dưới lên.",
+        "kiem_tra_thuc_dia": "Bóp nhẹ vào đốt thân bị bệnh: thân rỗng xốp nhũn mềm xẹp lép, ngửi thấy mùi chua ẩm ốc đặc trưng của nấm Fusarium mục rễ.",
+        "phac_do_vietgap": {
+          "canh_tac": "Cắt bỏ ngay đoạn thân thối dưới mắt khỏe 2 đốt, sát trùng vết cắt bằng vôi nhão hoặc cồn 70 độ; thay thảm mục giá thể quanh gốc nhiễm bệnh.",
+          "sinh_hoc": "Tưới ướt đẫm trụ leo dung dịch nấm đối kháng Trichoderma virens kết hợp vi khuẩn đối kháng Bacillus subtilis định kỳ 20 ngày/lần.",
+          "khuyen_cao_chuyen_gia": "Khử trùng giống dây lan bằng dung dịch Nano Bạc 20ppm trước khi đem buộc cố định vào trụ trồng mới."
+        }
+      },
+      {
+        "ten_benh": "Bệnh thán thư đốm cháy lá và vỏ quả Vani (Anthracnose)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Colletotrichum orchidophilum / Colletotrichum gloeosporioides"
+        },
+        "trieu_chung_dien_hinh": [
+          "Trên phiến lá dày của lan Vani xuất hiện các đốm tròn trũng sâu màu nâu đậm có các vòng tròn đồng tâm",
+          "Khi trời nồm ẩm, tâm vết bệnh tiết ra các chấm nhỏ lấm tấm chất nhờn màu hồng cam chứa khối bào tử",
+          "Trái vani đang trong giai đoạn phát triển xuất hiện các vệt thâm đen dọc quả, làm quả bị chai nứt và rụng sớm làm giảm nghiêm trọng hàm lượng hương vanillin"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với vết xước cọ gai do cột dây: Vết xước chỉ để lại sẹo khô màu vàng nâu không lan rộng; thán thư có đốm lõm vòng tròn đồng tâm ứa nhầy màu cam hồng.",
+        "kiem_tra_thuc_dia": "Dùng kính lúp soi bề mặt vết thâm quả vani: thấy các đốm chấm đen li ti xếp thành vòng tròn đồng tâm, cạo nhẹ thấy mô thịt thối nâu.",
+        "phac_do_vietgap": {
+          "canh_tac": "Hạ bớt mật độ dây quấn quanh trụ, tạo khoảng thông thoáng giữa các tán lá dây leo, không để nước tưới đọng qua đêm trên nách lá.",
+          "sinh_hoc": "Phun chế phẩm sinh học Chitosan 2% kết hợp dịch chiết nấm men kích kháng SAR tự nhiên của cây họ Lan.",
+          "khuyen_cao_chuyen_gia": "Phun phòng sớm giai đoạn thụ phấn nhân tạo hoa vani thành công đến khi quả đạt kích thước tối đa."
+        }
+      }
+    ]
+  },
+  {
+    "id": "imp_crop_006",
+    "topic": "Cay_Nhap_Khau_Kinh_Te_Cao",
+    "name_vi": "Nghệ tây Saffron trồng container lạnh (Saffron Crocus)",
+    "scientific_name": "Crocus sativus",
+    "dia_ban_pho_bien": [
+      "Đà Lạt (Lâm Đồng)",
+      "Sa Pa (Lào Cai)",
+      "Hà Nội (Trang trại Container Smart-Farm)"
+    ],
+    "dac_tinh_sinh_thai": "Cây thân thảo có củ ngầm cao cấp nhập khẩu từ Tây Á/Địa Trung Hải, trồng trong phòng sạch công nghệ cao điều hòa nhiệt độ (nhiệt độ lạnh kích hoa 10 - 15°C, chu kỳ sáng tối nghiêm ngặt), giá thể đất sạch hoặc giá thể vô trùng perlite + xơ dừa, pH 6.0 - 7.0, kỵ ẩm ngập ứ đọng nước tuyệt đối.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh thối khô củ nghệ tây Fusarium (Fusarium Corm Rot)",
+        "muc_do_nguy_hiem": "Cực kỳ nghiêm trọng (Hiểm nghèo)",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Fusarium oxysporum f. sp. gladioli"
+        },
+        "trieu_chung_dien_hinh": [
+          "Bóc lớp vỏ bọc xơ bên ngoài củ củ nghệ tây thấy bề mặt củ xuất hiện các vết đốm trũng sâu màu nâu đỏ hoặc đen mun",
+          "Củ bị thối khô từ ngoài vào tâm, thịt củ xốp khô mục nát, có mùi hôi hắc ẩm mốc",
+          "Các mầm hoa và lá kim không bật lên được, hoặc nếu nhú lên thì ngọn mầm bị thâm đen quắt queo rồi lụi tàn"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với củ cạn kiệt năng lượng tự nhiên sau khi ra hoa: Củ cạn tự teo tóp khô đồng đều màu vàng nâu sạch sẽ; củ bệnh Fusarium có các hốc lõm thâm đen thối rỗng và có lớp mốc hồng xốp bám bên trong.",
+        "kiem_tra_thuc_dia": "Cắt đôi củ nghệ tây kiểm tra: thấy phần thịt củ có các vòng thâm đen đồng tâm lan tỏa từ gốc củ lên mầm sinh trưởng.",
+        "phac_do_vietgap": {
+          "canh_tac": "Khử trùng khay trồng và phòng lạnh bằng khí Ozone hoặc đèn cực tím UV-C trước khi xếp củ giống vào phòng ươm.",
+          "sinh_hoc": "Ngâm xử lý củ giống 20 phút trước khi vào khay bằng dung dịch nấm đối kháng Trichoderma harzianum nồng độ 10^8 bào tử/ml kết hợp Nano Bạc 15ppm.",
+          "khuyen_cao_chuyen_gia": "Loại bỏ triệt để và đốt cách ly các củ có vết thâm ngay từ khâu phân loại kiểm dịch nhập khẩu ban đầu."
+        }
+      },
+      {
+        "ten_benh": "Bệnh thối hạch trắng đáy củ nghệ tây (Sclerotium White Rot)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Sclerotium rolfsii / Stromatinia gladioli"
+        },
+        "trieu_chung_dien_hinh": [
+          "Phần đế củ và rễ mầm xuất hiện lớp sợi nấm màu trắng muốt như bông gòn bao phủ dày đặc",
+          "Mô củ sát đáy bị thối mục ướt mềm, sau đó lớp sợi nấm kết tụ lại thành các hạch nấm tròn nhỏ màu nâu sẫm như hạt cải bắp",
+          "Lá kim nhú lên bị vàng vọt từ gốc và nhổ bật lên rất dễ dàng vì phần củ bên dưới đã mục nát hoàn toàn"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với sợi nấm có ích mycorrhiza: Nấm có ích sợi mảnh màu trắng xám bám rễ không làm thối củ; Sclerotium làm thối nhũn mô củ và bắt buộc tạo các hạch nấm tròn cứng như hạt cải.",
+        "kiem_tra_thuc_dia": "Dùng panh kẹp nhấc củ lên: thấy các hạt nhỏ hình tròn màu nâu bóng kích thước 1 - 2mm bám dày đặc quanh vùng rễ đáy củ bị thối mủn.",
+        "phac_do_vietgap": {
+          "canh_tac": "Kiểm soát độ ẩm giá thể khay trồng dưới 60%, không để rò rỉ nước từ dàn máy lạnh nhỏ xuống khay trồng củ.",
+          "sinh_hoc": "Xử lý giá thể bằng chế phẩm vi sinh hữu cơ chứa xạ khuẩn Streptomyces và vi khuẩn Bacillus amyloliquefaciens.",
+          "khuyen_cao_chuyen_gia": "Cách ly toàn bộ khay ươm bị nhiễm bệnh ra khỏi container thông minh, tiêu độc khử trùng toàn bộ phòng sinh trưởng."
+        }
+      }
+    ]
+  },
+  {
+    "id": "imp_crop_007",
+    "topic": "Cay_An_Trai_Nhiet_Doi_Va_On_Doi",
+    "name_vi": "Nho thân gỗ Nam Mỹ Jaboticaba (Jabuticaba)",
+    "scientific_name": "Plinia cauliflora (syn. Myrciaria cauliflora)",
+    "dia_ban_pho_bien": [
+      "Đà Lạt (Lâm Đồng)",
+      "Buôn Ma Thuột (Đắk Lắk)",
+      "Gia Lai",
+      "Bình Dương",
+      "Bình Phước",
+      "Vĩnh Long"
+    ],
+    "dac_tinh_sinh_thai": "Cây ăn trái thân gỗ lâu năm nguồn gốc Nam Mỹ, hoa và quả mọc trực tiếp từ thân cây gỗ, sinh trưởng chậm, ưa đất thịt giàu hữu cơ tầng canh tác dày, hơi chua nhẹ pH 5.5 - 6.5, chịu được biên độ nhiệt rộng nhưng nhạy cảm với đất kiềm vôi cao.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh gỉ sắt hoa và quả nho thân gỗ (Jaboticaba Rust)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Puccinia psidii"
+        },
+        "trieu_chung_dien_hinh": [
+          "Bụi hoa và quả non bám trên thân cây xuất hiện các mụn nhỏ sần sùi màu vàng huỳnh quang sáng chói",
+          "Lớp bột phấn bào tử màu vàng chanh bám dày đặc trên cuống hoa và bề mặt quả non",
+          "Quả non bị chai sần, ngừng lớn, vỏ sần sùi biến dạng và rụng hàng loạt khỏi thân gỗ, chồi non biến dạng quăn queo"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với phấn hoa tự nhiên của hoa nho: Phấn hoa nằm ở đầu nhụy màu trắng ngà rụng tự nhiên sau khi thụ phấn; mụn gỉ sắt màu vàng nghệ sặc sỡ bám chặt vào vỏ quả non và cành lộc non gây chai cứng mục thịt quả.",
+        "kiem_tra_thuc_dia": "Dùng ngón tay chạm vào đám quả non trên thân: bột vàng huỳnh quang bám dính dày đặc vào đầu ngón tay, quả non bị mềm nhăn hoặc chai đen.",
+        "phac_do_vietgap": {
+          "canh_tac": "Cắt tỉa các cành tăm, cành vượt mọc rậm rạp trong lòng tán để thân chính nhận đủ ánh nắng tán xạ mặt trời.",
+          "sinh_hoc": "Phun phòng luân phiên nấm đối kháng Chaetomium kết hợp dịch Nano Đồng hữu cơ 500ppm ngay khi hoa nhú mầm mắt cua trên thân.",
+          "khuyen_cao_chuyen_gia": "Ngừng phun mọi hoạt chất sinh học trước ngày thu hái quả chín mọng tối thiểu 7 ngày."
+        }
+      },
+      {
+        "ten_benh": "Bệnh nấm bồ hóng muội đen quả và thân cây (Sooty Mold)",
+        "muc_do_nguy_hiem": "Trung bình",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Capnodium citri / Meliola spp."
+        },
+        "trieu_chung_dien_hinh": [
+          "Vỏ thân cây và bề mặt vỏ quả chín bị bao phủ bởi một màng mỏng màu đen nhánh như nhọ nồi",
+          "Màng nấm không đâm sâu vào tế bào thịt cây mà phát triển ký sinh trên chất mật ngọt do rệp sáp, rầy mềm bài tiết ra",
+          "Làm quả nho thân gỗ mất màu đen tím bóng bẩy quyến rũ, cản trở quang hợp của lớp vỏ thân non"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với thán thư vỏ: Bồ hóng dùng khăn ướt lau mạnh sẽ bong tróc sạch để lộ vỏ quả tươi bóng nguyên vẹn bên dưới; thán thư ăn sâu hoại tử mô thịt không thể lau sạch.",
+        "kiem_tra_thuc_dia": "Dùng khăn ướt miết nhẹ lên vùng vỏ quả bị đen: mảng đen bong ra dễ dàng như nhọ nồi dính vào khăn, quả bên dưới hoàn toàn lành lặn không sẹo lõm.",
+        "phac_do_vietgap": {
+          "canh_tac": "Diệt trừ triệt để kiến đen và rệp sáp môi giới truyền chất mật ngọt bằng cách quét vôi quanh gốc thân cây.",
+          "sinh_hoc": "Phun trừ rệp sáp bằng chế phẩm nấm ký sinh côn trùng Beauveria bassiana kết hợp dầu khoáng SK Enspray 99EC nồng độ 0.5% để rửa trôi muội than.",
+          "khuyen_cao_chuyen_gia": "Dùng vòi nước áp lực vừa phải rửa sạch tán thân sau khi xử lý triệt để ổ rệp sáp."
+        }
+      }
+    ]
+  },
+  {
+    "id": "imp_crop_008",
+    "topic": "Cay_Nhap_Khau_Kinh_Te_Cao",
+    "name_vi": "Táo đỏ lùn hữu cơ Tân Cương (Organic Jujube / Chinese Date)",
+    "scientific_name": "Ziziphus jujuba",
+    "dia_ban_pho_bien": [
+      "Ninh Phước (Ninh Thuận)",
+      "Bắc Bình (Bình Thuận)",
+      "Đắk Lắk",
+      "Gia Lai",
+      "Lạng Sơn"
+    ],
+    "dac_tinh_sinh_thai": "Cây ăn quả ôn đới & cận nhiệt đới du nhập, ưa khí hậu khô nóng nhiều nắng, chịu hạn cực tốt, chịu rét mùa đông, ưa đất phù sa ven sông hoặc đất cát pha sỏi đồi núi, pH thích hợp từ 6.5 - 8.0, kỵ đất trũng ngập nước.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh chổi phù thủy táo đỏ (Jujube Witches' Broom - JWB)",
+        "muc_do_nguy_hiem": "Cực kỳ nghiêm trọng (Hiểm nghèo)",
+        "tac_nhan": {
+          "loai": "Phytoplasma",
+          "ten_khoa_hoc": "Candidatus Phytoplasma ziziphi",
+          "vector_truyen_benh": "Rầy xanh lá mạ (Hishimonus chinensis)"
+        },
+        "trieu_chung_dien_hinh": [
+          "Các chồi ngủ trên cành đồng loạt bung ra vô số chồi nách nhỏ li ti dày đặc mọc túm tụm như cái chổi quét nhà",
+          "Lá non teo nhỏ như vảy cá, vàng úa mất diệp lục, phiến lá cong queo dị hình",
+          "Cành hoa bị biến đổi thành dạng cành lá sinh dưỡng (hiện tượng hóa lá hoa), không thể đậu quả, cây suy kiệt kiệt quệ và chết khô sau 2 - 3 năm"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với đột biến chồi non do sốc thuốc cỏ: Sốc thuốc cỏ chỉ làm quéo đầu ngọn một đợt rồi phục hồi; bệnh do Phytoplasma lây lan khắp toàn bộ hệ thống mạch dẫn và mọc cụm chổi vĩnh viễn không thể phục hồi.",
+        "kiem_tra_thuc_dia": "Quan sát cấu trúc cụm cành: hàng chục chồi tăm đâm ra từ một mắt đốt duy nhất chen chúc nhau, hoa biến thành chùm lá xanh tí hon dị dạng.",
+        "phac_do_vietgap": {
+          "canh_tac": "Cắt tỉa triệt để và cưa bỏ cành chổi phù thủy sâu vào phần gỗ khỏe 30cm, đốt tiêu hủy cách ly ngay lập tức; không nhân giống từ cây mẹ có triệu chứng nghi ngờ.",
+          "sinh_hoc": "Phun phòng trừ rầy môi giới bằng nấm ký sinh Metarhizium anisopliae (nấm xanh) kết hợp chiết xuất tinh dầu Neem hữu cơ.",
+          "khuyen_cao_chuyen_gia": "Tiêm kháng sinh sinh học Oxytetracycline vào thân cây đầu mùa xuân để ức chế Phytoplasma đối với cây cổ thụ có giá trị kinh tế cao theo hướng dẫn của chuyên gia lâm sàng BVTV."
+        }
+      },
+      {
+        "ten_benh": "Bệnh gỉ sắt hại lá táo đỏ (Jujube Rust)",
+        "muc_do_nguy_hiem": "Cao",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Phakopsora zizyphi-vulgaris"
+        },
+        "trieu_chung_dien_hinh": [
+          "Mặt dưới phiến lá xuất hiện các đốm nhỏ màu vàng sáng, sau đó hình thành các mụn nổi nhỏ màu nâu vàng gỉ sắt",
+          "Bào tử nấm phát tán bụi phấn vàng bám dính dày đặc mặt dưới phiến lá táo đỏ",
+          "Lá bị nhiễm nặng ngả màu vàng úa, khô giòn và rụng sớm hàng loạt trút sạch lá làm quả non bị chai sượng rụng theo"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với nhện đỏ gây hại: Nhện đỏ tạo lớp tơ mịn bám mặt dưới lá và di chuyển được khi soi kính lúp, lá có màu bạc lấm tấm; gỉ sắt tạo các mụn nổi cố định chứa bụi phấn màu nâu vàng gỉ sắt.",
+        "kiem_tra_thuc_dia": "Dùng ngón tay vuốt mặt dưới lá táo: lớp bụi vàng gỉ sắt bám dính vào tay, mô lá mặt trên tương ứng có chấm vàng nhạt lõm nhẹ.",
+        "phac_do_vietgap": {
+          "canh_tac": "Quét vôi gốc cây vào mùa thu đông, dọn sạch lá rụng dưới gốc xới đất nhẹ để vùi lấp tàn dư bào tử nấm đông.",
+          "sinh_hoc": "Phun định kỳ dung dịch Nano Bạc Đồng sinh học nồng độ 30ppm kết hợp chế phẩm Bacillus subtilis khi lá thành thục chuyển bánh tẻ.",
+          "khuyen_cao_chuyen_gia": "Can thiệp sớm trước mùa mưa ẩm kéo dài, phun kỹ ướt đẫm cả mặt dưới của tán lá táo đỏ."
+        }
+      }
+    ]
+  },
+  {
+    "id": "imp_crop_009",
+    "topic": "Rau_Cu_Gia_Vi_Va_Nam",
+    "name_vi": "Wasabi / Mù tạt tươi Nhật Bản Đà Lạt (Japanese Wasabi)",
+    "scientific_name": "Eutrema japonicum (syn. Wasabia japonica)",
+    "dia_ban_pho_bien": [
+      "Đà Lạt (Lâm Đồng)",
+      "Lạc Dương (Lâm Đồng)",
+      "Sa Pa (Lào Cai)"
+    ],
+    "dac_tinh_sinh_thai": "Cây gia vị thảo mộc cao cấp bản địa Nhật Bản, trồng bán thủy canh dưới dòng suối nhân tạo nước lạnh chảy liên tục hoặc nhà màng kiểm soát khí hậu lạnh nghiêm ngặt (12 - 18°C), nước giàu oxy hòa tan, kỵ nhiệt độ > 22°C, giá thể sỏi cuội cát núi lửa rửa sạch vô trùng, pH nước 6.5 - 7.0.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh sọc đen thối lõi củ Wasabi (Black Leg / Phoma Stem Rot)",
+        "muc_do_nguy_hiem": "Cực kỳ nghiêm trọng (Hiểm nghèo)",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Phoma wasabiae"
+        },
+        "trieu_chung_dien_hinh": [
+          "Bó mạch dẫn bên trong thân củ wasabi bị hóa đen hoàn toàn dọc theo chiều dài củ",
+          "Lá wasabi bị vàng từ mép lá, cuống lá xuất hiện các sọc dài màu nâu đen lõm nhẹ",
+          "Thịt củ bên trong chuyển màu xám đen, mất hoàn toàn vị cay nồng sực mũi đặc trưng của hợp chất allyl isothiocyanate, củ bị rỗng ruột và thối mục nát"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với củ bị thâm do thiếu oxy rễ: Thiếu oxy làm thối nhũn vỏ củ từ ngoài vào trong có mùi hôi húng; Phoma wasabiae phá hủy có chọn lọc các bó mạch dẫn trung tâm củ tạo thành các chấm đen hoặc vệt sọc đen sắc nét bên trong thịt củ.",
+        "kiem_tra_thuc_dia": "Cắt một lát mỏng ngang thân củ Wasabi: thấy các vòng chấm đen như mực tàu sắp xếp thành vòng tròn dọc theo hệ thống mạch dẫn lõi củ.",
+        "phac_do_vietgap": {
+          "canh_tac": "Giữ nhiệt độ nước dòng chảy luôn dưới 16°C bằng hệ thống làm lạnh Chiller, tăng cường sục khí oxy hòa tan > 8 mg/lít.",
+          "sinh_hoc": "Khử trùng nước hồi lưu bằng hệ thống đèn cực tím tia UV và sục khí Ozone, bổ sung định kỳ vi khuẩn Bacillus amyloliquefaciens ức chế nấm nước.",
+          "khuyen_cao_chuyen_gia": "Tiêu hủy ngay các cây có triệu chứng sọc đen cuống lá để ngăn nấm lây lan theo dòng nước chảy tuần hoàn trong trang trại."
+        }
+      },
+      {
+        "ten_benh": "Bệnh thối mềm ướt thân rễ Wasabi vi khuẩn (Bacterial Soft Rot)",
+        "muc_do_nguy_hiem": "Cực kỳ nghiêm trọng (Hiểm nghèo)",
+        "tac_nhan": {
+          "loai": "Vi khuẩn",
+          "ten_khoa_hoc": "Pectobacterium carotovorum subsp. carotovorum"
+        },
+        "trieu_chung_dien_hinh": [
+          "Phần cổ rễ sát giá thể cuội sỏi bị úng nước màu nâu nhạt rồi nhanh chóng mềm nhũn chảy nước nhầy",
+          "Toàn bộ tán lá hình trái tim của Wasabi bị rũ gục xuống chỉ sau một đêm dù giá thể vẫn ướt đẫm",
+          "Thịt củ biến thành khối cháo sền sệt bốc mùi hôi thối nồng nặc khó chịu"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với bệnh thối do nấm Phoma: Nấm Phoma gây thối khô lõi củ không bốc mùi hôi thối; vi khuẩn Pectobacterium phá hủy thành tế bào tạo khối nhớt lỏng bốc mùi thối khắm đặc trưng của vi khuẩn thối rữa rau củ.",
+        "kiem_tra_thuc_dia": "Dùng ngón tay bóp nhẹ vào thân củ Wasabi: ngón tay lún sâu vào trong củ làm dịch nhớt tanh hôi phì ra ngoài, mô cây nhũn nát hoàn toàn.",
+        "phac_do_vietgap": {
+          "canh_tac": "Tránh làm trầy xước rễ củ khi thao tác vệ sinh hoặc thu hoạch tỉa lá, kiểm soát mật độ ốc sên và sâu hại cắn phá biểu bì củ.",
+          "sinh_hoc": "Xử lý nguồn nước bằng Nano Bạc nồng độ 10ppm kết hợp chế phẩm sinh học Kasugamycin nguồn gốc vi nấm.",
+          "khuyen_cao_chuyen_gia": "Tháo cạn luống sỏi bị nhiễm, ngâm sát trùng luống bằng dung dịch Cloramin B hoặc vôi bột 24 giờ trước khi thả cây giống đợt kế tiếp."
+        }
+      }
+    ]
+  },
+  {
+    "id": "imp_crop_010",
+    "topic": "Cay_An_Trai_Nhiet_Doi_Va_On_Doi",
+    "name_vi": "Chà là Trung Đông ăn tươi (Barhi Date Palm)",
+    "scientific_name": "Phoenix dactylifera cv. Barhi",
+    "dia_ban_pho_bien": [
+      "Bình Thuận",
+      "Ninh Thuận",
+      "Sa Đéc (Đồng Tháp)",
+      "Trà Ôn (Vĩnh Long)",
+      "Bến Tre",
+      "Tây Ninh"
+    ],
+    "dac_tinh_sinh_thai": "Cây cọ thân cột cao cấp nhập khẩu từ Trung Đông, ưa nắng trực tiếp 100%, chịu hạn và chịu mặn rất tốt, sinh trưởng tối ưu trên đất thịt pha cát hoặc đất phù sa bồi cao ráo, pH thích hợp từ 6.5 - 8.0, kỵ ngập úng đỉnh sinh trưởng cổ hũ.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh thối đen đọt non chà là (Black Scorch Disease)",
+        "muc_do_nguy_hiem": "Cực kỳ nghiêm trọng (Hiểm nghèo)",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Thielaviopsis paradoxa (syn. Ceratocystis paradoxa)"
+        },
+        "trieu_chung_dien_hinh": [
+          "Các tàu lá đọt non mới bung có màu nâu đen cháy xém như bị hơ trên ngọn lửa",
+          "Bẹ lá bị biến dạng uốn cong queo gãy gập sang một bên, phần mô sát cổ hũ bị thối khô màu đen mun",
+          "Nếu nấm ăn sâu vào đỉnh sinh trưởng trung tâm, toàn bộ bó đọt non bị rút rời khỏi thân cây bốc mùi men chua, cây chết đứng hoàn toàn"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với bọ dừa cắn phá: Bọ dừa cắn rách phiến lá thành các dải xơ xác song song dạng răng lược cơ học; Thielaviopsis làm mô thối đen cháy rụi và lan tỏa vào lõi cổ hũ có mùi thơm lên men rượu nhẹ.",
+        "kiem_tra_thuc_dia": "Nắm lấy bó ngọn đọt non kéo nhẹ: đọt non bị tuột gốc rời ra dễ dàng, phần gốc đọt thâm đen ngậm nước bốc mùi rượu chua thoang thoảng.",
+        "phac_do_vietgap": {
+          "canh_tac": "Tránh tưới nước thẳng từ trên ngọn xuống búp đọt non vào buổi chiều tối; khử trùng dụng cụ cắt tỉa tàu dừa bằng cồn hoặc lửa.",
+          "sinh_hoc": "Phun tưới đẫm vào cổ hũ đọt non chế phẩm Trichoderma asperellum kết hợp Nano Đồng hữu cơ 400ppm định kỳ vào đầu mùa mưa.",
+          "khuyen_cao_chuyen_gia": "Cắt bỏ ngay các tàu lá đọt bị cháy xém và quét keo liền sẹo pha đồng đỏ lên vết cắt ngăn nấm xâm nhập lõi sinh trưởng."
+        }
+      },
+      {
+        "ten_benh": "Bệnh đốm lá sần sùi Graphiola chà là (Graphiola Leaf Spot / False Smut)",
+        "muc_do_nguy_hiem": "Cao",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Graphiola phoenicis"
+        },
+        "trieu_chung_dien_hinh": [
+          "Cả 2 mặt của các tàu lá già xuất hiện vô số các nốt sần nhỏ màu vàng rồi chuyển sang đen cứng như hạt vừng",
+          "Khi hạt sần chín, đỉnh hạt nứt ra giải phóng một sợi lông tơ trắng dài chứa khối bụi bào tử nấm màu vàng nhạt",
+          "Tàu lá bị nhiễm dày đặc sẽ chuyển sang màu vàng xỉn, khô giòn từ chóp lá và chết non sớm làm giảm khả năng nuôi buồng quả"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với đốm gỉ sắt: Gỉ sắt tạo mụn bột mịn màu nâu đỏ không có sợi lông tơ; Graphiola tạo các mụn sần chai cứng như đá đen nhỏ và bật ra sợi lông tơ màu trắng ngà từ đỉnh mụn.",
+        "kiem_tra_thuc_dia": "Dùng móng tay cào vào nốt sần đen trên lá chà là: nốt sần cộm cứng trơ ra như hạt sỏi nhỏ bám chắc vào biểu bì lá gai dầy.",
+        "phac_do_vietgap": {
+          "canh_tac": "Cắt tỉa toàn bộ các tàu lá già tầng sát đất bị nhiễm nặng đem gom đốt tiêu hủy, tạo độ thoáng quanh gốc cây.",
+          "sinh_hoc": "Phun phòng nấm đối kháng Chaetomium kết hợp dầu khoáng SK Enspray 99EC nồng độ 0.5% để bịt kín ổ mụn sần.",
+          "khuyen_cao_chuyen_gia": "Giữ khoảng cách trồng tối thiểu 7m x 7m để đảm bảo ánh nắng chiếu rọi xuyên qua tán lá chà là."
+        }
+      }
+    ]
+  },
+  {
+    "id": "imp_crop_011",
+    "topic": "Cay_An_Trai_Nhiet_Doi_Va_On_Doi",
+    "name_vi": "Cherry nhiệt đới Surinam / Sơ ri Brazil (Surinam Cherry)",
+    "scientific_name": "Eugenia uniflora",
+    "dia_ban_pho_bien": [
+      "Đà Lạt (Lâm Đồng)",
+      "Long Khánh (Đồng Nai)",
+      "Bình Phước",
+      "Vĩnh Long",
+      "Cần Thơ"
+    ],
+    "dac_tinh_sinh_thai": "Cây bụi thân gỗ sống lâu năm nguồn gốc Nam Mỹ, quả có 8 múi khía hình lồng đèn đỏ rực rỡ, thích nghi tốt từ vùng khí hậu mát ôn đới đến nhiệt đới gió mùa, đất phù sa bồi hoặc đất đỏ bazan giàu mùn, pH đất 5.5 - 6.5, chịu hạn khá tốt.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh thán thư đốm lá và thối nứt quả cherry Surinam (Anthracnose)",
+        "muc_do_nguy_hiem": "Cao",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Colletotrichum gloeosporioides"
+        },
+        "trieu_chung_dien_hinh": [
+          "Trên phiến lá bóng xuất hiện các chấm nâu tròn sau lan rộng thành mảng cháy khô màu xám tro có viền đỏ đậm",
+          "Quả cherry có múi hình múi khế xuất hiện các vết đốm tròn trũng trũng màu nâu đen, vỏ quả bị nứt nẻ chảy dịch ngọt",
+          "Quả non bị chai sượng rụng sớm, quả chín bị thối nhũn một bên múi làm mất giá trị thương phẩm"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với ruồi đục quả chích: Ruồi đục quả có lỗ kim chích rất nhỏ ở tâm và bên trong có dòi giòi bò ngoe nguẩy; thán thư không có dòi mà mô thịt thối lõm hình chén có khối bào tử màu hồng cam khi ẩm.",
+        "kiem_tra_thuc_dia": "Dùng kính lúp kiểm tra vết đốm trên múi quả cherry: thấy các vòng tròn chấm đen đồng tâm lõm sâu, không thấy vết lỗ thủng do ruồi chích.",
+        "phac_do_vietgap": {
+          "canh_tac": "Cắt tỉa thông thoáng cành tăm trong tán, quét dọn sạch quả rụng dưới tán gốc gom tiêu hủy.",
+          "sinh_hoc": "Phun phòng chế phẩm vi sinh Bacillus subtilis kết hợp Nano Bạc Đồng 20ppm định kỳ 15 ngày/lần từ khi cây nở hoa.",
+          "khuyen_cao_chuyen_gia": "Bao bọc chùm quả bằng túi lưới thoáng khí chuyên dụng ngăn côn trùng và nấm xâm nhiễm mùa mưa ẩm."
+        }
+      },
+      {
+        "ten_benh": "Bệnh đốm vi khuẩn xì mủ lá non Cherry (Bacterial Leaf Spot)",
+        "muc_do_nguy_hiem": "Trung bình",
+        "tac_nhan": {
+          "loai": "Vi khuẩn",
+          "ten_khoa_hoc": "Pseudomonas syringae pv. syringae"
+        },
+        "trieu_chung_dien_hinh": [
+          "Lá non mới nhú xuất hiện các đốm nhỏ sũng nước màu xanh đậm, sau chuyển sang màu nâu đen",
+          "Xung quanh vết đốm luôn có quầng vàng sáng rõ bao bọc, đọt non bị chùn lại cong queo",
+          "Khi trời mưa phùn sương đêm, các đốm bệnh ứa ra các giọt dịch màu trắng đục dính bám"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với bệnh đốm nấm Cercospora: Đốm vi khuẩn có quầng vàng trong suốt ngậm nước xung quanh và ứa giọt dịch nhớt; đốm nấm khô giòn và không ngậm nước.",
+        "kiem_tra_thuc_dia": "Soi ngược phiến lá dưới ánh nắng mặt trời: quầng vàng sáng rực bao quanh vết nâu sũng nước nhìn thấy rất rõ nét.",
+        "phac_do_vietgap": {
+          "canh_tac": "Không bón phân đạm quá mức trong giai đoạn cây bung đọt non; duy trì mật độ tán cây đón nắng tốt.",
+          "sinh_hoc": "Phun kháng sinh sinh học Kasugamycin kết hợp chế phẩm sinh học Chitosan 1.5% phòng ngừa đợt lộc non.",
+          "khuyen_cao_chuyen_gia": "Tuân thủ thời gian cách ly sinh học 3 - 5 ngày trước thu hoạch an toàn."
+        }
+      }
+    ]
+  },
+  {
+    "id": "imp_crop_012",
+    "topic": "Cay_Nhap_Khau_Kinh_Te_Cao",
+    "name_vi": "Cây hạt dẻ cười nhập ngoại (Pistachio Tree)",
+    "scientific_name": "Pistacia vera",
+    "dia_ban_pho_bien": [
+      "Bình Thuận",
+      "Ninh Thuận",
+      "Gia Lai",
+      "Đắk Lắk"
+    ],
+    "dac_tinh_sinh_thai": "Cây thân gỗ lấy hạt nhập khẩu từ Trung Đông/Địa Trung Hải, ưa khí hậu bán khô hạn mùa hè nóng khô mùa đông có tích lũy giờ lạnh, đất sỏi đồi cát pha đá vôi thoát nước cực nhanh, pH đất 7.0 - 8.2, rất nhạy cảm với úng rễ và ẩm độ không khí cao.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh cháy đọt và đốm mắt chùm quả hạt dẻ cười (Panicle and Shoot Blight)",
+        "muc_do_nguy_hiem": "Cực kỳ nghiêm trọng (Hiểm nghèo)",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Botryosphaeria dothidea"
+        },
+        "trieu_chung_dien_hinh": [
+          "Các chùm hoa và chùm hạt non đang phát triển đột ngột bị khô héo, chuyển sang màu nâu sẫm rồi đen mun",
+          "Chùm hạt dẻ bị chết khô dính chặt trên cành không chịu rụng suốt cả mùa đông",
+          "Các cành mang quả xuất hiện các vết loét hình thoi thâm đen, nhựa gôm ứa ra làm khô chết toàn bộ phần cành phía trên"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với khô chùm do thiếu vi lượng Boron: Thiếu Boron làm rụng hoa thụ phấn kém không hình thành hạt; Botryosphaeria làm cả chùm hạt đã hình thành bị đen khô mủn và kèm theo vết loét xì mủ trên cành gỗ.",
+        "kiem_tra_thuc_dia": "Cắt ngang cành bị khô: lớp mô vỏ và tầng sinh mô mạch dẫn dưới vỏ bị thâm đen hoàn toàn, cành khô giòn gãy rụm.",
+        "phac_do_vietgap": {
+          "canh_tac": "Cắt tỉa triệt để toàn bộ các cành bị loét và chùm quả khô sót lại đem đốt tiêu hủy cách ly.",
+          "sinh_hoc": "Phun nấm đối kháng Trichoderma harzianum kết hợp dịch chiết nấm men kích kháng SAR vào giai đoạn bung nụ hoa.",
+          "khuyen_cao_chuyen_gia": "Phun bảo vệ chùm quả sau các trận mưa rào bất thường trong mùa khô hanh bằng dung dịch Nano Bạc Đồng sinh học."
+        }
+      },
+      {
+        "ten_benh": "Bệnh héo rũ Verticillium tắc mạch dẫn (Verticillium Wilt)",
+        "muc_do_nguy_hiem": "Cực kỳ nghiêm trọng (Hiểm nghèo)",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Verticillium dahliae"
+        },
+        "trieu_chung_dien_hinh": [
+          "Các lá trên một hoặc một vài cành bị biến vàng từ mép lá, sau đó khô giòn cong queo rũ xuống",
+          "Triệu chứng lan dần theo từng cành đơn lẻ (hiện tượng héo một bên tán) trước khi làm chết cả cây",
+          "Mạch gỗ bên trong cành thân cây hạt dẻ cười bị biến màu nâu đen sẫm chạy dọc theo thớ gỗ"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với bệnh thối rễ Phytophthora: Phytophthora làm vàng héo đồng loạt cả cây và rễ tơ thối nhũn đen; Verticillium héo khô từng cành riêng biệt trong khi bộ rễ tơ ban đầu trông vẫn nguyên vẹn.",
+        "kiem_tra_thuc_dia": "Dùng dao vát một mảnh vỏ cành bị héo: thấy các vệt sọc màu nâu sẫm chạy dài theo thớ gỗ mạch dẫn bên dưới lớp giác gỗ.",
+        "phac_do_vietgap": {
+          "canh_tac": "Sử dụng gốc ghép kháng bệnh Verticillium (như dòng Pistacia integerrima Pioneer Gold 1); không luân canh hoặc trồng xen với cây họ Cà (cà chua, ớt, khoai tây).",
+          "sinh_hoc": "Tưới gốc định kỳ chế phẩm vi khuẩn đối kháng Bacillus subtilis phân lập cao kết hợp xạ khuẩn Streptomyces.",
+          "khuyen_cao_chuyen_gia": "Tiêu hủy cây chết và phơi đất xử lý phủ bạt năng lượng mặt trời (soil solarization) nhiệt độ cao tiêu diệt hạch nấm trong đất."
+        }
+      }
+    ]
+  },
+  {
+    "id": "imp_crop_013",
+    "topic": "Cay_Nhap_Khau_Kinh_Te_Cao",
+    "name_vi": "Mắc ca Tây Nguyên cao sản (Macadamia)",
+    "scientific_name": "Macadamia integrifolia",
+    "dia_ban_pho_bien": [
+      "Đắk Lắk",
+      "Lâm Đồng (Đơn Dương, Lâm Hà)",
+      "Gia Lai",
+      "Đắk Nông",
+      "Sơn La (Mai Sơn)"
+    ],
+    "dac_tinh_sinh_thai": "Cây thân gỗ lấy hạt 'nữ hoàng các loại hạt' nguồn gốc Úc, ưa đất đỏ bazan sâu xốp màu mỡ, thoát nước tốt, pH đất 5.5 - 6.5, cần thời tiết se lạnh khô ráo để phân hóa mầm hoa (15 - 18°C), hoa dạng chuỗi dài rất nhạy cảm với sương muối và nấm ẩm.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh thán thư rụng chuỗi hoa và thối nứt quả non Mắc ca (Raceme Blight / Anthracnose)",
+        "muc_do_nguy_hiem": "Cực kỳ nghiêm trọng (Hiểm nghèo)",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Colletotrichum acutatum / Colletotrichum gloeosporioides"
+        },
+        "trieu_chung_dien_hinh": [
+          "Chuỗi hoa mắc ca đang nở bị thâm đen từ ngọn chuỗi hoặc cuống hoa nhỏ, nụ hoa bị thối nhũn rụng lả tả",
+          "Khi trời có sương mù ẩm ướt, cả chuỗi hoa dính bết lại thành một búi màu nâu đen bốc mùi mốc, không thể thụ phấn đậu quả",
+          "Vỏ quả non xuất hiện các đốm tròn trũng sâu màu nâu đậm, quả bị teo thắt và rụng non hàng loạt"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với hoa rụng do gió khô nóng hoặc thiếu nước: Rụng do thời tiết hoa khô giòn tự nhiên màu vàng nhạt; thán thư hoa thâm đen dính bết lại thành chùm bốc mùi mốc nấm có chấm nhầy màu cam hồng.",
+        "kiem_tra_thuc_dia": "Rung nhẹ cành hoa: nụ hoa rơi rụng lả tả xuống đất, cuống hoa sót lại trên cành bị thâm đen có chất dịch dính ngón tay.",
+        "phac_do_vietgap": {
+          "canh_tac": "Tỉa cành tạo tán hình nấm thông thoáng ngay sau vụ thu hoạch, đón ánh nắng chiếu sâu vào tâm tán cây.",
+          "sinh_hoc": "Phun phòng luân phiên nấm đối kháng Chaetomium kết hợp chế phẩm sinh học vi khuẩn Bacillus amyloliquefaciens nồng độ 0.2% giai đoạn hoa nhú mầm mắt cua 3 - 5cm.",
+          "khuyen_cao_chuyen_gia": "Tuyệt đối không phun thuốc trừ sâu hóa học giai đoạn hoa nở rộ làm chết ong mật thụ phấn hoa mắc ca."
+        }
+      },
+      {
+        "ten_benh": "Bệnh xì mủ thối loét thân gốc Phytophthora (Phytophthora Trunk Canker)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Phytophthora cinnamomi"
+        },
+        "trieu_chung_dien_hinh": [
+          "Phần vỏ thân sát mặt đất xuất hiện các vết loét thâm ướt, nhựa mủ màu nâu đỏ ứa ra rỉ chảy dọc theo thân",
+          "Vỏ cây chỗ loét bị nứt nẻ, bong tróc ra, cạo lớp vỏ thấy lớp tầng sinh mô mạch gỗ bên dưới có màu nâu đỏ sẫm như thịt bò ôi",
+          "Tán lá phía trên bị vàng úa rụng lác đác, cành khô dần từ ngọn xuống và cây có thể chết đứng sau 1 - 2 mùa mưa"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với vết xì mủ do mọt đục thân cành: Mọt đục có lỗ đùn mùn cưa mịn màu trắng ngà ra ngoài vỏ thân; Phytophthora không có mùn cưa mà là mủ nhựa tự nhiên rỉ ra từ vết nứt vỏ thâm ướt rộng.",
+        "kiem_tra_thuc_dia": "Dùng dao cạo nhẹ lớp biểu bì vỏ thân chỗ ứa mủ: thấy mô vỏ bên trong thối nhũn màu nâu đỏ đậm có ranh giới rõ ràng với phần mô gỗ khỏe màu trắng kem.",
+        "phac_do_vietgap": {
+          "canh_tac": "Làm sạch cỏ dại quanh gốc bán kính 1m, không vun đất quá cao vào cổ rễ cây mắc ca, khơi thông rãnh thoát nước vườn.",
+          "sinh_hoc": "Cạo sạch vết loét đến phần gỗ khỏe rồi quét dung dịch Nano Bạc Đồng sinh học kết hợp chế phẩm Trichoderma paste đặc lên miệng vết thương.",
+          "khuyen_cao_chuyen_gia": "Quét vôi tôi pha đồng sunfat quanh gốc thân cao 1m định kỳ vào đầu mùa mưa để bảo vệ cổ rễ."
+        }
+      }
+    ]
+  },
+  {
+    "id": "imp_crop_014",
+    "topic": "Cay_Nhap_Khau_Kinh_Te_Cao",
+    "name_vi": "Cà chua thân gỗ Tamarillo (Tree Tomato Tamarillo)",
+    "scientific_name": "Solanum betaceum (syn. Cyphomandra betacea)",
+    "dia_ban_pho_bien": [
+      "Đà Lạt (Lâm Đồng)",
+      "Lạc Dương (Lâm Đồng)",
+      "Sa Pa (Lào Cai)"
+    ],
+    "dac_tinh_sinh_thai": "Cây thân gỗ nhỏ lâu năm họ Cà nguồn gốc dãy Andes Nam Mỹ, thích hợp vùng cao 1.000 - 2.000m khí hậu mát mẻ quanh năm (15 - 22°C), rễ ăn nông rất nhạy cảm với ngập úng và gió bão, đất đỏ bazan hoặc đất mùn hữu cơ thoát nước tốt, pH 5.8 - 6.5.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh mốc sương thối lá quả Tamarillo (Late Blight)",
+        "muc_do_nguy_hiem": "Cực kỳ nghiêm trọng (Hiểm nghèo)",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Phytophthora infestans"
+        },
+        "trieu_chung_dien_hinh": [
+          "Mép phiến lá lớn xuất hiện các vết đốm ủng nước màu xanh xám loang nhanh thành mảng cháy khô màu nâu đen",
+          "Khi trời nhiều sương mù mặt dưới phiến lá phủ một lớp màng mốc tơ màu trắng xám bao quanh ranh giới vết bệnh",
+          "Quả cà chua thân gỗ xuất hiện các vệt loang màu nâu sô-cô-la cứng sần sùi, quả bị thối khô teo tóp dính trên cành"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với bệnh đốm vòng Alternaria: Mốc sương lây lan nhanh như lửa cháy mô bị sũng nước và có lớp màng nấm trắng ở mặt dưới lá; Alternaria phát triển chậm có các vòng tròn đồng tâm khô giòn rõ rệt.",
+        "kiem_tra_thuc_dia": "Lật mặt dưới lá non vào sáng sớm: thấy lớp màng mốc trắng xám mịn như bụi tuyết giăng quanh mép vết cháy sũng nước.",
+        "phac_do_vietgap": {
+          "canh_tac": "Cố định cọc chống đỡ cành tránh gió quật đổ gãy tán cây; ngắt sạch lá già tầng đáy cách mặt đất 50cm.",
+          "sinh_hoc": "Phun phòng luân phiên nấm vi sinh đối kháng Chaetomium kết hợp chế phẩm Nano Bạc Đồng 35ppm và Phosphonate sinh học.",
+          "khuyen_cao_chuyen_gia": "Phun phòng sớm trước các đợt áp thấp nhiệt đới gây mưa dầm kéo dài tại vùng núi cao Đà Lạt."
+        }
+      },
+      {
+        "ten_benh": "Bệnh héo xanh vi khuẩn Tamarillo (Bacterial Wilt)",
+        "muc_do_nguy_hiem": "Cực kỳ nghiêm trọng (Hiểm nghèo)",
+        "tac_nhan": {
+          "loai": "Vi khuẩn",
+          "ten_khoa_hoc": "Ralstonia solanacearum"
+        },
+        "trieu_chung_dien_hinh": [
+          "Cây đang xanh tốt đột ngột bị rũ gục các đọt non và lá vào ban ngày khi trời nắng gắt",
+          "Ban đêm cây hơi gượng lại, nhưng chỉ sau 2 - 3 ngày toàn bộ cây cà chua thân gỗ héo rũ hoàn toàn trong khi lá vẫn giữ màu xanh lục",
+          "Gốc thân cây sát cổ rễ bị sũng nước nhẹ, rễ tơ bị thối mục mủn đen"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với bệnh héo vàng Fusarium: Héo vàng lá vàng rực từ gốc lên ngọn rụng dần từng lá; héo xanh cây gục đột ngột khi lá vẫn còn xanh tươi nguyên vẹn trên cành.",
+        "kiem_tra_thuc_dia": "Cắt một đoạn thân bánh tẻ cắm vào cốc nước thủy tinh trong suốt: sau 1 - 2 phút các dòng dịch vi khuẩn màu trắng sữa đùn ra từ bó mạch dẫn chìm dần xuống đáy cốc (thử nghiệm dòng dịch vi khuẩn).",
+        "phac_do_vietgap": {
+          "canh_tac": "Nhổ bỏ cây bệnh nặng và đào toàn bộ bầu rễ cho vào bao nilon tiêu hủy; rải vôi bột khử trùng hố trồng.",
+          "sinh_hoc": "Tưới phòng gốc định kỳ nấm đối kháng Trichoderma phối hợp chủng vi khuẩn đối kháng Bacillus subtilis và chế phẩm sinh học Kasugamycin.",
+          "khuyen_cao_chuyen_gia": "Tuyệt đối không luân canh hoặc trồng xen Tamarillo trên đất vừa canh tác cà chua, ớt, khoai tây vụ trước."
+        }
+      }
+    ]
+  },
+  {
+    "id": "imp_crop_015",
+    "topic": "Rau_Cu_Gia_Vi_Va_Nam",
+    "name_vi": "Nấm mối đen nông nghiệp công nghệ cao (Black Termite Mushroom)",
+    "scientific_name": "Oudemansiella radicata (syn. Xerula radicata)",
+    "dia_ban_pho_bien": [
+      "Đà Lạt (Lâm Đồng)",
+      "Củ Chi (TP.HCM)",
+      "Long Khánh (Đồng Nai)",
+      "Bình Phước",
+      "Tam Bình (Vĩnh Long)"
+    ],
+    "dac_tinh_sinh_thai": "Nấm ăn đặc sản kinh tế cao nuôi trồng công nghệ cao trong nhà lạnh khép kín, cơ chất mùn cưa cao su đóng bịch phối trộn cám bắp cám gạo dinh dưỡng, phủ lớp giá thể đất sạch hoặc cát khoáng sau khi ươm tơ, nhiệt độ nuôi trồng 24 - 28°C, độ ẩm không khí 85 - 95%, kỵ ánh sáng trực tiếp.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh mốc xanh cạnh tranh giá thể bịch phôi nấm (Green Mold)",
+        "muc_do_nguy_hiem": "Cực kỳ nghiêm trọng (Hiểm nghèo)",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Trichoderma harzianum / Trichoderma viride"
+        },
+        "trieu_chung_dien_hinh": [
+          "Bên trong bịch phôi mùn cưa xuất hiện các đám sợi nấm màu trắng mịn sau nhanh chóng biến thành màu xanh lục đậm hoặc xanh lá mạ",
+          "Tơ nấm mối đen bị bao vây, tiết ra dịch màu vàng cam rồi teo lụi biến mất hoàn toàn",
+          "Bịch phôi bị mốc xanh hoàn toàn không thể bật mầm quả thể nấm mối đen, bốc mùi chua nồng của nấm hoại sinh"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với màu dịch tiết sinh lý bình thường của tơ nấm mối đen: Tơ nấm khỏe tiết dịch màu hổ phách nâu nhạt nhưng cơ chất vẫn trắng ngà; mốc xanh tạo đám bột màu xanh lục bám thành mảng lớn phá hủy toàn bộ mạng tơ nấm.",
+        "kiem_tra_thuc_dia": "Quan sát qua màng nilon bịch phôi: thấy các mảng bột phấn màu xanh lục mạ lan rộng nhanh chóng, bóp nhẹ thấy mùn cưa nhão nát có mùi chua.",
+        "phac_do_vietgap": {
+          "canh_tac": "Hấp tiệt trùng cơ chất bịch phôi đạt nhiệt độ 100°C trong 10 - 12 giờ hoặc nồi áp suất 121°C trong 90 phút; phòng cấy giống vô trùng bằng đèn UV-C.",
+          "sinh_hoc": "Sử dụng giống nấm mối đen thuần chủng khỏe tơ; vệ sinh định kỳ nhà nuôi bằng cồn y tế hoặc vôi bột rải nền nhà.",
+          "khuyen_cao_chuyen_gia": "Cách ly và mang ngay các bịch nhiễm mốc xanh ra khỏi phòng nuôi để tránh phát tán bào tử sang các bịch lân cận."
+        }
+      },
+      {
+        "ten_benh": "Bệnh đốm thâm nứt mũ nấm mối đen vi khuẩn (Bacterial Blotch)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Vi khuẩn",
+          "ten_khoa_hoc": "Pseudomonas tolaasii"
+        },
+        "trieu_chung_dien_hinh": [
+          "Trên tai nấm mối đen xuất hiện các đốm trũng màu vàng nâu rồi chuyển sang màu nâu đen ướt nhờn",
+          "Vết bệnh lan rộng làm mũ nấm bị méo mó, nứt nẻ, chảy dịch nhờn dính",
+          "Cuống nấm bị thâm đen và nhũn nát từ chân nấm lên, tai nấm bốc mùi chua tanh làm mất hoàn toàn giá trị thương phẩm xuất khẩu"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với đốm do giọt nước đọng trên mũ nấm: Giọt nước đọng lau khô mũ nấm vẫn bóng láng chắc thịt; đốm vi khuẩn làm mũ nấm bị lõm sâu trơn nhớt dính tay và thịt nấm biến màu xám đen.",
+        "kiem_tra_thuc_dia": "Chạm ngón tay vào đốm nâu trên tai nấm: thấy dịch nhờn trơn trượt dính vào ngón tay, ngửi thấy mùi tanh tanh của vi khuẩn phân hủy protein nấm.",
+        "phac_do_vietgap": {
+          "canh_tac": "Không tưới phun sương trực tiếp hạt nước to lên tai nấm khi sắp thu hoạch; kiểm soát hệ thống tạo ẩm siêu âm hạt mịn < 5 micron; duy trì quạt thông khí nhẹ.",
+          "sinh_hoc": "Phun sương phòng ngừa bằng dung dịch Nano Bạc nồng độ 5ppm hoặc chế phẩm vi sinh đối kháng Bacillus subtilis.",
+          "khuyen_cao_chuyen_gia": "Hạ độ ẩm nhà nấm xuống 80% trong 2 - 3 giờ sau mỗi lần tưới ẩm để bề mặt tai nấm khô ráo nước tự do."
+        }
+      }
+    ]
+  },
+  {
+    "id": "imp_crop_016",
+    "topic": "Rau_Cu_Gia_Vi_Va_Nam",
+    "name_vi": "Nấm hầu thủ / Nấm đầu khỉ công nghệ cao (Lion's Mane Mushroom)",
+    "scientific_name": "Hericium erinaceus",
+    "dia_ban_pho_bien": [
+      "Đà Lạt (Lâm Đồng)",
+      "Mộc Châu (Sơn La)",
+      "Hà Nội",
+      "TP.HCM"
+    ],
+    "dac_tinh_sinh_thai": "Nấm dược liệu quý nhập ngoại có hình dáng như chùm tua gai màu trắng ngà của bờm sư tử, nuôi trồng phòng lạnh công nghệ cao, cơ chất mùn cưa gỗ mềm phối bột ngô cám gạo, nhiệt độ nuôi sợi 20 - 24°C, nhiệt độ kích quả thể lạnh 16 - 20°C, độ ẩm 85 - 90%, cần ánh sáng tán xạ nhẹ.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh vàng ố và thối nhầy tua nấm hầu thủ vi khuẩn (Bacterial Yellowing and Rot)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Vi khuẩn",
+          "ten_khoa_hoc": "Pseudomonas tolaasii / Pseudomonas gingeri"
+        },
+        "trieu_chung_dien_hinh": [
+          "Các tua gai trắng muốt của nấm hầu thủ đột ngột chuyển sang màu vàng rơm, vàng cam ố bẩn",
+          "Đầu các sợi tua gai bị nhũn nước, dính bết lại với nhau thành từng búi nhờn dính",
+          "Quả thể nấm teo tóp biến dạng, bốc mùi hôi thối khó chịu, không thể chiết xuất hoạt chất hericenone và erinacine"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với nấm già tự nhiên đổi màu: Nấm hầu thủ già chuyển sang màu vàng ngà khô ráo tự nhiên; nấm nhiễm vi khuẩn biến màu vàng ố ướt nhầy thối rữa và có giọt dịch nhầy dính bết các tua nấm.",
+        "kiem_tra_thuc_dia": "Dùng tay sờ vào chùm tua nấm: các sợi gai nhũn dính bết vào tay, bóp nhẹ thấy dịch nhớt rỉ ra bốc mùi chua nồng.",
+        "phac_do_vietgap": {
+          "canh_tac": "Tránh để giọt nước ngưng tụ trên trần nhà lạnh nhỏ giọt trực tiếp xuống tai nấm; điều chỉnh hệ thống thông gió đối lưu nhẹ.",
+          "sinh_hoc": "Khử trùng không khí nhà nuôi định kỳ bằng đèn tia cực tím UV và máy tạo khí ozone loãng khi chưa treo nấm; phun dung dịch Nano Bạc nồng độ 5ppm.",
+          "khuyen_cao_chuyen_gia": "Thu hoạch sớm ngay khi phát hiện chớm vàng đầu gai để hạn chế tổn thất kinh tế."
+        }
+      },
+      {
+        "ten_benh": "Bệnh mốc cam phấn phủ bề mặt phôi nấm (Orange Bread Mold)",
+        "muc_do_nguy_hiem": "Cao",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Chrysonilia sitophila (syn. Neurospora sitophila)"
+        },
+        "trieu_chung_dien_hinh": [
+          "Trên cổ nút bông và bề mặt bịch phôi nấm hầu thủ xuất hiện lớp sợi nấm màu cam đào hoặc hồng phấn phát triển cực nhanh",
+          "Lớp nấm mốc bung ra vô số bụi bào tử màu cam rực rỡ bay lơ lửng khắp không gian nhà nuôi",
+          "Sợi nấm mốc cam ăn sâu chiếm đoạt toàn bộ dưỡng chất của bịch phôi làm tơ nấm hầu thủ ngạt thở chết nghẽn"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với sắc tố tự nhiên của phôi nấm: Nấm hầu thủ tơ thuần khiết màu trắng ngà sạch sẽ; mốc Neurospora có màu cam sáng rực rỡ và phát tán bụi phấn bào tử mịn màng vào không khí.",
+        "kiem_tra_thuc_dia": "Chạm nhẹ vào cổ nút bông: thấy đám bụi phấn màu cam bay túa ra như khói bụi màu gạch non.",
+        "phac_do_vietgap": {
+          "canh_tac": "Kiểm tra kỹ nút bông không để bị ẩm ướt trong quá trình hấp khử trùng; vứt bỏ ngay bịch nhiễm ra khỏi phòng lạnh trước khi bào tử bung tỏa.",
+          "sinh_hoc": "Vệ sinh giàn kệ bằng dung dịch cồn y tế 70 độ kết hợp phun xịt Nano Bạc sát khuẩn bề mặt kệ định kỳ.",
+          "khuyen_cao_chuyen_gia": "Giảm bớt tỷ lệ cám bắp thừa trong công thức phối trộn cơ chất mùa hè ẩm ướt."
+        }
+      }
+    ]
+  },
+  {
+    "id": "imp_crop_017",
+    "topic": "Cay_Nhap_Khau_Kinh_Te_Cao",
+    "name_vi": "Nấm đông trùng hạ thảo nhân tạo nuôi phòng lạnh (Cordyceps)",
+    "scientific_name": "Cordyceps militaris",
+    "dia_ban_pho_bien": [
+      "Đà Lạt (Lâm Đồng)",
+      "Thủ Đức (TP.HCM)",
+      "Hà Nội",
+      "Cần Thơ",
+      "Vĩnh Long"
+    ],
+    "dac_tinh_sinh_thai": "Dược liệu quý cao cấp nuôi trồng nhân tạo trong phòng sạch vô trùng đạt chuẩn Cleanroom, cơ chất gạo lứt bổ sung nước cốt dừa, dịch nhộng tằm, peptone và khoáng vi lượng, nhiệt độ ươm sợi 20 - 22°C (tối), nhiệt độ kích sáng tạo quả thể 18 - 20°C (độ ẩm 80 - 90%, ánh sáng 1.000 lux chu kỳ 12h/12h).",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh mốc xanh lục bội nhiễm cơ chất gạo lứt (Green Mold Contamination)",
+        "muc_do_nguy_hiem": "Cực kỳ nghiêm trọng (Hiểm nghèo)",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Penicillium digitatum / Aspergillus flavus"
+        },
+        "trieu_chung_dien_hinh": [
+          "Bên trong hộp hoặc lọ thủy tinh nuôi cấy xuất hiện các đốm mốc màu xanh lục hoặc vàng hoa cau trên bề mặt khối gạo lứt",
+          "Sợi nấm đông trùng hạ thảo màu cam bị ức chế, không thể bật lên các ngọn quả thể nấm dạng ngón tay",
+          "Khối cơ chất bị thối nhão chuyển sang màu xám đen, bốc mùi ẩm mốc khó chịu và có nguy cơ sinh độc tố mycotoxin"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với nấm đông trùng hạ thảo tơ màu cam thuần khiết: Nấm Cordyceps có màu cam cà rốt đồng nhất; mốc tạp nhiễm có màu xanh lục ô-liu hoặc xanh lá mạ bao phủ cơ chất dạng bột mịn.",
+        "kiem_tra_thuc_dia": "Soi đáy hộp nuôi cấy dưới ánh đèn LED kiểm tra: thấy cơ chất gạo lứt bị đổi màu xanh xám loang lổ và sợi nấm cam bị teo quắt.",
+        "phac_do_vietgap": {
+          "canh_tac": "Thực hiện nghiêm ngặt quy trình hấp autoclave cơ chất ở 121°C trong 45 phút; thao tác cấy truyền giống trong tủ cấy vô trùng Clean Bench thổi khí Laminar màng lọc HEPA.",
+          "sinh_hoc": "Sử dụng nguồn giống thuần chủng đời F1 khỏe mạnh; vệ sinh phòng cấy định kỳ bằng cồn 70 độ và khử trùng buồng nuôi bằng khí Ozone trước mỗi mẻ cấy mới.",
+          "khuyen_cao_chuyen_gia": "Tiêu hủy triệt để các lọ nhiễm mốc bằng cách hấp tiệt trùng trước khi rửa bình để tránh phát tán bào tử mốc ra môi trường xung quanh."
+        }
+      },
+      {
+        "ten_benh": "Bệnh thối nhũn teo ngọn quả thể vi khuẩn (Bacterial Soft Rot of Fruiting Bodies)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Vi khuẩn",
+          "ten_khoa_hoc": "Bacillus amyloliquefaciens hoang dã / Pseudomonas spp."
+        },
+        "trieu_chung_dien_hinh": [
+          "Các ngọn nấm màu cam đang vươn cao đột ngột bị nhũn nước ở phần chóp ngọn, chuyển sang màu nâu đen ướt nhờn",
+          "Thân cây nấm bị gục ngã ngang trên bề mặt cơ chất, dịch nhờn tiết ra làm dính bết các cây nấm xung quanh",
+          "Mùi hôi chua nồng bốc lên khi mở nắp hộp kiểm tra, hàm lượng cordycepin và adenosine bị phân hủy hoàn toàn"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với hiện tượng ngọn nấm bị cháy khô do quá nhiệt bóng đèn: Cháy nhiệt làm ngọn nấm khô quắt màu nâu đỏ không chảy nước nhờn; nhiễm khuẩn làm ngọn nấm nhũn nát chảy dịch nhớt thối rữa.",
+        "kiem_tra_thuc_dia": "Dùng panh vô trùng gắp nhẹ ngọn nấm: thân nấm đứt rời nhũn nát như cọng bún thiu, dịch nhớt dính chặt vào đầu panh.",
+        "phac_do_vietgap": {
+          "canh_tac": "Không để đọng nước trên nắp hộp cấy nhỏ giọt xuống quả thể; duy trì nhiệt độ phòng nuôi ổn định 18 - 20°C không để sốc nhiệt > 23°C.",
+          "sinh_hoc": "Khử trùng nắp hộp và màng thoáng khí bằng cồn y tế; kiểm tra định kỳ chỉ số vô trùng buồng nuôi cấy.",
+          "khuyen_cao_chuyen_gia": "Hạ độ ẩm phòng xuống 75% trong 24 giờ ngay khi phát hiện chớm nhũn ngọn để ngăn vi khuẩn lây lan."
+        }
+      }
+    ]
+  },
+  {
+    "id": "imp_crop_018",
+    "topic": "Cay_Nhap_Khau_Kinh_Te_Cao",
+    "name_vi": "Quả mâm xôi đỏ / Phúc bồn tử Đà Lạt (Red Raspberry)",
+    "scientific_name": "Rubus idaeus",
+    "dia_ban_pho_bien": [
+      "Đà Lạt (Lâm Đồng)",
+      "Lạc Dương (Lâm Đồng)",
+      "Mộc Châu (Sơn La)",
+      "Sa Pa (Lào Cai)"
+    ],
+    "dac_tinh_sinh_thai": "Cây bụi thân gai ôn đới cao cấp, trồng trong nhà màng che mưa trên luống cao hoặc chậu giá thể xơ dừa cao 40cm, ưa khí hậu mát lạnh (18 - 24°C), giá thể tơi xốp giàu hữu cơ, thoát nước tuyệt hảo, pH giá thể 5.5 - 6.5, cực kỳ mẫn cảm với đọng nước chân rễ.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh thối xám nát quả mâm xôi (Botrytis Gray Mold)",
+        "muc_do_nguy_hiem": "Cực kỳ nghiêm trọng (Hiểm nghèo)",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Botrytis cinerea"
+        },
+        "trieu_chung_dien_hinh": [
+          "Các múi nhỏ của quả phúc bồn tử chín mọng bị úng nước màu nâu nhạt, sau đó quả bị mềm nhũn chảy nước",
+          "Bao phủ toàn bộ quả là một lớp sợi nấm và chùm bào tử màu xám tro dày đặc như lớp nỉ",
+          "Quả khô quắt lại trên cành thành quả xác ướp (mummy), lây lan sang các quả xanh bên cạnh làm thối toàn bộ chùm"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với bệnh thối quả Rhizopus: Rhizopus sợi nấm màu trắng dài có các đầu chấm đen như đầu đinh ghim phát triển cực nhanh trong vài giờ; Botrytis có lớp lông ngắn màu xám tro phát tán bụi khói khi chạm nhẹ.",
+        "kiem_tra_thuc_dia": "Dùng tay gõ nhẹ vào cành mang quả bệnh: một đám bụi khói bào tử màu xám tro bay mù mịt trong không khí; quả thối nhũn dính bết vào ngón tay.",
+        "phac_do_vietgap": {
+          "canh_tac": "Buộc cố định các cành mâm xôi vào giàn dây chữ V giúp tán thông thoáng; hái quả vào buổi sáng ráo sương; loại bỏ ngay quả thối ra túi rác.",
+          "sinh_hoc": "Phun phòng định kỳ nấm đối kháng Chaetomium kết hợp vi khuẩn Bacillus subtilis chủng đặc hiệu và chế phẩm Nano Bạc hữu cơ.",
+          "khuyen_cao_chuyen_gia": "Giữ ẩm độ không khí nhà màng < 75% bằng quạt thông gió công nghiệp trong giai đoạn thu hoạch rộ."
+        }
+      },
+      {
+        "ten_benh": "Bệnh đốm mắt cua nứt thân cành Rubus (Spur Blight / Cane Spot)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Elsinoë veneta (syn. Didymella applanata)"
+        },
+        "trieu_chung_dien_hinh": [
+          "Trên thân cành non xuất hiện các vết đốm nhỏ hình tròn lõm sâu màu tím hoặc nâu đỏ",
+          "Tâm vết đốm chuyển sang màu xám tro, mép gờ nổi cao màu tím thẫm rất sắc nét",
+          "Nhiều vết đốm liên kết lại làm vỏ cành bị nứt nẻ sâu vào tầng gỗ, cành bị khô giòn dễ gãy, các chồi nách mang hoa vụ sau bị teo chết hoàn toàn"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với vết xước gai tự nhiên: Gai cào xước chỉ để lại vệt xơ mỏng màu nâu nhạt; nấm Elsinoë tạo các vết lõm tròn tâm xám bạc gờ tím nổi cao và làm nứt toác lớp vỏ gỗ.",
+        "kiem_tra_thuc_dia": "Dùng móng tay miết dọc thân cành mâm xôi: cảm giác lồi lõm sần sùi cộm tay rõ rệt, nắn nhẹ cành giòn gãy ngang mắt đốt.",
+        "phac_do_vietgap": {
+          "canh_tac": "Cắt tỉa triệt để các cành đã cho quả vụ trước sát mặt đất ngay sau thu hoạch; dọn sạch tàn dư lá bệnh.",
+          "sinh_hoc": "Phun dung dịch Nano Đồng Chitosan kích kháng dày vỏ cành kết hợp chế phẩm sinh học Trichoderma.",
+          "khuyen_cao_chuyen_gia": "Quét dung dịch vôi pha đồng sunfat lên thân cành già vào giai đoạn ngủ nghỉ tỉa cành."
+        }
+      }
+    ]
+  },
+  {
+    "id": "imp_crop_019",
+    "topic": "Cay_Nhap_Khau_Kinh_Te_Cao",
+    "name_vi": "Dưa lưới Musk Melon Nhật Bản (Japanese Musk Melon)",
+    "scientific_name": "Cucumis melo var. reticulatus",
+    "dia_ban_pho_bien": [
+      "Đà Lạt (Lâm Đồng)",
+      "Củ Chi (TP.HCM)",
+      "Ninh Thuận",
+      "Bình Dương",
+      "Vĩnh Long",
+      "Tây Ninh"
+    ],
+    "dac_tinh_sinh_thai": "Cây ăn quả dây leo giá trị kinh tế cực cao, bắt buộc canh tác nhà màng ứng dụng công nghệ tưới nhỏ giọt Fertigation trên giá thể xơ dừa, thụ phấn nhân tạo, mỗi cây nuôi đúng 1 quả đạt vân lưới nổi đều dày, pH giá thể 6.0 - 6.8, EC 1.8 - 2.5 mS/cm.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh nứt thân xì mủ bã kẹo gôm dưa lưới (Gummy Stem Blight)",
+        "muc_do_nguy_hiem": "Cực kỳ nghiêm trọng (Hiểm nghèo)",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Didymella bryoniae (anamorph: Phoma cucurbitacearum)"
+        },
+        "trieu_chung_dien_hinh": [
+          "Phần gốc thân sát mặt giá thể hoặc các nách cành xuất hiện vết úng nước thâm đen, sau đó vỏ thân bị nứt nẻ dọc theo thớ",
+          "Từ vết nứt ứa ra chất dịch mủ màu nâu đỏ quánh đặc như bã kẹo cao su hoặc giọt gôm mật ong",
+          "Trên bề mặt vết loét khô xuất hiện lấm tấm vô số chấm đen nhỏ li ti (bọc quả thể nấm), toàn bộ dây dưa phía trên bị héo rũ nhanh chóng khi quả đang lên vân lưới"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với bệnh héo xanh vi khuẩn: Héo vi khuẩn thân không nứt nẻ xì mủ quánh nâu đỏ và không có các chấm đen li ti trên vỏ; Didymella bắt buộc có vết nứt dài xì gôm nâu dẻo quánh và hạt đen li ti.",
+        "kiem_tra_thuc_dia": "Sờ tay vào vết nứt gốc thân dưa lưới: giọt mủ nâu đỏ dính dẻo quánh vào đầu ngón tay như nhựa kẹo; dùng kính lúp soi thấy các hạt chấm đen li ti rải rác quanh vết nứt.",
+        "phac_do_vietgap": {
+          "canh_tac": "Tỉa chồi nách vào buổi sáng khô ráo nắng to để vết thương mau se lành; khử trùng kéo bấm chồi bằng cồn 70 độ.",
+          "sinh_hoc": "Quét trực tiếp thuốc sinh học Trichoderma dạng paste đặc trộn Nano Bạc Đồng 100ppm lên vết nứt thân; phun phòng toàn bộ tán lá định kỳ 7 ngày/lần.",
+          "khuyen_cao_chuyen_gia": "Kiểm soát độ ẩm nhà màng dưới 80% bằng quạt đối lưu, không để nước tưới nhỏ giọt văng trúng cổ thân cây dưa."
+        }
+      },
+      {
+        "ten_benh": "Bệnh phấn trắng phủ vân lưới nứt nẻ (Powdery Mildew)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Golovinomyces cichoracearum (syn. Erysiphe cichoracearum) / Podosphaera xanthii"
+        },
+        "trieu_chung_dien_hinh": [
+          "Mặt trên và mặt dưới phiến lá dưa lưới xuất hiện các đốm bột màu trắng như rắc phấn mì",
+          "Vết phấn lan nhanh bao phủ toàn bộ phiến lá và cuống lá, lá bị vàng xỉn, khô cháy giòn từ lá gốc lên ngọn",
+          "Vỏ quả dưa lưới bị chai sượng, các đường vân lưới phát triển méo mó đứt đoạn, quả không tích lũy được độ ngọt Brix chuẩn Nhật Bản"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với bệnh sương mai: Phấn trắng tạo lớp bột phấn trắng xốp như phấn viết bảng ở cả 2 mặt lá; sương mai tạo các vết cháy màu vàng nâu hình góc cạnh bị chặn bởi gân lá mặt dưới có lớp tơ xám.",
+        "kiem_tra_thuc_dia": "Miết ngón tay lên phiến lá dưa: lớp bột phấn trắng dính dính đầy ngón tay, mô lá bên dưới hơi vàng úa xơ xác.",
+        "phac_do_vietgap": {
+          "canh_tac": "Thu dọn triệt để lá già dưới gốc mang ra khỏi nhà màng tiêu hủy; tăng cường thông gió giảm tích tụ ẩm.",
+          "sinh_hoc": "Phun phòng luân phiên chế phẩm sinh học vi khuẩn Bacillus subtilis chủng QST 713 kết hợp dầu khoáng hữu cơ SK Enspray 99EC nồng độ 0.3%.",
+          "khuyen_cao_chuyen_gia": "Phun kỹ cả mặt trên và mặt dưới của các tầng lá phía dưới tán dưa nơi mầm nấm xuất hiện đầu tiên."
+        }
+      },
+      {
+        "ten_benh": "Bệnh sương mai bã chè cháy lá góc cạnh (Downy Mildew)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Pseudoperonospora cubensis"
+        },
+        "trieu_chung_dien_hinh": [
+          "Mặt trên lá xuất hiện các đốm màu vàng tươi có hình đa giác góc cạnh rõ rệt do bị chặn lại bởi các gân phụ của phiến lá dưa",
+          "Sáng sớm lật mặt dưới lá thấy một lớp tơ nấm mịn màu xám tím hoặc nâu xám bao phủ vết bệnh",
+          "Các vết góc cạnh nhanh chóng liên kết lại làm toàn bộ lá khô cháy giòn như bã chè khô, cuộn mép lên trên nhưng lá vẫn treo lủng lẳng trên dây"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với bệnh cháy lá do thiếu Magie: Thiếu Magie vàng ở phần thịt giữa các gân chính không có hình đa giác góc cạnh sắc sảo và mặt dưới lá sạch bong không có lớp tơ xám tím.",
+        "kiem_tra_thuc_dia": "Soi ngược phiến lá lên trần nhà màng: thấy các ô hình đa giác góc cạnh màu vàng nâu sắc nét như ô cờ caro; mặt dưới ẩm có lớp mốc xám.",
+        "phac_do_vietgap": {
+          "canh_tac": "Bảo dưỡng màng mái không để dột nước mưa tạo giọt nhỏ xuống lá dưa; không tưới phun mưa.",
+          "sinh_hoc": "Phun dung dịch Nano Đồng sinh học kết hợp Phosphonate sinh học (Kali Phosphite) nồng độ 0.2%.",
+          "khuyen_cao_chuyen_gia": "Can thiệp ngay khi thấy xuất hiện đốm đa giác vàng đầu tiên trên các tầng lá dưới gốc."
+        }
+      }
+    ]
+  },
+  {
+    "id": "imp_crop_020",
+    "topic": "Rau_Cu_Gia_Vi_Va_Nam",
+    "name_vi": "Bí ngô khổng lồ Atlantic Giant Đà Lạt (Atlantic Giant Pumpkin)",
+    "scientific_name": "Cucurbita maxima 'Atlantic Giant'",
+    "dia_ban_pho_bien": [
+      "Đà Lạt (Lâm Đồng)",
+      "Đơn Dương (Lâm Đồng)"
+    ],
+    "dac_tinh_sinh_thai": "Giống bí ngô kỷ lục thế giới nhập ngoại cho quả nặng từ 50kg đến hàng trăm kg, trồng trong nhà kính công nghệ cao, cần diện tích bò > 30m2/gốc, chế độ bón phân giàu kali và hữu cơ vi sinh, đệm rơm hoặc xốp cách ly quả khổng lồ khỏi mặt đất ẩm, pH đất 6.5 - 7.2.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh thối thâm cuống và thối ruột quả khổng lồ (Choanephora Wet Rot)",
+        "muc_do_nguy_hiem": "Cực kỳ nghiêm trọng (Hiểm nghèo)",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Choanephora cucurbitarum"
+        },
+        "trieu_chung_dien_hinh": [
+          "Bắt đầu từ vết đài hoa héo hoặc cuống quả bí ngô khổng lồ xuất hiện vết úng nước thâm nhũn",
+          "Nấm phát triển cực nhanh tạo ra một lớp sợi nấm màu trắng mang vô số đầu bào tử màu đen như đầu đinh ghim li ti bao phủ vùng cuống quả",
+          "Vỏ và thịt quả bí ngô nặng hàng chục kg bị thối nhũn chảy nước vàng nhầy, quả bị sụp đổ xẹp lép từ bên trong bốc mùi thối chua nồng"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với bệnh nứt quả do tưới nước quá nhiều: Nứt do thừa nước mép vết nứt khô cứng có mô sẹo màu trắng; thối Choanephora có lớp sợi nấm tua tủa gắn hạt đen như đầu đinh ghim và mô thịt quả nhũn chảy nước lỏng.",
+        "kiem_tra_thuc_dia": "Dùng kính lúp soi vùng cuống quả bị thối: thấy các sợi nấm mảnh trắng vươn cao mang các hạt tròn nhỏ màu đen lấp lánh như rừng đinh ghim mini.",
+        "phac_do_vietgap": {
+          "canh_tac": "Lót đệm mút xốp hoặc tấm pallet nhựa cao ráo dưới đáy quả bí ngô khổng lồ; ngắt bỏ hoa đực hoa cái đã tàn sau thụ phấn tránh ẩm mốc cuống.",
+          "sinh_hoc": "Rắc bột vôi tôi khử trùng quanh cuống kết hợp phun dung dịch Nano Bạc 30ppm và vi khuẩn Bacillus subtilis bảo vệ vùng rốn quả.",
+          "khuyen_cao_chuyen_gia": "Quạt gió trực tiếp vào vùng cuống quả khổng lồ sau các cơn mưa dông để làm khô nhanh độ ẩm đọng tại kẽ cuống."
+        }
+      },
+      {
+        "ten_benh": "Bệnh lở cổ rễ thối thắt thân chính bí ngô (Fusarium Crown and Foot Rot)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Fusarium solani f. sp. cucurbitae"
+        },
+        "trieu_chung_dien_hinh": [
+          "Đoạn thân gốc chính sát mặt đất bị sũng nước thâm đen, vỏ thân nứt nẻ và hóa bần",
+          "Mô gốc thân bị teo thắt lại, khi trời ẩm xuất hiện lớp nấm mốc màu trắng hồng bám xung quanh vết nứt",
+          "Toàn bộ dàn lá khổng lồ phía trên bị héo rũ từ từ, quả non bị teo tóp không thể tăng trọng lượng"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với dế hoặc chuột cắn thân: Chuột cắn có dấu răng gặm nham nhở; Fusarium làm thối mục mạch dẫn từ bên trong rỉ nhựa vàng và có sợi mốc hồng.",
+        "kiem_tra_thuc_dia": "Bới nhẹ lớp đất cổ rễ: thấy phần gốc thắt eo nhỏ lại so với thân trên, cạo vỏ thấy lớp nấm mốc màu hồng phấn mịn bám trong thớ gỗ thối mục.",
+        "phac_do_vietgap": {
+          "canh_tac": "Lên mô cao ráo trước khi đặt cây giống; không tưới nước thẳng vào gốc thân bí ngô.",
+          "sinh_hoc": "Tưới đẫm vùng rễ nấm đối kháng Trichoderma asperellum kết hợp vi khuẩn đối kháng Streptomyces định kỳ 15 ngày/lần.",
+          "khuyen_cao_chuyen_gia": "Xử lý đất hố trồng bằng chế phẩm sinh học Chitosan kích kháng rễ phát triển sâu rộng."
+        }
+      }
+    ]
+  },
+  {
+    "id": "imp_crop_021",
+    "topic": "Rau_Cu_Gia_Vi_Va_Nam",
+    "name_vi": "Ớt chuông ngọt Sweet Palermo Hà Lan (Sweet Palermo Sweet Pepper)",
+    "scientific_name": "Capsicum annuum var. grossum 'Sweet Palermo'",
+    "dia_ban_pho_bien": [
+      "Đà Lạt (Lâm Đồng)",
+      "Đơn Dương (Lâm Đồng)",
+      "Đức Trọng (Lâm Đồng)"
+    ],
+    "dac_tinh_sinh_thai": "Giống ớt ngọt thon dài cao cấp bản quyền từ Hà Lan, canh tác 100% trong nhà kính hiện đại trên giá thể xơ dừa tưới nhỏ giọt hồi lưu, nhiệt độ 22 - 28°C, độ ẩm 65 - 75%, pH giá thể 5.5 - 6.2, EC 2.2 - 2.8 mS/cm.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh thán thư vòng đồng tâm lõm sâu quả ớt chuông (Anthracnose Fruit Rot)",
+        "muc_do_nguy_hiem": "Cực kỳ nghiêm trọng (Hiểm nghèo)",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Colletotrichum scovillei / Colletotrichum acutatum"
+        },
+        "trieu_chung_dien_hinh": [
+          "Trên thân quả ớt Sweet Palermo dài xuất hiện các đốm trũng sâu hình tròn hoặc bầu dục màu nâu xám",
+          "Vết lõm lan rộng có các vòng tròn đồng tâm nổi bật, bên trên kết tụ các khối chất nhờn bào tử màu cam hồng",
+          "Quả ớt bị thối khô teo tóp, nhăn nheo như da túi da cũ, phần thịt bên trong thối đen làm mất hoàn toàn độ giòn ngọt"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với bệnh thối đít trái do thiếu Canxi (Blossom End Rot): Thiếu Canxi chỉ xuất hiện ở đỉnh chóp đít quả vị trí tiếp xúc hoa màu đen phẳng khô; thán thư xuất hiện bất kỳ vị trí nào trên thân quả có dạng lõm sâu nhiều vòng tròn đồng tâm ứa nhầy cam.",
+        "kiem_tra_thuc_dia": "Dùng tay ấn vào vết đốm trên quả: mô quả lún sâu mềm nhũn, miết nhẹ ngón tay dính dịch nhầy màu cam phấn có mùi chua nhẹ.",
+        "phac_do_vietgap": {
+          "canh_tac": "Tỉa bỏ bớt chồi nách chỉ giữ 2 thân chính/cây; dọn sạch quả thối cho vào túi ni-lông đem đốt tiêu hủy; kiểm soát quạt hút gió nhà kính.",
+          "sinh_hoc": "Phun phòng luân phiên nấm đối kháng Chaetomium kết hợp dịch chiết nấm men kích kháng sinh học và chế phẩm Nano Bạc Đồng 30ppm.",
+          "khuyen_cao_chuyen_gia": "Phun phòng định kỳ 7 - 10 ngày/lần trong mùa mưa nhiều sương mù đọng nước trên tán lá."
+        }
+      },
+      {
+        "ten_benh": "Bệnh héo xanh vi khuẩn mạch dẫn ớt chuông (Bacterial Wilt)",
+        "muc_do_nguy_hiem": "Cực kỳ nghiêm trọng (Hiểm nghèo)",
+        "tac_nhan": {
+          "loai": "Vi khuẩn",
+          "ten_khoa_hoc": "Ralstonia solanacearum"
+        },
+        "trieu_chung_dien_hinh": [
+          "Cây ớt chuông đang mang quả trĩu cành đột ngột bị rũ gục lá vào buổi trưa nắng gắt",
+          "Lá vẫn giữ nguyên màu xanh tươi bóng nhưng toàn bộ tán lá rũ rượi áp sát vào thân",
+          "Chỉ sau 2 - 3 ngày cây chết khô đứng trơ trọi, rễ tơ và vỏ cổ rễ bị thối nhũn nâu đen"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với bệnh héo vàng Fusarium: Héo vàng lá vàng rực từ gốc lên ngọn rụng dần từng lá; héo xanh cây gục đột ngột khi lá vẫn còn xanh tươi nguyên vẹn trên cành.",
+        "kiem_tra_thuc_dia": "Cắt đoạn thân gốc cắm vào cốc nước trong: các dòng dịch vi khuẩn màu trắng sữa chảy tràn ra từ bó mạch dẫn chìm xuống đáy cốc nước.",
+        "phac_do_vietgap": {
+          "canh_tac": "Nhổ bỏ cây bệnh cho vào bao tiêu hủy; khử trùng máng giá thể bằng vôi tả; không để nước thoát máng tràn sang chậu bên cạnh.",
+          "sinh_hoc": "Tưới phòng định kỳ chế phẩm vi khuẩn đối kháng Bacillus amyloliquefaciens kết hợp kháng sinh sinh học Kasugamycin.",
+          "khuyen_cao_chuyen_gia": "Giữ nhiệt độ vùng rễ dưới 28°C bằng cách che mát hệ thống máng trồng thủy canh hồi lưu."
+        }
+      }
+    ]
+  },
+  {
+    "id": "imp_crop_022",
+    "topic": "Rau_Cu_Gia_Vi_Va_Nam",
+    "name_vi": "Cải xoăn Kale xoăn khủng Hà Lan (Curly Kale)",
+    "scientific_name": "Brassica oleracea var. sabellica",
+    "dia_ban_pho_bien": [
+      "Đà Lạt (Lâm Đồng)",
+      "Lạc Dương (Lâm Đồng)",
+      "Mộc Châu (Sơn La)"
+    ],
+    "dac_tinh_sinh_thai": "Rau 'siêu thực phẩm' nhập nội ưa khí hậu mát lạnh (15 - 20°C), chịu rét rất tốt, lá xoăn tít dày phiến, trồng luống phủ bạt hoặc chậu giá thể, pH đất tối ưu 6.2 - 6.8, rất mẫn cảm với úng ngập và vi khuẩn thối đen.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh thối đen chữ V vi khuẩn Xanthomonas (Black Rot)",
+        "muc_do_nguy_hiem": "Cực kỳ nghiêm trọng (Hiểm nghèo)",
+        "tac_nhan": {
+          "loai": "Vi khuẩn",
+          "ten_khoa_hoc": "Xanthomonas campestris pv. campestris"
+        },
+        "trieu_chung_dien_hinh": [
+          "Bắt đầu từ mép lá xoăn xuất hiện các vết đốm vàng hình chữ V đỉnh nhọn hướng sâu vào gân chính của lá",
+          "Các gân lá nhỏ trong vùng chữ V bị biến thành màu đen mun như sợi chỉ đen",
+          "Mô lá bị khô giòn màu nâu sẫm, lá xoăn rụng sớm từ gốc lên, cắt ngang cuống lá thấy các vòng mạch dẫn hóa đen hoàn toàn"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với cháy mép lá do thừa muối khoáng EC cao: Cháy phân mép lá khô cháy đồng đều thành dải cong không có hình chữ V nhọn và gân lá không bị hóa đen mun; Xanthomonas tạo hình chữ V gân đen sắc nét.",
+        "kiem_tra_thuc_dia": "Cắt ngang cuống lá xoăn bệnh: thấy các chấm đen nhỏ li ti xếp vòng theo mạch dẫn; đưa lên kính lúp thấy dịch nhớt vi khuẩn ứa ra từ bó mạch đen.",
+        "phac_do_vietgap": {
+          "canh_tac": "Sử dụng hạt giống nhập khẩu đã xử lý nhiệt nước nóng 50°C trong 25 phút; không tưới phun mưa lên tán lá xế chiều.",
+          "sinh_hoc": "Phun phòng kháng sinh vi sinh Kasugamycin kết hợp Nano Bạc 20ppm và chủng vi sinh Bacillus subtilis.",
+          "khuyen_cao_chuyen_gia": "Tiêu hủy triệt để lá già bị chữ V, hạn chế chạm tay từ cây bệnh sang cây khỏe khi tỉa lá thu hoạch."
+        }
+      },
+      {
+        "ten_benh": "Bệnh sưng rễ u sần rễ bắp cải Kale (Clubroot Disease)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Động vật nguyên sinh / Nấm nhầy",
+          "ten_khoa_hoc": "Plasmodiophora brassicae"
+        },
+        "trieu_chung_dien_hinh": [
+          "Cây cải xoăn Kale sinh trưởng còi cọc, lá ngả màu xanh xám vàng úa và héo rũ vào buổi trưa nắng rồi hồi lại ban đêm",
+          "Nhổ cây lên thấy toàn bộ hệ thống rễ chính và rễ phụ bị phình to bất thường thành các cục u sần sùi biến dạng như củ gừng",
+          "Các cục u rễ sau đó bị thối mục mủn đen bốc mùi hôi thối, cây không thể hút nước và khoáng chất dẫn đến chết rụi"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với tuyến trùng nốt sưng rễ: Tuyến trùng tạo các nốt hạt nhỏ tròn li ti đính trên rễ như hạt đậu; Clubroot làm toàn bộ thân rễ phình to thành khối u khổng lồ biến dạng hoàn toàn bộ rễ.",
+        "kiem_tra_thuc_dia": "Nhổ bật gốc cải Kale: cả chùm rễ biến thành các khối u sần sùi to bằng ngón tay cái, mô u rễ giòn bẻ gãy thấy ruột thối đục bốc mùi khó chịu.",
+        "phac_do_vietgap": {
+          "canh_tac": "Nâng pH đất lên > 7.2 bằng cách bón vôi nông nghiệp khử chua triệt để vì mầm bệnh chỉ phát triển mạnh trong đất chua pH < 6.0.",
+          "sinh_hoc": "Tưới phòng gốc nấm đối kháng Trichoderma phối hợp chủng xạ khuẩn đối kháng phân giải màng bào tử nang nấm nhầy.",
+          "khuyen_cao_chuyen_gia": "Luân canh bắt buộc với cây họ Hòa thảo hoặc Hành tỏi tối thiểu 3 vụ trước khi trồng lại rau họ Thập tự."
+        }
+      }
+    ]
+  },
+  {
+    "id": "imp_crop_023",
+    "topic": "Rau_Cu_Gia_Vi_Va_Nam",
+    "name_vi": "Cà chua bi Cherry Ruby socola Hà Lan (Chocolate Cherry Tomato)",
+    "scientific_name": "Solanum lycopersicum var. cerasiforme",
+    "dia_ban_pho_bien": [
+      "Đà Lạt (Lâm Đồng)",
+      "Đức Trọng (Lâm Đồng)",
+      "Đơn Dương (Lâm Đồng)"
+    ],
+    "dac_tinh_sinh_thai": "Giống cà chua bi cao cấp màu socola đen bóng ngọt đậm, leo cao giàn nhà màng bán thủy canh nhỏ giọt, ưa nhiệt độ ngày 22 - 26°C, đêm 15 - 18°C, giá thể xơ dừa phối perlite, pH 5.8 - 6.5, EC 2.5 - 3.2 mS/cm.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh mốc sương thối nâu lá và chùm quả non (Late Blight)",
+        "muc_do_nguy_hiem": "Cực kỳ nghiêm trọng (Hiểm nghèo)",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Phytophthora infestans"
+        },
+        "trieu_chung_dien_hinh": [
+          "Mép lá và đầu phiến lá xuất hiện các vết đốm sũng nước màu xanh đậm rồi chuyển nhanh sang nâu sẫm cháy khô",
+          "Sáng sớm lật mặt dưới lá thấy lớp mốc tơ nấm màu trắng tuyết bao phủ rìa vết bệnh",
+          "Cuống quả và quả cà chua bi xuất hiện các mảng loang màu nâu sô-cô-la chai cứng, quả thối nhũn rụng cuống hoàng loạt"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với bệnh đốm vòng Alternaria: Mốc sương lan cực nhanh trong thời tiết lạnh ẩm sương mù và có lớp mốc tơ trắng mặt dưới lá; Alternaria lá khô có nhiều vòng đồng tâm sắc nét.",
+        "kiem_tra_thuc_dia": "Lật mặt dưới lá non vào sáng sớm: lớp màng tơ trắng mịn giăng quanh mép cháy sũng nước; quả thối có mảng da cứng màu nâu đồng.",
+        "phac_do_vietgap": {
+          "canh_tac": "Tỉa bỏ triệt để lá già tầng đáy dưới chùm quả đang thu hoạch; duy trì độ thông gió nhà màng tối ưu.",
+          "sinh_hoc": "Phun dung dịch Nano Đồng Bạc hữu cơ kết hợp Phosphonate sinh học (Kali Phosphite) nồng độ 0.25%.",
+          "khuyen_cao_chuyen_gia": "Phun phòng sớm trước các đợt mưa dầm lạnh ẩm kéo dài tại cao nguyên Lâm Đồng."
+        }
+      },
+      {
+        "ten_benh": "Bệnh xoăn ngọn vàng lá virus cà chua bi (Tomato Yellow Leaf Curl Virus - TYLCV)",
+        "muc_do_nguy_hiem": "Cực kỳ nghiêm trọng (Hiểm nghèo)",
+        "tac_nhan": {
+          "loai": "Virus",
+          "ten_khoa_hoc": "Tomato yellow leaf curl virus (TYLCV)",
+          "vector_truyen_benh": "Bọ phấn trắng (Bemisia tabaci)"
+        },
+        "trieu_chung_dien_hinh": [
+          "Các lá non trên ngọn bị teo nhỏ, phiến lá cong quăn queo hình lòng máng hoặc hình chiếc thìa",
+          "Mép lá ngả màu vàng tươi trong khi gân lá vẫn xanh, đọt non bị chùn lại mọc thành búi rậm rạp",
+          "Cây bị lùn còi cọc nghiêm trọng, hoa rụng sạch không thể đậu quả chùm cà chua bi"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với ngộ độc dinh dưỡng vi lượng: Ngộ độc vi lượng chỉ làm cháy rìa lá khô giòn đồng loạt; virus TYLCV làm lá non cong queo hình chiếc thìa kèm theo đốt thân ngắn ngủn và chồi non mọc túm lại.",
+        "kiem_tra_thuc_dia": "Lật mặt dưới đọt non kiểm tra: thấy vô số con bọ phấn trắng nhỏ xíu bay túa ra; lá non cứng giòn cong úp hình lòng thìa.",
+        "phac_do_vietgap": {
+          "canh_tac": "Lắp đặt lưới chắn côn trùng 50 mesh kín toàn bộ nhà màng; treo bẫy dính màu vàng mật độ 1 bẫy/20m2 để theo dõi bắt bọ phấn.",
+          "sinh_hoc": "Phun phòng trừ bọ phấn bằng chế phẩm nấm ký sinh Beauveria bassiana kết hợp dầu khoáng sinh học SK Enspray 99EC.",
+          "khuyen_cao_chuyen_gia": "Nhổ bỏ ngay cây nhiễm virus cho vào túi nilon buộc kín mang tiêu hủy để loại bỏ nguồn virus trong nhà màng."
+        }
+      }
+    ]
+  },
+  {
+    "id": "imp_crop_024",
+    "topic": "Rau_Cu_Gia_Vi_Va_Nam",
+    "name_vi": "Cà rốt tím Rainbow Baby Đà Lạt (Rainbow Baby Purple Carrot)",
+    "scientific_name": "Daucus carota subsp. sativus",
+    "dia_ban_pho_bien": [
+      "Đà Lạt (Lâm Đồng)",
+      "Đơn Dương (Lâm Đồng)"
+    ],
+    "dac_tinh_sinh_thai": "Giống cà rốt mini màu tím giàu anthocyanin cao cấp, ưa khí hậu mát dịu ôn đới (16 - 22°C), đất cát pha phù sa tơi xốp sâu > 30cm sạch sỏi đá để củ suôn thẳng, pH đất 6.0 - 6.8, rất mẫn cảm với úng nước thối củ.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh cháy lá sọc nâu Alternaria cà rốt (Alternaria Leaf Blight)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Alternaria dauci"
+        },
+        "trieu_chung_dien_hinh": [
+          "Mép các khía lá lông chim xuất hiện các đốm nhỏ màu nâu đen có quầng vàng xung quanh",
+          "Vết bệnh lan nhanh làm toàn bộ phiến lá lông chim bị cháy khô màu nâu đồng, quăn queo rũ xuống",
+          "Cuống lá bị các sọc thâm lõm dài làm cuống giòn dễ gãy khi dùng máy nhổ củ thu hoạch tự động"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với bệnh đốm lá Cercospora: Alternaria xuất hiện chủ yếu trên mép các lá già lá bánh tẻ viền nâu đen cháy khô rách rưới; Cercospora xuất hiện trên lá non với các đốm tròn tâm xám bạc rõ nét.",
+        "kiem_tra_thuc_dia": "Quan sát tán lá lông chim: mép các thùy lá bị cháy khô giòn màu nâu sẫm, nắn cuống lá thấy các vệt lõm màu nâu sẫm dễ đứt gãy.",
+        "phac_do_vietgap": {
+          "canh_tac": "Lên luống cao 30cm tạo rãnh thoát nước nhanh; gieo hạt giống mật độ vừa phải đảm bảo thông thoáng.",
+          "sinh_hoc": "Phun phòng chế phẩm vi sinh Bacillus subtilis kết hợp Nano Đồng hữu cơ 250ppm định kỳ 10 ngày/lần.",
+          "khuyen_cao_chuyen_gia": "Phun phòng sớm ngay khi tán lá cà rốt bắt đầu khép luống che kín mặt đất."
+        }
+      },
+      {
+        "ten_benh": "Bệnh thối mềm ướt củ vi khuẩn (Bacterial Soft Rot)",
+        "muc_do_nguy_hiem": "Cực kỳ nghiêm trọng (Hiểm nghèo)",
+        "tac_nhan": {
+          "loai": "Vi khuẩn",
+          "ten_khoa_hoc": "Pectobacterium carotovorum"
+        },
+        "trieu_chung_dien_hinh": [
+          "Cổ củ sát mặt đất xuất hiện vết úng nước thâm đen rồi nhanh chóng mềm nhũn",
+          "Thịt củ cà rốt tím bên trong bị phân hủy thành khối chất nhờn nhầy màu nâu tím xám, bốc mùi thối khắm đặc trưng",
+          "Tán lá phía trên bị héo rũ gục ngã trên mặt đất, củ nhấc lên bị đứt rời chảy nước thối"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với nứt củ sinh lý do thừa nước: Nứt sinh lý củ nứt toác dọc thịt củ khô ráo màu tím giòn; thối vi khuẩn củ nhũn nát chảy dịch nhớt bốc mùi hôi thối nồng nặc.",
+        "kiem_tra_thuc_dia": "Cầm cuống lá kéo nhẹ: cuống tuột rời khỏi củ, đầu củ nhầy nhụa dịch mủ thối bốc mùi khắm nồng nặc dính tay.",
+        "phac_do_vietgap": {
+          "canh_tac": "Không thu hoạch cà rốt lúc trời mưa hoặc đất đang nhão ướt; khử trùng công cụ thu hoạch.",
+          "sinh_hoc": "Tưới phòng gốc dung dịch Nano Bạc sinh học 15ppm kết hợp vi khuẩn đối kháng Bacillus amyloliquefaciens.",
+          "khuyen_cao_chuyen_gia": "Rửa sạch củ bằng nước sạch có sục khí Ozone trước khi đóng gói bảo quản kho lạnh 4°C."
+        }
+      }
+    ]
+  },
+  {
+    "id": "imp_crop_025",
+    "topic": "Rau_Cu_Gia_Vi_Va_Nam",
+    "name_vi": "Măng tây tím Purple Passion (Purple Passion Asparagus)",
+    "scientific_name": "Asparagus officinalis cv. Purple Passion",
+    "dia_ban_pho_bien": [
+      "Ninh Phước (Ninh Thuận)",
+      "Đơn Dương (Lâm Đồng)",
+      "Bắc Bình (Bình Thuận)"
+    ],
+    "dac_tinh_sinh_thai": "Giống măng tây cao cấp màu tím khói giàu chất chống oxy hóa, hàm lượng đường cao hơn măng xanh 20%, ưa đất cát pha tơi xốp thoát nước, độ ẩm giá thể 65 - 75%, pH 6.8 - 7.5, rất sợ úng ngập vùng cổ rễ.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh đốm tím thắt ngọn chồi măng tây tím (Purple Spot)",
+        "muc_do_nguy_hiem": "Cao",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Stemphylium vesicarium"
+        },
+        "trieu_chung_dien_hinh": [
+          "Thân chồi măng màu tím xuất hiện các vết đốm trũng sâu hình bầu dục màu tím đen",
+          "Vết bệnh ăn sâu vào biểu bì làm méo mó thân chồi măng non, đọt chồi bị cong thắt lại",
+          "Khi gặp gió lớn chồi măng dễ bị gãy gập ngang vết lõm, giảm 80% tỷ lệ măng xuất khẩu loại 1"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với sắc tố tím tự nhiên của giống Purple Passion: Sắc tố giống phân bố đều bóng mịn trên thân; bệnh Stemphylium là các vết lõm trũng sâu cục bộ có gờ nổi màu tím đen thâm quầng hoại tử mô.",
+        "kiem_tra_thuc_dia": "Dùng tay sờ vết đốm: thấy hốc lõm sâu cộm tay rõ rệt, mô tại vết lõm khô giòn dễ bẻ gãy.",
+        "phac_do_vietgap": {
+          "canh_tac": "Cắt tỉa hạ bớt mật độ cây mẹ thông thoáng tán; tạo hàng rào chắn gió xung quanh luống cát.",
+          "sinh_hoc": "Phun chế phẩm Nano Bạc Chitosan kết hợp nấm đối kháng Chaetomium định kỳ sau các đợt mưa rào.",
+          "khuyen_cao_chuyen_gia": "Thu hoạch măng vào sáng sớm trước khi ánh nắng làm nở các vảy ngọn chồi măng."
+        }
+      },
+      {
+        "ten_benh": "Bệnh thối đỏ gốc rễ măng tây tím (Fusarium Root and Crown Rot)",
+        "muc_do_nguy_hiem": "Cực kỳ nghiêm trọng (Hiểm nghèo)",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Fusarium oxysporum f. sp. asparagi"
+        },
+        "trieu_chung_dien_hinh": [
+          "Gốc thân măng sát mặt đất xuất hiện các vệt loét khô màu đỏ nâu hoặc nâu sẫm",
+          "Mạch dẫn bên trong thân bị nghẽn tắc, chuyển sang màu nâu đỏ rỉ sét",
+          "Bụi măng bị héo vàng rũ cành lá kim, rễ ngầm bị thối rỗng ruột trơ vỏ xơ xấc"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với bệnh thối rễ do úng nước Pythium: Pythium làm rễ thối nhũn chảy nước nhầy không đổi màu đỏ nâu mạch dẫn; Fusarium làm mạch dẫn hóa màu đỏ nâu rõ rệt và thân teo tóp khô.",
+        "kiem_tra_thuc_dia": "Dùng dao rạch vát gốc thân bụi măng bệnh: các bó sợi mạch dẫn màu đỏ nâu sẫm chạy dài từ cổ rễ lên thân mẹ nhìn thấy rất rõ.",
+        "phac_do_vietgap": {
+          "canh_tac": "Lên luống cao 35cm, xử lý đất bằng vôi bột khử chua trước khi trồng giống.",
+          "sinh_hoc": "Tưới định kỳ nấm Trichoderma asperellum kết hợp xạ khuẩn Streptomyces xung quanh vùng rễ bụi măng.",
+          "khuyen_cao_chuyen_gia": "Tiêu hủy bụi măng bệnh nặng và cách ly vùng đất xung quanh tránh nấm lây lan theo dòng nước tưới nhỏ giọt."
+        }
+      }
+    ]
+  },
+  {
+    "id": "imp_crop_026",
+    "topic": "Cay_An_Trai_Nhiet_Doi_Va_On_Doi",
+    "name_vi": "Sung Mỹ Cẩm Thạch / Kadota / Black Genoa (Fig Tree)",
+    "scientific_name": "Ficus carica",
+    "dia_ban_pho_bien": [
+      "Đà Lạt (Lâm Đồng)",
+      "Ninh Thuận",
+      "Bình Dương",
+      "Củ Chi (TP.HCM)",
+      "Vĩnh Long"
+    ],
+    "dac_tinh_sinh_thai": "Cây ăn quả Địa Trung Hải quả ngọt dẻo thơm, ưa nắng trực tiếp, sinh trưởng cực nhanh, trồng chậu hoặc luống nhà màng che mưa, ưa đất tơi xốp giàu canxi hữu cơ, pH thích hợp 6.5 - 7.5, rất nhạy cảm với tuyến trùng sưng rễ và bệnh gỉ sắt lá.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh gỉ sắt vàng lá sung Mỹ (Fig Rust)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Cerotelium fici"
+        },
+        "trieu_chung_dien_hinh": [
+          "Mặt trên lá xuất hiện các chấm nhỏ màu vàng xanh, mặt dưới tương ứng hình thành các mụn nổi nhỏ màu nâu đỏ gỉ sắt",
+          "Bào tử nấm phát tán bụi phấn vàng nâu phủ kín mặt dưới phiến lá sung xẻ thùy",
+          "Lá bị khô cháy giòn từ mép vào, rụng sớm hàng loạt trơ trọi cành mang quả non, quả sung bị teo sượng không chín ngọt"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với vết chích hút của nhện đỏ: Nhện đỏ có tơ mịn bám mặt dưới lá và lá có ánh bạc li ti; gỉ sắt tạo các mụn nổi gờ cộm chứa bột phấn gỉ sắt màu nâu đỏ rõ rệt.",
+        "kiem_tra_thuc_dia": "Dùng ngón tay vuốt mặt dưới lá sung: bột màu nâu đỏ gỉ sắt dính đầy vào đầu ngón tay như bột phấn hoa.",
+        "phac_do_vietgap": {
+          "canh_tac": "Cắt tỉa tạo tán mở tâm giúp ánh sáng xuyên thấu toàn bộ tán cành sung; thu dọn lá rụng đốt tiêu hủy.",
+          "sinh_hoc": "Phun phòng nấm đối kháng Chaetomium kết hợp chế phẩm Nano Bạc Đồng 35ppm định kỳ 10 ngày/lần.",
+          "khuyen_cao_chuyen_gia": "Phun phủ mặt dưới phiến lá vào sáng sớm khi sương vừa ráo để bao vây bào tử nấm."
+        }
+      },
+      {
+        "ten_benh": "Bệnh tuyến trùng nốt sưng rễ sung Mỹ (Root-Knot Nematode)",
+        "muc_do_nguy_hiem": "Cực kỳ nghiêm trọng (Hiểm nghèo)",
+        "tac_nhan": {
+          "loai": "Tuyến trùng",
+          "ten_khoa_hoc": "Meloidogyne incognita"
+        },
+        "trieu_chung_dien_hinh": [
+          "Cây sung Mỹ sinh trưởng chậm chạp, còi cọc, mép lá bị vàng úa và rụng lác đác",
+          "Quả sung non nhỏ teo, rụng hàng loạt khi quả mới bằng đầu ngón tay cái",
+          "Nhổ hoặc bới rễ kiểm tra thấy hệ thống rễ tơ xuất hiện vô số nốt sưng tròn cục u nhỏ như chuỗi hạt cườm biến dạng"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với nốt sần vi sinh vật cố định đạm (ở cây họ Đậu): Cây sung Mỹ không có nốt sần cố định đạm tự nhiên; mọi nốt u sần trên rễ sung đều là tổn thương do tuyến trùng xâm nhiễm.",
+        "kiem_tra_thuc_dia": "Bới nhẹ một chùm rễ tơ ngoài rìa chậu: thấy các cục u sần tròn dính liền nhau như chuỗi hạt cườm, bóp vỡ thấy dịch mủ trắng đục.",
+        "phac_do_vietgap": {
+          "canh_tac": "Xử lý nhiệt giá thể trước khi vào bầu hoặc chậu trồng sung; trồng xen cúc vạn thọ quanh gốc để xua đuổi tuyến trùng.",
+          "sinh_hoc": "Tưới gốc chế phẩm sinh học nấm ký sinh tuyến trùng Paecilomyces lilacinus kết hợp Chitosan sinh học nồng độ 1%.",
+          "khuyen_cao_chuyen_gia": "Không lấy cành giâm hoặc mắt ghép từ cây mẹ có rễ bị nhiễm nốt sưng tuyến trùng."
+        }
+      }
+    ]
+  },
+  {
+    "id": "imp_crop_027",
+    "topic": "Cay_An_Trai_Nhiet_Doi_Va_On_Doi",
+    "name_vi": "Lựu đỏ lùn Israel / Ấn Độ Bhagwa (Bhagwa Pomegranate)",
+    "scientific_name": "Punica granatum cv. Bhagwa",
+    "dia_ban_pho_bien": [
+      "Ninh Thuận",
+      "Bình Thuận",
+      "Đắk Lắk",
+      "Gia Lai",
+      "Vĩnh Long",
+      "Đồng Tháp"
+    ],
+    "dac_tinh_sinh_thai": "Cây ăn quả cận nhiệt đới du nhập cho quả đỏ rực từ trong ra ngoài, hạt mềm mọng nước, ưa nhiều nắng, chịu hạn rất tốt, đất phù sa pha cát hoặc đất đỏ bazan thoát nước tốt, pH đất 6.5 - 7.5, kỵ ngập úng gốc và bệnh đốm dầu vi khuẩn.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh đốm đen dầu vi khuẩn Xanthomonas lựu (Bacterial Blight / Oily Spot)",
+        "muc_do_nguy_hiem": "Cực kỳ nghiêm trọng (Hiểm nghèo)",
+        "tac_nhan": {
+          "loai": "Vi khuẩn",
+          "ten_khoa_hoc": "Xanthomonas axonopodis pv. punicae"
+        },
+        "trieu_chung_dien_hinh": [
+          "Trên phiến lá xuất hiện các đốm nhỏ sũng nước màu nâu đen có quầng vàng xung quanh, dạng ngậm dầu mỡ bóng loáng",
+          "Cành lộc non xuất hiện các vết nứt nẻ dài xì mủ thâm đen, cành bị khô chết ngọn",
+          "Trên vỏ quả lựu hình thành các vết nứt nẻ hình chữ Y hoặc chữ L màu nâu đen như vết bỏng dầu, vỏ quả bị nứt toác để lộ các hạt lựu đỏ bên trong bị thối rữa"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với bệnh thán thư quả: Thán thư tạo vết tròn lõm tâm có chấm hồng phấn; đốm dầu vi khuẩn tạo vết nứt sắc cạnh hình chữ Y hoặc L kèm theo quầng ngậm dầu bóng loáng đặc trưng.",
+        "kiem_tra_thuc_dia": "Quan sát vết nứt trên vỏ quả: vết nứt có dạng góc cạnh chữ Y/L ngậm dầu bốc mùi thối chua nhẹ khi ẩm ướt.",
+        "phac_do_vietgap": {
+          "canh_tac": "Cắt tỉa triệt để các cành nhiễm đốm dầu đem đốt xa vườn; khử trùng kéo tỉa bằng cồn y tế sau mỗi cây.",
+          "sinh_hoc": "Phun phòng kháng sinh sinh học nguồn gốc vi nấm Kasugamycin kết hợp Nano Bạc 25ppm và Bacillus subtilis.",
+          "khuyen_cao_chuyen_gia": "Phun phòng ngừa toàn diện trước và sau mỗi đợt mưa dông trong giai đoạn nuôi quả non."
+        }
+      },
+      {
+        "ten_benh": "Bệnh thán thư thối khô đài hoa và vỏ lựu (Anthracnose)",
+        "muc_do_nguy_hiem": "Cao",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Colletotrichum gloeosporioides"
+        },
+        "trieu_chung_dien_hinh": [
+          "Bắt đầu từ vùng đài hoa ở đỉnh quả lựu xuất hiện đốm thâm đen rồi lan dần xuống vỏ quả",
+          "Vết bệnh tròn lõm sâu màu nâu đen có nhiều vòng tròn đồng tâm",
+          "Quả non bị chai sượng ngừng lớn rụng sớm, quả chín bị thối khô một góc làm hạt bên trong bị úng nước chuyển màu xám"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với vết chích của bọ xít: Bọ xít chích để lại một đốm thâm đen nhỏ phẳng như đầu kim; thán thư vết đốm lan rộng lõm sâu nhiều vòng tròn đồng tâm ứa nhầy màu hồng cam.",
+        "kiem_tra_thuc_dia": "Dùng ngón tay ấn vào đài hoa đỉnh quả lựu: đài hoa giòn rụm thâm đen, thịt vỏ sát đài hoa lún sâu mềm nhũn.",
+        "phac_do_vietgap": {
+          "canh_tac": "Bao quả bằng túi chuyên dụng sau khi hoa rụng cánh và quả non đạt đường kính 2 - 3cm.",
+          "sinh_hoc": "Phun phòng chế phẩm sinh học nấm Chaetomium kết hợp Nano Đồng vi sinh 300ppm.",
+          "khuyen_cao_chuyen_gia": "Cắt tỉa cành thông thoáng sau mỗi vụ thu hoạch, quét vôi trắng thân gốc cây."
+        }
+      }
+    ]
+  },
+  {
+    "id": "imp_crop_028",
+    "topic": "Cay_Nhap_Khau_Kinh_Te_Cao",
+    "name_vi": "Chanh ngón tay Úc - Trứng cá hồi thực vật (Finger Lime)",
+    "scientific_name": "Citrus australasica",
+    "dia_ban_pho_bien": [
+      "Đà Lạt (Lâm Đồng)",
+      "Buôn Ma Thuột (Đắk Lắk)",
+      "Gia Lai",
+      "Bến Tre",
+      "Cần Thơ"
+    ],
+    "dac_tinh_sinh_thai": "Cây có múi quý hiếm bản địa Úc, quả hình ngón tay chứa tép tròn lóng lánh như trứng cá hồi caviar vị chua thanh sang trọng, cây nhiều gai nhọn, ưa đất thoát nước tốt giàu mùn, pH 6.0 - 6.8, rất mẫn cảm với ghẻ loét vi khuẩn và xì mủ Phytophthora.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh ghẻ loét sùi miệng núi lửa vi khuẩn (Citrus Canker)",
+        "muc_do_nguy_hiem": "Cực kỳ nghiêm trọng (Hiểm nghèo)",
+        "tac_nhan": {
+          "loai": "Vi khuẩn",
+          "ten_khoa_hoc": "Xanthomonas citri subsp. citri"
+        },
+        "trieu_chung_dien_hinh": [
+          "Trên lá nhỏ và vỏ quả chanh ngón tay xuất hiện các nốt sần tròn sùi lên như miệng núi lửa thu nhỏ",
+          "Mô nốt sần hóa bần xơ cứng màu nâu xám, xung quanh vết loét luôn có quầng vàng sáng rực rỡ bao bọc",
+          "Vỏ quả chanh ngón tay bị sần sùi chai sượng làm nứt toác vỏ, các tép trứng cá hồi bên trong bị khô xơ teo tóp"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với Ghẻ nhám (Citrus Scab do nấm Elsinoë): Ghẻ nhám chóp nhọn hình nón như mụn cóc không có quầng vàng bao quanh; Ghẻ loét nứt toác ở giữa dạng miệng núi lửa và luôn có quầng vàng halo sáng rực.",
+        "kiem_tra_thuc_dia": "Dùng kính lúp 20x soi nốt sẹo trên vỏ chanh: miệng nốt nứt toác như miệng núi lửa, quầng vàng tươi bao quanh rõ nét.",
+        "phac_do_vietgap": {
+          "canh_tac": "Cắt tỉa triệt để cành lá có vết loét sau mỗi đợt lộc non; khử trùng kéo cắt bằng cồn 70 độ.",
+          "sinh_hoc": "Phun phòng định kỳ Nano Bạc Đồng sinh học 35ppm kết hợp vi khuẩn đối kháng Bacillus subtilis.",
+          "khuyen_cao_chuyen_gia": "Phun phòng trừ sâu vẽ bùa đọt non vì vết đục của sâu vẽ bùa là cửa ngõ xâm nhập chính của vi khuẩn ghẻ loét."
+        }
+      },
+      {
+        "ten_benh": "Bệnh xì mủ thối gốc chảy gôm chanh ngón tay (Phytophthora Gummosis)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Phytophthora citrophthora / Phytophthora nicotianae"
+        },
+        "trieu_chung_dien_hinh": [
+          "Vùng vỏ thân sát cổ rễ bị sũng nước thâm đen, nhựa mủ vàng nâu ứa ra chảy ròng ròng dọc thân",
+          "Lớp vỏ cây bị thối nhũn nứt nẻ, cạo lớp vỏ thấy tầng sinh mô gỗ bên dưới bị biến màu nâu sẫm",
+          "Tán lá nhỏ phía trên bị vàng úa rụng lác đác, cây suy kiệt khô cành dần và chết đứng"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với vết xước cọ gai thân: Vết cọ gai khô ráo lành sẹo tự nhiên không thâm ướt; xì mủ Phytophthora vết loét lan rộng thối vỏ và ứa dịch nhựa gôm liên tục.",
+        "kiem_tra_thuc_dia": "Dùng dao cạo lớp vỏ ngoài cổ rễ: thấy mô vỏ bên trong thối nhũn màu nâu đỏ bốc mùi ẩm mốc, phân định ranh giới rõ với mô khỏe.",
+        "phac_do_vietgap": {
+          "canh_tac": "Ghép chanh ngón tay lên gốc ghép kháng bệnh (như bưởi chua hoặc cam ba lá Trifoliate); vị trí mắt ghép cao > 30cm so với mặt đất.",
+          "sinh_hoc": "Cạo sạch vết thối rồi quét hỗn hợp nấm Trichoderma đặc trộn Nano Bạc Đồng; tưới gốc phòng ngừa định kỳ.",
+          "khuyen_cao_chuyen_gia": "Không để cỏ dại tủ dày ướt át quanh gốc cây chanh ngón tay trong mùa mưa."
+        }
+      }
+    ]
+  },
+  {
+    "id": "imp_crop_029",
+    "topic": "Cay_An_Trai_Nhiet_Doi_Va_On_Doi",
+    "name_vi": "Bơ Hass New Zealand / Pinkerton Tây Nguyên (Hass / Pinkerton Avocado)",
+    "scientific_name": "Persea americana cv. Hass",
+    "dia_ban_pho_bien": [
+      "Đắk Lắk (Cư M'gar, Krông Pắk)",
+      "Lâm Đồng (Bảo Lộc, Đức Trọng)",
+      "Gia Lai",
+      "Đắk Nông"
+    ],
+    "dac_tinh_sinh_thai": "Giống bơ xuất khẩu vỏ sần sùi sẫm màu khi chín cơm béo dẻo đậm đà nguồn gốc quốc tế, ưa đất đỏ bazan tầng canh tác sâu > 1m, thoát nước tuyệt đối, pH đất 5.5 - 6.5, cực kỳ mẫn cảm với úng ngập và nấm Phytophthora thối rễ.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh thối rễ héo rũ cây bơ Hass Phytophthora (Phytophthora Root Rot)",
+        "muc_do_nguy_hiem": "Cực kỳ nghiêm trọng (Hiểm nghèo)",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Phytophthora cinnamomi"
+        },
+        "trieu_chung_dien_hinh": [
+          "Lá bơ Hass bị nhạt màu, mất độ bóng rồi ngả màu vàng úa, rủ rũ xuống cành như thiếu nước trầm trọng",
+          "Lá rụng trút dần từ ngọn xuống làm trơ trọi các đầu cành khô chết cháy ngọn (dieback)",
+          "Hệ thống rễ tơ hút dinh dưỡng bị thối mủn đen, giòn gãy vụn, không tìm thấy rễ tơ màu trắng khỏe mạnh"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với cây bị hạn sinh lý mùa khô: Thiếu nước tưới lá tươi trở lại sau khi tưới đẫm nước; Phytophthora rễ đã thối đen nên càng tưới nước cây càng vàng rũ và chết nhanh hơn.",
+        "kiem_tra_thuc_dia": "Dùng cuốc nhỏ bới lớp đất dưới rìa mép tán lá bơ: rễ tơ bị thối mục đen xì bốc mùi ẩm mốc, bóp nhẹ rễ vụn nát trong tay.",
+        "phac_do_vietgap": {
+          "canh_tac": "Tạo rãnh thoát nước sâu 60 - 80cm quanh vườn bơ chống đọng nước mùa mưa bão; quét vôi gốc thân.",
+          "sinh_hoc": "Tưới gốc định kỳ nấm đối kháng Trichoderma harzianum kết hợp xạ khuẩn Streptomyces và tiêm thân Phosphonate sinh học (Kali Phosphite) kích kháng hệ thống.",
+          "khuyen_cao_chuyen_gia": "Tiêm thân cây bơ bằng ống tiêm chuyên dụng Chemjet theo hướng dẫn lâm sàng của Viện WASI Tây Nguyên."
+        }
+      },
+      {
+        "ten_benh": "Bệnh thán thư thối đen thâm thịt quả bơ (Anthracnose)",
+        "muc_do_nguy_hiem": "Cao",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Colletotrichum gloeosporioides"
+        },
+        "trieu_chung_dien_hinh": [
+          "Trên vỏ quả bơ xuất hiện các chấm nâu tròn nhỏ sau lan rộng thành mảng thâm đen hơi lõm",
+          "Khi quả chín nấm ăn sâu vào lớp cơm bơ bên dưới làm thịt bơ bị nhũn đen có vị đắng ngắt",
+          "Cuống quả bơ bị thâm khô làm quả rụng trước khi đạt độ già thu hoạch tiêu chuẩn"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với sẹo cọ gió vỏ bơ: Sẹo cọ gió chai bần màu nâu xám sần sùi phẳng lì chỉ ở ngoài vỏ không ăn sâu vào thịt; thán thư ăn sâu hình nón vào ruột thịt bơ làm thối nhũn đen phần cơm.",
+        "kiem_tra_thuc_dia": "Dùng dao cắt ngang vết thối quả bơ: thấy vết thối ăn sâu vào phần cơm béo hình nón nhọn hướng vào tâm hạt, thịt bơ thâm đen bốc mùi chua.",
+        "phac_do_vietgap": {
+          "canh_tac": "Tỉa cành thông thoáng sau thu hoạch, thu gom quả rụng đem tiêu hủy xa vườn.",
+          "sinh_hoc": "Phun phòng chế phẩm sinh học Bacillus subtilis kết hợp Nano Bạc Đồng 30ppm từ giai đoạn quả non bằng ngón tay.",
+          "khuyen_cao_chuyen_gia": "Hái bơ bằng sào có túi đệm tránh để quả va đập cơ học gây dập biểu bì tạo cửa ngõ xâm nhiễm."
+        }
+      }
+    ]
+  },
+  {
+    "id": "imp_crop_030",
+    "topic": "Cay_Nhap_Khau_Kinh_Te_Cao",
+    "name_vi": "Hoa hồng leo ngoại David Austin (David Austin English Rose)",
+    "scientific_name": "Rosa 'David Austin'",
+    "dia_ban_pho_bien": [
+      "Đà Lạt (Lâm Đồng)",
+      "Sa Pa (Lào Cai)",
+      "Mộc Châu (Sơn La)",
+      "Hà Nội",
+      "TP.HCM"
+    ],
+    "dac_tinh_sinh_thai": "Giống hoa hồng bụi và hồng leo cao cấp nhập khẩu từ Anh Quốc hoa to nhiều lớp cánh hương thơm nồng nàn, ưa khí hậu mát mẻ, nắng chiếu 6 - 8h/ngày, trồng chậu giá thể xơ dừa phối perlite + phân trùn quế hoai mục, pH giá thể 6.2 - 6.8, rất mẫn cảm với phấn trắng và đốm đen.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh phấn trắng xoăn búp lá non hoa hồng (Powdery Mildew)",
+        "muc_do_nguy_hiem": "Cực kỳ nghiêm trọng (Hiểm nghèo)",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Podosphaera pannosa (syn. Sphaerotheca pannosa)"
+        },
+        "trieu_chung_dien_hinh": [
+          "Bề mặt lá non, chồi hoa và cuống nụ hoa phủ một lớp bột màu trắng mịn dày đặc như bột phấn",
+          "Phiến lá non bị vặn vẹo quăn queo, mép lá cuộn tròn, chồi non biến dạng còi cọc ngừng sinh trưởng",
+          "Nụ hoa bị bao bọc bởi lớp phấn trắng không thể bung nở cánh, cánh hoa bên trong bị thâm đen khô héo"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với cặn phân bón lá phun khô: Cặn phân lau sạch bằng khăn ướt lá vẫn xanh phẳng bình thường; phấn trắng lau xong lá bên dưới bị thâm nhạt và vặn vẹo biến dạng.",
+        "kiem_tra_thuc_dia": "Dùng tay xoa nhẹ lên ngọn hồng bị bệnh: bột phấn trắng dính đầy tay, ngọn lá giòn queo mất tính đàn hồi.",
+        "phac_do_vietgap": {
+          "canh_tac": "Đặt cây nơi thông thoáng gió đón nhiều ánh nắng sớm; tưới gốc không tưới ướt đẫm tán lá chiều tối.",
+          "sinh_hoc": "Phun phòng luân phiên chế phẩm sinh học vi khuẩn Bacillus subtilis kết hợp dầu khoáng SK Enspray 99EC nồng độ 0.3% hoặc dung dịch baking soda 0.3% pha loãng.",
+          "khuyen_cao_chuyen_gia": "Cắt tỉa ngọn bị phấn trắng cho vào túi nilon buộc kín trước khi xử lý chế phẩm sinh học."
+        }
+      },
+      {
+        "ten_benh": "Bệnh đốm đen viền tia rụng lá trơ cành (Black Spot)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Diplocarpon rosae (anamorph: Marssonina rosae)"
+        },
+        "trieu_chung_dien_hinh": [
+          "Trên phiến lá xuất hiện các đốm tròn màu nâu đen có rìa mép hình lông chim hoặc tia gai sợi nấm lan tỏa ra ngoài",
+          "Mô lá xung quanh vết đốm nhanh chóng chuyển sang màu vàng tươi",
+          "Lá bị rụng trút hàng loạt từ gốc lên ngọn khiến cây hoa hồng trơ trụi cành chỉ sau 1 - 2 tuần mưa ẩm"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt with đốm lá Cercospora: Cercospora có đốm tròn tâm trắng xám viền tím rõ ràng; đốm đen Diplocarpon mép vết đen hình tua sợi lông chim lan tỏa không có tâm trắng.",
+        "kiem_tra_thuc_dia": "Dùng kính lúp soi mép vết đốm đen: mép vết đốm có các sợi tia gai màu đen xòe ra như mạng lưới sợi nấm ăn lan trong biểu bì.",
+        "phac_do_vietgap": {
+          "canh_tac": "Dọn sạch lá rụng dưới gốc chậu mỗi ngày đem tiêu hủy; không tưới nước bắn từ dưới đất lên tán lá.",
+          "sinh_hoc": "Phun phòng chế phẩm sinh học Nano Bạc Đồng 30ppm kết hợp nấm đối kháng Chaetomium định kỳ 7 ngày/lần trong mùa mưa.",
+          "khuyen_cao_chuyen_gia": "Cách ly cây nhiễm bệnh ra khu vực riêng để tránh bào tử nấm bắn theo giọt nước mưa sang các chậu hoa hồng khác."
+        }
+      }
+    ]
+  },
+  {
+    "id": "imp_crop_031",
+    "topic": "Cay_Nhap_Khau_Kinh_Te_Cao",
+    "name_vi": "Hoa cẩm tú cầu Hà Lan đổi màu (Dutch Hydrangea)",
+    "scientific_name": "Hydrangea macrophylla",
+    "dia_ban_pho_bien": [
+      "Đà Lạt (Lâm Đồng)",
+      "Lạc Dương (Lâm Đồng)",
+      "Sa Pa (Lào Cai)",
+      "Tam Đảo (Vĩnh Phúc)"
+    ],
+    "dac_tinh_sinh_thai": "Cây hoa cảnh bụi ôn đới cụm hoa cầu khổng lồ đổi màu theo độ pH đất (đất chua pH < 5.5 hoa màu xanh lam, đất kiềm pH > 6.5 hoa màu hồng đỏ), ưa khí hậu mát ẩm 15 - 22°C, giá thể đất mùn giàu hữu cơ thoát nước tốt.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh mốc xám nát cụm hoa cẩm tú cầu (Botrytis Gray Mold)",
+        "muc_do_nguy_hiem": "Cực kỳ nghiêm trọng (Hiểm nghèo)",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Botrytis cinerea"
+        },
+        "trieu_chung_dien_hinh": [
+          "Các cánh hoa nhỏ trong cụm hoa tú cầu khổng lồ xuất hiện các đốm úng nước màu nâu nhạt",
+          "Vết bệnh lan nhanh làm toàn bộ cụm hoa bị nhũn nát, sau đó bao phủ một lớp lông tơ nấm màu xám tro dày đặc",
+          "Cụm hoa bị thối rữa khô quắt lại trên cành, bốc mùi ẩm mốc khó chịu làm mất hoàn toàn giá trị thương phẩm xuất khẩu"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với hoa già tàn tự nhiên: Hoa già cánh hoa chuyển màu xanh nhạt hoặc tím khô tự nhiên không nhũn nát; Botrytis làm cánh hoa nhũn ướt và có lớp lông mốc xám tro bốc khói bụi khi chạm nhẹ.",
+        "kiem_tra_thuc_dia": "Rung nhẹ cụm hoa tú cầu: bụi bào tử màu xám tro bay túa ra; các cánh hoa dính bết lại nhũn nát trong tay.",
+        "phac_do_vietgap": {
+          "canh_tac": "Không tưới phun mưa trực tiếp lên cụm hoa; cắt tỉa cụm hoa tàn sớm; giữ ẩm độ nhà màng dưới 75%.",
+          "sinh_hoc": "Phun phòng định kỳ nấm đối kháng Chaetomium kết hợp vi khuẩn Bacillus subtilis chủng QST 713 và Nano Bạc sinh học 15ppm.",
+          "khuyen_cao_chuyen_gia": "Cắt bỏ ngay các chùm hoa chớm bệnh cho vào bao tiêu hủy tránh lây lan trong không gian nhà kính."
+        }
+      },
+      {
+        "ten_benh": "Bệnh đốm mắt cua lá cẩm tú cầu (Cercospora Leaf Spot)",
+        "muc_do_nguy_hiem": "Cao",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Cercospora hydrangea"
+        },
+        "trieu_chung_dien_hinh": [
+          "Trên phiến lá lớn xuất hiện các đốm tròn nhỏ màu nâu đỏ hoặc tím sẫm",
+          "Tâm vết đốm khô chuyển sang màu xám bạc hoặc trắng tro, xung quanh có viền màu đỏ tía tím thẫm rất rõ nét",
+          "Các đốm liên kết lại làm lá tú cầu vàng úa và rụng sớm từ gốc lên ngọn làm trơ cành cây"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với cháy nắng phiến lá: Cháy nắng mảng lớn khô bạc ở tâm lá không có viền đỏ tím; Cercospora nhiều đốm nhỏ tròn rải rác có viền đỏ tím nổi bật hình mắt cua.",
+        "kiem_tra_thuc_dia": "Quan sát tâm đốm bệnh bằng kính lúp: tâm đốm màu xám trắng khô ráo, viền màu tím tía gờ nổi rõ ràng.",
+        "phac_do_vietgap": {
+          "canh_tac": "Tưới nước nhỏ giọt tại gốc; ngắt sạch lá già tầng đáy chậu; dọn sạch tàn dư lá bệnh.",
+          "sinh_hoc": "Phun phòng dung dịch Nano Đồng Chitosan kích kháng kết hợp chế phẩm sinh học Trichoderma.",
+          "khuyen_cao_chuyen_gia": "Phun phòng luân phiên vào đầu mùa mưa phùn sương đêm tại vùng cao Đà Lạt."
+        }
+      }
+    ]
+  },
+  {
+    "id": "imp_crop_032",
+    "topic": "Cay_Nhap_Khau_Kinh_Te_Cao",
+    "name_vi": "Hoa Tulip Hà Lan công nghệ phòng lạnh (Dutch Tulip)",
+    "scientific_name": "Tulipa gesneriana",
+    "dia_ban_pho_bien": [
+      "Đà Lạt (Lâm Đồng)",
+      "Sa Pa (Lào Cai)",
+      "Hà Nội",
+      "Mộc Châu (Sơn La)"
+    ],
+    "dac_tinh_sinh_thai": "Cây thân thảo có củ ngầm cao cấp nhập khẩu từ Hà Lan phục vụ thị trường Tết, quy trình kích lạnh xử lý củ ở nhiệt độ 5 - 9°C trong 8 - 10 tuần, sau đó trồng trong nhà lạnh hoặc nhà màng kiểm soát 15 - 18°C, giá thể đất sạch vô trùng thoát nước tốt, pH 6.0 - 7.0.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh mốc lửa đốm cháy cánh hoa và lá Tulip (Tulip Fire)",
+        "muc_do_nguy_hiem": "Cực kỳ nghiêm trọng (Hiểm nghèo)",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Botrytis tulipae"
+        },
+        "trieu_chung_dien_hinh": [
+          "Mầm lá mới nhú bị biến dạng cong queo, trên phiến lá xuất hiện các vết đốm sũng nước hình bầu dục màu nâu nhạt",
+          "Vết bệnh lan nhanh như lửa cháy làm lá bị rách nát khô giòn từng mảng",
+          "Trên cánh hoa xuất hiện các chấm nhỏ lấm tấm màu trắng hoặc nâu như tàn thuốc lá rơi vào, sau đó hoa bị thối nhũn phủ lớp nấm mốc màu xám tro"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với tổn thương do giọt sương đọng khúc xạ ánh nắng: Tổn thương khúc xạ nắng chỉ là đốm trắng khô nhỏ không lan; nấm Tulip Fire lan cực nhanh phá hủy cả lá và cánh hoa kèm màng mốc xám tro.",
+        "kiem_tra_thuc_dia": "Quan sát cánh hoa: các chấm cháy thâm nâu lan rộng nhanh chóng làm rụng cánh hoa, sờ vào thấy cánh hoa nhũn dính bết.",
+        "phac_do_vietgap": {
+          "canh_tac": "Kiểm tra kỹ củ giống trước khi trồng, loại bỏ củ có đốm nâu hoặc hạch nấm; duy trì quạt thông khí nhẹ trong phòng trồng.",
+          "sinh_hoc": "Xử lý củ giống bằng dung dịch Nano Bạc sinh học 20ppm trước khi vào chậu; phun phòng Bacillus subtilis lên tán lá non.",
+          "khuyen_cao_chuyen_gia": "Nhổ bỏ ngay cây bị bệnh cả củ cho vào túi nilon tiêu hủy để tránh bào tử phát tán theo luồng gió quạt phòng lạnh."
+        }
+      },
+      {
+        "ten_benh": "Bệnh thối củ Tulip Fusarium (Fusarium Bulb Rot / Basal Rot)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Fusarium oxysporum f. sp. tulipae"
+        },
+        "trieu_chung_dien_hinh": [
+          "Đế củ tulip xuất hiện các vết thối màu nâu sẫm, mô củ bị mềm xốp thối khô từ đáy lên",
+          "Khi ẩm độ cao xuất hiện lớp mốc màu trắng hồng hoặc cam phấn phủ quanh đế củ",
+          "Củ sinh ra khí ethylene làm các cây xung quanh bị thui chột nụ hoa (hiện tượng mù hoa), lá vàng sớm còi cọc"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt with củ bị ngâm nước úng rễ: Thối úng rễ củ nhũn chảy nước chua không có lớp mốc hồng; Fusarium củ thối khô từ đế có lớp mốc hồng phấn và bốc mùi khí ethylene làm rụng nụ hoa các cây kế bên.",
+        "kiem_tra_thuc_dia": "Bóc lớp vỏ nâu bên ngoài củ: thấy đế củ bị thâm đen mủn mục có lớp phấn nấm màu hồng nhạt bám chặt.",
+        "phac_do_vietgap": {
+          "canh_tac": "Bảo quản củ giống trong kho lạnh thông thoáng khí không để tích tụ khí ethylene; khử trùng giá thể chậu trồng.",
+          "sinh_hoc": "Ngâm xử lý củ bằng chế phẩm nấm đối kháng Trichoderma harzianum trước khi ươm trồng.",
+          "khuyen_cao_chuyen_gia": "Hủy bỏ toàn bộ lô củ nếu phát hiện tỷ lệ nhiễm bệnh Fusarium vượt quá 3% lúc khui kiện nhập khẩu."
+        }
+      }
+    ]
+  },
+  {
+    "id": "imp_crop_033",
+    "topic": "Cay_Nhap_Khau_Kinh_Te_Cao",
+    "name_vi": "Hoa Lan Hồ Điệp Đài Loan công nghệ cao (Phalaenopsis Orchid)",
+    "scientific_name": "Phalaenopsis amabilis",
+    "dia_ban_pho_bien": [
+      "Đà Lạt (Lâm Đồng)",
+      "Củ Chi (TP.HCM)",
+      "Gia Lâm (Hà Nội)",
+      "Vĩnh Long",
+      "Bến Tre"
+    ],
+    "dac_tinh_sinh_thai": "Hoa lan công nghiệp giá trị kinh tế số 1 nuôi trồng trong nhà kính thông minh điều khiển tự động hoàn toàn nhiệt độ (25 - 28°C nuôi sinh trưởng, 18 - 22°C phân hóa mầm hoa), giá thể dớn trắng rêu Sphagnum moss nhập khẩu từ New Zealand/Chile, pH giá thể 5.5 - 6.2, EC 0.8 - 1.2 mS/cm.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh thối mềm vi khuẩn lá lan hồ điệp (Bacterial Soft Rot)",
+        "muc_do_nguy_hiem": "Cực kỳ nghiêm trọng (Hiểm nghèo)",
+        "tac_nhan": {
+          "loai": "Vi khuẩn",
+          "ten_khoa_hoc": "Pectobacterium carotovorum / Dickeya chrysanthemi"
+        },
+        "trieu_chung_dien_hinh": [
+          "Trên phiến lá dày mọng nước xuất hiện đốm nhỏ úng nước màu xanh vàng bóng loáng",
+          "Vết bệnh lan nhanh chóng mặt chỉ sau 24 - 48 giờ làm toàn bộ phiến lá biến thành một túi nước nhầy nhụa mềm nhũn",
+          "Khi vỡ ra chảy dịch nhớt bốc mùi chua khắm khó chịu nồng nặc; nách lá và ngọn đỉnh sinh trưởng bị thối đen đứt rời"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với bệnh thối đen do nấm Phytophthora: Nấm Phytophthora lá thâm đen cứng chắc không tạo túi nước phồng bốc mùi chua khắm; vi khuẩn Dickeya/Pectobacterium làm phiến lá phồng mọng nước nhũn nát như túi nước bốc mùi thối chua đặc trưng.",
+        "kiem_tra_thuc_dia": "Dùng ngón tay ấn nhẹ vào phiến lá: phiến lá mềm nhũn bùng nhùng như túi bóng chứa nước bên trong, ngửi thấy mùi thối khắm tanh tưởi.",
+        "phac_do_vietgap": {
+          "canh_tac": "Dùng dao lam vô trùng khoét bỏ phần mô thối cách rìa khỏe 2cm, bôi vôi nhão hoặc cồn iod sát trùng vết cắt; ngừng tưới nước 3 ngày.",
+          "sinh_hoc": "Phun phòng luân phiên kháng sinh sinh học vi nấm Kasugamycin kết hợp Nano Bạc 20ppm và chế phẩm Bacillus amyloliquefaciens.",
+          "khuyen_cao_chuyen_gia": "Giảm độ ẩm nhà kính xuống dưới 70% và tăng cường chạy quạt gió đối lưu khi thời tiết nồm ẩm."
+        }
+      },
+      {
+        "ten_benh": "Bệnh thán thư vòng tròn đồng tâm lõm đen lá hồ điệp (Anthracnose)",
+        "muc_do_nguy_hiem": "Cao",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Colletotrichum gloeosporioides"
+        },
+        "trieu_chung_dien_hinh": [
+          "Trên phiến lá hồ điệp xuất hiện các vết đốm trũng sâu hình tròn hoặc bầu dục màu nâu đen",
+          "Các đốm bệnh xếp thành các vòng tròn đồng tâm sắc nét, trên mặt đốm xuất hiện các chấm nhỏ màu đen li ti",
+          "Khi ẩm ướt rỉ ra các giọt chất nhờn màu hồng cam chứa bào tử nấm, làm lá bị thủng lỗ chỗ mất giá trị thẩm mỹ chưng Tết"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với vết bỏng lạnh máy điều hòa: Vết bỏng lạnh màu trắng xám khô phẳng ranh giới rõ không có vòng tròn đồng tâm; thán thư lõm sâu nhiều vòng tròn đồng tâm và có chấm đen li ti ứa dịch nhầy màu hồng cam.",
+        "kiem_tra_thuc_dia": "Dùng kính lúp soi đốm lõm lá lan: thấy các chấm đen sắp xếp theo các vòng tròn đồng tâm trũng sâu xuống mặt lá.",
+        "phac_do_vietgap": {
+          "canh_tac": "Không tưới nước vào buổi chiều muộn đọng nước trong nõn lá qua đêm; khử trùng kéo tỉa.",
+          "sinh_hoc": "Phun dung dịch Nano Đồng Chitosan kết hợp chế phẩm sinh học nấm Chaetomium định kỳ 10 ngày/lần.",
+          "khuyen_cao_chuyen_gia": "Cách ly các chậu lan nhiễm bệnh ra khu riêng để bảo vệ các chậu lan ngồng hoa chưng Tết."
+        }
+      }
+    ]
+  },
+  {
+    "id": "imp_crop_034",
+    "topic": "Cay_Nhap_Khau_Kinh_Te_Cao",
+    "name_vi": "Hoa Ly Ly Concador / Sorbonne Hà Lan (Oriental Lily Concador)",
+    "scientific_name": "Lilium oriental 'Concador'",
+    "dia_ban_pho_bien": [
+      "Đà Lạt (Lâm Đồng)",
+      "Lạc Dương (Lâm Đồng)",
+      "Sa Pa (Lào Cai)",
+      "Mộc Châu (Sơn La)",
+      "Tây Tựu (Hà Nội)"
+    ],
+    "dac_tinh_sinh_thai": "Hoa ly thơm cao cấp nhập khẩu từ Hà Lan với cánh hoa vàng thơm ngát kích thước lớn, canh tác nhà màng che mưa, ưa khí hậu ôn hòa 18 - 25°C, đất thịt nhẹ hoặc giá thể đất mùn tơi xốp giàu hữu cơ thoát nước tốt, pH 6.0 - 6.5, cực kỳ mẫn cảm với đọng nước chân củ và bệnh cháy lá Botrytis.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh thối xám cháy lá hoa Ly Botrytis (Lily Blight)",
+        "muc_do_nguy_hiem": "Cực kỳ nghiêm trọng (Hiểm nghèo)",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Botrytis elliptica"
+        },
+        "trieu_chung_dien_hinh": [
+          "Trên phiến lá xuất hiện các đốm nhỏ hình bầu dục màu nâu cam sau lan nhanh thành mảng cháy khô màu xám tro",
+          "Khi trời nồm ẩm, trên bề mặt vết cháy mọc lên một lớp lông tơ nấm màu xám xịt dày đặc",
+          "Nụ hoa ly bị thâm đen thối nhũn không thể nở hoa, cả cành hoa bị gãy gục khô rụi"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với cháy ngọn sinh lý do thiếu Canxi: Cháy Canxi làm cháy cong đầu ngọn lá non trên búp hoa không có lớp tơ nấm xám; Botrytis tạo các đốm bầu dục lan rộng khắp mặt lá và có màng lông mốc xám tro phát tán bụi khói.",
+        "kiem_tra_thuc_dia": "Dùng tay sờ vào phiến lá bị cháy: mô lá mủn nát khô giòn, rung nhẹ thấy bụi nấm xám tro bay ra bám dính vào đầu ngón tay.",
+        "phac_do_vietgap": {
+          "canh_tac": "Tưới nước tại gốc vào sáng sớm; duy trì khoảng cách luống thông thoáng; ngắt bỏ sớm các lá bệnh gom tiêu hủy.",
+          "sinh_hoc": "Phun phòng luân phiên nấm vi sinh Chaetomium kết hợp chế phẩm Bacillus subtilis và Nano Bạc Đồng 30ppm.",
+          "khuyen_cao_chuyen_gia": "Phun phòng ngừa đặc biệt trong giai đoạn cây vươn ngồng nhú nụ hoa non gặp sương mù."
+        }
+      },
+      {
+        "ten_benh": "Bệnh thối củ và thối rễ Fusarium ly ly (Fusarium Basal Rot)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Fusarium oxysporum f. sp. lilii"
+        },
+        "trieu_chung_dien_hinh": [
+          "Đế củ và các vảy củ ly ly bị biến màu nâu đen rồi thối khô mủn nát",
+          "Các rễ thân và rễ đáy củ bị thối đen tuột vỏ, cây sinh trưởng còi cọc lùn tịt",
+          "Lá dưới gốc bị vàng úa rụng sớm, ngọn hoa bị héo rũ từ từ, cành hoa không đạt chuẩn chiều cao thương phẩm"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với rễ bị thối do đọng nước úng: Thối úng rễ nhũn mềm không thâm đế củ; Fusarium phá hủy có chọn lọc phần đĩa đế củ làm các cánh vảy củ rời rạc rụng lả tả.",
+        "kiem_tra_thuc_dia": "Nhổ nhẹ cây ly ly lên: các cánh vảy củ bị thối đen tách rời khỏi đế củ, đĩa đáy củ hóa đen mục nát bốc mùi hôi ẩm mốc.",
+        "phac_do_vietgap": {
+          "canh_tac": "Chọn củ giống nhập khẩu chuẩn kiểm dịch sạch bệnh; khử trùng đất luống bằng vôi tả phơi ải trước khi trồng.",
+          "sinh_hoc": "Xử lý củ giống trước khi đặt luống bằng dung dịch nấm đối kháng Trichoderma kết hợp xạ khuẩn Streptomyces.",
+          "khuyen_cao_chuyen_gia": "Loại bỏ hoàn toàn các củ có vết thâm đáy đĩa củ ngay từ khâu xả đông củ giống."
+        }
+      }
+    ]
+  },
+  {
+    "id": "imp_crop_035",
+    "topic": "Rau_Cu_Gia_Vi_Va_Nam",
+    "name_vi": "Xà lách thủy canh Salanova Hà Lan (Salanova Hydroponic Lettuce)",
+    "scientific_name": "Lactuca sativa cv. Salanova",
+    "dia_ban_pho_bien": [
+      "Đà Lạt (Lâm Đồng)",
+      "Củ Chi (TP.HCM)",
+      "Gia Lâm (Hà Nội)",
+      "Cần Thơ",
+      "Vĩnh Long"
+    ],
+    "dac_tinh_sinh_thai": "Giống xà lách búp cao cấp bản quyền từ tập đoàn Rijk Zwaan Hà Lan (tách một nhát dao được hàng trăm lá nhỏ đều đặn), trồng máng thủy canh màng dinh dưỡng NFT hoặc khí canh nhà màng, nhiệt độ dung dịch 20 - 24°C, pH dung dịch 5.8 - 6.2, EC 1.2 - 1.6 mS/cm.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh thối nhũn bẹ lá xà lách vi khuẩn (Bacterial Soft Rot)",
+        "muc_do_nguy_hiem": "Cực kỳ nghiêm trọng (Hiểm nghèo)",
+        "tac_nhan": {
+          "loai": "Vi khuẩn",
+          "ten_khoa_hoc": "Pectobacterium carotovorum"
+        },
+        "trieu_chung_dien_hinh": [
+          "Phần gốc bẹ lá sát mặt rọ nhựa thủy canh xuất hiện vết sũng nước màu nâu nhạt",
+          "Vết bệnh lan nhanh chóng làm toàn bộ phần gốc búp xà lách bị mềm nhũn nhầy nhụa",
+          "Cả cây xà lách Salanova bị gục rũ đứt rời khỏi rọ nhựa, chảy nước nhờn bốc mùi thối khắm nồng nặc chỉ sau một đêm ẩm nóng"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với bệnh thối hạch Sclerotinia: Sclerotinia tạo sợi nấm trắng như bông gòn và hạch đen cứng không bốc mùi hôi thối; vi khuẩn Pectobacterium làm mô nhũn nát chảy dịch nhớt bốc mùi hôi thối khắm đặc trưng.",
+        "kiem_tra_thuc_dia": "Nhấc rọ xà lách lên: gốc bẹ lá tuột rời khỏi thân, dịch nhờn tanh hôi dính đầy ngón tay, mùi khắm nồng nặc.",
+        "phac_do_vietgap": {
+          "canh_tac": "Giữ máng thủy canh luôn sạch sẽ, kiểm soát nhiệt độ dung dịch thủy canh < 25°C bằng hệ thống làm lạnh Chiller.",
+          "sinh_hoc": "Khử trùng dung dịch hồi lưu bằng đèn cực tím UV-C và sục Ozone; bổ sung chế phẩm Nano Bạc hữu cơ nồng độ 5ppm.",
+          "khuyen_cao_chuyen_gia": "Cách ly ngay các rọ nhiễm bệnh và lau khử trùng máng NFT bằng cồn y tế hoặc nước oxy già."
+        }
+      },
+      {
+        "ten_benh": "Bệnh thối rễ nấm Pythium thủy canh (Pythium Root Rot)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Pythium ultimum / Pythium aphanidermatum"
+        },
+        "trieu_chung_dien_hinh": [
+          "Chùm rễ xà lách bên trong máng NFT từ màu trắng muốt chuyển sang màu vàng nâu rồi nâu đen nhớt nhầy",
+          "Vỏ rễ bị thối tuột ra chỉ trơ lại sợi lõi mạch gỗ mỏng manh, rễ bốc mùi tanh hôi",
+          "Tán lá xà lách Salanova bị héo rũ vào ban ngày khi có ánh nắng chiếu, cây ngừng lớn và vàng úa còi cọc"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt with rễ bị bám cặn hữu cơ dinh dưỡng: Rễ bám cặn màu nâu vàng nhưng vẫn săn chắc dai khỏe; Pythium làm rễ thối mủn tuột vỏ trôi rách nát trong dòng nước máng.",
+        "kiem_tra_thuc_dia": "Nhấc rọ thủy canh quan sát chùm rễ: rễ có màu nâu sẫm nhầy nhụa dính dính, vuốt nhẹ rễ tuột vỏ trơ sợi chỉ lõi trắng.",
+        "phac_do_vietgap": {
+          "canh_tac": "Tăng cường sục khí oxy hòa tan vào bồn dinh dưỡng đạt > 6.5 mg/lít; vệ sinh súc rửa máng định kỳ giữa 2 vụ.",
+          "sinh_hoc": "Bổ sung vi khuẩn đối kháng Bacillus subtilis phân lập cao chuyên dùng cho thủy canh và nấm đối kháng Trichoderma harzianum dạng hòa tan hoàn toàn.",
+          "khuyen_cao_chuyen_gia": "Xả bỏ toàn bộ dung dịch máng nếu tỷ lệ thối rễ vượt quá 10% để ngăn bào tử nấm bơi lây lan toàn hệ thống."
+        }
+      }
+    ]
+  },
+  {
+    "id": "imp_crop_036",
+    "topic": "Rau_Cu_Gia_Vi_Va_Nam",
+    "name_vi": "Nấm hương Nhật Bản Shiitake công nghệ cao (Shiitake Mushroom)",
+    "scientific_name": "Lentinula edodes",
+    "dia_ban_pho_bien": [
+      "Đà Lạt (Lâm Đồng)",
+      "Sa Pa (Lào Cai)",
+      "Mộc Châu (Sơn La)",
+      "Lạng Sơn"
+    ],
+    "dac_tinh_sinh_thai": "Nấm ăn đặc sản cao cấp bản quyền Nhật Bản giàu hương thơm lenthionine tự nhiên, nuôi cấy bịch mùn cưa gỗ sồi gỗ dẻ công nghệ phòng lạnh khép kín, nhiệt độ ươm sợi 22 - 25°C, nhiệt độ sốc nhiệt kích nấm 12 - 16°C, độ ẩm 80 - 90%, cần ánh sáng tán xạ kích quả thể.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh mốc xanh Trichoderma xâm nhiễm mùn cưa phôi nấm (Green Mold)",
+        "muc_do_nguy_hiem": "Cực kỳ nghiêm trọng (Hiểm nghèo)",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Trichoderma viride / Trichoderma harzianum"
+        },
+        "trieu_chung_dien_hinh": [
+          "Bên trong bịch mùn cưa xuất hiện các đốm bột màu xanh lục đậm hoặc xanh lá mạ",
+          "Mạng tơ nấm hương trắng ngà bị nấm mốc bao vây, tiết dịch nâu cam rồi thối rữa biến mất",
+          "Bịch phôi bị chai cứng không thể tạo mầm quả thể nấm hương, bốc mùi men chua khó chịu"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với quá trình hóa nâu tự nhiên của phôi nấm hương (browning stage): Quá trình hóa nâu là sinh lý bình thường tạo lớp vỏ nâu bảo vệ phôi; mốc xanh tạo mảng bột màu xanh lục bám dày phá hủy tơ nấm hoàn toàn.",
+        "kiem_tra_thuc_dia": "Quan sát qua bao nilon: các mảng bột màu xanh lục lan rộng nhanh chóng, bóp nhẹ thấy mùn cưa nhão nát có mùi chua.",
+        "phac_do_vietgap": {
+          "canh_tac": "Hấp tiệt trùng cơ chất đạt 100°C trong 10 - 12 giờ hoặc nồi hấp áp suất 121°C trong 90 phút; phòng cấy vô trùng bằng đèn UV-C.",
+          "sinh_hoc": "Sử dụng giống nấm hương thuần chủng khỏe tơ; vệ sinh định kỳ nhà nuôi bằng cồn y tế hoặc vôi bột rải nền nhà.",
+          "khuyen_cao_chuyen_gia": "Cách ly và mang ngay các bịch nhiễm mốc xanh ra khỏi phòng nuôi để tránh phát tán bào tử sang các bịch lân cận."
+        }
+      },
+      {
+        "ten_benh": "Bệnh đốm nâu mục nát mũ nấm hương vi khuẩn (Bacterial Brown Blot)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Vi khuẩn",
+          "ten_khoa_hoc": "Pseudomonas tolaasii"
+        },
+        "trieu_chung_dien_hinh": [
+          "Trên mũ nấm hương màu nâu xuất hiện các đốm trũng sâu màu nâu đen ướt nhờn bóng",
+          "Vết bệnh lan nhanh làm mũ nấm bị mềm nhũn chảy dịch nhờn dính bết",
+          "Tai nấm bốc mùi tanh chua làm mất hoàn toàn hương thơm tự nhiên và không thể sấy khô xuất khẩu"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với giọt nước ngưng tụ trên mũ nấm: Giọt nước lau khô tai nấm vẫn chắc thịt săn giòn; đốm vi khuẩn làm mũ nấm bị lõm sâu trơn nhớt dính tay và thịt nấm biến màu xám đen mục nát.",
+        "kiem_tra_thuc_dia": "Chạm ngón tay vào đốm nâu trên tai nấm: dịch nhờn trơn trượt dính vào ngón tay, ngửi thấy mùi tanh tanh của vi khuẩn phân hủy protein nấm.",
+        "phac_do_vietgap": {
+          "canh_tac": "Không tưới phun hạt nước to trực tiếp lên mũ nấm trước thu hoạch; điều chỉnh hệ thống thông gió quạt hút làm ráo nước bề mặt.",
+          "sinh_hoc": "Phun sương phòng ngừa bằng dung dịch Nano Bạc nồng độ 5ppm hoặc chế phẩm vi sinh đối kháng Bacillus subtilis.",
+          "khuyen_cao_chuyen_gia": "Hạ độ ẩm nhà nấm xuống 75% trong 2 - 3 giờ sau mỗi lần tưới ẩm để bề mặt tai nấm khô ráo nước tự do."
+        }
+      }
+    ]
+  },
+  {
+    "id": "imp_crop_037",
+    "topic": "Rau_Cu_Gia_Vi_Va_Nam",
+    "name_vi": "Nấm đùi gà King Oyster Mushroom công nghệ cao (King Oyster Mushroom)",
+    "scientific_name": "Pleurotus eryngii",
+    "dia_ban_pho_bien": [
+      "Đà Lạt (Lâm Đồng)",
+      "Củ Chi (TP.HCM)",
+      "Hà Nội",
+      "Mộc Châu (Sơn La)"
+    ],
+    "dac_tinh_sinh_thai": "Nấm ăn thượng hạng thân nấm to giòn ngọt như thịt gà bản địa Địa Trung Hải, sản xuất công nghệ cao trong chai nhựa hoặc bịch phôi phòng sạch điều hòa 14 - 18°C, cơ chất mùn cưa phối lõi ngô bắp nghiền cám gạo, độ ẩm 85 - 90%, kiểm soát nồng độ khí CO2 nghiêm ngặt để tạo hình thân mập mạp.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh thối ướt mũ nấm và đốm nhầy chân nấm đùi gà vi khuẩn (Bacterial Soft Rot)",
+        "muc_do_nguy_hiem": "Cực kỳ nghiêm trọng (Hiểm nghèo)",
+        "tac_nhan": {
+          "loai": "Vi khuẩn",
+          "ten_khoa_hoc": "Pseudomonas gingeri / Pseudomonas tolaasii"
+        },
+        "trieu_chung_dien_hinh": [
+          "Mũ nấm đùi gà xuất hiện các đốm úng nước màu nâu sẫm trơn nhớt",
+          "Vết bệnh lan nhanh xuống phần thân nấm mập mạp làm thân nấm bị biến màu vàng nâu rồi mềm nhũn chảy nước",
+          "Thịt nấm bên trong bị rỗng xốp thối nát bốc mùi hôi thối khó chịu làm mất hoàn toàn phẩm cấp nấm loại 1"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với hiện tượng chân nấm bị xốp do thiếu độ ẩm: Thiếu độ ẩm thân nấm khô ráo xốp nhẹ không chảy nước nhờn; nhiễm khuẩn làm thân nấm nhũn nát chảy dịch nhớt thối khắm.",
+        "kiem_tra_thuc_dia": "Dùng ngón tay bóp nhẹ vào thân nấm mập: ngón tay lún sâu làm dịch nhớt tanh hôi phì ra ngoài, mô nấm nhũn nát hoàn toàn.",
+        "phac_do_vietgap": {
+          "canh_tac": "Kiểm soát hệ thống tạo ẩm hạt sương siêu mịn không đọng giọt trên mũ nấm; duy trì quạt đối lưu không khí.",
+          "sinh_hoc": "Khử trùng không khí nhà nuôi bằng sục khí Ozone trước khi xếp chai vào buồng nuôi; phun định kỳ dung dịch Nano Bạc 5ppm.",
+          "khuyen_cao_chuyen_gia": "Thu hoạch sớm ngay khi phát hiện đốm nâu đầu tiên trên mũ nấm để giảm thiểu thiệt hại."
+        }
+      },
+      {
+        "ten_benh": "Bệnh mốc mạng nhện bao phủ tai nấm đùi gà (Cobweb Disease)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Cladobotryum mycophilum (syn. Dactylium dendroides)"
+        },
+        "trieu_chung_dien_hinh": [
+          "Lớp sợi nấm màu trắng mịn mọc giăng màng xốp mềm mại như mạng nhện bao phủ lấy gốc và thân nấm đùi gà",
+          "Sợi nấm phát triển cực nhanh chỉ sau 24h trùm kín toàn bộ tai nấm, sau đó chuyển sang màu hồng phấn hoặc vàng cam",
+          "Tai nấm bị bao vây bên trong bị thối nhũn nâu đen và sụp đổ hoàn toàn"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với sợi tơ nấm đùi gà tự nhiên: Tơ nấm đùi gà bò bám sát cơ chất màu trắng ngà săn chắc; mốc mạng nhện mọc vươn cao trong không khí bao trùm lên tai nấm như màng nhện xốp và đổi màu hồng phấn.",
+        "kiem_tra_thuc_dia": "Dùng panh chạm vào lớp màng trắng: màng sợi xốp mềm như tơ mạng nhện co dúm lại, bộc lộ tai nấm bên dưới đã bị thối nâu.",
+        "phac_do_vietgap": {
+          "canh_tac": "Đặt khăn giấy ướt tẩm cồn phủ nhẹ lên ổ mốc mạng nhện trước khi nhấc bỏ để ngăn bào tử nấm bay lơ lửng trong phòng lạnh.",
+          "sinh_hoc": "Rải bột vôi tôi khử trùng quanh khu vực có ổ bệnh; lau chùi kệ nuôi bằng cồn 70 độ.",
+          "khuyen_cao_chuyen_gia": "Giảm độ ẩm nhà nuôi xuống 80% trong 24 giờ để chặn đứng tốc độ phát triển của nấm mạng nhện."
+        }
+      }
+    ]
+  },
+  {
+    "id": "imp_crop_038",
+    "topic": "Rau_Cu_Gia_Vi_Va_Nam",
+    "name_vi": "Cần tây Mỹ giòn ngọt cọng lớn (American Giant Celery)",
+    "scientific_name": "Apium graveolens var. dulce",
+    "dia_ban_pho_bien": [
+      "Đà Lạt (Lâm Đồng)",
+      "Đơn Dương (Lâm Đồng)",
+      "Đức Trọng (Lâm Đồng)"
+    ],
+    "dac_tinh_sinh_thai": "Giống cần tây khổng lồ cọng mập giòn ngọt phục vụ trào lưu nước ép detox thanh lọc cơ thể, ưa khí hậu ôn hòa mát mẻ (16 - 22°C), trồng luống cao hoặc giá thể xơ dừa tưới nhỏ giọt, đất tơi xốp giàu hữu cơ và vi lượng Canxi - Bo, pH đất 6.2 - 6.8.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh cháy lá đốm sớm Cercospora cần tây (Early Blight)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Cercospora apii"
+        },
+        "trieu_chung_dien_hinh": [
+          "Trên phiến lá và bẹ cọng xuất hiện các đốm nhỏ màu nâu vàng sau chuyển sang màu xám tro",
+          "Vết bệnh hình tròn hoặc bầu dục không có viền rõ rệt, khi trời ẩm mặt vết bệnh phủ lớp lông mốc xám mịn",
+          "Các lá bị bệnh vàng úa khô cháy giòn từng mảng lớn, bẹ cần tây bị thâm lõm làm mất độ bóng giòn thương phẩm"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với bệnh đốm muộn Septoria: Đốm sớm Cercospora vết đốm lớn hơn 3 - 6mm màu xám tro không có chấm đen li ti; đốm muộn Septoria lấm tấm vô số chấm đen nhỏ li ti như hạt vừng đen (pycnidia).",
+        "kiem_tra_thuc_dia": "Quan sát đốm lá dưới ánh sáng: vết đốm màu xám mốc lông mịn, bẻ cọng cần tây thấy sẹo lõm khô giòn.",
+        "phac_do_vietgap": {
+          "canh_tac": "Xử lý nhiệt hạt giống 48°C trong 30 phút trước khi gieo; không tưới phun mưa chiều tối.",
+          "sinh_hoc": "Phun phòng luân phiên chế phẩm sinh học vi khuẩn Bacillus subtilis kết hợp Nano Bạc Đồng 25ppm.",
+          "khuyen_cao_chuyen_gia": "Tỉa bỏ bẹ lá già tầng sát đất để gốc cần tây luôn khô ráo đón gió lưu thông."
+        }
+      },
+      {
+        "ten_benh": "Bệnh thối đen tim ruột bẹ cần tây do thiếu vi lượng Canxi & Bo (Blackheart)",
+        "muc_do_nguy_hiem": "Cao",
+        "tac_nhan": {
+          "loai": "Sinh lý kết hợp bội nhiễm Nấm / Vi khuẩn",
+          "ten_khoa_hoc": "Physiological Calcium/Boron Deficiency & Alternaria/Pectobacterium"
+        },
+        "trieu_chung_dien_hinh": [
+          "Các lá non và đọt non bên trong lõi tim của bụi cần tây bị biến màu nâu sẫm rồi đen mun",
+          "Vết cháy đen lan nhanh xuống các bẹ non trung tâm làm tim ruột bụi cần tây bị thối khô hoặc thối nhũn",
+          "Bên ngoài bụi cần tây nhìn vẫn xanh tốt nhưng khi bóc lõi tim ra thì ruột đã bị thối đen hoàn toàn không thể thu hoạch"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với thối nhũn bẹ ngoài vi khuẩn: Thối bẹ ngoài bắt đầu từ các bẹ già sát mặt đất; Blackheart bắt đầu từ chính giữa đọt non và tim ruột bên trong bụi cần tây do thiếu hụt Canxi vận chuyển lên mô sinh trưởng non.",
+        "kiem_tra_thuc_dia": "Vạch mở các bẹ lá ngoài kiểm tra lõi tim: thấy búp đọt non bên trong bị cháy đen khô hoặc nhũn nước thối rữa.",
+        "phac_do_vietgap": {
+          "canh_tac": "Cân bằng chế độ tưới nước nhỏ giọt đều đặn tránh để đất bị khô hạn đột ngột làm gián đoạn dòng hấp thu Canxi.",
+          "sinh_hoc": "Phun bổ sung qua lá Canxi-Bo hữu cơ chelate nồng độ 0.2% định kỳ 7 ngày/lần trong giai đoạn cây lớn nhanh.",
+          "khuyen_cao_chuyen_gia": "Kiểm tra chỉ số EC dung dịch tưới không để vượt quá 2.0 mS/cm gây áp suất thẩm thấu cản trở rễ hút Canxi."
+        }
+      }
+    ]
+  },
+  {
+    "id": "imp_crop_039",
+    "topic": "Rau_Cu_Gia_Vi_Va_Nam",
+    "name_vi": "Atiso tím khổng lồ Đà Lạt (Artichoke)",
+    "scientific_name": "Cynara cardunculus var. scolymus",
+    "dia_ban_pho_bien": [
+      "Đà Lạt (Lâm Đồng)",
+      "Lạc Dương (Lâm Đồng)",
+      "Sa Pa (Lào Cai)"
+    ],
+    "dac_tinh_sinh_thai": "Cây dược liệu và rau ăn hoa quý tộc nguồn gốc Địa Trung Hải biểu tượng của nông nghiệp Đà Lạt, ưa khí hậu ôn đới quanh năm mát mẻ (15 - 20°C), cần tầng đất sâu > 60cm giàu mùn hữu cơ thoát nước tốt, pH đất 6.0 - 6.8, rất mẫn cảm với úng rễ và mốc xám búp hoa.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh đốm xám mốc lông búp hoa Atiso (Botrytis Gray Mold)",
+        "muc_do_nguy_hiem": "Cực kỳ nghiêm trọng (Hiểm nghèo)",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Botrytis cinerea"
+        },
+        "trieu_chung_dien_hinh": [
+          "Các lá bắc bao quanh búp hoa Atiso xuất hiện các đốm úng nước màu nâu sẫm",
+          "Vết bệnh lan nhanh vào tâm búp hoa, bao phủ toàn bộ búp hoa là lớp sợi nấm và chùm bào tử màu xám tro dày đặc như nhung lông",
+          "Búp hoa Atiso bị thối rữa nhũn nát chảy nước bốc mùi ẩm mốc, làm mất hoàn toàn giá trị dược liệu và ẩm thực cao cấp"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với hoa già nở hoa tím tự nhiên: Hoa già bung nhụy tím khô ráo tự nhiên; Botrytis làm các lá bắc thối nhũn màu nâu sẫm phủ lớp lông tơ xám tro phát tán bụi khói.",
+        "kiem_tra_thuc_dia": "Dùng tay gõ nhẹ búp hoa bệnh: bụi bào tử màu xám tro bay ra như khói bụi; bóp nhẹ búp hoa thấy nhũn mềm dính tay.",
+        "phac_do_vietgap": {
+          "canh_tac": "Trồng đúng mật độ khoảng cách 1m x 1.2m; ngắt bỏ lá già sát đất; thu hoạch búp hoa đúng độ già khi lá bắc còn khép chặt.",
+          "sinh_hoc": "Phun phòng luân phiên nấm vi sinh Chaetomium kết hợp chế phẩm vi khuẩn Bacillus subtilis và Nano Bạc Đồng 30ppm.",
+          "khuyen_cao_chuyen_gia": "Thu hoạch hoa vào sáng ráo sương, loại bỏ búp hoa bệnh vào bao tiêu hủy xa nông trại."
+        }
+      },
+      {
+        "ten_benh": "Bệnh thối héo củ ngầm và thối thân lụi Atiso (Verticillium Wilt)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Verticillium dahliae"
+        },
+        "trieu_chung_dien_hinh": [
+          "Các thùy lá phía ngoài của bụi Atiso bị biến vàng từ mép lá, sau đó khô giòn cong queo rũ xuống",
+          "Cây bị héo một bên tán trước rồi lan dần ra toàn bộ bụi cây, cành hoa bị còi cọc nụ hoa nhỏ teo sượng",
+          "Cắt ngang phần gốc thân củ ngầm thấy các bó mạch dẫn hóa đen sẫm chạy dọc theo thớ gỗ"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với thối rễ do úng nước Phytophthora: Phytophthora làm thối nhũn đen toàn bộ vỏ rễ củ ướt át; Verticillium làm tắc nghẽn bó mạch dẫn hóa màu nâu đen bên trong trong khi vỏ ngoài rễ củ vẫn nguyên vẹn.",
+        "kiem_tra_thuc_dia": "Dùng dao cắt ngang gốc thân củ Atiso: thấy vòng chấm đen mạch dẫn xếp thành vòng tròn đồng tâm bên trong thớ thịt củ.",
+        "phac_do_vietgap": {
+          "canh_tac": "Sử dụng cây giống cấy mô in-vitro sạch bệnh; lên luống cao 30 - 40cm thoát nước triệt để mùa mưa bão.",
+          "sinh_hoc": "Tưới định kỳ nấm đối kháng Trichoderma harzianum kết hợp xạ khuẩn Streptomyces xung quanh vùng rễ bụi Atiso.",
+          "khuyen_cao_chuyen_gia": "Không luân canh Atiso với khoai tây, cà chua hoặc ớt chuông đã có tiền sử nhiễm Verticillium."
+        }
+      }
+    ]
+  },
+  {
+    "id": "imp_crop_040",
+    "topic": "Cay_Nhap_Khau_Kinh_Te_Cao",
+    "name_vi": "Sâm Ngọc Linh cấy mô khí canh công nghệ cao (Vietnamese Ginseng)",
+    "scientific_name": "Panax vietnamensis",
+    "dia_ban_pho_bien": [
+      "Đà Lạt (Lâm Đồng)",
+      "Tu Mơ Rông (Kon Tum)",
+      "Nam Trà My (Quảng Nam)"
+    ],
+    "dac_tinh_sinh_thai": "Quốc bảo dược liệu Việt Nam chứa hàm lượng saponin MR2 kỷ lục, nhân giống cấy mô và trồng bán tự nhiên dưới tán rừng hoặc trong nhà màng khí canh Aeroponics công nghệ cao kiểm soát nhiệt độ 18 - 22°C, độ ẩm 85 - 95%, giá thể mùn thảm mục rừng tự nhiên giàu hữu cơ, pH 5.0 - 5.8.",
+    "danh_sach_benh": [
+      {
+        "ten_benh": "Bệnh thối nhũn củ và thối cổ rễ sâm Rhizoctonia (Damping-off / Root Rot)",
+        "muc_do_nguy_hiem": "Cực kỳ nghiêm trọng (Hiểm nghèo)",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Rhizoctonia solani"
+        },
+        "trieu_chung_dien_hinh": [
+          "Phần cổ thân sát mặt giá thể mùn bị úng nước thâm đen, teo thắt lại như bị thắt cổ",
+          "Cây sâm con cấy mô hoặc cây sâm đang nuôi củ đột ngột bị gục ngã ngang mặt luống trong khi lá vẫn xanh tươi",
+          "Phần củ sâm quý giá bên dưới giá thể bị thối nhũn mủn nát, vỏ củ bong tróc bốc mùi chua nồng của nấm thối rữa"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với cây sâm ngủ đông tự nhiên: Ngủ đông tự nhiên thân lá vàng úa rụng cuống rụng sạch để lại vết sẹo mắt tròn bóng láng trên củ sâm khỏe cứng chắc; bệnh Rhizoctonia làm cổ thân thâm nhũn gãy gục và củ sâm bên dưới bị thối mủn nát.",
+        "kiem_tra_thuc_dia": "Nhấc nhẹ cây sâm lên: cổ thân đứt lìa nhũn nát, bới củ sâm thấy mô củ mềm nhũn chảy nước nhầy làm mất hoàn toàn hình thái mắt đốt củ sâm.",
+        "phac_do_vietgap": {
+          "canh_tac": "Xử lý tiệt trùng giá thể mùn thảm mục bằng hơi nước nóng hoặc sục Ozone trước khi vào bầu/luống sâm; che mái vòm nilon ngăn mưa trực tiếp.",
+          "sinh_hoc": "Tưới định kỳ nấm đối kháng Trichoderma viride kết hợp chủng xạ khuẩn phân lập đặc hiệu Streptomyces và Nano Bạc sinh học 15ppm.",
+          "khuyen_cao_chuyen_gia": "Cách ly ngay khay sâm hoặc bầu sâm có cây gục ngã để bảo tồn nguồn gen sâm giống quý giá."
+        }
+      },
+      {
+        "ten_benh": "Bệnh đốm cháy lá rỉ sắt sâm Ngọc Linh (Alternaria Leaf Blight)",
+        "muc_do_nguy_hiem": "Nặng",
+        "tac_nhan": {
+          "loai": "Nấm",
+          "ten_khoa_hoc": "Alternaria panax"
+        },
+        "trieu_chung_dien_hinh": [
+          "Trên các lá chét hình chân vịt xuất hiện các đốm nhỏ màu nâu đậm có các vòng tròn đồng tâm",
+          "Vết bệnh lan nhanh làm toàn bộ lá chét bị khô cháy giòn màu rỉ sắt, mép lá cuộn ngược lên",
+          "Cuống chùm quả hạt sâm bị thâm đen làm rụng các quả sâm hạt đỏ khi hạt chưa kịp chín sinh lý"
+        ],
+        "phan_biet_chan_doan_kep": "Phân biệt với vết chích của bọ trĩ: Bọ trĩ làm mép lá sần sùi ánh bạc không có vòng đồng tâm; Alternaria tạo các vết đốm tròn có nhiều vòng tròn đồng tâm màu rỉ sắt sắc nét.",
+        "kiem_tra_thuc_dia": "Dùng kính lúp soi bề mặt vết cháy lá sâm: thấy các vòng tròn đồng tâm khô giòn màu nâu sẫm viền vàng nhạt rõ rệt.",
+        "phac_do_vietgap": {
+          "canh_tac": "Điều chỉnh lưới che giảm bớt ẩm độ không khí khi có sương mù dầm; thu dọn lá rụng đốt tiêu hủy.",
+          "sinh_hoc": "Phun phòng chế phẩm sinh học vi khuẩn Bacillus subtilis kết hợp Nano Bạc Chitosan kích kháng dày biểu bì lá sâm.",
+          "khuyen_cao_chuyen_gia": "Bảo vệ chùm hoa và quả hạt sâm Ngọc Linh bằng túi lưới che phấn ngăn côn trùng và nấm xâm nhiễm mùa thu."
+        }
+      }
+    ]
+  }
+]
