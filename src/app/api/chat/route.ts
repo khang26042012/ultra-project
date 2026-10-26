@@ -1,6 +1,7 @@
 import { NextRequest } from 'next/server';
 import { AGRIVISION_MASTER_SYSTEM_PROMPT } from '@/lib/systemPrompt';
 import { searchCropKnowledge } from '@/lib/cropSearch';
+import { executeTavilySearch } from '@/lib/tavilySearch';
 
 export const runtime = 'nodejs';
 
@@ -313,17 +314,27 @@ export async function POST(req: NextRequest) {
                   // Send live searching status to UI
                   sendEvent({ type: 'searching', query });
 
-                  // Execute real search on Web Search Engine
-                  const searchData = await executeWebSearch(query);
+                  // Execute Tavily Search Max Power (Cluster 5 Keys Base64)
+                  const searchData = await executeTavilySearch(query);
 
                   // Send sources to UI
                   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                  const formattedSources = searchData.results.map((r: any) => ({
-                    title: r.title || 'Nguồn kiểm chứng',
-                    url: r.url || '',
-                    snippet: r.snippet || '',
-                    favicon: r.favicon_url || undefined,
-                  }));
+                  const formattedSources = searchData.results.map((r: any) => {
+                    let favicon = r.favicon || r.favicon_url;
+                    if (!favicon && r.url) {
+                      try {
+                        favicon = `https://www.google.com/s2/favicons?domain=${new URL(r.url).hostname}&sz=32`;
+                      } catch {
+                        favicon = undefined;
+                      }
+                    }
+                    return {
+                      title: r.title || 'Nguồn kiểm chứng',
+                      url: r.url || '',
+                      snippet: r.content || r.snippet || '',
+                      favicon,
+                    };
+                  });
 
                   sendEvent({
                     type: 'sources',
@@ -338,6 +349,7 @@ export async function POST(req: NextRequest) {
                       query,
                       results: searchData.results,
                       summary: searchData.answer || '',
+                      images: searchData.images || [],
                     }),
                   });
                 } else {

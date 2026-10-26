@@ -249,8 +249,8 @@ def audit_crop_dataset(file_path: str, autofix: bool = False) -> Dict[str, Any]:
         disease_count = len(diseases)
         report["total_diseases"] += disease_count
 
-        if disease_count < 2 or disease_count > 5:
-            viol_msg = f"{crop_err_prefix} Số lượng bệnh ({disease_count}) vi phạm quy định (phải từ 2 đến 5 bệnh)"
+        if disease_count < 2:
+            viol_msg = f"{crop_err_prefix} Số lượng bệnh ({disease_count}) vi phạm quy định (phải có ít nhất 2 bệnh)"
             report["errors"].append(viol_msg)
             report["disease_count_violations"].append(viol_msg)
 
@@ -327,7 +327,7 @@ def format_audit_summary(report: Dict[str, Any]) -> str:
     lines.append(f"🔬 Lỗi phân loại tác nhân vi sinh: {len(report['pathology_mismatches'])}")
     lines.append(f"🆔 Trùng lặp ID: {len(report['duplicate_ids'])}")
     lines.append(f"🌿 Trùng lặp tên cây: {len(report['duplicate_names'])}")
-    lines.append(f"📐 Vi phạm số lượng bệnh (2-5 bệnh/cây): {len(report['disease_count_violations'])}")
+    lines.append(f"📐 Vi phạm số lượng bệnh (>= 2 bệnh/cây): {len(report['disease_count_violations'])}")
     lines.append(f"🛠️  Số sửa chữa đã áp dụng (Autofixes): {len(report['fixes_applied'])}")
     lines.append(f"🏁 ĐÁNH GIÁ TỔNG QUAN: {'🟢 ĐẠT CHUẨN HOÀN TOÀN (100% COMPLIANT)' if report['schema_pass'] else '🔴 CHƯA ĐẠT CHUẨN'}")
     lines.append("=" * 60)

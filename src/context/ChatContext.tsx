@@ -64,11 +64,13 @@ interface ChatContextType {
   renameConversation: (id: string, newTitle: string) => void;
   togglePinConversation: (id: string) => void;
   sendMessage: (content: string, imageUrl?: string, thinkActive?: boolean) => Promise<void>;
+  updateAvatar: (base64: string) => Promise<{ success: boolean; error?: string }>;
   userProfile: {
     name: string;
     email: string;
     plan?: string;
     initials: string;
+    avatar_url?: string;
   };
 }
 
@@ -105,6 +107,7 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
           email: user.email.toLowerCase().trim(),
           name: user.name,
           password_hash: user.passwordHash,
+          avatar_url: user.avatar_url || null,
           role: 'farmer',
           updated_at: new Date().toISOString(),
         },
@@ -499,6 +502,7 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
           email: dbUser.email,
           passwordHash: dbUser.password_hash,
           createdAt: dbUser.created_at || new Date().toISOString(),
+          avatar_url: dbUser.avatar_url || undefined,
         };
 
         // Lưu session vào localStorage
@@ -959,10 +963,53 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  // Update user avatar & persist to Supabase + localStorage
+  const updateAvatar = useCallback(async (compressedBase64: string): Promise<{ success: boolean; error?: string }> => {
+    try {
+      const updatedUser: User = currentUser
+        ? { ...currentUser, avatar_url: compressedBase64 }
+        : {
+            id: 'guest',
+            name: 'Phan Trọng Khang',
+            email: 'trongkhabgphan@gmail.com',
+            passwordHash: '',
+            createdAt: new Date().toISOString(),
+            avatar_url: compressedBase64,
+          };
+
+      setCurrentUser(updatedUser);
+
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('agrivision_current_user', JSON.stringify(updatedUser));
+        localStorage.setItem('agrivision_custom_avatar', compressedBase64);
+      }
+
+      // If user has Supabase account, sync directly to profiles table
+      if (currentUser?.id && currentUser.id !== 'guest') {
+        const { error } = await supabase
+          .from('profiles')
+          .update({
+            avatar_url: compressedBase64,
+            updated_at: new Date().toISOString(),
+          })
+          .eq('id', currentUser.id);
+
+        if (error) {
+          console.warn('Supabase avatar update warning:', error);
+        }
+      }
+
+      return { success: true };
+    } catch (err: unknown) {
+      return { success: false, error: (err as Error)?.message || 'Lỗi lưu ảnh đại diện' };
+    }
+  }, [currentUser]);
+
   const userProfile = {
     name: currentUser?.name || 'Phan Trọng Khang',
     email: currentUser?.email || 'trongkhabgphan@gmail.com',
     initials: currentUser ? getInitials(currentUser.name) : 'PTK',
+    avatar_url: currentUser?.avatar_url || (typeof window !== 'undefined' ? localStorage.getItem('agrivision_custom_avatar') || undefined : undefined),
   };
 
   return (
@@ -998,6 +1045,7 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
         logout,
         clearChatHistory,
         exportBackupJson,
+        updateAvatar,
         isStreaming,
         createNewChat,
         selectConversation,

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { ChatProvider, useChat } from '@/context/ChatContext';
 import {
@@ -45,8 +45,49 @@ function SettingsView() {
     clearChatHistory,
     exportBackupJson,
     logout,
+    updateAvatar,
     userProfile,
   } = useChat();
+
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [isProcessingAvatar, setIsProcessingAvatar] = useState(false);
+
+  const handleAvatarFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    try {
+      setIsProcessingAvatar(true);
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const img = new Image();
+        img.onload = async () => {
+          const canvas = document.createElement('canvas');
+          canvas.width = 160;
+          canvas.height = 160;
+          const ctx = canvas.getContext('2d');
+          if (!ctx) return;
+
+          const minDim = Math.min(img.width, img.height);
+          const sx = (img.width - minDim) / 2;
+          const sy = (img.height - minDim) / 2;
+
+          ctx.drawImage(img, sx, sy, minDim, minDim, 0, 0, 160, 160);
+          const compressedBase64 = canvas.toDataURL('image/jpeg', 0.85);
+
+          await updateAvatar(compressedBase64);
+          setIsProcessingAvatar(false);
+          setActiveModal(null);
+          if (fileInputRef.current) fileInputRef.current.value = '';
+        };
+        img.src = event.target?.result as string;
+      };
+      reader.readAsDataURL(file);
+    } catch (err) {
+      console.error('Lỗi nén và lưu avatar:', err);
+      setIsProcessingAvatar(false);
+    }
+  };
 
   const [searchQuery, setSearchQuery] = useState('');
   const [activeModal, setActiveModal] = useState<
@@ -135,13 +176,32 @@ function SettingsView() {
         <div className="max-w-xl mx-auto space-y-6">
           {/* Profile Showcase (Center Top) */}
           <div className="flex flex-col items-center text-center space-y-2.5 pb-2">
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*"
+              className="hidden"
+              onChange={handleAvatarFileChange}
+            />
             <div className="relative group">
-              <div className="w-20 h-20 rounded-full bg-[#f0f0f0] dark:bg-[#252525] border-2 border-white dark:border-[#333] shadow-md flex items-center justify-center text-2xl font-bold text-[#0d0d0d] dark:text-white">
-                {userInitials}
+              <div
+                onClick={() => fileInputRef.current?.click()}
+                title="Bấm để đổi ảnh đại diện"
+                className="w-20 h-20 rounded-full bg-[#f0f0f0] dark:bg-[#252525] border-2 border-white dark:border-[#333] shadow-md flex items-center justify-center text-2xl font-bold text-[#0d0d0d] dark:text-white overflow-hidden cursor-pointer hover:opacity-90 transition-opacity"
+              >
+                {userProfile.avatar_url ? (
+                  <img
+                    src={userProfile.avatar_url}
+                    alt={userName}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  userInitials
+                )}
               </div>
               <button
                 type="button"
-                onClick={() => setActiveModal('avatar')}
+                onClick={() => fileInputRef.current?.click()}
                 title="Thay đổi ảnh đại diện"
                 className="absolute bottom-0 right-0 w-7 h-7 rounded-full bg-[#0d0d0d] text-white dark:bg-white dark:text-black border-2 border-white dark:border-[#141414] shadow-sm flex items-center justify-center hover:scale-110 active:scale-95 transition-all cursor-pointer"
               >
@@ -903,7 +963,7 @@ function SettingsView() {
       {/* 7. Modal Đổi Avatar */}
       {activeModal === 'avatar' && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 animate-in fade-in duration-150">
-          <div className="w-full max-w-sm bg-white dark:bg-[#202020] border border-[#e5e5e5] dark:border-[#333] rounded-3xl p-5 space-y-3 shadow-xl">
+          <div className="w-full max-w-sm bg-white dark:bg-[#202020] border border-[#e5e5e5] dark:border-[#333] rounded-3xl p-5 space-y-4 shadow-xl text-center">
             <div className="flex items-center justify-between">
               <h3 className="text-base font-semibold text-[#0d0d0d] dark:text-white">
                 Ảnh đại diện
@@ -917,18 +977,41 @@ function SettingsView() {
               </button>
             </div>
 
+            <div className="flex justify-center py-2">
+              <div className="w-24 h-24 rounded-full bg-[#f0f0f0] dark:bg-[#252525] border-2 border-[#e5e5e5] dark:border-[#333] overflow-hidden flex items-center justify-center text-3xl font-bold shadow-inner">
+                {userProfile.avatar_url ? (
+                  <img
+                    src={userProfile.avatar_url}
+                    alt={userName}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  userInitials
+                )}
+              </div>
+            </div>
+
             <p className="text-xs text-[#5d5d5d] dark:text-[#aaa] leading-relaxed">
-              Tài khoản hiện đang sử dụng chữ viết tắt đại diện <strong>{userInitials}</strong> chuẩn
-              tối giản phong cách ChatGPT.
+              Chọn ảnh từ thiết bị hoặc camera. Ảnh sẽ được tự động nén về kích thước chuẩn 160×160px và đồng bộ an toàn lên Cloud Supabase.
             </p>
 
-            <button
-              type="button"
-              onClick={() => setActiveModal(null)}
-              className="w-full py-2.5 rounded-xl bg-[#0d0d0d] hover:bg-[#262626] text-white dark:bg-white dark:hover:bg-gray-100 dark:text-black font-semibold text-xs cursor-pointer shadow-xs"
-            >
-              Đóng
-            </button>
+            <div className="space-y-2">
+              <button
+                type="button"
+                disabled={isProcessingAvatar}
+                onClick={() => fileInputRef.current?.click()}
+                className="w-full py-2.5 rounded-xl bg-[#0d0d0d] hover:bg-[#262626] text-white dark:bg-white dark:hover:bg-gray-100 dark:text-black font-semibold text-xs cursor-pointer shadow-xs transition-transform active:scale-98"
+              >
+                {isProcessingAvatar ? 'Đang xử lý...' : 'Chọn ảnh mới từ thiết bị'}
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveModal(null)}
+                className="w-full py-2.5 rounded-xl bg-[#f4f4f4] hover:bg-[#eaeaea] dark:bg-[#2c2c2c] dark:hover:bg-[#383838] text-[#555] dark:text-[#ccc] font-medium text-xs cursor-pointer"
+              >
+                Đóng
+              </button>
+            </div>
           </div>
         </div>
       )}

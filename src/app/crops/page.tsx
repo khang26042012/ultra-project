@@ -1,24 +1,21 @@
 'use client';
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import {
   Search,
-  PanelLeft,
   SlidersHorizontal,
-  Sparkles,
   ShieldCheck,
   AlertTriangle,
   Activity,
   ChevronRight,
-  ExternalLink,
   X,
   MapPin,
   Leaf,
-  CheckCircle2,
   Check,
 } from 'lucide-react';
+import { ChatProvider, useChat } from '@/context/ChatContext';
+import AppSidebar from '@/components/sidebar/AppSidebar';
 import { CropRecord } from '@/lib/cropSearch';
 
 const CATEGORIES = [
@@ -33,8 +30,10 @@ const CATEGORIES = [
 
 const PAGE_SIZE = 20;
 
-export default function CropsEncyclopediaPage() {
+function CropsEncyclopediaView() {
   const router = useRouter();
+  const { toggleSidebar } = useChat();
+
   const [crops, setCrops] = useState<CropRecord[]>([]);
   const [totalCount, setTotalCount] = useState(0);
   const [loadingInitial, setLoadingInitial] = useState(true);
@@ -103,7 +102,9 @@ export default function CropsEncyclopediaPage() {
       } catch (err) {
         console.error('Failed to load initial crops:', err);
       } finally {
-        if (!isCancelled) setLoadingInitial(false);
+        if (!isCancelled) {
+          setLoadingInitial(false);
+        }
       }
     }
 
@@ -181,21 +182,13 @@ export default function CropsEncyclopediaPage() {
 
     observer.observe(sentinel);
     return () => observer.disconnect();
-  }, [loadMore, hasMore, loadingMore, loadingInitial]);
+  }, [hasMore, loadingMore, loadingInitial, loadMore]);
 
-  const handleAskAI = (cropName: string, diseaseName?: string) => {
-    const prompt = diseaseName
-      ? `Tôi muốn hỏi về bệnh ${diseaseName} trên cây ${cropName}. Nhờ bác sĩ AgriVision chẩn đoán lâm sàng và hướng dẫn phác đồ điều trị VietGAP.`
-      : `Tôi muốn tìm hiểu về các loại sâu bệnh thường gặp và cách phòng trừ an toàn trên cây ${cropName}.`;
-    sessionStorage.setItem('agrivision_prefill_prompt', prompt);
-    router.push('/');
-  };
-
-  const getDangerBadge = (danger: string) => {
-    if (danger.includes('Hiểm nghèo') || danger.includes('Cực kỳ')) {
+  const renderDangerBadge = (danger: string) => {
+    if (danger.includes('Hiểm') || danger.includes('Cực kỳ') || danger.includes('Nghiêm trọng')) {
       return (
         <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-50 text-red-700 border border-red-200 dark:bg-red-950/40 dark:text-red-300 dark:border-red-900/50">
-          <span className="w-1.5 h-1.5 rounded-full bg-red-600 animate-pulse" />
+          <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
           Hiểm nghèo
         </span>
       );
@@ -219,367 +212,317 @@ export default function CropsEncyclopediaPage() {
   const activeCategory = CATEGORIES.find((c) => c.id === selectedTopic);
 
   return (
-    <div className="h-[100dvh] flex flex-col bg-[#ffffff] dark:bg-[#0f0f0f] text-[#0d0d0d] dark:text-[#ececec] overflow-hidden">
-      {/* Top Minimalist Navigation Bar */}
-      <header className="shrink-0 h-14 sm:h-16 bg-[#ffffff]/90 dark:bg-[#0f0f0f]/90 backdrop-blur-md border-b border-[#e5e5e5] dark:border-[#262626] z-20">
-        <div className="max-w-6xl mx-auto px-4 h-full flex items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <Link
-              href="/"
-              className="inline-flex items-center gap-2 px-3 py-1.5 -ml-2 rounded-xl text-[#525252] hover:text-[#0d0d0d] dark:text-[#a3a3a3] dark:hover:text-white hover:bg-[#f4f4f4] dark:hover:bg-[#1a1a1a] transition-colors text-sm font-medium"
-              title="Quay lại Trò chuyện"
-            >
-              <PanelLeft className="w-4 h-4" strokeWidth={1.5} />
-              <span>Trò chuyện</span>
-            </Link>
+    <div className="flex h-[100dvh] w-screen overflow-hidden bg-[#ffffff] dark:bg-[#141414] text-[#0d0d0d] dark:text-[#ececec]">
+      {/* 1. App Sidebar Integrated */}
+      <AppSidebar />
 
-            <div className="h-4 w-px bg-[#e5e5e5] dark:bg-[#262626]" />
-
-            <div className="flex items-center gap-2">
-              <span className="w-6 h-6 rounded-lg bg-[#0d0d0d] text-white dark:bg-white dark:text-black flex items-center justify-center font-bold text-xs">
-                AV
-              </span>
-              <span className="font-semibold text-sm sm:text-base tracking-tight text-[#0d0d0d] dark:text-white">
-                Toàn Thư Bệnh Học Cây Trồng
-              </span>
+      {/* 2. Main Viewport */}
+      <div className="flex-1 flex flex-col h-full min-w-0 relative bg-[#ffffff] dark:bg-[#141414] overflow-hidden">
+        {/* Floating Sidebar Open Button at top-left (ChatGPT Style) */}
+        <div className="fixed top-3.5 left-3.5 z-30 pointer-events-none">
+          <button
+            type="button"
+            onClick={toggleSidebar}
+            title="Mở menu"
+            className="pointer-events-auto w-10 h-10 rounded-full bg-white/90 dark:bg-[#212121]/90 backdrop-blur-md shadow-[0_2px_8px_rgba(0,0,0,0.08)] dark:shadow-none border border-black/5 dark:border-white/10 flex items-center justify-center text-[#0d0d0d] dark:text-white hover:scale-105 active:scale-95 transition-all cursor-pointer"
+          >
+            <div className="flex flex-col gap-1.5 items-center justify-center">
+              <span className="w-4 h-0.5 bg-current rounded-full" />
+              <span className="w-4 h-0.5 bg-current rounded-full" />
             </div>
-          </div>
-
-          <div className="flex items-center gap-2">
-            <span className="text-[11px] font-mono px-2.5 py-1 rounded-full bg-[#f4f4f4] dark:bg-[#1f1f1f] border border-[#e5e5e5] dark:border-[#2f2f2f] text-[#737373] dark:text-[#a3a3a3]">
-              1.500+ Loài Cây
-            </span>
-          </div>
+          </button>
         </div>
-      </header>
 
-      {/* Main Scrollable Viewport */}
-      <div
-        ref={scrollContainerRef}
-        className="flex-1 overflow-y-auto min-h-0 bg-[#ffffff] dark:bg-[#0f0f0f]"
-      >
-        {/* Hero Section */}
-        <section className="bg-gradient-to-b from-[#f9f9f9] to-[#ffffff] dark:from-[#141414] dark:to-[#0f0f0f] border-b border-[#e5e5e5] dark:border-[#262626] py-8 sm:py-10 px-4">
-          <div className="max-w-4xl mx-auto text-center space-y-3">
-            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-[#0d0d0d] dark:text-white">
-              Tra Cứu Lâm Sàng & Phổ Bệnh Học Thực Vật
-            </h1>
-            <p className="text-xs sm:text-sm text-[#737373] dark:text-[#a3a3a3] max-w-2xl mx-auto leading-relaxed">
-              Công trình nghiên cứu khoa học của tác giả{' '}
-              <strong className="text-[#0d0d0d] dark:text-white font-semibold">
-                Phan Trọng Khang
-              </strong>{' '}
-              (Lớp 9¹, THCS Vĩnh An, tỉnh Vĩnh Long), chuẩn hóa 1.500+ loài cây
-              trồng bản địa 63 tỉnh thành và quốc tế, 100% phác đồ sinh học
-              VietGAP an toàn.
-            </p>
-
-            {/* Single Refined Metric Pill Line */}
-            <div className="pt-2 flex justify-center">
-              <div className="inline-flex flex-wrap items-center justify-center gap-2 sm:gap-3 px-4 py-1.5 rounded-full bg-[#f4f4f4] dark:bg-[#1a1a1a] border border-[#e5e5e5] dark:border-[#2a2a2a] text-xs text-[#525252] dark:text-[#a3a3a3] font-medium shadow-2xs">
-                <span>1.500+ loài cây trồng</span>
-                <span className="text-[#cccccc] dark:text-[#444444]">•</span>
-                <span>3.000+ hồ sơ bệnh lâm sàng</span>
-                <span className="text-[#cccccc] dark:text-[#444444]">•</span>
-                <span className="text-emerald-600 dark:text-emerald-400 font-semibold">
-                  100% Chuẩn VietGAP
-                </span>
-                <span className="text-[#cccccc] dark:text-[#444444]">•</span>
-                <span className="text-blue-600 dark:text-blue-400 font-mono">
-                  &lt; 2ms RAG nội tại
-                </span>
-              </div>
+        {/* Scrollable Content Viewport */}
+        <div
+          ref={scrollContainerRef}
+          className="flex-1 overflow-y-auto min-h-0 bg-[#ffffff] dark:bg-[#141414] pt-4"
+        >
+          {/* Header Section */}
+          <section className="pt-10 pb-6 px-4 text-center">
+            <div className="max-w-2xl mx-auto space-y-2">
+              <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#0d0d0d] dark:text-white">
+                Kho dữ liệu cây trồng
+              </h1>
+              <p className="text-xs sm:text-sm text-[#737373] dark:text-[#a3a3a3] max-w-lg mx-auto leading-relaxed">
+                Tra cứu toàn diện hồ sơ bệnh học thực vật, triệu chứng lâm sàng và phác đồ sinh học VietGAP an toàn.
+              </p>
             </div>
-          </div>
-        </section>
+          </section>
 
-        {/* Content Area */}
-        <main className="max-w-6xl mx-auto px-4 py-6 sm:py-8 space-y-6">
-          {/* Search & Single 'Bộ lọc' Filter Action */}
-          <div className="max-w-2xl mx-auto space-y-2.5">
-            <div className="relative flex items-center gap-2">
-              {/* Rounded 24px Search Input */}
-              <div className="relative flex-1">
-                <Search
-                  className="w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 text-[#8e8e8e]"
-                  strokeWidth={1.5}
-                />
-                <input
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Tìm theo tên cây (sầu riêng, bưởi, việt quất...), tên khoa học hoặc bệnh..."
-                  className="w-full pl-11 pr-10 py-2.5 sm:py-3 rounded-[24px] bg-[#f9f9f9] dark:bg-[#1a1a1a] border border-[#e5e5e5] dark:border-[#2e2e2e] text-xs sm:text-sm text-[#0d0d0d] dark:text-white placeholder:text-[#8e8e8e] focus:outline-hidden focus:border-[#0d0d0d] dark:focus:border-white transition-colors shadow-2xs"
-                />
-                {searchQuery && (
-                  <button
-                    type="button"
-                    onClick={() => setSearchQuery('')}
-                    className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[#8e8e8e] hover:text-[#0d0d0d] dark:hover:text-white p-1 rounded-full cursor-pointer"
-                  >
-                    <X className="w-3.5 h-3.5" strokeWidth={1.5} />
-                  </button>
-                )}
-              </div>
-
-              {/* Single 'Bộ lọc' Button */}
-              <div className="relative" ref={filterMenuRef}>
-                <button
-                  type="button"
-                  onClick={() => setIsFilterOpen((prev) => !prev)}
-                  className={`inline-flex items-center gap-1.5 px-3.5 py-2.5 sm:py-3 rounded-[24px] text-xs font-medium border transition-all cursor-pointer shrink-0 ${
-                    selectedTopic !== 'all'
-                      ? 'bg-[#0d0d0d] text-white dark:bg-white dark:text-black border-transparent shadow-xs'
-                      : 'bg-[#f9f9f9] hover:bg-[#eaeaea] text-[#0d0d0d] dark:bg-[#1a1a1a] dark:hover:bg-[#252525] dark:text-white border-[#e5e5e5] dark:border-[#2e2e2e]'
-                  }`}
-                >
-                  <SlidersHorizontal className="w-3.5 h-3.5" strokeWidth={1.5} />
-                  <span>Bộ lọc</span>
-                  {selectedTopic !== 'all' && (
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse ml-0.5" />
+          {/* Search Bar & Filter Button */}
+          <main className="max-w-6xl mx-auto px-4 pb-12 space-y-6">
+            <div className="max-w-2xl mx-auto space-y-2.5">
+              <div className="relative flex items-center gap-2">
+                {/* Search Input */}
+                <div className="relative flex-1">
+                  <Search
+                    className="w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 text-[#8e8e8e]"
+                    strokeWidth={1.5}
+                  />
+                  <input
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="Tìm theo tên cây (sầu riêng, bưởi, lúa...), tên khoa học hoặc bệnh..."
+                    className="w-full pl-11 pr-10 py-2.5 sm:py-3 rounded-[24px] bg-[#f9f9f9] dark:bg-[#1f1f1f] border border-[#e5e5e5] dark:border-[#2e2e2e] text-xs sm:text-sm text-[#0d0d0d] dark:text-white placeholder:text-[#8e8e8e] focus:outline-hidden focus:border-[#0d0d0d] dark:focus:border-white transition-colors shadow-2xs"
+                  />
+                  {searchQuery && (
+                    <button
+                      type="button"
+                      onClick={() => setSearchQuery('')}
+                      className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[#8e8e8e] hover:text-[#0d0d0d] dark:hover:text-white p-1 rounded-full cursor-pointer"
+                    >
+                      <X className="w-3.5 h-3.5" strokeWidth={1.5} />
+                    </button>
                   )}
-                </button>
+                </div>
 
-                {/* Filter Dropdown Popover */}
-                {isFilterOpen && (
-                  <div className="absolute right-0 top-full mt-2 w-64 p-1.5 rounded-2xl bg-[#ffffff] dark:bg-[#1a1a1a] border border-[#e5e5e5] dark:border-[#2e2e2e] shadow-xl z-30 space-y-0.5 animate-in fade-in zoom-in-95 duration-100">
-                    <div className="px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-[#737373] dark:text-[#8e8e8e]">
-                      Chọn nhóm cây trồng
-                    </div>
-                    {CATEGORIES.map((cat) => {
-                      const isSelected = selectedTopic === cat.id;
-                      return (
-                        <button
-                          key={cat.id}
-                          type="button"
-                          onClick={() => {
-                            setSelectedTopic(cat.id);
-                            setIsFilterOpen(false);
-                          }}
-                          className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium transition-colors text-left cursor-pointer ${
-                            isSelected
-                              ? 'bg-[#0d0d0d] text-white dark:bg-white dark:text-black font-semibold'
-                              : 'text-[#0d0d0d] dark:text-[#ececec] hover:bg-[#f4f4f4] dark:hover:bg-[#252525]'
-                          }`}
-                        >
-                          <span className="flex items-center gap-2">
-                            <span>{cat.icon}</span>
-                            <span>{cat.label}</span>
-                          </span>
-                          {isSelected && (
-                            <Check className="w-3.5 h-3.5" strokeWidth={1.5} />
-                          )}
-                        </button>
-                      );
-                    })}
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* Active Filter Pill indicator */}
-            {selectedTopic !== 'all' && activeCategory && (
-              <div className="flex items-center gap-2 text-xs text-[#737373] dark:text-[#a3a3a3] px-1">
-                <span>Đang lọc:</span>
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#f4f4f4] dark:bg-[#202020] text-[#0d0d0d] dark:text-white font-medium border border-[#e5e5e5] dark:border-[#333333]">
-                  <span>{activeCategory.icon}</span>
-                  <span>{activeCategory.label}</span>
+                {/* Filter Button */}
+                <div className="relative" ref={filterMenuRef}>
                   <button
                     type="button"
-                    onClick={() => setSelectedTopic('all')}
-                    className="hover:text-red-500 ml-0.5 cursor-pointer"
-                    title="Xóa bộ lọc"
+                    onClick={() => setIsFilterOpen((prev) => !prev)}
+                    className={`inline-flex items-center gap-1.5 px-3.5 py-2.5 sm:py-3 rounded-[24px] text-xs font-medium border transition-all cursor-pointer shrink-0 ${
+                      selectedTopic !== 'all'
+                        ? 'bg-[#0d0d0d] text-white dark:bg-white dark:text-black border-transparent shadow-xs'
+                        : 'bg-[#f9f9f9] hover:bg-[#eaeaea] text-[#0d0d0d] dark:bg-[#1f1f1f] dark:hover:bg-[#252525] dark:text-white border-[#e5e5e5] dark:border-[#2e2e2e]'
+                    }`}
                   >
-                    <X className="w-3 h-3" strokeWidth={1.5} />
+                    <SlidersHorizontal className="w-3.5 h-3.5" strokeWidth={1.5} />
+                    <span>Bộ lọc</span>
+                    {selectedTopic !== 'all' && (
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse ml-0.5" />
+                    )}
                   </button>
-                </span>
-                <span className="text-[11px] font-mono">
-                  ({totalCount} kết quả)
-                </span>
+
+                  {/* Filter Dropdown Popover */}
+                  {isFilterOpen && (
+                    <div className="absolute right-0 top-full mt-2 w-64 p-1.5 rounded-2xl bg-[#ffffff] dark:bg-[#1f1f1f] border border-[#e5e5e5] dark:border-[#2e2e2e] shadow-xl z-30 space-y-0.5 animate-in fade-in zoom-in-95 duration-100">
+                      <div className="px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-[#737373] dark:text-[#8e8e8e]">
+                        Chọn nhóm cây trồng
+                      </div>
+                      {CATEGORIES.map((cat) => {
+                        const isSelected = selectedTopic === cat.id;
+                        return (
+                          <button
+                            key={cat.id}
+                            type="button"
+                            onClick={() => {
+                              setSelectedTopic(cat.id);
+                              setIsFilterOpen(false);
+                            }}
+                            className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium transition-colors cursor-pointer text-left ${
+                              isSelected
+                                ? 'bg-[#f0f0f0] dark:bg-[#2a2a2a] text-[#0d0d0d] dark:text-white font-semibold'
+                                : 'hover:bg-[#f7f7f7] dark:hover:bg-[#262626] text-[#525252] dark:text-[#cccccc]'
+                            }`}
+                          >
+                            <span className="flex items-center gap-2 truncate">
+                              <span>{cat.icon}</span>
+                              <span className="truncate">{cat.label}</span>
+                            </span>
+                            {isSelected && (
+                              <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
+                            )}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Active Filter Pill */}
+              {selectedTopic !== 'all' && activeCategory && (
+                <div className="flex items-center gap-1.5 text-xs text-[#737373] dark:text-[#a3a3a3] pl-2">
+                  <span>Đang lọc:</span>
+                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#f4f4f4] dark:bg-[#222222] text-[#0d0d0d] dark:text-white font-medium text-[11px]">
+                    {activeCategory.icon} {activeCategory.label}
+                    <button
+                      type="button"
+                      onClick={() => setSelectedTopic('all')}
+                      className="hover:text-red-500 cursor-pointer ml-0.5"
+                    >
+                      <X className="w-3 h-3" />
+                    </button>
+                  </span>
+                </div>
+              )}
+            </div>
+
+            {/* Crops Grid */}
+            {loadingInitial ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pt-4">
+                {Array.from({ length: 6 }).map((_, i) => (
+                  <div
+                    key={i}
+                    className="p-5 rounded-2xl bg-[#f9f9f9] dark:bg-[#1a1a1a] border border-[#e5e5e5] dark:border-[#262626] animate-pulse space-y-3"
+                  >
+                    <div className="h-5 bg-[#e5e5e5] dark:bg-[#262626] rounded-md w-1/2" />
+                    <div className="h-3 bg-[#e5e5e5] dark:bg-[#262626] rounded-md w-3/4" />
+                    <div className="h-12 bg-[#e5e5e5] dark:bg-[#262626] rounded-md w-full" />
+                  </div>
+                ))}
+              </div>
+            ) : crops.length === 0 ? (
+              <div className="text-center py-16 space-y-3">
+                <div className="w-12 h-12 mx-auto rounded-full bg-[#f4f4f4] dark:bg-[#1f1f1f] flex items-center justify-center text-xl">
+                  🔍
+                </div>
+                <h3 className="font-semibold text-sm text-[#0d0d0d] dark:text-white">
+                  Không tìm thấy loài cây phù hợp
+                </h3>
+                <p className="text-xs text-[#737373] dark:text-[#a3a3a3] max-w-sm mx-auto">
+                  Thử tìm kiếm với tên gọi khác hoặc chuyển về &quot;Tất cả nhóm cây&quot;
+                </p>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pt-2">
+                {crops.map((crop) => {
+                  const diseasesCount = Array.isArray(crop.danh_sach_benh)
+                    ? crop.danh_sach_benh.length
+                    : 0;
+                  const regions = Array.isArray(crop.dia_ban_pho_bien)
+                    ? crop.dia_ban_pho_bien.slice(0, 3).join(', ')
+                    : crop.dia_ban_pho_bien;
+
+                  return (
+                    <div
+                      key={crop.id}
+                      onClick={() => {
+                        setSelectedCrop(crop);
+                        setActiveDiseaseTab(0);
+                      }}
+                      className="group p-5 rounded-2xl bg-[#ffffff] dark:bg-[#1a1a1a] border border-[#e5e5e5] dark:border-[#262626] hover:border-[#0d0d0d] dark:hover:border-white/40 transition-all hover:shadow-md cursor-pointer flex flex-col justify-between space-y-4"
+                    >
+                      <div className="space-y-2">
+                        <div className="flex items-start justify-between gap-2">
+                          <h3 className="font-bold text-base text-[#0d0d0d] dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+                            {crop.name_vi}
+                          </h3>
+                          <span className="text-[11px] font-mono px-2 py-0.5 rounded-md bg-[#f4f4f4] dark:bg-[#252525] text-[#737373] dark:text-[#a3a3a3] border border-[#e5e5e5]/50 dark:border-[#333]/50 shrink-0">
+                            {diseasesCount} bệnh
+                          </span>
+                        </div>
+                        <p className="text-xs italic font-serif text-[#737373] dark:text-[#a3a3a3] truncate">
+                          {crop.scientific_name}
+                        </p>
+                        <p className="text-xs text-[#525252] dark:text-[#b3b3b3] line-clamp-2 leading-relaxed">
+                          {crop.dac_tinh_sinh_thai}
+                        </p>
+                      </div>
+
+                      <div className="pt-2 border-t border-[#f0f0f0] dark:border-[#262626] flex items-center justify-between text-[11px] text-[#737373] dark:text-[#8e8e8e]">
+                        <span className="flex items-center gap-1 truncate max-w-[80%]">
+                          <MapPin className="w-3 h-3 shrink-0" />
+                          <span className="truncate">{regions || 'Toàn quốc'}</span>
+                        </span>
+                        <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             )}
-          </div>
 
-          {/* Crops Grid & States */}
-          {loadingInitial ? (
-            <div className="py-24 text-center space-y-3">
-              <div className="w-7 h-7 mx-auto border-2 border-[#0d0d0d] dark:border-white border-t-transparent rounded-full animate-spin" />
-              <p className="text-xs text-[#737373] dark:text-[#a3a3a3]">
-                Đang nạp dữ liệu cây trồng...
-              </p>
-            </div>
-          ) : crops.length === 0 ? (
-            <div className="py-20 text-center space-y-3 border border-dashed border-[#e5e5e5] dark:border-[#2e2e2e] rounded-3xl">
-              <Leaf className="w-10 h-10 mx-auto text-[#a3a3a3]" strokeWidth={1.5} />
-              <h3 className="text-sm font-semibold text-[#0d0d0d] dark:text-white">
-                Không tìm thấy cây trồng phù hợp
-              </h3>
-              <p className="text-xs text-[#737373] dark:text-[#a3a3a3] max-w-sm mx-auto">
-                Thử tìm với tên thông dụng (sầu riêng, bưởi, cà phê, lúa, wasabi) hoặc chuyển nhóm cây sang Tất cả.
-              </p>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {crops.map((crop) => {
-                const diseasesCount = Array.isArray(crop.danh_sach_benh)
-                  ? crop.danh_sach_benh.length
-                  : 0;
-                const regions = Array.isArray(crop.dia_ban_pho_bien)
-                  ? crop.dia_ban_pho_bien.slice(0, 3).join(', ')
-                  : crop.dia_ban_pho_bien;
-
-                return (
-                  <div
-                    key={crop.id}
-                    onClick={() => {
-                      setSelectedCrop(crop);
-                      setActiveDiseaseTab(0);
-                    }}
-                    className="group relative p-4 rounded-2xl bg-[#ffffff] dark:bg-[#161616] border border-[#e5e5e5] dark:border-[#262626] hover:border-[#0d0d0d] dark:hover:border-white transition-all shadow-2xs hover:shadow-xs cursor-pointer flex flex-col justify-between"
-                  >
-                    <div className="space-y-2">
-                      <div className="flex items-start justify-between gap-2">
-                        <h3 className="font-semibold text-base text-[#0d0d0d] dark:text-white group-hover:underline">
-                          {crop.name_vi}
-                        </h3>
-                        <span className="shrink-0 text-[11px] font-mono px-2 py-0.5 rounded-md bg-[#f4f4f4] dark:bg-[#222222] text-[#737373] dark:text-[#a3a3a3] border border-[#e5e5e5] dark:border-[#2e2e2e]">
-                          {diseasesCount} bệnh
-                        </span>
-                      </div>
-
-                      <p className="text-xs italic font-serif text-[#737373] dark:text-[#a3a3a3]">
-                        {crop.scientific_name}
-                      </p>
-
-                      <p className="text-xs text-[#525252] dark:text-[#b4b4b4] line-clamp-2 leading-relaxed">
-                        {crop.dac_tinh_sinh_thai}
-                      </p>
-                    </div>
-
-                    <div className="mt-4 pt-3 border-t border-[#f0f0f0] dark:border-[#222222] flex items-center justify-between text-xs text-[#737373] dark:text-[#8e8e8e]">
-                      <div className="flex items-center gap-1 truncate max-w-[180px]">
-                        <MapPin className="w-3.5 h-3.5 shrink-0" strokeWidth={1.5} />
-                        <span className="truncate">{regions || 'Toàn quốc'}</span>
-                      </div>
-                      <span className="inline-flex items-center gap-0.5 text-xs font-medium text-[#0d0d0d] dark:text-white group-hover:translate-x-0.5 transition-transform">
-                        <span>Hồ sơ lâm sàng</span>
-                        <ChevronRight className="w-3.5 h-3.5" strokeWidth={1.5} />
-                      </span>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          )}
-
-          {/* Infinite Scroll Sentinel */}
-          {!loadingInitial && (
-            <div
-              ref={sentinelRef}
-              className="py-6 flex items-center justify-center text-xs text-[#737373] dark:text-[#8e8e8e]"
-            >
+            {/* Infinite Scroll Sentinel */}
+            <div ref={sentinelRef} className="py-6 flex justify-center">
               {loadingMore ? (
-                <div className="flex items-center gap-2">
-                  <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
+                <div className="flex items-center gap-2 text-xs text-[#737373] dark:text-[#a3a3a3]">
+                  <span className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
                   <span>Đang tải thêm cây trồng...</span>
                 </div>
               ) : !hasMore && crops.length > 0 ? (
-                <span className="font-mono text-[11px] text-[#a3a3a3] dark:text-[#525252]">
-                  Đã tải trọn bộ {crops.length} / {totalCount} cây trồng
-                </span>
+                <div className="text-xs text-[#8e8e8e] text-center">
+                  Đã tải toàn bộ {crops.length} / {totalCount} cây trồng
+                </div>
               ) : null}
             </div>
-          )}
-        </main>
+          </main>
+        </div>
       </div>
 
       {/* Crop Pathology Profile Detail Modal */}
       {selectedCrop && (
         <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 animate-in fade-in duration-150"
           onClick={() => setSelectedCrop(null)}
-          className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 animate-in fade-in duration-150"
         >
           <div
+            className="w-full max-w-3xl max-h-[90vh] bg-white dark:bg-[#1a1a1a] border border-[#e5e5e5] dark:border-[#333] rounded-3xl shadow-2xl flex flex-col overflow-hidden animate-in zoom-in-95 duration-150"
             onClick={(e) => e.stopPropagation()}
-            className="w-full max-w-3xl max-h-[90vh] bg-[#ffffff] dark:bg-[#161616] rounded-3xl border border-[#e5e5e5] dark:border-[#2e2e2e] shadow-2xl flex flex-col overflow-hidden animate-in zoom-in-95 duration-150"
           >
-            {/* Modal Header */}
-            <div className="p-5 border-b border-[#e5e5e5] dark:border-[#262626] flex items-start justify-between gap-4 bg-[#f9f9f9] dark:bg-[#1c1c1c]">
-              <div className="space-y-1">
-                <div className="flex items-center gap-2">
-                  <h2 className="text-xl sm:text-2xl font-bold text-[#0d0d0d] dark:text-white">
+            {/* Modal Header: Clean, only close button ✕ */}
+            <div className="p-5 sm:p-6 border-b border-[#e5e5e5] dark:border-[#262626] flex items-center justify-between gap-4 shrink-0">
+              <div className="min-w-0">
+                <div className="flex items-center gap-2.5">
+                  <h2 className="text-xl sm:text-2xl font-bold text-[#0d0d0d] dark:text-white truncate">
                     {selectedCrop.name_vi}
                   </h2>
-                  <span className="text-xs px-2 py-0.5 rounded-md bg-[#ffffff] dark:bg-[#282828] border border-[#e5e5e5] dark:border-[#383838] font-mono text-[#737373] dark:text-[#a3a3a3]">
+                  <span className="text-xs px-2 py-0.5 rounded-md bg-[#f4f4f4] dark:bg-[#282828] border border-[#e5e5e5] dark:border-[#383838] font-mono text-[#737373] dark:text-[#a3a3a3] shrink-0">
                     {selectedCrop.id}
                   </span>
                 </div>
-                <p className="text-sm italic font-serif text-[#737373] dark:text-[#a3a3a3]">
+                <p className="text-xs sm:text-sm italic font-serif text-[#737373] dark:text-[#a3a3a3] mt-0.5 truncate">
                   {selectedCrop.scientific_name}
                 </p>
               </div>
 
-              <div className="flex items-center gap-2">
-                <button
-                  type="button"
-                  onClick={() => handleAskAI(selectedCrop.name_vi)}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#0d0d0d] text-white dark:bg-white dark:text-black hover:opacity-90 transition-opacity cursor-pointer shadow-xs"
-                >
-                  <Sparkles className="w-3.5 h-3.5" strokeWidth={1.5} />
-                  <span>Hỏi AI cây này</span>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setSelectedCrop(null)}
-                  className="p-1.5 rounded-xl hover:bg-[#e5e5e5] dark:hover:bg-[#2b2b2b] text-[#737373] hover:text-[#0d0d0d] dark:text-[#a3a3a3] dark:hover:text-white transition-colors cursor-pointer"
-                >
-                  <X className="w-5 h-5" strokeWidth={1.5} />
-                </button>
-              </div>
+              {/* ONLY close button ✕ */}
+              <button
+                type="button"
+                onClick={() => setSelectedCrop(null)}
+                className="p-2 rounded-full hover:bg-[#f0f0f0] dark:hover:bg-[#2b2b2b] text-[#737373] hover:text-[#0d0d0d] dark:text-[#a3a3a3] dark:hover:text-white transition-colors cursor-pointer shrink-0"
+                title="Đóng"
+              >
+                <X className="w-5 h-5" strokeWidth={1.5} />
+              </button>
             </div>
 
             {/* Modal Body */}
-            <div className="p-5 overflow-y-auto space-y-6 flex-1 text-sm">
+            <div className="p-5 sm:p-6 overflow-y-auto space-y-6 flex-1 text-sm no-scrollbar">
               {/* Ecology & Geography */}
-              <div className="p-4 rounded-2xl bg-[#f9f9f9] dark:bg-[#1c1c1c] border border-[#e5e5e5] dark:border-[#262626] space-y-2">
+              <div className="p-4 rounded-2xl bg-[#f9f9f9] dark:bg-[#212121] border border-[#e5e5e5] dark:border-[#2a2a2a] space-y-2">
                 <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#737373] dark:text-[#8e8e8e]">
-                  <MapPin className="w-3.5 h-3.5" strokeWidth={1.5} />
-                  <span>Đặc tính sinh thái & Vùng canh tác</span>
+                  <Leaf className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+                  <span>Đặc tính nông học & Địa bàn</span>
                 </div>
-                <p className="text-xs sm:text-sm text-[#0d0d0d] dark:text-[#ececec] leading-relaxed">
+                <p className="text-xs text-[#525252] dark:text-[#cccccc] leading-relaxed">
                   {selectedCrop.dac_tinh_sinh_thai}
                 </p>
-                <div className="text-xs text-[#737373] dark:text-[#8e8e8e] pt-1">
-                  <strong>Địa bàn phổ biến:</strong>{' '}
-                  {Array.isArray(selectedCrop.dia_ban_pho_bien)
-                    ? selectedCrop.dia_ban_pho_bien.join(', ')
-                    : selectedCrop.dia_ban_pho_bien}
+                <div className="pt-1 flex items-center gap-1.5 text-xs text-[#737373] dark:text-[#a3a3a3]">
+                  <MapPin className="w-3 h-3 text-red-500 shrink-0" />
+                  <span>
+                    {Array.isArray(selectedCrop.dia_ban_pho_bien)
+                      ? selectedCrop.dia_ban_pho_bien.join(', ')
+                      : selectedCrop.dia_ban_pho_bien}
+                  </span>
                 </div>
               </div>
 
-              {/* Diseases Tabs */}
+              {/* Pathology Spectrum */}
               {Array.isArray(selectedCrop.danh_sach_benh) &&
                 selectedCrop.danh_sach_benh.length > 0 && (
-                  <div className="space-y-4">
+                  <div className="space-y-3">
                     <div className="flex items-center justify-between">
-                      <h4 className="text-xs font-semibold uppercase tracking-wider text-[#737373] dark:text-[#8e8e8e] flex items-center gap-1.5">
-                        <AlertTriangle className="w-3.5 h-3.5" strokeWidth={1.5} />
-                        <span>
-                          Hồ sơ bệnh học ({selectedCrop.danh_sach_benh.length} bệnh)
-                        </span>
-                      </h4>
+                      <h3 className="font-bold text-sm text-[#0d0d0d] dark:text-white flex items-center gap-2">
+                        <Activity className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                        <span>Hồ sơ bệnh học ({selectedCrop.danh_sach_benh.length} bệnh)</span>
+                      </h3>
                     </div>
 
-                    {/* Tabs */}
-                    <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none border-b border-[#e5e5e5] dark:border-[#262626]">
+                    {/* Disease Tabs */}
+                    <div className="flex gap-2 overflow-x-auto pb-1 no-scrollbar">
                       {selectedCrop.danh_sach_benh.map((d, dIdx) => (
                         <button
                           key={dIdx}
+                          type="button"
                           onClick={() => setActiveDiseaseTab(dIdx)}
-                          className={`px-3 py-1.5 text-xs font-medium border-b-2 transition-all shrink-0 cursor-pointer ${
+                          className={`px-3 py-1.5 rounded-xl text-xs font-medium whitespace-nowrap transition-all cursor-pointer ${
                             activeDiseaseTab === dIdx
-                              ? 'border-[#0d0d0d] text-[#0d0d0d] dark:border-white dark:text-white font-semibold'
-                              : 'border-transparent text-[#737373] hover:text-[#0d0d0d] dark:text-[#8e8e8e] dark:hover:text-white'
+                              ? 'bg-[#0d0d0d] text-white dark:bg-white dark:text-black shadow-xs font-semibold'
+                              : 'bg-[#f4f4f4] hover:bg-[#eaeaea] text-[#525252] dark:bg-[#242424] dark:hover:bg-[#2e2e2e] dark:text-[#a3a3a3]'
                           }`}
                         >
                           {d.ten_benh}
@@ -589,35 +532,32 @@ export default function CropsEncyclopediaPage() {
 
                     {/* Active Disease Details */}
                     {selectedCrop.danh_sach_benh[activeDiseaseTab] && (
-                      <div className="p-4 rounded-2xl border border-[#e5e5e5] dark:border-[#262626] bg-[#ffffff] dark:bg-[#1a1a1a] space-y-4">
+                      <div className="p-4 sm:p-5 rounded-2xl bg-[#f9f9f9] dark:bg-[#212121] border border-[#e5e5e5] dark:border-[#2a2a2a] space-y-4">
                         <div className="flex flex-wrap items-center justify-between gap-2">
-                          <div className="space-y-0.5">
-                            <h5 className="font-bold text-base text-[#0d0d0d] dark:text-white">
+                          <div>
+                            <h4 className="font-bold text-base text-[#0d0d0d] dark:text-white">
                               {selectedCrop.danh_sach_benh[activeDiseaseTab].ten_benh}
-                            </h5>
-                            <div className="text-xs text-[#737373] dark:text-[#a3a3a3]">
-                              <strong>Tác nhân:</strong>{' '}
-                              {typeof selectedCrop.danh_sach_benh[activeDiseaseTab]
-                                .tac_nhan === 'object'
+                            </h4>
+                            <p className="text-xs text-[#737373] dark:text-[#a3a3a3] mt-0.5">
+                              Tác nhân:{' '}
+                              {typeof selectedCrop.danh_sach_benh[activeDiseaseTab].tac_nhan === 'object'
                                 ? `${selectedCrop.danh_sach_benh[activeDiseaseTab].tac_nhan.loai} (${selectedCrop.danh_sach_benh[activeDiseaseTab].tac_nhan.ten_khoa_hoc})`
                                 : selectedCrop.danh_sach_benh[activeDiseaseTab].tac_nhan}
-                            </div>
+                            </p>
                           </div>
-                          {getDangerBadge(
-                            selectedCrop.danh_sach_benh[activeDiseaseTab]
-                              .muc_do_nguy_hiem
+                          {renderDangerBadge(
+                            selectedCrop.danh_sach_benh[activeDiseaseTab].muc_do_nguy_hiem || ''
                           )}
                         </div>
 
                         {/* Symptoms */}
                         <div className="space-y-1.5">
-                          <span className="text-xs font-semibold text-[#0d0d0d] dark:text-white">
+                          <div className="text-xs font-semibold text-[#0d0d0d] dark:text-white">
                             Triệu chứng điển hình:
-                          </span>
-                          <ul className="list-disc list-inside text-xs text-[#525252] dark:text-[#c4c4c4] space-y-1">
+                          </div>
+                          <ul className="list-disc list-inside space-y-1 text-xs text-[#525252] dark:text-[#cccccc] leading-relaxed">
                             {Array.isArray(
-                              selectedCrop.danh_sach_benh[activeDiseaseTab]
-                                .trieu_chung_dien_hinh
+                              selectedCrop.danh_sach_benh[activeDiseaseTab].trieu_chung_dien_hinh
                             ) ? (
                               selectedCrop.danh_sach_benh[
                                 activeDiseaseTab
@@ -626,98 +566,61 @@ export default function CropsEncyclopediaPage() {
                               ))
                             ) : (
                               <li>
-                                {
-                                  selectedCrop.danh_sach_benh[activeDiseaseTab]
-                                    .trieu_chung_dien_hinh
-                                }
+                                {selectedCrop.danh_sach_benh[activeDiseaseTab].trieu_chung_dien_hinh}
                               </li>
                             )}
                           </ul>
                         </div>
 
-                        {/* Double Diagnosis */}
-                        <div className="p-3 rounded-xl bg-amber-50/70 dark:bg-amber-950/20 border border-amber-200/80 dark:border-amber-900/40 text-xs text-amber-900 dark:text-amber-200 space-y-1">
-                          <span className="font-semibold flex items-center gap-1">
-                            <ShieldCheck
-                              className="w-3.5 h-3.5 shrink-0"
-                              strokeWidth={1.5}
-                            />
-                            Bóc tách chẩn đoán kép:
-                          </span>
-                          <p>
-                            {
-                              selectedCrop.danh_sach_benh[activeDiseaseTab]
-                                .phan_biet_chan_doan_kep
-                            }
-                          </p>
-                        </div>
-
-                        {/* Field Test */}
-                        <div className="p-3 rounded-xl bg-blue-50/70 dark:bg-blue-950/20 border border-blue-200/80 dark:border-blue-900/40 text-xs text-blue-900 dark:text-blue-200 space-y-1">
-                          <span className="font-semibold flex items-center gap-1">
-                            <Activity
-                              className="w-3.5 h-3.5 shrink-0"
-                              strokeWidth={1.5}
-                            />
-                            Bài test thực địa:
-                          </span>
-                          <p>
-                            {
-                              selectedCrop.danh_sach_benh[activeDiseaseTab]
-                                .kiem_tra_thuc_dia
-                            }
-                          </p>
-                        </div>
-
-                        {/* VietGAP Protocol */}
-                        {selectedCrop.danh_sach_benh[activeDiseaseTab]
-                          .phac_do_vietgap && (
-                          <div className="p-3 rounded-xl bg-emerald-50/70 dark:bg-emerald-950/20 border border-emerald-200/80 dark:border-emerald-900/40 text-xs text-emerald-900 dark:text-emerald-200 space-y-1.5">
-                            <span className="font-semibold flex items-center gap-1">
-                              <CheckCircle2
-                                className="w-3.5 h-3.5 shrink-0"
-                                strokeWidth={1.5}
-                              />
-                              Phác đồ điều trị VietGAP:
-                            </span>
-                            <div className="space-y-1">
-                              <div>
-                                <strong>Canh tác:</strong>{' '}
-                                {
-                                  selectedCrop.danh_sach_benh[activeDiseaseTab]
-                                    .phac_do_vietgap.canh_tac
-                                }
-                              </div>
-                              <div>
-                                <strong>Sinh học:</strong>{' '}
-                                {
-                                  selectedCrop.danh_sach_benh[activeDiseaseTab]
-                                    .phac_do_vietgap.sinh_hoc
-                                }
-                              </div>
+                        {/* Differential Diagnosis */}
+                        {selectedCrop.danh_sach_benh[activeDiseaseTab].phan_biet_chan_doan_kep && (
+                          <div className="p-3 rounded-xl bg-amber-50/70 dark:bg-amber-950/20 border border-amber-200/60 dark:border-amber-900/40 text-xs text-amber-900 dark:text-amber-200 space-y-1">
+                            <div className="font-semibold flex items-center gap-1.5">
+                              <AlertTriangle className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
+                              <span>Phân biệt chẩn đoán kép lâm sàng:</span>
                             </div>
+                            <p className="leading-relaxed">
+                              {selectedCrop.danh_sach_benh[activeDiseaseTab].phan_biet_chan_doan_kep}
+                            </p>
                           </div>
                         )}
 
-                        <div className="pt-2 flex justify-end">
-                          <button
-                            type="button"
-                            onClick={() =>
-                              handleAskAI(
-                                selectedCrop.name_vi,
-                                selectedCrop.danh_sach_benh[activeDiseaseTab]
-                                  .ten_benh
-                              )
-                            }
-                            className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#0d0d0d] dark:text-white hover:underline cursor-pointer"
-                          >
-                            <span>Hỏi sâu về bệnh này trên AI</span>
-                            <ExternalLink
-                              className="w-3.5 h-3.5"
-                              strokeWidth={1.5}
-                            />
-                          </button>
-                        </div>
+                        {/* Field Test */}
+                        {selectedCrop.danh_sach_benh[activeDiseaseTab].kiem_tra_thuc_dia && (
+                          <div className="p-3 rounded-xl bg-blue-50/70 dark:bg-blue-950/20 border border-blue-200/60 dark:border-blue-900/40 text-xs text-blue-900 dark:text-blue-200 space-y-1">
+                            <div className="font-semibold flex items-center gap-1.5">
+                              <Activity className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
+                              <span>Thao tác kiểm tra thực địa:</span>
+                            </div>
+                            <p className="leading-relaxed">
+                              {selectedCrop.danh_sach_benh[activeDiseaseTab].kiem_tra_thuc_dia}
+                            </p>
+                          </div>
+                        )}
+
+                        {/* VietGAP Protocol */}
+                        {selectedCrop.danh_sach_benh[activeDiseaseTab].phac_do_vietgap && (
+                          <div className="p-3 rounded-xl bg-emerald-50/70 dark:bg-emerald-950/20 border border-emerald-200/60 dark:border-emerald-900/40 text-xs text-emerald-900 dark:text-emerald-200 space-y-2">
+                            <div className="font-semibold flex items-center gap-1.5 text-emerald-800 dark:text-emerald-300">
+                              <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+                              <span>Phác đồ điều trị sinh học chuẩn VietGAP:</span>
+                            </div>
+                            <div className="space-y-1 pl-1 leading-relaxed">
+                              {selectedCrop.danh_sach_benh[activeDiseaseTab].phac_do_vietgap.canh_tac && (
+                                <p>
+                                  <strong>• Canh tác:</strong>{' '}
+                                  {selectedCrop.danh_sach_benh[activeDiseaseTab].phac_do_vietgap.canh_tac}
+                                </p>
+                              )}
+                              {selectedCrop.danh_sach_benh[activeDiseaseTab].phac_do_vietgap.sinh_hoc && (
+                                <p>
+                                  <strong>• Sinh học:</strong>{' '}
+                                  {selectedCrop.danh_sach_benh[activeDiseaseTab].phac_do_vietgap.sinh_hoc}
+                                </p>
+                              )}
+                            </div>
+                          </div>
+                        )}
                       </div>
                     )}
                   </div>
@@ -727,5 +630,13 @@ export default function CropsEncyclopediaPage() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function CropsPage() {
+  return (
+    <ChatProvider>
+      <CropsEncyclopediaView />
+    </ChatProvider>
   );
 }
