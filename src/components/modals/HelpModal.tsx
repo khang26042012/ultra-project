@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useChat } from '@/context/ChatContext';
 import {
   X,
@@ -9,12 +9,23 @@ import {
   FlaskConical,
   PhoneCall,
   BookOpen,
-  ArrowRight,
-  ExternalLink,
 } from 'lucide-react';
 
 export default function HelpModal() {
   const { isHelpOpen, setIsHelpOpen } = useChat();
+
+  // Close on Escape key
+  useEffect(() => {
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key === 'Escape') {
+        setIsHelpOpen(false);
+      }
+    }
+    if (isHelpOpen) {
+      window.addEventListener('keydown', handleKeyDown);
+    }
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isHelpOpen, setIsHelpOpen]);
 
   if (!isHelpOpen) return null;
 
@@ -22,16 +33,16 @@ export default function HelpModal() {
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs select-none p-3 sm:p-4 animate-in fade-in duration-150">
       <div className="w-full max-w-2xl bg-[#ffffff] dark:bg-[#1e1e1e] border border-[#e5e5e5] dark:border-[#333333] rounded-[24px] shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
         {/* Modal Header */}
-        <div className="h-14 px-5 border-b border-[#e5e5e5] dark:border-[#333333] flex items-center justify-between shrink-0">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-xl bg-black text-white dark:bg-white dark:text-black flex items-center justify-center font-bold text-xs shadow-xs">
+        <div className="min-h-[3.5rem] py-2.5 px-4 sm:px-5 border-b border-[#e5e5e5] dark:border-[#333333] flex items-center justify-between shrink-0 gap-3">
+          <div className="flex items-center gap-2.5 min-w-0 flex-1">
+            <div className="w-8 h-8 rounded-xl bg-black text-white dark:bg-white dark:text-black flex items-center justify-center font-bold text-xs shadow-xs shrink-0">
               <BookOpen className="w-4 h-4" strokeWidth={1.75} />
             </div>
-            <div>
-              <h2 className="font-semibold text-sm sm:text-base text-[#0d0d0d] dark:text-white leading-none">
+            <div className="min-w-0">
+              <h2 className="font-semibold text-sm sm:text-base text-[#0d0d0d] dark:text-white leading-tight">
                 Cẩm nang Hướng dẫn Nông dân AgriVision
               </h2>
-              <p className="text-[11px] text-[#737373] dark:text-[#a3a3a3] mt-0.5">
+              <p className="text-[11px] text-[#737373] dark:text-[#a3a3a3] mt-0.5 leading-normal">
                 Quy trình chuẩn hóa chẩn đoán bệnh học cây trồng VietGAP
               </p>
             </div>
@@ -41,7 +52,7 @@ export default function HelpModal() {
             type="button"
             onClick={() => setIsHelpOpen(false)}
             title="Đóng (Esc)"
-            className="p-1.5 rounded-lg hover:bg-[#f0f0f0] dark:hover:bg-[#2f2f2f] text-[#5d5d5d] hover:text-[#0d0d0d] dark:text-[#8e8e8e] dark:hover:text-white transition-colors cursor-pointer"
+            className="shrink-0 p-1.5 rounded-lg hover:bg-[#f0f0f0] dark:hover:bg-[#2f2f2f] text-[#5d5d5d] hover:text-[#0d0d0d] dark:text-[#8e8e8e] dark:hover:text-white transition-colors cursor-pointer"
           >
             <X className="w-5 h-5" strokeWidth={1.75} />
           </button>
@@ -147,14 +158,14 @@ export default function HelpModal() {
         </div>
 
         {/* Modal Footer */}
-        <div className="p-3 px-5 border-t border-[#e5e5e5] dark:border-[#333333] flex items-center justify-between bg-[#fbfbfb] dark:bg-[#181818] shrink-0">
-          <span className="text-[11px] text-[#8e8e8e]">
+        <div className="p-3 px-4 sm:px-5 border-t border-[#e5e5e5] dark:border-[#333333] flex items-center justify-between bg-[#fbfbfb] dark:bg-[#181818] shrink-0 gap-3">
+          <span className="text-[11px] text-[#8e8e8e] leading-tight">
             AgriVision v1.0 • Phát triển bởi Phan Trọng Khang (THCS Vĩnh An)
           </span>
           <button
             type="button"
             onClick={() => setIsHelpOpen(false)}
-            className="px-4 py-2 rounded-xl bg-[#0d0d0d] hover:bg-[#262626] text-white dark:bg-white dark:hover:bg-gray-100 dark:text-black text-xs font-semibold shadow-xs transition-all cursor-pointer"
+            className="shrink-0 px-4 py-2 rounded-xl bg-[#0d0d0d] hover:bg-[#262626] text-white dark:bg-white dark:hover:bg-gray-100 dark:text-black text-xs font-semibold shadow-xs transition-all cursor-pointer"
           >
             Đã hiểu
           </button>

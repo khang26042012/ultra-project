@@ -43,7 +43,7 @@ export default function MessageList({ messages }: MessageListProps) {
       // User is at bottom
       isNearBottomRef.current = true;
       setShowScrollBottom(false);
-    } else if (distanceFromBottom > 80) {
+    } else if (distanceFromBottom > 60) {
       // Only set isNearBottomRef to false if this was NOT triggered by programmatic auto-scroll
       if (!isProgrammaticScrollRef.current) {
         isNearBottomRef.current = false;
@@ -62,7 +62,7 @@ export default function MessageList({ messages }: MessageListProps) {
       const el = containerRef.current;
       if (el) {
         const dist = el.scrollHeight - el.scrollTop - el.clientHeight;
-        if (dist > 80) {
+        if (dist > 60) {
           setShowScrollBottom(true);
         }
       }
@@ -83,7 +83,7 @@ export default function MessageList({ messages }: MessageListProps) {
         const el = containerRef.current;
         if (el) {
           const dist = el.scrollHeight - el.scrollTop - el.clientHeight;
-          if (dist > 80) {
+          if (dist > 60) {
             setShowScrollBottom(true);
           }
         }
@@ -141,6 +141,7 @@ export default function MessageList({ messages }: MessageListProps) {
       onWheel={handleWheel}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
+      data-testid="message-list-container"
       className="flex-1 min-h-0 overflow-y-auto overscroll-contain no-scrollbar pt-4 sm:pt-6 pb-2 relative"
     >
       <div ref={contentRef} className="w-full max-w-3xl mx-auto px-4 py-2">
@@ -155,6 +156,8 @@ export default function MessageList({ messages }: MessageListProps) {
         <div className="sticky bottom-4 flex justify-center z-20 pointer-events-none">
           <button
             type="button"
+            data-testid="scroll-to-bottom-button"
+            aria-label="Cuộn xuống đáy"
             onClick={handleScrollToBottomClick}
             title="Cuộn xuống tin nhắn mới nhất"
             className="pointer-events-auto p-2.5 rounded-full bg-white dark:bg-[#262626] border border-[#e5e5e5] dark:border-[#383838] shadow-lg text-[#0d0d0d] dark:text-white hover:bg-[#f4f4f4] dark:hover:bg-[#333] hover:scale-105 active:scale-95 transition-all cursor-pointer flex items-center justify-center animate-in fade-in duration-200"

@@ -242,6 +242,7 @@ export async function POST(req: NextRequest) {
                   title: r.title || 'Nguồn kiểm chứng',
                   url: r.url || '',
                   snippet: r.snippet || '',
+                  favicon: r.favicon_url || undefined,
                 }));
 
                 sendEvent({

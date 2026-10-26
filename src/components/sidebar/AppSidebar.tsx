@@ -138,15 +138,15 @@ export default function AppSidebar() {
                     onClick={() => setSearchQuery('')}
                     className="absolute right-2 top-2 text-[#8e8e8e] hover:text-[#0d0d0d] dark:hover:text-white cursor-pointer"
                   >
-                    <X className="w-3.5 h-3.5" strokeWidth={1.75} />
+                    <X className="w-3.5 h-3.5" />
                   </button>
                 )}
               </div>
             </div>
           )}
 
-          {/* Primary New Chat Button */}
-          <div className="px-3 pb-2">
+          {/* New Chat Button */}
+          <div className="px-3 py-1.5">
             <button
               onClick={() => {
                 createNewChat();
@@ -228,6 +228,7 @@ export default function AppSidebar() {
           <div className="px-2.5 py-1.5 space-y-0.5 border-t border-[#e5e5e5] dark:border-[#262626]">
             <button
               type="button"
+              data-testid="sidebar-help-button"
               onClick={() => {
                 setIsHelpOpen(true);
                 if (window.innerWidth < 768) setIsSidebarOpen(false);
@@ -239,6 +240,7 @@ export default function AppSidebar() {
             </button>
             <button
               type="button"
+              data-testid="sidebar-settings-button"
               onClick={() => {
                 setIsSettingsOpen(true);
                 if (window.innerWidth < 768) setIsSidebarOpen(false);
@@ -255,6 +257,7 @@ export default function AppSidebar() {
             {currentUser ? (
               <>
                 <div
+                  data-testid="profile-menu-button"
                   onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
                   className="flex items-center justify-between p-2 rounded-xl hover:bg-[#eaeaea] dark:hover:bg-[#212121] transition-all hover:scale-[1.01] active:scale-[0.99] cursor-pointer"
                 >
