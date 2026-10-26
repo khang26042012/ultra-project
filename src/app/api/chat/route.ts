@@ -77,6 +77,24 @@ const WEB_SEARCH_TOOL = {
   },
 };
 
+// Resilient fetch with automatic exponential retry
+async function fetchWithRetry(url: string, options: RequestInit, retries = 2, delayMs = 1200): Promise<Response> {
+  let lastError: unknown;
+  for (let attempt = 1; attempt <= retries + 1; attempt++) {
+    try {
+      const res = await fetch(url, options);
+      return res;
+    } catch (err) {
+      lastError = err;
+      if (attempt <= retries) {
+        console.warn(`Gateway fetch attempt ${attempt} failed, retrying in ${delayMs}ms...`, err);
+        await new Promise((r) => setTimeout(r, delayMs));
+      }
+    }
+  }
+  throw lastError;
+}
+
 export async function POST(req: NextRequest) {
   try {
     const { messages, model, webSearchEnabled = true } = await req.json();
@@ -191,9 +209,13 @@ HƯỚNG DẪN TRẢ LỜI BÁC SĨ CÂY TRỒNG NAM BỘ:
           while (turn < maxTurns) {
             turn++;
 
-            // Available tools list: Local Pathology RAG tool + Computer Vision Lesion Segmentation tool always active
+            // Available tools list: Local Pathology RAG tool always active
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            const toolsList: any[] = [SEARCH_CROP_DATABASE_TOOL, SEGMENT_CROP_LESION_TOOL];
+            const toolsList: any[] = [SEARCH_CROP_DATABASE_TOOL];
+            // Only add segmentation tool if not already precomputed
+            if (!precomputedVisionResult) {
+              toolsList.push(SEGMENT_CROP_LESION_TOOL);
+            }
             if (webSearchEnabled !== false) {
               toolsList.push(WEB_SEARCH_TOOL);
             }
@@ -204,10 +226,10 @@ HƯỚNG DẪN TRẢ LỜI BÁC SĨ CÂY TRỒNG NAM BỘ:
               messages: activeMessages,
               stream: true,
               tools: toolsList,
-              tool_choice: 'auto',
+              tool_choice: turn === 1 ? 'auto' : 'none',
             };
 
-            const gatewayRes = await fetch(AI_GATEWAY_URL, {
+            const gatewayRes = await fetchWithRetry(AI_GATEWAY_URL, {
               method: 'POST',
               headers: {
                 Authorization: `Bearer ${AI_GATEWAY_KEY}`,
@@ -465,10 +487,12 @@ HƯỚNG DẪN TRẢ LỜI BÁC SĨ CÂY TRỒNG NAM BỘ:
           }
         } catch (streamErr) {
           console.error('Agent Loop Streaming Error:', streamErr);
-          sendEvent({
-            type: 'content',
-            token: `\n\n⚠️ **Lỗi thực thi chuỗi Agent**: ${(streamErr as Error)?.message || 'Mất kết nối'}`,
-          });
+          if (!accumulatedContent) {
+            sendEvent({
+              type: 'content',
+              token: `\n\n⚠️ **Mất kết nối tạm thời với máy chủ AI**: ${(streamErr as Error)?.message || 'fetch failed'}. Nhờ bà con bấm nút tạo lại để em trả lời liền nghen! 🌿`,
+            });
+          }
         } finally {
           controller.enqueue(encoder.encode('data: [DONE]\n\n'));
           controller.close();
