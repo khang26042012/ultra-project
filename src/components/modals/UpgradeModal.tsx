@@ -30,7 +30,7 @@ export default function UpgradeModal() {
           onClick={() => setIsUpgradeOpen(false)}
           className="absolute top-5 right-5 p-2 rounded-full hover:bg-[#f0f0f0] dark:hover:bg-[#2f2f2f] text-[#5d5d5d] hover:text-[#0d0d0d] dark:text-[#8e8e8e] dark:hover:text-white transition-colors cursor-pointer"
         >
-          <X className="w-5 h-5" strokeWidth={1.75} />
+          <X className="w-5 h-5" strokeWidth={1.5} />
         </button>
 
         {/* Title */}
@@ -77,11 +77,11 @@ export default function UpgradeModal() {
 
               <div className="space-y-2 text-xs text-[#5d5d5d] dark:text-[#b4b4b4]">
                 <div className="flex items-center gap-2">
-                  <Check className="w-3.5 h-3.5 text-[#0d0d0d] dark:text-white shrink-0" strokeWidth={1.75} />
+                  <Check className="w-3.5 h-3.5 text-[#0d0d0d] dark:text-white shrink-0" strokeWidth={1.5} />
                   <span>Mô hình Gemini 3.8 Flash High</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Check className="w-3.5 h-3.5 text-[#0d0d0d] dark:text-white shrink-0" strokeWidth={1.75} />
+                  <Check className="w-3.5 h-3.5 text-[#0d0d0d] dark:text-white shrink-0" strokeWidth={1.5} />
                   <span>Chẩn đoán qua mô tả hình ảnh</span>
                 </div>
               </div>
@@ -105,7 +105,7 @@ export default function UpgradeModal() {
 
             <div>
               <div className="flex items-center gap-1.5 text-sm font-semibold text-[#0d0d0d] dark:text-white mb-1">
-                <Sparkles className="w-4 h-4 text-[#0d0d0d] dark:text-white" strokeWidth={1.75} />
+                <Sparkles className="w-4 h-4 text-[#0d0d0d] dark:text-white" strokeWidth={1.5} />
                 <span>AgriVision Plus</span>
               </div>
               <div className="text-xl font-bold text-[#0d0d0d] dark:text-white mb-2">
@@ -117,15 +117,15 @@ export default function UpgradeModal() {
 
               <div className="space-y-2 text-xs text-[#0d0d0d] dark:text-[#ececec]">
                 <div className="flex items-center gap-2">
-                  <Check className="w-3.5 h-3.5 text-[#0d0d0d] dark:text-white shrink-0" strokeWidth={1.75} />
+                  <Check className="w-3.5 h-3.5 text-[#0d0d0d] dark:text-white shrink-0" strokeWidth={1.5} />
                   <span>Ưu tiên suy luận sâu bệnh phức tạp</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Check className="w-3.5 h-3.5 text-[#0d0d0d] dark:text-white shrink-0" strokeWidth={1.75} />
+                  <Check className="w-3.5 h-3.5 text-[#0d0d0d] dark:text-white shrink-0" strokeWidth={1.5} />
                   <span>Nhận diện đa bệnh qua ảnh độ phân giải cao</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Check className="w-3.5 h-3.5 text-[#0d0d0d] dark:text-white shrink-0" strokeWidth={1.75} />
+                  <Check className="w-3.5 h-3.5 text-[#0d0d0d] dark:text-white shrink-0" strokeWidth={1.5} />
                   <span>Tài liệu hướng dẫn điều trị độc quyền</span>
                 </div>
               </div>

@@ -105,7 +105,7 @@ export default function SettingsModal() {
         <div className="h-14 px-5 border-b border-[#e5e5e5] dark:border-[#333333] flex items-center justify-between shrink-0">
           <div className="flex items-center gap-2.5">
             <div className="w-7 h-7 rounded-lg bg-black text-white dark:bg-white dark:text-black flex items-center justify-center font-bold text-xs shadow-xs">
-              <Settings className="w-4 h-4" strokeWidth={1.75} />
+              <Settings className="w-4 h-4" strokeWidth={1.5} />
             </div>
             <span className="font-semibold text-base text-[#0d0d0d] dark:text-white">Cài đặt hệ thống</span>
           </div>
@@ -119,7 +119,7 @@ export default function SettingsModal() {
             title="Đóng (Esc)"
             className="p-1.5 rounded-lg hover:bg-[#f0f0f0] dark:hover:bg-[#2f2f2f] text-[#5d5d5d] hover:text-[#0d0d0d] dark:text-[#8e8e8e] dark:hover:text-white transition-colors cursor-pointer"
           >
-            <X className="w-5 h-5" strokeWidth={1.75} />
+            <X className="w-5 h-5" strokeWidth={1.5} />
           </button>
         </div>
 
@@ -144,7 +144,7 @@ export default function SettingsModal() {
                       : 'bg-[#eeeeee] text-[#555555] dark:bg-[#282828] dark:text-[#a0a0a0] hover:bg-[#e4e4e4] dark:hover:bg-[#333333]'
                   }`}
                 >
-                  <Icon className="w-3.5 h-3.5" strokeWidth={1.75} />
+                  <Icon className="w-3.5 h-3.5" strokeWidth={1.5} />
                   <span>{tab.label}</span>
                 </button>
               );
@@ -174,7 +174,7 @@ export default function SettingsModal() {
                       : 'text-[#5d5d5d] dark:text-[#8e8e8e] hover:text-[#0d0d0d] dark:hover:text-white hover:bg-[#eaeaea] dark:hover:bg-[#252525]'
                   }`}
                 >
-                  <Icon className="w-4 h-4 shrink-0" strokeWidth={1.75} />
+                  <Icon className="w-4 h-4 shrink-0" strokeWidth={1.5} />
                   <span>{tab.label}</span>
                 </button>
               );
@@ -203,7 +203,7 @@ export default function SettingsModal() {
                             : 'border-[#e5e5e5] hover:border-[#b4b4b4] text-[#5d5d5d] dark:border-[#383838] dark:hover:border-[#525252] dark:text-[#8e8e8e]'
                         }`}
                       >
-                        <Palette className="w-4 h-4 mx-auto mb-1.5 opacity-85" strokeWidth={1.75} />
+                        <Palette className="w-4 h-4 mx-auto mb-1.5 opacity-85" strokeWidth={1.5} />
                         {mode === 'light' ? 'Chế độ sáng' : mode === 'dark' ? 'Chế độ tối' : 'Hệ thống'}
                       </button>
                     ))}
@@ -357,9 +357,9 @@ export default function SettingsModal() {
                 <div className="pt-4 border-t border-[#e5e5e5] dark:border-[#333333] flex items-center justify-between">
                   <div className="pr-4">
                     <div className="flex items-center gap-2">
-                      <Globe className="w-4 h-4 text-[#0d0d0d] dark:text-white" strokeWidth={1.75} />
+                      <Globe className="w-4 h-4 text-[#0d0d0d] dark:text-white" strokeWidth={1.5} />
                       <h3 className="text-sm font-semibold text-[#0d0d0d] dark:text-white">
-                        Tự động tra cứu Web thời gian thực (9Router)
+                        Tự động tra cứu Web thời gian thực (Web Search)
                       </h3>
                     </div>
                     <p className="text-xs text-[#5d5d5d] dark:text-[#8e8e8e] mt-1">
@@ -430,7 +430,7 @@ export default function SettingsModal() {
                     onClick={exportBackupJson}
                     className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-[#e5e5e5] hover:bg-[#f4f4f4] dark:border-[#383838] dark:hover:bg-[#2f2f2f] text-xs font-medium transition-colors cursor-pointer text-[#0d0d0d] dark:text-white shrink-0"
                   >
-                    <Download className="w-3.5 h-3.5" strokeWidth={1.75} />
+                    <Download className="w-3.5 h-3.5" strokeWidth={1.5} />
                     <span>Xuất JSON</span>
                   </button>
                 </div>
@@ -439,7 +439,7 @@ export default function SettingsModal() {
                   <div className="flex items-center justify-between">
                     <div className="pr-4">
                       <h3 className="text-sm font-semibold text-red-600 dark:text-red-400 flex items-center gap-1.5">
-                        <Trash2 className="w-4 h-4" strokeWidth={1.75} />
+                        <Trash2 className="w-4 h-4" strokeWidth={1.5} />
                         Xóa sạch lịch sử hội thoại
                       </h3>
                       <p className="text-xs text-[#5d5d5d] dark:text-[#8e8e8e] mt-0.5">
@@ -514,8 +514,8 @@ export default function SettingsModal() {
                   <div className="flex justify-between py-2 border-b border-[#e5e5e5] dark:border-[#2a2a2a]">
                     <span className="text-[#5d5d5d] dark:text-[#8e8e8e]">Mô hình AI chuyên sâu:</span>
                     <span className="font-mono text-[#0d0d0d] dark:text-white flex items-center gap-1">
-                      <Sparkles className="w-3.5 h-3.5" />
-                      ag/gemini-3.8-flash-high (9Router)
+                      <Sparkles className="w-3.5 h-3.5" strokeWidth={1.5} />
+                      ag/gemini-3.8-flash-high (AI Gateway)
                     </span>
                   </div>
                   <div className="flex justify-between py-2 border-b border-[#e5e5e5] dark:border-[#2a2a2a]">

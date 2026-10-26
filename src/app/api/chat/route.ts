@@ -4,7 +4,7 @@ import { searchCropKnowledge } from '@/lib/cropSearch';
 
 export const runtime = 'nodejs';
 
-// Configurable AI Gateway & 9Router Search endpoints
+// Configurable AI Gateway & Web Search endpoints
 const rawGatewayUrl =
   process.env.AI_GATEWAY_URL ||
   process.env.NINEROUTER_API_URL ||
@@ -53,7 +53,7 @@ const SEARCH_CROP_DATABASE_TOOL = {
   },
 };
 
-// Definition of 9Router Web Search Tool (OpenAI Function Calling format)
+// Definition of Real-time Web Search Tool (OpenAI Function Calling format)
 const WEB_SEARCH_TOOL = {
   type: 'function',
   function: {
@@ -74,7 +74,7 @@ const WEB_SEARCH_TOOL = {
   },
 };
 
-// Helper: Query 9Router Web Search Engine
+// Helper: Query Real-time Web Search Engine
 async function executeWebSearch(query: string) {
   try {
     const res = await fetch(SEARCH_API_URL, {
@@ -99,7 +99,7 @@ async function executeWebSearch(query: string) {
       };
     }
   } catch (err) {
-    console.error('9Router Search API error:', err);
+    console.error('Web Search API error:', err);
   }
   return { results: [], answer: '' };
 }
@@ -313,7 +313,7 @@ export async function POST(req: NextRequest) {
                   // Send live searching status to UI
                   sendEvent({ type: 'searching', query });
 
-                  // Execute real search on 9Router
+                  // Execute real search on Web Search Engine
                   const searchData = await executeWebSearch(query);
 
                   // Send sources to UI

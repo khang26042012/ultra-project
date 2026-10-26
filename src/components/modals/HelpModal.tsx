@@ -5,8 +5,8 @@ import { useChat } from '@/context/ChatContext';
 import {
   X,
   Camera,
-  FileText,
-  FlaskConical,
+  FileSpreadsheet,
+  TestTube2,
   PhoneCall,
   BookOpen,
 } from 'lucide-react';
@@ -35,8 +35,8 @@ export default function HelpModal() {
         {/* Modal Header */}
         <div className="min-h-[3.5rem] py-2.5 px-4 sm:px-5 border-b border-[#e5e5e5] dark:border-[#333333] flex items-center justify-between shrink-0 gap-3">
           <div className="flex items-center gap-2.5 min-w-0 flex-1">
-            <div className="w-8 h-8 rounded-xl bg-black text-white dark:bg-white dark:text-black flex items-center justify-center font-bold text-xs shadow-xs shrink-0">
-              <BookOpen className="w-4 h-4" strokeWidth={1.75} />
+            <div className="w-8 h-8 rounded-full bg-[#f4f4f4] text-[#0d0d0d] dark:bg-[#2c2c2c] dark:text-white flex items-center justify-center font-bold text-xs shadow-xs shrink-0">
+              <BookOpen className="w-4 h-4" strokeWidth={1.5} />
             </div>
             <div className="min-w-0">
               <h2 className="font-semibold text-sm sm:text-base text-[#0d0d0d] dark:text-white leading-tight">
@@ -52,9 +52,9 @@ export default function HelpModal() {
             type="button"
             onClick={() => setIsHelpOpen(false)}
             title="Đóng (Esc)"
-            className="shrink-0 p-1.5 rounded-lg hover:bg-[#f0f0f0] dark:hover:bg-[#2f2f2f] text-[#5d5d5d] hover:text-[#0d0d0d] dark:text-[#8e8e8e] dark:hover:text-white transition-colors cursor-pointer"
+            className="shrink-0 p-1.5 rounded-full hover:bg-[#f0f0f0] dark:hover:bg-[#2f2f2f] text-[#5d5d5d] hover:text-[#0d0d0d] dark:text-[#8e8e8e] dark:hover:text-white transition-colors cursor-pointer"
           >
-            <X className="w-5 h-5" strokeWidth={1.75} />
+            <X className="w-4 h-4" strokeWidth={1.5} />
           </button>
         </div>
 
@@ -62,9 +62,9 @@ export default function HelpModal() {
         <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4 no-scrollbar text-xs sm:text-sm text-[#0d0d0d] dark:text-[#ececec] leading-relaxed">
           {/* Section 1: Cách chụp ảnh chuẩn bệnh học */}
           <div className="p-4 rounded-2xl bg-[#f7f7f8] dark:bg-[#242424] border border-[#e5e5e5] dark:border-[#333] space-y-2">
-            <div className="flex items-center gap-2 font-semibold text-sm text-[#0d0d0d] dark:text-white">
-              <div className="p-1.5 rounded-lg bg-black/5 dark:bg-white/10 text-[#0d0d0d] dark:text-white">
-                <Camera className="w-4 h-4" strokeWidth={1.75} />
+            <div className="flex items-center gap-2.5 font-semibold text-sm text-[#0d0d0d] dark:text-white">
+              <div className="p-2 rounded-full bg-[#ebebeb] dark:bg-[#333] text-[#0d0d0d] dark:text-white shadow-2xs">
+                <Camera className="w-4 h-4" strokeWidth={1.5} />
               </div>
               <span>1. Cách chụp ảnh chuẩn bệnh học vi mô</span>
             </div>
@@ -86,9 +86,9 @@ export default function HelpModal() {
 
           {/* Section 2: Mô tả triệu chứng hiệu quả */}
           <div className="p-4 rounded-2xl bg-[#f7f7f8] dark:bg-[#242424] border border-[#e5e5e5] dark:border-[#333] space-y-2">
-            <div className="flex items-center gap-2 font-semibold text-sm text-[#0d0d0d] dark:text-white">
-              <div className="p-1.5 rounded-lg bg-black/5 dark:bg-white/10 text-[#0d0d0d] dark:text-white">
-                <FileText className="w-4 h-4" strokeWidth={1.75} />
+            <div className="flex items-center gap-2.5 font-semibold text-sm text-[#0d0d0d] dark:text-white">
+              <div className="p-2 rounded-full bg-[#ebebeb] dark:bg-[#333] text-[#0d0d0d] dark:text-white shadow-2xs">
+                <FileSpreadsheet className="w-4 h-4" strokeWidth={1.5} />
               </div>
               <span>2. Mô tả triệu chứng hiệu quả cho AI</span>
             </div>
@@ -113,9 +113,9 @@ export default function HelpModal() {
 
           {/* Section 3: Hướng dẫn kiểm tra thực địa */}
           <div className="p-4 rounded-2xl bg-[#f7f7f8] dark:bg-[#242424] border border-[#e5e5e5] dark:border-[#333] space-y-2">
-            <div className="flex items-center gap-2 font-semibold text-sm text-[#0d0d0d] dark:text-white">
-              <div className="p-1.5 rounded-lg bg-black/5 dark:bg-white/10 text-[#0d0d0d] dark:text-white">
-                <FlaskConical className="w-4 h-4" strokeWidth={1.75} />
+            <div className="flex items-center gap-2.5 font-semibold text-sm text-[#0d0d0d] dark:text-white">
+              <div className="p-2 rounded-full bg-[#ebebeb] dark:bg-[#333] text-[#0d0d0d] dark:text-white shadow-2xs">
+                <TestTube2 className="w-4 h-4" strokeWidth={1.5} />
               </div>
               <span>3. Phương pháp thử nghiệm lâm sàng tại vườn</span>
             </div>
@@ -133,9 +133,9 @@ export default function HelpModal() {
 
           {/* Section 4: Liên hệ khẩn cấp BVTV Vĩnh Long */}
           <div className="p-4 rounded-2xl bg-black/5 dark:bg-white/5 border border-[#e5e5e5] dark:border-[#333] space-y-2.5">
-            <div className="flex items-center gap-2 font-semibold text-sm text-[#0d0d0d] dark:text-white">
-              <div className="p-1.5 rounded-lg bg-black text-white dark:bg-white dark:text-black">
-                <PhoneCall className="w-4 h-4" strokeWidth={1.75} />
+            <div className="flex items-center gap-2.5 font-semibold text-sm text-[#0d0d0d] dark:text-white">
+              <div className="p-2 rounded-full bg-[#ebebeb] dark:bg-[#333] text-[#0d0d0d] dark:text-white shadow-2xs">
+                <PhoneCall className="w-4 h-4" strokeWidth={1.5} />
               </div>
               <span>4. Thông tin liên hệ cơ quan bảo vệ thực vật địa phương</span>
             </div>

@@ -44,12 +44,12 @@ export default function CodeBlock({ language, code }: CodeBlockProps) {
         >
           {copied ? (
             <>
-              <Check className="w-3.5 h-3.5 text-white" strokeWidth={1.75} />
+              <Check className="w-3.5 h-3.5 text-white" strokeWidth={1.5} />
               <span className="text-white font-sans font-medium">Copied!</span>
             </>
           ) : (
             <>
-              <Copy className="w-3.5 h-3.5 text-[#b4b4b4]" strokeWidth={1.75} />
+              <Copy className="w-3.5 h-3.5 text-[#b4b4b4]" strokeWidth={1.5} />
               <span className="font-sans">Copy code</span>
             </>
           )}

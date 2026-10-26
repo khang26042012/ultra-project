@@ -142,7 +142,7 @@ export default function MessageList({ messages }: MessageListProps) {
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       data-testid="message-list-container"
-      className="flex-1 min-h-0 overflow-y-auto overscroll-contain no-scrollbar pt-4 sm:pt-6 pb-2 relative"
+      className="flex-1 min-h-0 overflow-y-auto overscroll-contain no-scrollbar pt-16 sm:pt-16 pb-2 relative"
     >
       <div ref={contentRef} className="w-full max-w-3xl mx-auto px-4 py-2">
         {messages.map((message) => (
@@ -162,7 +162,7 @@ export default function MessageList({ messages }: MessageListProps) {
             title="Cuộn xuống tin nhắn mới nhất"
             className="pointer-events-auto p-2.5 rounded-full bg-white dark:bg-[#262626] border border-[#e5e5e5] dark:border-[#383838] shadow-lg text-[#0d0d0d] dark:text-white hover:bg-[#f4f4f4] dark:hover:bg-[#333] hover:scale-105 active:scale-95 transition-all cursor-pointer flex items-center justify-center animate-in fade-in duration-200"
           >
-            <ArrowDown className="w-4 h-4" strokeWidth={2} />
+            <ArrowDown className="w-4 h-4" strokeWidth={1.5} />
           </button>
         </div>
       )}

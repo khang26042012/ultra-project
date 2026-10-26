@@ -203,7 +203,7 @@ export default function FloatingInputIsland() {
               title="Hủy ảnh"
               className="ml-1 p-1 rounded-full hover:bg-[#eaeaea] dark:hover:bg-[#333] text-[#5d5d5d] hover:text-[#0d0d0d] dark:text-[#b4b4b4] dark:hover:text-white transition-colors cursor-pointer"
             >
-              <X className="w-3.5 h-3.5" strokeWidth={1.75} />
+              <X className="w-3.5 h-3.5" strokeWidth={1.5} />
             </button>
           </div>
         )}
@@ -236,7 +236,7 @@ export default function FloatingInputIsland() {
               title="Đính kèm ảnh hoặc chụp từ camera"
               className="p-1.5 rounded-full hover:bg-[#f2f2f2] dark:hover:bg-[#333] text-[#5d5d5d] hover:text-[#0d0d0d] dark:text-[#b4b4b4] dark:hover:text-white transition-all hover:scale-[1.05] active:scale-[0.95] cursor-pointer"
             >
-              <Plus className="w-4 h-4" strokeWidth={1.75} />
+              <Plus className="w-4 h-4" strokeWidth={1.5} />
             </button>
             {isCompressing && (
               <span className="text-[11px] text-[#8e8e8e] italic animate-pulse">
@@ -259,7 +259,7 @@ export default function FloatingInputIsland() {
                   : 'bg-[#e5e5e5] text-[#8e8e8e] dark:bg-[#2b2b2b] dark:text-[#555] cursor-not-allowed'
               }`}
             >
-              <ArrowUp className="w-4 h-4" strokeWidth={2} />
+              <ArrowUp className="w-4 h-4" strokeWidth={1.5} />
             </button>
           </div>
         </div>

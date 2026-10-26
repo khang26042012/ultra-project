@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useChat } from '@/context/ChatContext';
 import ProfileMenu from './ProfileMenu';
 import {
@@ -12,7 +13,6 @@ import {
   MessageSquare,
   X,
   LogIn,
-  Settings,
   HelpCircle,
   BookOpen,
   MoreHorizontal,
@@ -24,6 +24,7 @@ import gsap from 'gsap';
 import { TimeGroup, Conversation } from '@/types/chat';
 
 export default function AppSidebar() {
+  const router = useRouter();
   const {
     conversations,
     activeConversationId,
@@ -36,7 +37,6 @@ export default function AppSidebar() {
     setIsSidebarOpen,
     toggleSidebar,
     setIsAuthModalOpen,
-    setIsSettingsOpen,
     setIsHelpOpen,
     currentUser,
     userProfile,
@@ -183,9 +183,9 @@ export default function AppSidebar() {
       >
         <div className="flex items-center gap-2 truncate pr-2 flex-1 min-w-0">
           {conv.isPinned ? (
-            <Pin className="w-3.5 h-3.5 shrink-0 text-emerald-600 dark:text-emerald-400 rotate-45" strokeWidth={1.75} />
+            <Pin className="w-3.5 h-3.5 shrink-0 text-[#0d0d0d] dark:text-white rotate-45" strokeWidth={1.5} />
           ) : (
-            <MessageSquare className="w-3.5 h-3.5 shrink-0 opacity-70" strokeWidth={1.75} />
+            <MessageSquare className="w-3.5 h-3.5 shrink-0 opacity-70" strokeWidth={1.5} />
           )}
 
           {isEditing ? (
@@ -207,7 +207,7 @@ export default function AppSidebar() {
                 className="p-1 hover:text-emerald-600 cursor-pointer"
                 title="Lưu"
               >
-                <Check className="w-3.5 h-3.5" />
+                <Check className="w-3.5 h-3.5" strokeWidth={1.5} />
               </button>
             </div>
           ) : (
@@ -215,7 +215,7 @@ export default function AppSidebar() {
           )}
         </div>
 
-        {/* 3-Dots Action Button (replaces crude trash button) */}
+        {/* 3-Dots Action Button */}
         {!isEditing && (
           <button
             type="button"
@@ -223,7 +223,7 @@ export default function AppSidebar() {
             title="Tùy chọn đoạn chat"
             className="opacity-70 md:opacity-0 group-hover:opacity-100 p-1 rounded-lg hover:bg-[#eaeaea] dark:hover:bg-[#2e2e2e] text-[#8e8e8e] hover:text-[#0d0d0d] dark:hover:text-white transition-all cursor-pointer shrink-0 ml-1"
           >
-            <MoreHorizontal className="w-4 h-4" strokeWidth={1.75} />
+            <MoreHorizontal className="w-4 h-4" strokeWidth={1.5} />
           </button>
         )}
       </div>
@@ -289,14 +289,14 @@ export default function AppSidebar() {
                     onClick={() => setSearchQuery('')}
                     className="absolute right-2 top-2 text-[#8e8e8e] hover:text-[#0d0d0d] dark:hover:text-white cursor-pointer"
                   >
-                    <X className="w-3.5 h-3.5" />
+                    <X className="w-3.5 h-3.5" strokeWidth={1.5} />
                   </button>
                 )}
               </div>
             </div>
           )}
 
-          {/* Action Buttons: New Chat & Crop Encyclopedia */}
+          {/* Action Buttons: New Chat & Monochrome Crop Encyclopedia */}
           <div className="px-3 py-1.5 space-y-1.5">
             <button
               onClick={() => {
@@ -305,10 +305,11 @@ export default function AppSidebar() {
               }}
               className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl bg-[#ffffff] hover:bg-[#f0f0f0] dark:bg-[#212121] dark:hover:bg-[#2a2a2a] text-[#0d0d0d] dark:text-[#ececec] text-xs font-semibold transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer border border-[#e5e5e5] dark:border-[#2f2f2f] shadow-xs"
             >
-              <SquarePen className="w-4 h-4 text-[#0d0d0d] dark:text-white" strokeWidth={1.75} />
+              <SquarePen className="w-4 h-4 text-[#0d0d0d] dark:text-white" strokeWidth={1.5} />
               <span>Đoạn chat mới</span>
             </button>
 
+            {/* Clean Monochrome Toàn thư cây trồng Button (badge removed) */}
             <Link
               href="/crops"
               onClick={() => {
@@ -316,11 +317,8 @@ export default function AppSidebar() {
               }}
               className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl bg-[#ffffff] hover:bg-[#f0f0f0] dark:bg-[#212121] dark:hover:bg-[#2a2a2a] text-[#0d0d0d] dark:text-[#ececec] text-xs font-semibold transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer border border-[#e5e5e5] dark:border-[#2f2f2f] shadow-xs"
             >
-              <BookOpen className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" strokeWidth={1.75} />
+              <BookOpen className="w-4 h-4 text-[#0d0d0d] dark:text-white shrink-0" strokeWidth={1.5} />
               <span className="flex-1 text-left truncate">Toàn thư cây trồng</span>
-              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300">
-                1.500+
-              </span>
             </Link>
           </div>
 
@@ -336,8 +334,8 @@ export default function AppSidebar() {
                 {/* 1. PINNED SECTION (ĐÃ GHIM) */}
                 {pinnedConversations.length > 0 && (
                   <div className="space-y-0.5">
-                    <div className="flex items-center gap-1 px-3 py-1 text-[11px] font-semibold text-[#8e8e8e] uppercase tracking-wider">
-                      <Pin className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />
+                    <div className="flex items-center gap-1.5 px-3 py-1 text-[11px] font-semibold text-[#8e8e8e] uppercase tracking-wider">
+                      <Pin className="w-3 h-3 text-[#0d0d0d] dark:text-white" strokeWidth={1.5} />
                       <span>Đã ghim</span>
                     </div>
                     {pinnedConversations.map((conv) => renderConversationItem(conv))}
@@ -366,8 +364,8 @@ export default function AppSidebar() {
             )}
           </div>
 
-          {/* Quick Actions: Help & Settings */}
-          <div className="px-2.5 py-1.5 space-y-0.5 border-t border-[#e5e5e5] dark:border-[#262626]">
+          {/* Quick Action: Help only (Settings removed from here, accessible via Profile card) */}
+          <div className="px-2.5 py-1.5 border-t border-[#e5e5e5] dark:border-[#262626]">
             <button
               type="button"
               data-testid="sidebar-help-button"
@@ -377,38 +375,26 @@ export default function AppSidebar() {
               }}
               className="w-full flex items-center gap-2.5 px-2.5 py-2 rounded-xl hover:bg-[#eaeaea] dark:hover:bg-[#212121] text-xs font-medium text-[#5d5d5d] dark:text-[#b4b4b4] hover:text-[#0d0d0d] dark:hover:text-white transition-colors cursor-pointer"
             >
-              <HelpCircle className="w-4 h-4 shrink-0" strokeWidth={1.75} />
+              <HelpCircle className="w-4 h-4 shrink-0" strokeWidth={1.5} />
               <span>Trợ giúp & Hướng dẫn</span>
-            </button>
-            <button
-              type="button"
-              data-testid="sidebar-settings-button"
-              onClick={() => {
-                setIsSettingsOpen(true);
-                if (window.innerWidth < 768) setIsSidebarOpen(false);
-              }}
-              className="w-full flex items-center gap-2.5 px-2.5 py-2 rounded-xl hover:bg-[#eaeaea] dark:hover:bg-[#212121] text-xs font-medium text-[#5d5d5d] dark:text-[#b4b4b4] hover:text-[#0d0d0d] dark:hover:text-white transition-colors cursor-pointer"
-            >
-              <Settings className="w-4 h-4 shrink-0" strokeWidth={1.75} />
-              <span>Cài đặt hệ thống</span>
             </button>
           </div>
 
-          {/* Footer Profile / Auth Bar */}
-          <div className="p-3 border-t border-[#e5e5e5] dark:border-[#262626] relative">
+          {/* Refined 16px Rounded Profile Footer Card */}
+          <div className="p-2.5 border-t border-[#e5e5e5] dark:border-[#262626] relative">
             {currentUser ? (
               <>
                 <div
                   data-testid="profile-menu-button"
                   onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
-                  className="flex items-center justify-between p-2 rounded-xl hover:bg-[#eaeaea] dark:hover:bg-[#212121] transition-all hover:scale-[1.01] active:scale-[0.99] cursor-pointer"
+                  className="flex items-center justify-between p-2 rounded-[16px] bg-[#ffffff] dark:bg-[#212121] border border-[#e5e5e5]/80 dark:border-[#2c2c2c] hover:bg-[#f4f4f4] dark:hover:bg-[#282828] transition-all hover:scale-[1.01] active:scale-[0.99] cursor-pointer shadow-2xs"
                 >
                   <div className="flex items-center gap-2.5 truncate">
-                    <div className="w-8 h-8 shrink-0 rounded-full bg-[#0d0d0d] text-white dark:bg-[#2a2a2a] dark:border dark:border-[#444] dark:text-[#ececec] flex items-center justify-center font-bold text-xs shadow-xs">
+                    <div className="w-8 h-8 shrink-0 rounded-full bg-[#0d0d0d] text-white dark:bg-[#1a1a1a] dark:border dark:border-[#3e3e3e] dark:text-[#ececec] flex items-center justify-center font-bold text-xs shadow-xs">
                       {userProfile.initials}
                     </div>
                     <div className="truncate text-left">
-                      <div className="font-medium text-xs text-[#0d0d0d] dark:text-white truncate leading-tight">
+                      <div className="font-semibold text-xs text-[#0d0d0d] dark:text-white truncate leading-tight">
                         {userProfile.name}
                       </div>
                       <div className="text-[10px] text-[#8e8e8e] truncate mt-0.5">
@@ -427,11 +413,22 @@ export default function AppSidebar() {
             ) : (
               <button
                 type="button"
-                onClick={() => setIsAuthModalOpen(true)}
-                className="w-full flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl bg-[#0d0d0d] hover:bg-[#262626] text-white dark:bg-white dark:hover:bg-gray-100 dark:text-black text-xs font-semibold shadow-xs transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
+                onClick={() => router.push('/settings')}
+                className="w-full flex items-center justify-between p-2 rounded-[16px] bg-[#ffffff] dark:bg-[#212121] border border-[#e5e5e5]/80 dark:border-[#2c2c2c] hover:bg-[#f4f4f4] dark:hover:bg-[#282828] text-xs font-semibold text-[#0d0d0d] dark:text-white shadow-2xs transition-all hover:scale-[1.01] active:scale-[0.99] cursor-pointer"
               >
-                <LogIn className="w-4 h-4" strokeWidth={1.75} />
-                <span>Đăng nhập / Đăng ký</span>
+                <div className="flex items-center gap-2.5">
+                  <div className="w-8 h-8 shrink-0 rounded-full bg-[#0d0d0d] text-white dark:bg-white dark:text-black flex items-center justify-center font-bold text-xs shadow-xs">
+                    PTK
+                  </div>
+                  <div className="text-left">
+                    <div className="text-xs font-semibold text-[#0d0d0d] dark:text-white">
+                      Phan Trọng Khang
+                    </div>
+                    <div className="text-[10px] text-[#8e8e8e] font-normal">
+                      Cài đặt & Tài khoản
+                    </div>
+                  </div>
+                </div>
               </button>
             )}
           </div>
@@ -460,7 +457,7 @@ export default function AppSidebar() {
                   }}
                   className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium text-[#0d0d0d] dark:text-[#ececec] hover:bg-[#f4f4f4] dark:hover:bg-[#2b2b2b] transition-colors cursor-pointer text-left"
                 >
-                  <Pin className={`w-3.5 h-3.5 ${isPinned ? 'text-emerald-600 dark:text-emerald-400 rotate-45' : 'text-[#5d5d5d] dark:text-[#a3a3a3]'}`} />
+                  <Pin className={`w-3.5 h-3.5 ${isPinned ? 'text-[#0d0d0d] dark:text-white rotate-45' : 'text-[#5d5d5d] dark:text-[#a3a3a3]'}`} strokeWidth={1.5} />
                   <span>{isPinned ? 'Bỏ ghim' : 'Ghim'}</span>
                 </button>
 
@@ -476,7 +473,7 @@ export default function AppSidebar() {
                   }}
                   className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium text-[#0d0d0d] dark:text-[#ececec] hover:bg-[#f4f4f4] dark:hover:bg-[#2b2b2b] transition-colors cursor-pointer text-left"
                 >
-                  <Pencil className="w-3.5 h-3.5 text-[#5d5d5d] dark:text-[#a3a3a3]" />
+                  <Pencil className="w-3.5 h-3.5 text-[#5d5d5d] dark:text-[#a3a3a3]" strokeWidth={1.5} />
                   <span>Đổi tên</span>
                 </button>
 
@@ -489,7 +486,7 @@ export default function AppSidebar() {
                   }}
                   className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium text-red-500 hover:bg-red-50 dark:hover:bg-red-950/40 transition-colors cursor-pointer text-left"
                 >
-                  <Trash2 className="w-3.5 h-3.5 text-red-500" />
+                  <Trash2 className="w-3.5 h-3.5 text-red-500" strokeWidth={1.5} />
                   <span>Xoá</span>
                 </button>
               </>
