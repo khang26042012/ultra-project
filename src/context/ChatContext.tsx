@@ -62,6 +62,7 @@ interface ChatContextType {
   selectConversation: (id: string) => void;
   deleteConversation: (id: string) => void;
   renameConversation: (id: string, newTitle: string) => void;
+  togglePinConversation: (id: string) => void;
   sendMessage: (content: string, imageUrl?: string, thinkActive?: boolean) => Promise<void>;
   userProfile: {
     name: string;
@@ -643,6 +644,19 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
     );
   };
 
+  const togglePinConversation = (id: string) => {
+    updateAndPersistConversations((prev) =>
+      prev.map((c) => {
+        if (c.id === id) {
+          const updated = { ...c, isPinned: !c.isPinned };
+          syncConversationToSupabase(updated, currentUser?.id);
+          return updated;
+        }
+        return c;
+      })
+    );
+  };
+
   // Multi-step Agent Loop with 9Router Web Search & Reasoning Streaming
   const sendMessage = async (content: string, imageUrl?: string, thinkActive = false) => {
     const trimmedContent = content.trim();
@@ -676,6 +690,30 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
 
       // Sync new conversation to Supabase
       syncConversationToSupabase(newConv, currentUser?.id);
+
+      // LPU Groq Fast Titling (<0.2s)
+      const convIdToName = targetConvId;
+      fetch('/api/chat/title', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: trimmedContent || 'Chẩn đoán hình ảnh' }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data?.title) {
+            updateAndPersistConversations((prev) =>
+              prev.map((c) => {
+                if (c.id === convIdToName) {
+                  const updatedWithTitle = { ...c, title: data.title };
+                  syncConversationToSupabase(updatedWithTitle, currentUser?.id);
+                  return updatedWithTitle;
+                }
+                return c;
+              })
+            );
+          }
+        })
+        .catch((err) => console.warn('LPU titling trigger error:', err));
     } else {
       const conv = conversations.find((c) => c.id === targetConvId);
       currentMessages = conv ? [...conv.messages, userMessage] : [userMessage];
@@ -965,6 +1003,7 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
         selectConversation,
         deleteConversation,
         renameConversation,
+        togglePinConversation,
         sendMessage,
         userProfile,
       }}

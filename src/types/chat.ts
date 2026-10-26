@@ -30,6 +30,7 @@ export interface Conversation {
   messages: Message[];
   updatedAt: string;
   group: TimeGroup;
+  isPinned?: boolean;
 }
 
 export interface ModelOption {

@@ -10,8 +10,7 @@ import SettingsModal from '@/components/modals/SettingsModal';
 import HelpModal from '@/components/modals/HelpModal';
 import UpgradeModal from '@/components/modals/UpgradeModal';
 import AuthModal from '@/components/modals/AuthModal';
-import Link from 'next/link';
-import { BookOpen, PanelLeft, SquarePen } from 'lucide-react';
+import { PanelLeft, SquarePen } from 'lucide-react';
 
 function ChatApp() {
   const { activeConversation, isSidebarOpen, toggleSidebar, createNewChat } = useChat();
@@ -52,22 +51,11 @@ function ChatApp() {
           </div>
 
           <div className="flex items-center gap-2">
-            {/* Quick Link to Crop Pathology Encyclopedia */}
-            <Link
-              href="/crops"
-              title="Tra cứu Toàn thư Bệnh học 1.500+ loài cây trồng"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-emerald-50 hover:bg-emerald-100 text-emerald-800 dark:bg-emerald-950/40 dark:hover:bg-emerald-900/50 dark:text-emerald-300 border border-emerald-200/80 dark:border-emerald-800/60 shadow-xs transition-all cursor-pointer backdrop-blur-sm"
-            >
-              <BookOpen className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" strokeWidth={1.75} />
-              <span className="hidden sm:inline">Toàn thư bệnh học</span>
-              <span className="text-[10px] px-1.5 py-0.5 bg-emerald-200/70 dark:bg-emerald-800/80 rounded-full font-semibold">1.500+</span>
-            </Link>
-
             <button
               type="button"
               onClick={createNewChat}
               title="Đoạn chat mới"
-              className="md:hidden p-1.5 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 text-[#5d5d5d] hover:text-[#0d0d0d] dark:text-[#b4b4b4] dark:hover:text-white transition-colors cursor-pointer"
+              className="p-1.5 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 text-[#5d5d5d] hover:text-[#0d0d0d] dark:text-[#b4b4b4] dark:hover:text-white transition-colors cursor-pointer"
             >
               <SquarePen className="w-4 h-4" strokeWidth={1.75} />
             </button>
