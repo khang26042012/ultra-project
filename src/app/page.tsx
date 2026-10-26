@@ -57,18 +57,18 @@ function ChatApp() {
           </div>
         )}
 
-        <main className="flex-1 overflow-y-auto overscroll-contain flex flex-col relative no-scrollbar bg-[#ffffff] dark:bg-[#171717]">
+        <main className="flex-1 flex flex-col min-h-0 overflow-hidden relative bg-[#ffffff] dark:bg-[#171717]">
           {hasMessages ? (
             <>
-              <div className="flex-1 overflow-y-auto overscroll-contain no-scrollbar pt-4 sm:pt-6 pb-2">
-                <MessageList messages={activeConversation.messages} />
-              </div>
+              <MessageList messages={activeConversation.messages} />
               <div className="shrink-0 bg-gradient-to-t from-[#ffffff] via-[#ffffff]/95 to-transparent dark:from-[#171717] dark:via-[#171717]/95 pt-2 sm:pt-4">
                 <FloatingInputIsland />
               </div>
             </>
           ) : (
-            <EmptyState />
+            <div className="flex-1 min-h-0 overflow-y-auto flex flex-col">
+              <EmptyState />
+            </div>
           )}
         </main>
 
