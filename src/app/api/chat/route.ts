@@ -2,6 +2,8 @@ import { NextRequest } from 'next/server';
 import { AGRIVISION_MASTER_SYSTEM_PROMPT } from '@/lib/systemPrompt';
 import { searchCropKnowledge } from '@/lib/cropSearch';
 import { executeTavilySearch } from '@/lib/tavilySearch';
+import { SEGMENT_CROP_LESION_TOOL } from '@/lib/aiTools';
+import { segmentAndAnnotateCropLesion } from '@/lib/visionSegmentation';
 
 export const runtime = 'nodejs';
 
@@ -33,7 +35,7 @@ const SEARCH_CROP_DATABASE_TOOL = {
   function: {
     name: 'search_crop_database',
     description:
-      'Tra cứu hồ sơ bệnh học thực vật chuẩn xác trong kho tri thức nội tại AgriVision (1.000 cây trồng Việt Nam & thế giới). Dùng ngay khi người dùng hỏi về bệnh cây trồng, triệu chứng vàng lá, thối rễ, xì mủ, sâu bệnh, hoặc sau khi phân tích hình ảnh cây trồng.',
+      'Tra cứu hồ sơ bệnh học thực vật chuẩn xác trong kho tri thức nội tại AgriVision (1.534 loài cây & 6.983 phác đồ). Dùng ngay khi người dùng hỏi về bệnh cây trồng, triệu chứng vàng lá, thối rễ, xì mủ, sâu bệnh, hoặc sau khi phân tích hình ảnh cây trồng.',
     parameters: {
       type: 'object',
       properties: {
@@ -75,36 +77,6 @@ const WEB_SEARCH_TOOL = {
   },
 };
 
-// Helper: Query Real-time Web Search Engine
-async function executeWebSearch(query: string) {
-  try {
-    const res = await fetch(SEARCH_API_URL, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${AI_GATEWAY_KEY}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        model: 'ag',
-        query,
-        search_type: 'web',
-        max_results: 5,
-      }),
-    });
-
-    if (res.ok) {
-      const data = await res.json();
-      return {
-        results: Array.isArray(data.results) ? data.results : [],
-        answer: data.answer?.text || '',
-      };
-    }
-  } catch (err) {
-    console.error('Web Search API error:', err);
-  }
-  return { results: [], answer: '' };
-}
-
 export async function POST(req: NextRequest) {
   try {
     const { messages, model, webSearchEnabled = true } = await req.json();
@@ -115,6 +87,27 @@ export async function POST(req: NextRequest) {
     const conversationalMessages = incomingMessages.filter(
       (m: { role?: string }) => m.role !== 'system'
     );
+
+    // Extract the latest user image in case tool arguments need it
+    let latestUserImage = '';
+    for (let i = conversationalMessages.length - 1; i >= 0; i--) {
+      const msg = conversationalMessages[i];
+      if (msg.role === 'user') {
+        if (typeof msg.imageUrl === 'string' && msg.imageUrl) {
+          latestUserImage = msg.imageUrl;
+          break;
+        }
+        if (Array.isArray(msg.content)) {
+          for (const part of msg.content) {
+            if (part?.type === 'image_url' && part?.image_url?.url) {
+              latestUserImage = part.image_url.url;
+              break;
+            }
+          }
+        }
+        if (latestUserImage) break;
+      }
+    }
 
     // Initial conversation payload: System Prompt & Tools at static head (Optimizes Prompt Cache Tokens)
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -146,9 +139,9 @@ export async function POST(req: NextRequest) {
           while (turn < maxTurns) {
             turn++;
 
-            // Available tools list: Local Pathology RAG tool is ALWAYS available; web_search according to flag
+            // Available tools list: Local Pathology RAG tool + Computer Vision Lesion Segmentation tool always active
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            const toolsList: any[] = [SEARCH_CROP_DATABASE_TOOL];
+            const toolsList: any[] = [SEARCH_CROP_DATABASE_TOOL, SEGMENT_CROP_LESION_TOOL];
             if (webSearchEnabled !== false) {
               toolsList.push(WEB_SEARCH_TOOL);
             }
@@ -247,7 +240,7 @@ export async function POST(req: NextRequest) {
 
             const toolCallsList = Object.values(toolCallsMap);
 
-            // If Gemini Gateway requested tool calls (Local Pathology Search or Web Search)
+            // If Gemini Gateway requested tool calls
             if (toolCallsList.length > 0) {
               // Append assistant message with tool_calls to activeMessages
               activeMessages.push({
@@ -264,7 +257,55 @@ export async function POST(req: NextRequest) {
               });
 
               for (const tc of toolCallsList) {
-                if (tc.name === 'search_crop_database') {
+                if (tc.name === 'segment_crop_lesion') {
+                  // Computer Vision Roboflow Instance Segmentation & HUD
+                  let imageToSegment = latestUserImage;
+                  try {
+                    const parsedArgs = JSON.parse(tc.arguments);
+                    if (parsedArgs.imageBase64 && typeof parsedArgs.imageBase64 === 'string') {
+                      imageToSegment = parsedArgs.imageBase64;
+                    }
+                  } catch {
+                    if (tc.arguments && tc.arguments.length > 50) {
+                      imageToSegment = tc.arguments;
+                    }
+                  }
+
+                  sendEvent({
+                    type: 'vision_segmenting',
+                    status: 'Đang bóc tách đa giác viền tổn thương mô lá qua Roboflow Computer Vision...',
+                  });
+
+                  const visionResult = await segmentAndAnnotateCropLesion(imageToSegment);
+
+                  sendEvent({
+                    type: 'vision_hud',
+                    annotated_image_url: visionResult.annotated_image_url,
+                    total_necrosis_percentage: visionResult.total_necrosis_percentage,
+                    predictions: visionResult.predictions,
+                    summary: visionResult.summary,
+                  });
+
+                  activeMessages.push({
+                    role: 'tool',
+                    tool_call_id: tc.id,
+                    content: JSON.stringify({
+                      status: 'success',
+                      total_necrosis_percentage: visionResult.total_necrosis_percentage,
+                      predictions_count: visionResult.predictions.length,
+                      predictions: visionResult.predictions.map((p) => ({
+                        class: p.class,
+                        class_vi: p.class_vi,
+                        confidence: p.confidence,
+                        necrosis_percentage: p.necrosis_percentage,
+                        points_sample: p.points.slice(0, 5),
+                      })),
+                      summary: visionResult.summary,
+                      annotated_hud_image_url: visionResult.annotated_image_url,
+                      hud_embed_markdown: `![AgriVision AI HUD: Phân tích tổn thương mô](${visionResult.annotated_image_url})`,
+                    }),
+                  });
+                } else if (tc.name === 'search_crop_database') {
                   let cropName = '';
                   let symptoms: string[] = [];
                   try {

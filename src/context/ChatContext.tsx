@@ -140,7 +140,7 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
         conversation_id: convId,
         role: msg.role,
         content: msg.content,
-        image_url: msg.imageUrl || null,
+        image_url: msg.imageUrl || msg.annotatedImageUrl || null,
         thought: msg.thought || null,
         sources: msg.sources ? JSON.parse(JSON.stringify(msg.sources)) : null,
         timestamp: msg.timestamp,
@@ -190,7 +190,8 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
                 id: m.id,
                 role: m.role,
                 content: m.content || '',
-                imageUrl: m.image_url || undefined,
+                imageUrl: m.role === 'user' ? (m.image_url || undefined) : undefined,
+                annotatedImageUrl: m.role === 'assistant' ? (m.image_url || undefined) : undefined,
                 thought: m.thought || undefined,
                 sources: m.sources || undefined,
                 timestamp: m.timestamp || new Date(m.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
@@ -782,6 +783,8 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
     let thinkingSeconds = 0;
     let searchingQuery: string | undefined = undefined;
     let currentSources: SearchSource[] = [];
+    let currentAnnotatedImageUrl: string | undefined = undefined;
+    let isVisionSegmenting = false;
 
     try {
       const response = await fetch('/api/chat', {
@@ -843,6 +846,15 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
                   currentSources = [...currentSources, ...newSources];
                   searchingQuery = undefined;
                 }
+                // 3b. Computer Vision Lesion Segmentation indicator
+                else if (parsed.type === 'vision_segmenting') {
+                  isVisionSegmenting = true;
+                }
+                // 3c. Computer Vision HUD Result
+                else if (parsed.type === 'vision_hud' && parsed.annotated_image_url) {
+                  isVisionSegmenting = false;
+                  currentAnnotatedImageUrl = parsed.annotated_image_url;
+                }
                 // 4. Content token
                 else if (parsed.type === 'content' && parsed.token) {
                   if (isThinking) {
@@ -879,6 +891,8 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
                                       : undefined),
                                   searchingQuery,
                                   sources: currentSources.length > 0 ? currentSources : undefined,
+                                  annotatedImageUrl: currentAnnotatedImageUrl,
+                                  visionSegmenting: isVisionSegmenting,
                                   isStreaming: true,
                                 }
                               : m
@@ -911,6 +925,8 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
           thinkingSeconds ||
           (accumulatedThought ? Math.max(1, Math.round((Date.now() - startTime) / 1000)) : undefined),
         sources: currentSources.length > 0 ? currentSources : undefined,
+        annotatedImageUrl: currentAnnotatedImageUrl,
+        visionSegmenting: false,
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       };
 

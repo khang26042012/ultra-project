@@ -73,10 +73,16 @@ export async function GET(req: NextRequest) {
     const total = filtered.length;
     const paginated = filtered.slice(offset, offset + limit);
 
+    const totalDiseasesInDb = allCrops.reduce(
+      (acc, crop) => acc + (Array.isArray(crop.danh_sach_benh) ? crop.danh_sach_benh.length : 0),
+      0
+    );
+
     return NextResponse.json({
       success: true,
       total,
       total_in_db: allCrops.length,
+      total_diseases_in_db: totalDiseasesInDb,
       limit,
       offset,
       crops: paginated,

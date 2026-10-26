@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo, useRef } from 'react';
+import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { ChatProvider, useChat } from '@/context/ChatContext';
 import {
@@ -26,7 +26,9 @@ import {
   ChevronRight,
   Check,
   X,
+  FlaskConical,
 } from 'lucide-react';
+import TankMixModal from '@/components/tankMix/TankMixModal';
 import { ThemeMode, FontSizeOption } from '@/types/chat';
 
 function SettingsView() {
@@ -90,9 +92,26 @@ function SettingsView() {
   };
 
   const [searchQuery, setSearchQuery] = useState('');
+  const [cropStats, setCropStats] = useState({ totalCrops: 1534, totalDiseases: 6983 });
+
+  useEffect(() => {
+    fetch('/api/crops?limit=1')
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success && data.total_in_db) {
+          setCropStats({
+            totalCrops: data.total_in_db,
+            totalDiseases: data.total_diseases_in_db || 6983,
+          });
+        }
+      })
+      .catch(() => {});
+  }, []);
+
   const [activeModal, setActiveModal] = useState<
     'personalize' | 'model' | 'theme' | 'fontSize' | 'password' | 'clearHistory' | 'avatar' | null
   >(null);
+  const [isTankMixOpen, setIsTankMixOpen] = useState(false);
 
   // Personalization settings stored in localStorage
   const [personalRole, setPersonalRole] = useState(() => {
@@ -291,7 +310,30 @@ function SettingsView() {
                           Kho tri thức bệnh học
                         </div>
                         <div className="text-[11px] text-[#737373] dark:text-[#8e8e8e]">
-                          1.534 loài cây trồng & 3.020 bệnh học
+                          {cropStats.totalCrops.toLocaleString('vi-VN')} loài cây trồng & {cropStats.totalDiseases.toLocaleString('vi-VN')} phác đồ bệnh học chuyên sâu
+                        </div>
+                      </div>
+                    </div>
+                    <ChevronRight className="w-4 h-4 text-[#8e8e8e] shrink-0" strokeWidth={1.5} />
+                  </button>
+                )}
+
+                {(matchesSearch('bình phun') || matchesSearch('pha thuốc') || matchesSearch('wales') || matchesSearch('xung đột')) && (
+                  <button
+                    type="button"
+                    onClick={() => setIsTankMixOpen(true)}
+                    className="w-full flex items-center justify-between p-3.5 hover:bg-[#f2f2f2] dark:hover:bg-[#222222] transition-colors cursor-pointer text-left"
+                  >
+                    <div className="flex items-center gap-3 min-w-0">
+                      <div className="w-8 h-8 rounded-xl bg-cyan-50 dark:bg-cyan-950/40 text-cyan-600 dark:text-cyan-400 flex items-center justify-center shrink-0">
+                        <FlaskConical className="w-4 h-4" strokeWidth={1.5} />
+                      </div>
+                      <div>
+                        <div className="text-sm font-medium text-[#0d0d0d] dark:text-white">
+                          Bình phun ảo BVTV (Chuẩn WALES)
+                        </div>
+                        <div className="text-[11px] text-[#737373] dark:text-[#8e8e8e]">
+                          Mô phỏng xung đột hóa sinh, kết tủa & thứ tự hòa tan cho bình 16L, 25L, 200L
                         </div>
                       </div>
                     </div>
@@ -655,6 +697,9 @@ function SettingsView() {
           )}
         </div>
       </footer>
+
+      {/* Virtual Spray Tank Simulator Modal */}
+      <TankMixModal isOpen={isTankMixOpen} onClose={() => setIsTankMixOpen(false)} />
 
       {/* SUB-MODALS */}
       {/* 1. Modal Cá nhân hóa */}
