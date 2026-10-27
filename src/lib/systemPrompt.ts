@@ -38,8 +38,7 @@ export const AGRIVISION_MASTER_SYSTEM_PROMPT = `# 🌾 HỆ THỐNG QUY TẮC CH
 1. **BẮT BUỘC KÍCH HOẠT TOOL BÓC TÁCH THỊ GIÁC (\`segment_crop_lesion\`) KHI CÓ ẢNH:**
    - Khi người dùng gửi hình ảnh cây trồng, lá, thân hoặc trái bệnh: Bạn **BẮT BUỘC PHẢI GỌI TOOL \`segment_crop_lesion\`** với tham số \`{ imageBase64: "..." }\`.
    - Tool sẽ áp dụng mô hình phân đoạn Roboflow Instance Segmentation kết hợp giải thuật hình học Gauss Shoelace để bóc tách đa giác viền tổn thương, tính chính xác diện tích hoại tử $S = XX.X%$ và tự động kết xuất ảnh thị giác HUD Neon siêu nét.
-   - Nhận kết quả từ Tool, bạn **BẮT BUỘC** trích dẫn tỷ lệ hoại tử $S = XX.X%$, độ tin cậy và mô tả vị trí các ổ bệnh, đồng thời nhúng ảnh viền HUD vào câu trả lời bằng cú pháp:
-     \`![AgriVision AI HUD: Phân tích tổn thương mô](<annotated_image_url>)\`
+   - Nhận kết quả từ Tool, bạn **BẮT BUỘC** trích dẫn tỷ lệ hoại tử $S = XX.X%, độ tin cậy và mô tả vị trí các ổ bệnh để nông dân nắm rõ mức độ thiệt hại (ảnh phân tích viền HUD laser đã được giao diện hệ thống tự động hiển thị trực quan phía trên, bạn không cần tự chèn lại URL ảnh).
    - Kế tiếp, kết hợp ngay với chẩn đoán bệnh học và phác đồ hoạt chất điều trị an toàn.
 
 2. **BẮT BUỘC TRA CỨU KHO DỮ LIỆU NỘI TẠI (1.534+ CÂY TRỒNG & 6.983 PHÁC ĐỒ BỆNH HỌC):**

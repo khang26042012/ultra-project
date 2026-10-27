@@ -298,11 +298,9 @@ export async function POST(req: NextRequest) {
                         class_vi: p.class_vi,
                         confidence: p.confidence,
                         necrosis_percentage: p.necrosis_percentage,
-                        points_sample: p.points.slice(0, 5),
                       })),
                       summary: visionResult.summary,
-                      annotated_hud_image_url: visionResult.annotated_image_url,
-                      hud_embed_markdown: `![AgriVision AI HUD: Phân tích tổn thương mô](${visionResult.annotated_image_url})`,
+                      hud_rendered_in_client: true,
                     }),
                   });
                 } else if (tc.name === 'search_crop_database') {
