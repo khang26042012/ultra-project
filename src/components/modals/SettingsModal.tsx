@@ -509,7 +509,7 @@ export default function SettingsModal() {
                   </div>
                   <div className="flex justify-between py-2 border-b border-[#e5e5e5] dark:border-[#2a2a2a]">
                     <span className="text-[#5d5d5d] dark:text-[#8e8e8e]">Đơn vị học tập:</span>
-                    <span className="font-medium text-[#0d0d0d] dark:text-white">Lớp 9¹, Trường THCS Vĩnh An, tỉnh Vĩnh Long</span>
+                    <span className="font-medium text-[#0d0d0d] dark:text-white">Lớp 9¹, Trường THCS Vĩnh An (xã Ba Tri, tỉnh Vĩnh Long)</span>
                   </div>
                   <div className="flex justify-between py-2 border-b border-[#e5e5e5] dark:border-[#2a2a2a]">
                     <span className="text-[#5d5d5d] dark:text-[#8e8e8e]">Mô hình AI chuyên sâu:</span>

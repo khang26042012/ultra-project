@@ -332,7 +332,8 @@ export default function AppSidebar() {
               <span className="flex-1 text-left truncate">Toàn thư cây trồng</span>
             </Link>
 
-            {/* Virtual Spray Tank Simulator Button */}
+            {/* Virtual Spray Tank Simulator Button (Tạm ẩn theo yêu cầu) */}
+            {/*
             <button
               type="button"
               onClick={() => {
@@ -344,6 +345,7 @@ export default function AppSidebar() {
               <FlaskConical className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" strokeWidth={1.5} />
               <span className="flex-1 text-left truncate">Bình phun ảo BVTV</span>
             </button>
+            */}
           </div>
 
           {/* Divider */}
