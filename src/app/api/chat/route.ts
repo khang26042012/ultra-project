@@ -147,8 +147,19 @@ export async function POST(req: NextRequest) {
         const encoder = new TextEncoder();
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const sendEvent = (obj: any) => {
-          controller.enqueue(encoder.encode(`data: ${JSON.stringify(obj)}\n\n`));
+          try {
+            controller.enqueue(encoder.encode(`data: ${JSON.stringify(obj)}\n\n`));
+          } catch {}
         };
+
+        // Active SSE Keep-Alive Ping every 2.5s (Crucial for mobile background / 4G idle disconnect)
+        const keepAliveInterval = setInterval(() => {
+          try {
+            controller.enqueue(encoder.encode(': keep-alive\n\n'));
+          } catch {
+            clearInterval(keepAliveInterval);
+          }
+        }, 2500);
 
         const maxTurns = 6;
         let turn = 0;
@@ -497,8 +508,11 @@ HƯỚNG DẪN TRẢ LỜI BÁC SĨ CÂY TRỒNG NAM BỘ:
             });
           }
         } finally {
-          controller.enqueue(encoder.encode('data: [DONE]\n\n'));
-          controller.close();
+          clearInterval(keepAliveInterval);
+          try {
+            controller.enqueue(encoder.encode('data: [DONE]\n\n'));
+            controller.close();
+          } catch {}
         }
       },
     });
@@ -508,6 +522,7 @@ HƯỚNG DẪN TRẢ LỜI BÁC SĨ CÂY TRỒNG NAM BỘ:
         'Content-Type': 'text/event-stream; charset=utf-8',
         'Cache-Control': 'no-cache, no-transform',
         Connection: 'keep-alive',
+        'X-Accel-Buffering': 'no',
       },
     });
   } catch (err: unknown) {
