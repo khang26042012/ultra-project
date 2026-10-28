@@ -464,7 +464,7 @@ export default function AppSidebar() {
                   </div>
                   <div className="text-left">
                     <div className="text-xs font-semibold text-[#0d0d0d] dark:text-white">
-                      Phan Trọng Khang
+                      Tác giả đề tài AgriVision
                     </div>
                     <div className="text-[10px] text-[#8e8e8e] font-normal">
                       Cài đặt & Tài khoản
