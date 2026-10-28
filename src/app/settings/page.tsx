@@ -29,6 +29,7 @@ import {
   FlaskConical,
 } from 'lucide-react';
 import TankMixModal from '@/components/tankMix/TankMixModal';
+import AuthModal from '@/components/modals/AuthModal';
 import { ThemeMode, FontSizeOption } from '@/types/chat';
 
 function SettingsView() {
@@ -49,6 +50,8 @@ function SettingsView() {
     logout,
     updateAvatar,
     userProfile,
+    currentUser,
+    setIsAuthModalOpen,
   } = useChat();
 
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -150,9 +153,9 @@ function SettingsView() {
     }
   };
 
-  const userName = userProfile?.name || 'Tác giả đề tài AgriVision';
-  const userEmail = userProfile?.email || 'trongkhabgphan@gmail.com';
-  const userInitials = userProfile?.initials || 'PTK';
+  const userName = currentUser ? currentUser.name : 'Khách nhà nông';
+  const userEmail = currentUser ? currentUser.email : 'Chưa đăng nhập';
+  const userInitials = currentUser ? userProfile?.initials : 'AV';
 
   const themeLabel =
     theme === 'light' ? 'Chế độ Sáng' : theme === 'dark' ? 'Chế độ Tối' : 'Theo Hệ thống';
@@ -688,6 +691,7 @@ function SettingsView() {
 
       {/* Virtual Spray Tank Simulator Modal */}
       <TankMixModal isOpen={isTankMixOpen} onClose={() => setIsTankMixOpen(false)} />
+      <AuthModal />
 
       {/* SUB-MODALS */}
       {/* 1. Modal Cá nhân hóa */}
