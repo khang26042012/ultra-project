@@ -505,11 +505,11 @@ export default function SettingsModal() {
                 <div className="space-y-2.5 text-xs">
                   <div className="flex justify-between py-2 border-b border-[#e5e5e5] dark:border-[#2a2a2a]">
                     <span className="text-[#5d5d5d] dark:text-[#8e8e8e]">Tác giả phát triển:</span>
-                    <span className="font-semibold text-[#0d0d0d] dark:text-white">Phan Trọng Khang</span>
+                    <span className="font-semibold text-[#0d0d0d] dark:text-white">Tác giả đề tài AgriVision</span>
                   </div>
                   <div className="flex justify-between py-2 border-b border-[#e5e5e5] dark:border-[#2a2a2a]">
                     <span className="text-[#5d5d5d] dark:text-[#8e8e8e]">Đơn vị học tập:</span>
-                    <span className="font-medium text-[#0d0d0d] dark:text-white">Lớp 9¹, Trường THCS Vĩnh An (xã Ba Tri, tỉnh Vĩnh Long)</span>
+                    <span className="font-medium text-[#0d0d0d] dark:text-white">Học sinh trung học, Đơn vị nghiên cứu (Tỉnh Vĩnh Long)</span>
                   </div>
                   <div className="flex justify-between py-2 border-b border-[#e5e5e5] dark:border-[#2a2a2a]">
                     <span className="text-[#5d5d5d] dark:text-[#8e8e8e]">Mô hình AI chuyên sâu:</span>
