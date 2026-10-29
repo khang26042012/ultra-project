@@ -584,40 +584,27 @@ export default function ChatMessage({ message }: ChatMessageProps) {
       {message.visionSegmenting && (
         <div className="inline-flex items-center gap-2 text-xs font-mono text-[#00b4d8] dark:text-[#00F2FE] animate-pulse mb-2.5 select-none px-3 py-1.5 rounded-full bg-[#00F2FE]/10 border border-[#00F2FE]/30">
           <span className="w-2 h-2 rounded-full bg-[#00F2FE] animate-ping" />
-          <span>Bóc tách tổn thương mô nấm bệnh qua YOLO-26 & Roboflow Computer Vision...</span>
+          <span>Đang khoanh vùng tổn thương mô lá...</span>
         </div>
       )}
 
-      {/* High-Precision Computer Vision HUD Card */}
+      {/* Khoanh vùng tổn thương & Diện tích (Không watermark) */}
       {message.annotatedImageUrl && (
-        <div className="my-3 rounded-2xl overflow-hidden border border-[#00F2FE]/40 bg-[#0a1128]/95 dark:bg-[#020617]/95 text-white shadow-lg">
-          <div className="px-4 py-2 bg-[#00F2FE]/10 border-b border-[#00F2FE]/30 flex flex-wrap items-center justify-between gap-2">
-            <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-[#00F2FE] animate-pulse shadow-[0_0_8px_#00F2FE]" />
-              <span className="font-mono text-xs font-bold tracking-wider text-[#00F2FE]">
-                YOLO-26 & ROBOFLOW COMPUTER VISION • AI HUD
-              </span>
-            </div>
-            <span className="text-[10.5px] font-mono px-2 py-0.5 rounded bg-[#00F2FE]/20 text-[#00F2FE] border border-[#00F2FE]/40">
-              Gauss Shoelace Formula
-            </span>
-          </div>
-          <div
-            onClick={() => {
-              setLightboxZoom(1);
-              setLightboxImageUrl(message.annotatedImageUrl || null);
-            }}
-            className="relative max-w-full max-h-[380px] overflow-hidden flex items-center justify-center bg-black/70 cursor-pointer group/hud"
-          >
-            <img
-              src={message.annotatedImageUrl}
-              alt="AgriVision AI HUD: Phân tích tổn thương mô"
-              className="w-full max-h-[380px] object-contain transition-transform duration-300 group-hover/hud:scale-[1.01]"
-            />
-            <div className="absolute bottom-2 right-2 bg-black/75 backdrop-blur-md text-[#00F2FE] text-xs px-2.5 py-1 rounded-full border border-[#00F2FE]/30 flex items-center gap-1.5 opacity-90 group-hover/hud:opacity-100 transition-opacity">
-              <ZoomIn className="w-3.5 h-3.5" strokeWidth={1.5} />
-              <span>Phóng to toàn màn hình HUD</span>
-            </div>
+        <div
+          onClick={() => {
+            setLightboxZoom(1);
+            setLightboxImageUrl(message.annotatedImageUrl || null);
+          }}
+          className="my-3 overflow-hidden rounded-2xl border border-black/10 dark:border-white/10 bg-black/5 max-w-lg cursor-pointer group/hud relative shadow-xs"
+        >
+          <img
+            src={message.annotatedImageUrl}
+            alt="Khoanh vùng tổn thương mô"
+            className="w-full max-h-[380px] object-contain transition-transform duration-200 group-hover/hud:scale-[1.01]"
+          />
+          <div className="absolute bottom-2 right-2 bg-black/70 text-white text-[11px] px-2.5 py-1 rounded-full backdrop-blur-xs flex items-center gap-1 opacity-80 group-hover/hud:opacity-100 transition-opacity">
+            <ZoomIn className="w-3 h-3" strokeWidth={1.5} />
+            <span>Phóng to</span>
           </div>
         </div>
       )}

@@ -177,107 +177,34 @@ export function renderAgriTechHudSvg(
   <image href="${fullBase64}" xlink:href="${fullBase64}" width="${width}" height="${height}" preserveAspectRatio="xMidYMid meet" />
 `;
 
-  // Global Diagnostic Watermark Header (Top Left HUD status)
+  // 1. Chỉ hiển thị diện tích (Không watermark, không logo rườm rà)
   svg += `
-  <!-- Top HUD Global Status Pill -->
-  <g transform="translate(16, 16)">
-    <rect width="210" height="30" rx="8" fill="rgba(15, 23, 42, 0.88)" stroke="rgba(0, 242, 254, 0.6)" stroke-width="1.2" />
-    <circle cx="14" cy="15" r="4" fill="#00F2FE" filter="url(#neon-cyan-glow)">
-      <animate attributeName="opacity" values="1;0.4;1" dur="2s" repeatCount="indefinite"/>
-    </circle>
-    <text x="26" y="19" font-family="monospace, monospace" font-size="11" font-weight="bold" fill="#00F2FE">AGRIVISION AI HUD</text>
-    <text x="146" y="19" font-family="monospace, monospace" font-size="10" fill="#10B981">S = ${totalNecrosis}%</text>
+  <!-- Badge hiển thị diện tích -->
+  <g transform="translate(14, 14)">
+    <rect width="86" height="26" rx="6" fill="rgba(0, 0, 0, 0.75)" stroke="#00F2FE" stroke-width="1.2" />
+    <circle cx="11" cy="13" r="3" fill="#00F2FE" filter="url(#neon-cyan-glow)"/>
+    <text x="20" y="17" font-family="monospace, monospace" font-size="11.5" font-weight="bold" fill="#00F2FE">S = ${totalNecrosis}%</text>
   </g>
 `;
 
-  // Draw Lesions
+  // 2. Chỉ khoanh vùng tổn thương (Polygon contour viền phát sáng)
   predictions.forEach((pred, idx) => {
     const isPrimary = idx === 0;
     const strokeColor = isPrimary ? '#00F2FE' : '#10B981';
     const filterId = isPrimary ? 'url(#neon-cyan-glow)' : 'url(#neon-emerald-glow)';
 
-    // 1. Polygon Points String
     const polyPointsStr = pred.points.map((p) => `${p.x},${p.y}`).join(' ');
 
-    // Compute bounding box from points
-    let minX = width;
-    let maxX = 0;
-    let minY = height;
-    let maxY = 0;
-    pred.points.forEach((p) => {
-      if (p.x < minX) minX = p.x;
-      if (p.x > maxX) maxX = p.x;
-      if (p.y < minY) minY = p.y;
-      if (p.y > maxY) maxY = p.y;
-    });
-
-    const boxPadding = 6;
-    const bx1 = Math.max(0, minX - boxPadding);
-    const by1 = Math.max(0, minY - boxPadding);
-    const bx2 = Math.min(width, maxX + boxPadding);
-    const by2 = Math.min(height, maxY + boxPadding);
-    const bLen = Math.min(16, Math.max(8, (bx2 - bx1) * 0.15));
-
-    // A. Heatmap Lesion Mask + Polygon Contour (Nét thanh 1.2px - 1.5px, phát sáng)
     svg += `
-  <!-- Lesion #${idx + 1} Polygon Contour -->
+  <!-- Khoanh vùng tổn thương #${idx + 1} -->
   <polygon
     points="${polyPointsStr}"
-    fill="rgba(239, 68, 68, 0.22)"
+    fill="rgba(0, 242, 254, 0.12)"
     stroke="${strokeColor}"
-    stroke-width="1.4"
+    stroke-width="1.8"
     stroke-linejoin="round"
     filter="${filterId}"
   />
-`;
-
-    // B. Corner HUD Brackets (4 dấu ngoặc góc L-bracket siêu mảnh)
-    svg += `
-  <!-- Corner HUD Brackets -->
-  <path
-    d="
-      M ${bx1} ${by1 + bLen} L ${bx1} ${by1} L ${bx1 + bLen} ${by1}
-      M ${bx2 - bLen} ${by1} L ${bx2} ${by1} L ${bx2} ${by1 + bLen}
-      M ${bx1} ${by2 - bLen} L ${bx1} ${by2} L ${bx1 + bLen} ${by2}
-      M ${bx2 - bLen} ${by2} L ${bx2} ${by2} L ${bx2} ${by2 - bLen}
-    "
-    fill="none"
-    stroke="${strokeColor}"
-    stroke-width="1.4"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-    filter="${filterId}"
-  />
-`;
-
-    // C. Floating HUD Glass Badge
-    const badgeW = Math.min(220, Math.max(170, width * 0.35));
-    const badgeH = 50;
-    let badgeX = bx1;
-    let badgeY = by1 - badgeH - 8;
-
-    // Boundary check so badge doesn't overflow outside SVG
-    if (badgeY < 10) badgeY = by2 + 8;
-    if (badgeX + badgeW > width - 10) badgeX = width - badgeW - 10;
-    if (badgeX < 10) badgeX = 10;
-
-    const confPercent = Math.round(pred.confidence * 100);
-
-    svg += `
-  <!-- Floating HUD Glass Badge -->
-  <g transform="translate(${badgeX}, ${badgeY})">
-    <rect width="${badgeW}" height="${badgeH}" rx="8" fill="url(#hud-glass-grad)" stroke="${strokeColor}" stroke-width="1" />
-    <circle cx="12" cy="16" r="3" fill="${strokeColor}" filter="${filterId}"/>
-    <text x="22" y="19" font-family="system-ui, -apple-system, sans-serif" font-size="10.5" font-weight="bold" fill="#ffffff">
-      ${pred.class_vi.length > 24 ? pred.class_vi.slice(0, 24) + '...' : pred.class_vi}
-    </text>
-    <text x="12" y="34" font-family="monospace, monospace" font-size="9.5" fill="#00F2FE">
-      Hoại tử: S = ${pred.necrosis_percentage}%
-    </text>
-    <text x="12" y="44" font-family="monospace, monospace" font-size="9" fill="#10B981">
-      Độ tin cậy: ${confPercent}%
-    </text>
-  </g>
 `;
   });
 
