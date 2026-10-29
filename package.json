@@ -2,8 +2,8 @@
   "name": "ultra-project",
   "version": "1.0.0",
   "private": true,
-  "description": "Ultra AI Project — Pixel-Perfect ChatGPT Clone & Multi-Agent AI Workspace with GSAP Animations and Modular Skills Ecosystem",
-  "author": "Tác giả đề tài AgriVision (khang26042012)",
+  "description": "AgriVision — Phần mềm Hệ thống Nông nghiệp Thông minh kết hợp Trí tuệ Nhân tạo AI",
+  "author": "Nhóm tác giả AgriVision",
   "license": "MIT",
   "repository": {
     "type": "git",

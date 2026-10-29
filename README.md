@@ -1,7 +1,7 @@
 # 🌾 AgriVision (Ultra Project) — Bác Sĩ Cây Trồng Lâm Sàng AI & Toàn Thư Bệnh Học 1.500+ Cây Trồng
 
 > **Công trình nghiên cứu khoa học kỹ thuật dành cho học sinh trung học (Năm học 2026 - 2027)**  
-> *Lĩnh vực: Hệ thống phần mềm (Mã 08) — Cuộc thi KHKT cấp tỉnh.*  
+> *Lĩnh vực: Công nghệ thông tin (Mã lĩnh vực: 08) — Cuộc thi KHKT cấp tỉnh.*  
 > **Website chính thức:** [https://ultra-project.onrender.com](https://ultra-project.onrender.com)  
 > **Kho lưu trữ GitHub:** [https://github.com/khang26042012/ultra-project](https://github.com/khang26042012/ultra-project)
 
@@ -9,7 +9,7 @@
 
 ## 🌟 GIỚI THIỆU TỔNG QUAN
 
-**AgriVision** là hệ sinh thái AI trợ lý Bác sĩ Cây trồng Lâm sàng chuyên sâu đạt chuẩn **Pixel-Perfect SaaS (Linear & ChatGPT)**, được xây dựng trên nền tảng **Next.js 16 (App Router / Turbopack)**, **React 19**, **GSAP Animations 60 FPS**, **Tailwind CSS v4** và **Supabase PostgreSQL**.
+**AgriVision** là hệ sinh thái AI trợ lý Bác sĩ Cây trồng Lâm sàng chuyên sâu đạt chuẩn **Pixel-Perfect SaaS tối ưu thực địa**, được xây dựng trên nền tảng **Next.js 16 (App Router / Turbopack)**, **React 19**, **GSAP Animations 60 FPS**, **Tailwind CSS v4** và **Supabase PostgreSQL**.
 
 Dự án ra đời nhằm giải quyết nỗi đau lớn nhất của bà con nông dân Vĩnh Long, Đồng bằng Sông Cửu Long và 63 tỉnh thành: **phát hiện bệnh muộn, nhầm lẫn giữa các ca bệnh kép có triệu chứng tương đồng và phun sai thuốc bảo vệ thực vật hóa học gây cháy lá, chai đất và ô nhiễm nguồn nước.**
 
