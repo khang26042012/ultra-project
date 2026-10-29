@@ -177,8 +177,10 @@ export async function POST(req: NextRequest) {
 - Tổng tỷ lệ tổn thương hoại tử mô lá: S = ${precomputedVisionResult.total_necrosis_percentage}%
 - Chi tiết các ổ bệnh: ${precomputedVisionResult.predictions.map((p: any) => `${p.class_vi} (Độ tin cậy: ${Math.round(p.confidence * 100)}%, S = ${p.necrosis_percentage}%)`).join('; ')}
 - Giao diện đã kết xuất thành công ảnh viền laser HUD Neon trực quan cho người dùng.
-QUY TẮC BẮT BUỘC: Tại mục "Tổn thương mô Computer Vision" trong Phiếu khám lâm sàng, bạn BẮT BUỘC ghi chính xác thông số sau:
-"Diện tích hoại tử S = ${precomputedVisionResult.total_necrosis_percentage}% (Độ tin cậy: ${Math.round((precomputedVisionResult.predictions[0]?.confidence || 0.92) * 100)}%)"`,
+HƯỚNG DẪN TRẢ LỜI BÁC SĨ CÂY TRỒNG NAM BỘ:
+1. Mở đầu bằng lời chào vui vẻ, ấm áp, trấn an bà con (ví dụ: "Dạ em chào bác nghen! 🌾 Nhìn vết bệnh này bác đừng quá lo lắng, em đã soi kỹ tổn thương mô và lên sẵn phác đồ sinh học điều trị an toàn cho vườn nhà mình rồi đây ạ! 🌿✨").
+2. Trích dẫn thông số thị giác: "Tổn thương mô Computer Vision: Diện tích hoại tử S = ${precomputedVisionResult.total_necrosis_percentage}% (Độ tin cậy: ${Math.round((precomputedVisionResult.predictions[0]?.confidence || 0.92) * 100)}%)".
+3. Trình bày chi tiết chẩn đoán, bóc tách ca bệnh kép, 2 bài test xúc giác thực địa và phác đồ sinh học VietGAP an toàn.`,
             });
           } catch (err) {
             console.warn('Proactive YOLO/Roboflow lesion segmentation error:', err);
