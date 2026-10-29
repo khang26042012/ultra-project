@@ -784,6 +784,16 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
     let currentAnnotatedImageUrl: string | undefined = undefined;
     let isVisionSegmenting = false;
 
+    // Request Screen Wake Lock to prevent mobile OS from putting connection to sleep when multitasking
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let wakeLock: any = null;
+    if (typeof navigator !== 'undefined' && 'wakeLock' in navigator) {
+      try {
+        // @ts-ignore
+        wakeLock = await (navigator as any).wakeLock.request('screen');
+      } catch {}
+    }
+
     try {
       const response = await fetch('/api/chat', {
         method: 'POST',
@@ -949,6 +959,8 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
       }
       console.error('AgriVision Streaming Error:', err);
       const errorMessage = (err as Error)?.message || 'An unexpected error occurred';
+
+      // Resilient preservation: Never wipe out already streamed content, thoughts, or annotated image HUD
       updateAndPersistConversations((prev) =>
         prev.map((c) =>
           c.id === targetConvId
@@ -958,9 +970,20 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
                   m.id === aiMessageId
                     ? {
                         ...m,
-                        content: `⚠️ **Lỗi kết nối AgriVision**: ${errorMessage}\n\nVui lòng kiểm tra lại đường truyền mạng.`,
+                        content:
+                          accumulatedContent ||
+                          (accumulatedThought
+                            ? '⚠️ **Mạng bị gián đoạn khi đang suy nghĩ**: Do bạn vừa chuyển ứng dụng hoặc mạng bị ngắt quãng. Bạn vui lòng bấm nút tạo lại bên dưới để em chẩn đoán lại nghen! 🌿'
+                            : `⚠️ **Mất kết nối mạng**: ${errorMessage}. Vui lòng kiểm tra lại kết nối và thử lại.`),
+                        thought: accumulatedThought || undefined,
                         isStreaming: false,
                         isThinking: false,
+                        thinkingSeconds:
+                          thinkingSeconds ||
+                          (accumulatedThought ? Math.max(1, Math.round((Date.now() - startTime) / 1000)) : undefined),
+                        sources: currentSources.length > 0 ? currentSources : undefined,
+                        annotatedImageUrl: currentAnnotatedImageUrl,
+                        visionSegmenting: false,
                         searchingQuery: undefined,
                       }
                     : m
@@ -970,6 +993,11 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
         )
       );
     } finally {
+      if (wakeLock) {
+        try {
+          wakeLock.release();
+        } catch {}
+      }
       setIsStreaming(false);
       abortControllerRef.current = null;
     }
