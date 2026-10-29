@@ -205,6 +205,8 @@ HƯỚNG DẪN TRẢ LỜI BÁC SĨ CÂY TRỒNG NAM BỘ:
           }
         }
 
+        let overallStreamedContent = '';
+
         try {
           while (turn < maxTurns) {
             turn++;
@@ -284,6 +286,7 @@ HƯỚNG DẪN TRẢ LỜI BÁC SĨ CÂY TRỒNG NAM BỘ:
                     const content = choice.delta?.content;
                     if (content) {
                       accumulatedContent += content;
+                      overallStreamedContent += content;
                       sendEvent({ type: 'content', token: content });
                     }
 
@@ -487,7 +490,7 @@ HƯỚNG DẪN TRẢ LỜI BÁC SĨ CÂY TRỒNG NAM BỘ:
           }
         } catch (streamErr) {
           console.error('Agent Loop Streaming Error:', streamErr);
-          if (!accumulatedContent) {
+          if (!overallStreamedContent) {
             sendEvent({
               type: 'content',
               token: `\n\n⚠️ **Mất kết nối tạm thời với máy chủ AI**: ${(streamErr as Error)?.message || 'fetch failed'}. Nhờ bà con bấm nút tạo lại để em trả lời liền nghen! 🌿`,
