@@ -13,6 +13,14 @@ import {
   AlertCircle,
   Image as ImageIcon,
   Scan,
+  ShieldAlert,
+  ArrowUp,
+  Settings,
+  HelpCircle,
+  ChevronDown,
+  ChevronUp,
+  ExternalLink,
+  Sparkles,
 } from 'lucide-react';
 import gsap from 'gsap';
 
@@ -22,6 +30,47 @@ interface CameraCaptureModalProps {
   onCapture: (base64Image: string, fileName: string) => void;
   onSwitchToUpload?: () => void;
 }
+
+// Client-side image compressor for native camera fallback
+const compressFile = (file: File): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const img = new Image();
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        let width = img.width;
+        let height = img.height;
+        const maxDim = 1600; // High resolution for pathology diagnosis
+
+        if (width > maxDim || height > maxDim) {
+          if (width > height) {
+            height = Math.round((height * maxDim) / width);
+            width = maxDim;
+          } else {
+            width = Math.round((width * maxDim) / height);
+            height = maxDim;
+          }
+        }
+
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        if (ctx) {
+          ctx.drawImage(img, 0, 0, width, height);
+          const base64 = canvas.toDataURL('image/jpeg', 0.92);
+          resolve(base64);
+        } else {
+          resolve(e.target?.result as string);
+        }
+      };
+      img.onerror = () => reject(new Error('Không thể đọc ảnh chụp'));
+      img.src = e.target?.result as string;
+    };
+    reader.onerror = () => reject(new Error('Không thể tải tệp'));
+    reader.readAsDataURL(file);
+  });
+};
 
 export default function CameraCaptureModal({
   isOpen,
@@ -38,11 +87,14 @@ export default function CameraCaptureModal({
   const [capturedResolution, setCapturedResolution] = useState<{ width: number; height: number } | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isInitializing, setIsInitializing] = useState(false);
+  const [showGuide, setShowGuide] = useState(true);
+  const [isPermissionDenied, setIsPermissionDenied] = useState(false);
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const streamRef = useRef<MediaStream | null>(null);
   const modalRef = useRef<HTMLDivElement>(null);
   const flashRef = useRef<HTMLDivElement>(null);
+  const nativeCameraInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     setMounted(true);
@@ -72,13 +124,29 @@ export default function CameraCaptureModal({
     async (facing: 'environment' | 'user') => {
       stopCamera();
       setError(null);
+      setIsPermissionDenied(false);
       setResolution(null);
       setIsInitializing(true);
 
       if (typeof navigator === 'undefined' || !navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-        setError('Trình duyệt của bạn không hỗ trợ Camera Web API trực tiếp. Vui lòng sử dụng tính năng tải ảnh từ thiết bị.');
+        setError('Trình duyệt của bạn không hỗ trợ Camera Web API trực tiếp. Vui lòng sử dụng tính năng chụp bằng máy ảnh thiết bị.');
         setIsInitializing(false);
         return;
+      }
+
+      // Query permissions API if available to detect state
+      if (typeof navigator.permissions !== 'undefined' && navigator.permissions.query) {
+        try {
+          const perm = await navigator.permissions.query({ name: 'camera' as any });
+          if (perm.state === 'denied') {
+            setIsPermissionDenied(true);
+            setError('Quyền truy cập máy ảnh đang bị chặn trên trình duyệt.');
+            setIsInitializing(false);
+            return;
+          }
+        } catch {
+          // Some browsers do not support querying camera permission
+        }
       }
 
       // Constraints tiers: 4K Ultra HD -> 1080p Full HD -> Standard
@@ -126,8 +194,13 @@ export default function CameraCaptureModal({
 
       if (!activeStream) {
         console.error('Không thể mở camera:', lastErr);
-        if (lastErr?.name === 'NotAllowedError' || lastErr?.name === 'PermissionDeniedError') {
-          setError('Quyền truy cập camera bị từ chối. Vui lòng cho phép quyền máy ảnh trong cài đặt trình duyệt để chụp trực tiếp.');
+        if (
+          lastErr?.name === 'NotAllowedError' ||
+          lastErr?.name === 'PermissionDeniedError' ||
+          lastErr?.message?.toLowerCase().includes('denied')
+        ) {
+          setIsPermissionDenied(true);
+          setError('Quyền truy cập camera bị từ chối hoặc đang bị chặn trên trình duyệt.');
         } else if (lastErr?.name === 'NotFoundError' || lastErr?.name === 'DevicesNotFoundError') {
           setError('Không tìm thấy camera khả dụng trên thiết bị này.');
         } else {
@@ -169,6 +242,54 @@ export default function CameraCaptureModal({
     },
     [stopCamera]
   );
+
+  // Directly trigger browser permission prompt through a direct user click
+  const handleRequestPermission = async () => {
+    setIsInitializing(true);
+    setError(null);
+    try {
+      // Direct simple constraint request on user click triggers browser prompt
+      const testStream = await navigator.mediaDevices.getUserMedia({ video: true });
+      // If user allowed, stop test stream and run full high-res start
+      testStream.getTracks().forEach((t) => t.stop());
+      setIsPermissionDenied(false);
+      await startCamera(facingMode);
+    } catch (err: any) {
+      console.error('User permission request rejected:', err);
+      setIsPermissionDenied(true);
+      setError('Quyền truy cập máy ảnh đang bị chặn trên trình duyệt.');
+      setIsInitializing(false);
+    }
+  };
+
+  // Trigger Native Camera App Fallback via HTML5 capture="environment"
+  const handleOpenNativeCamera = () => {
+    if (nativeCameraInputRef.current) {
+      nativeCameraInputRef.current.click();
+    }
+  };
+
+  // Handle image taken from native camera app
+  const handleNativeCameraFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (files && files.length > 0) {
+      const file = files[0];
+      try {
+        setIsInitializing(true);
+        const compressedBase64 = await compressFile(file);
+        const timestamp = new Date().toISOString().replace(/[-:T.]/g, '').slice(0, 14);
+        const fileName = 'Chup_MayAnh_' + timestamp + '.jpg';
+        setCapturedImage(compressedBase64);
+        setCapturedResolution({ width: 1600, height: 1200 });
+        setError(null);
+      } catch (err) {
+        console.error('Lỗi đọc ảnh từ máy ảnh:', err);
+        setError('Không thể xử lý ảnh từ máy ảnh thiết bị.');
+      } finally {
+        setIsInitializing(false);
+      }
+    }
+  };
 
   // Initialize or teardown when modal opens/closes
   useEffect(() => {
@@ -297,9 +418,19 @@ export default function CameraCaptureModal({
 
   return createPortal(
     <div className="fixed inset-0 z-[99999] flex items-center justify-center bg-black/90 backdrop-blur-md p-2 sm:p-4 select-none">
+      {/* Hidden Native Camera Input with capture="environment" */}
+      <input
+        ref={nativeCameraInputRef}
+        type="file"
+        accept="image/*"
+        capture="environment"
+        onChange={handleNativeCameraFileChange}
+        className="hidden"
+      />
+
       <div
         ref={modalRef}
-        className="relative w-full max-w-2xl h-[92vh] sm:h-[88vh] max-h-[820px] bg-[#121212] text-white rounded-3xl border border-white/15 shadow-2xl flex flex-col overflow-hidden"
+        className="relative w-full max-w-2xl h-[94vh] sm:h-[88vh] max-h-[840px] bg-[#121212] text-white rounded-3xl border border-white/15 shadow-2xl flex flex-col overflow-hidden"
       >
         {/* Shutter White Flash Overlay */}
         <div
@@ -325,6 +456,8 @@ export default function CameraCaptureModal({
                   ? ('Xem trước ảnh chụp • ' + (capturedResolution?.width || 0) + '×' + (capturedResolution?.height || 0) + 'px')
                   : resolution
                   ? ('Độ phân giải cảm biến: ' + resolution.width + '×' + resolution.height + 'px')
+                  : error
+                  ? 'Gợi ý quyền máy ảnh'
                   : 'Đang kết nối ống kính vi thể...'}
               </p>
             </div>
@@ -332,7 +465,7 @@ export default function CameraCaptureModal({
 
           <div className="flex items-center gap-2">
             {/* Flash Torch Toggle (if supported) */}
-            {torchAvailable && !capturedImage && (
+            {torchAvailable && !capturedImage && !error && (
               <button
                 type="button"
                 onClick={handleToggleTorch}
@@ -360,26 +493,108 @@ export default function CameraCaptureModal({
           </div>
         </div>
 
-        {/* Main Viewfinder / Photo Area */}
-        <div className="relative flex-1 bg-black flex items-center justify-center overflow-hidden">
+        {/* Main Viewfinder / Permission Error View */}
+        <div className="relative flex-1 bg-black flex items-center justify-center overflow-y-auto no-scrollbar">
           {error ? (
-            <div className="px-6 text-center max-w-md">
-              <div className="w-14 h-14 rounded-full bg-rose-500/10 text-rose-400 flex items-center justify-center mx-auto mb-3 border border-rose-500/20">
-                <AlertCircle className="w-7 h-7" />
+            <div className="px-4 py-6 w-full max-w-lg text-center flex flex-col items-center">
+              {/* Alert Badge */}
+              <div className="w-14 h-14 rounded-full bg-rose-500/10 text-rose-400 flex items-center justify-center mb-3 border border-rose-500/20 shadow-lg shadow-rose-500/5">
+                <ShieldAlert className="w-7 h-7" />
               </div>
-              <p className="text-sm text-rose-300 font-medium mb-2">{error}</p>
-              <p className="text-xs text-white/60 mb-5 leading-relaxed">
-                Bạn có thể chọn ảnh sẵn có trong thư viện điện thoại hoặc máy tính để AI phân tích bệnh học vi mô.
+
+              <h4 className="text-base font-semibold text-white mb-1.5">
+                Quyền truy cập máy ảnh chưa được cấp
+              </h4>
+              <p className="text-xs text-rose-300/90 font-medium mb-4 max-w-md">
+                {error}
               </p>
-              <div className="flex items-center justify-center gap-3">
+
+              {/* ACTION 1: NATIVE CAMERA APP (Zero-Permission Fallback) */}
+              <div className="w-full bg-emerald-950/30 border border-emerald-500/30 rounded-2xl p-3.5 mb-4 text-left shadow-lg">
+                <div className="flex items-start gap-3">
+                  <div className="w-9 h-9 rounded-xl bg-emerald-500 text-black flex items-center justify-center shrink-0 mt-0.5">
+                    <Camera className="w-5 h-5" />
+                  </div>
+                  <div className="flex-1">
+                    <div className="text-xs font-bold text-white flex items-center gap-1.5">
+                      <span>Mở máy ảnh chụp ngay</span>
+                      <span className="text-[9px] font-bold px-1.5 py-0.2 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                        Khuyên dùng
+                      </span>
+                    </div>
+                    <p className="text-[11px] text-white/70 mt-0.5 leading-relaxed">
+                      Sử dụng trực tiếp ứng dụng Máy ảnh gốc của điện thoại, không cần cài đặt hay cấp quyền trình duyệt.
+                    </p>
+                    <button
+                      type="button"
+                      onClick={handleOpenNativeCamera}
+                      className="mt-2.5 w-full py-2 px-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-black text-xs font-bold flex items-center justify-center gap-2 transition-transform active:scale-[0.98] cursor-pointer shadow-md"
+                    >
+                      <Camera className="w-4 h-4" />
+                      <span>Chụp ảnh bằng máy ảnh thiết bị</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* ACTION 2: HOW TO ENABLE IN BROWSER */}
+              <div className="w-full bg-white/5 border border-white/10 rounded-2xl p-3.5 mb-4 text-left">
                 <button
                   type="button"
-                  onClick={() => startCamera(facingMode)}
-                  className="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
+                  onClick={() => setShowGuide(!showGuide)}
+                  className="w-full flex items-center justify-between text-xs font-semibold text-white/90 cursor-pointer"
                 >
-                  <RotateCcw className="w-3.5 h-3.5" />
-                  <span>Thử lại</span>
+                  <span className="flex items-center gap-2">
+                    <Settings className="w-4 h-4 text-emerald-400" />
+                    <span>Hướng dẫn bật quyền trên trình duyệt (3 giây)</span>
+                  </span>
+                  {showGuide ? <ChevronUp className="w-4 h-4 text-white/50" /> : <ChevronDown className="w-4 h-4 text-white/50" />}
                 </button>
+
+                {showGuide && (
+                  <div className="mt-3 space-y-2.5 pt-2.5 border-t border-white/10 text-[11px] text-white/80">
+                    <div className="flex items-start gap-2.5">
+                      <span className="w-5 h-5 rounded-full bg-white/10 text-emerald-400 font-bold flex items-center justify-center shrink-0 text-[10px]">
+                        1
+                      </span>
+                      <p className="leading-snug">
+                        Nhìn lên góc trên thanh địa chỉ, bấm vào biểu tượng <strong>Cài đặt / Ổ khóa 🔒</strong> (cạnh chữ <em>argivision.io.vn</em>).
+                      </p>
+                    </div>
+
+                    <div className="flex items-start gap-2.5">
+                      <span className="w-5 h-5 rounded-full bg-white/10 text-emerald-400 font-bold flex items-center justify-center shrink-0 text-[10px]">
+                        2
+                      </span>
+                      <p className="leading-snug">
+                        Chọn mục <strong>&quot;Quyền&quot; (Permissions)</strong> → Tìm dòng <strong>&quot;Máy ảnh&quot; (Camera)</strong>.
+                      </p>
+                    </div>
+
+                    <div className="flex items-start gap-2.5">
+                      <span className="w-5 h-5 rounded-full bg-white/10 text-emerald-400 font-bold flex items-center justify-center shrink-0 text-[10px]">
+                        3
+                      </span>
+                      <p className="leading-snug">
+                        Gạt công tắc sang <strong>&quot;Cho phép&quot; (Allow)</strong>, sau đó quay lại đây bấm nút &quot;Thử xin quyền lại&quot;.
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* ACTION 3: TRY REQUESTING PERMISSION AGAIN */}
+              <div className="flex items-center justify-center gap-2.5 w-full flex-wrap">
+                <button
+                  type="button"
+                  onClick={handleRequestPermission}
+                  disabled={isInitializing}
+                  className="py-2.5 px-4 rounded-xl bg-white/15 hover:bg-white/25 text-white text-xs font-semibold flex items-center gap-1.5 transition-all active:scale-[0.98] cursor-pointer"
+                >
+                  <RotateCcw className={'w-3.5 h-3.5 ' + (isInitializing ? 'animate-spin' : '')} />
+                  <span>Thử xin quyền lại</span>
+                </button>
+
                 {onSwitchToUpload && (
                   <button
                     type="button"
@@ -387,10 +602,10 @@ export default function CameraCaptureModal({
                       handleClose();
                       onSwitchToUpload();
                     }}
-                    className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
+                    className="py-2.5 px-4 rounded-xl bg-white/10 hover:bg-white/20 text-white/90 text-xs font-semibold flex items-center gap-1.5 transition-all active:scale-[0.98] cursor-pointer"
                   >
-                    <ImageIcon className="w-3.5 h-3.5" />
-                    <span>Chọn ảnh từ thiết bị</span>
+                    <ImageIcon className="w-3.5 h-3.5 text-blue-400" />
+                    <span>Chọn từ thư viện</span>
                   </button>
                 )}
               </div>
@@ -487,8 +702,20 @@ export default function CameraCaptureModal({
                 <span>Sử dụng ảnh này</span>
               </button>
             </div>
+          ) : error ? (
+            // Actions when in error/permission state
+            <div className="flex items-center justify-center max-w-md mx-auto">
+              <button
+                type="button"
+                onClick={handleOpenNativeCamera}
+                className="w-full py-3 px-4 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/30 transition-all active:scale-[0.98] cursor-pointer"
+              >
+                <Camera className="w-4 h-4 stroke-[2.5]" />
+                <span>Chụp ngay bằng máy ảnh thiết bị (Native Camera)</span>
+              </button>
+            </div>
           ) : (
-            // Actions for Live Capture
+            // Actions for Live Stream Capture
             <div className="flex items-center justify-between max-w-md mx-auto">
               {/* Left: Switch to File Picker */}
               <div className="w-16 flex justify-start">
