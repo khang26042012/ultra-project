@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useRef, useEffect, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import { Message } from '@/types/chat';
 import CodeBlock from './CodeBlock';
@@ -39,8 +40,13 @@ export default function ChatMessage({ message }: ChatMessageProps) {
   const [showSources, setShowSources] = useState(false);
   const [lightboxImageUrl, setLightboxImageUrl] = useState<string | null>(null);
   const [lightboxZoom, setLightboxZoom] = useState(1);
+  const [mounted, setMounted] = useState(false);
   const [checkedSensoryItems, setCheckedSensoryItems] = useState<Record<string, string>>({});
   const messageRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const fontSizeClass =
     fontSize === 'small' ? 'text-[13px]' : fontSize === 'large' ? 'text-[17px]' : 'text-[15px]';
@@ -521,6 +527,87 @@ export default function ChatMessage({ message }: ChatMessageProps) {
     });
   };
 
+  // Universal Lightbox Modal rendered via createPortal directly into document.body
+  const renderLightbox = () => {
+    if (!lightboxImageUrl || !mounted) return null;
+
+    return createPortal(
+      <div
+        onClick={() => {
+          setLightboxImageUrl(null);
+          setLightboxZoom(1);
+        }}
+        className="fixed inset-0 z-[99999] bg-black/95 backdrop-blur-md flex flex-col items-center justify-center p-3 sm:p-6 select-none animate-in fade-in duration-150"
+      >
+        {/* Top Control Bar */}
+        <div
+          onClick={(e) => e.stopPropagation()}
+          className="absolute top-4 sm:top-6 right-4 sm:right-6 flex items-center gap-1.5 sm:gap-2 bg-black/75 p-1.5 sm:p-2 rounded-full backdrop-blur-md border border-white/20 text-white z-10 shadow-xl"
+        >
+          <button
+            type="button"
+            onClick={() => setLightboxZoom((prev) => Math.min(prev + 0.25, 3.5))}
+            title="Phóng to (+)"
+            className="p-2 rounded-full hover:bg-white/20 active:scale-95 transition-all cursor-pointer text-white"
+          >
+            <ZoomIn className="w-5 h-5 sm:w-4 sm:h-4" strokeWidth={1.75} />
+          </button>
+          <button
+            type="button"
+            onClick={() => setLightboxZoom((prev) => Math.max(prev - 0.25, 0.5))}
+            title="Thu nhỏ (-)"
+            className="p-2 rounded-full hover:bg-white/20 active:scale-95 transition-all cursor-pointer text-white"
+          >
+            <ZoomOut className="w-5 h-5 sm:w-4 sm:h-4" strokeWidth={1.75} />
+          </button>
+          <button
+            type="button"
+            onClick={() => setLightboxZoom(1)}
+            title="Đặt lại kích thước (100%)"
+            className="p-2 rounded-full hover:bg-white/20 active:scale-95 transition-all cursor-pointer text-white"
+          >
+            <RotateCcw className="w-5 h-5 sm:w-4 sm:h-4" strokeWidth={1.75} />
+          </button>
+          <div className="w-px h-5 bg-white/30 my-auto" />
+          <button
+            type="button"
+            onClick={() => {
+              setLightboxImageUrl(null);
+              setLightboxZoom(1);
+            }}
+            title="Đóng (Esc)"
+            className="p-2 rounded-full hover:bg-red-500/30 active:scale-95 transition-all text-white hover:text-red-400 cursor-pointer"
+          >
+            <X className="w-5 h-5 sm:w-4 sm:h-4" strokeWidth={2} />
+          </button>
+        </div>
+
+        {/* Center Image Container */}
+        <div
+          onClick={(e) => e.stopPropagation()}
+          className="relative max-w-full max-h-[85vh] overflow-auto flex items-center justify-center p-2 no-scrollbar"
+        >
+          <img
+            src={lightboxImageUrl}
+            alt="Chi tiết ảnh phóng to"
+            style={{
+              transform: `scale(${lightboxZoom})`,
+              transformOrigin: 'center center',
+            }}
+            className="max-w-full max-h-[80vh] w-auto h-auto object-contain rounded-2xl shadow-2xl transition-transform duration-200 cursor-zoom-in"
+            onClick={() => setLightboxZoom((prev) => (prev > 1 ? 1 : 2))}
+          />
+        </div>
+
+        {/* Bottom Helper Hint */}
+        <div className="absolute bottom-4 sm:bottom-6 text-xs text-white/80 bg-black/70 px-3.5 py-1.5 rounded-full border border-white/10 backdrop-blur-sm pointer-events-none">
+          Chạm vào ảnh để phóng to 2x • Nhấn X hoặc bấm ra ngoài để đóng
+        </div>
+      </div>,
+      document.body
+    );
+  };
+
   // User Message Bubble
   if (message.role === 'user') {
     return (
@@ -552,7 +639,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
           </div>
         </div>
 
-
+        {renderLightbox()}
       </>
     );
   }
@@ -562,10 +649,11 @@ export default function ChatMessage({ message }: ChatMessageProps) {
 
   // Assistant Bubble
   return (
-    <div
-      ref={messageRef}
-      className={`w-full mb-8 text-[#0d0d0d] dark:text-[#ececec] ${fontSizeClass} chat-message-text group`}
-    >
+    <>
+      <div
+        ref={messageRef}
+        className={`w-full mb-8 text-[#0d0d0d] dark:text-[#ececec] ${fontSizeClass} chat-message-text group`}
+      >
       {/* Brand Header */}
       <div className="flex items-center gap-2 mb-2 text-xs font-semibold text-[#0d0d0d] dark:text-white">
         <span className="w-5 h-5 rounded-md bg-[#0d0d0d] text-white dark:bg-white dark:text-black flex items-center justify-center font-bold text-[10px] shadow-xs">
@@ -860,73 +948,8 @@ export default function ChatMessage({ message }: ChatMessageProps) {
         </div>
       )}
 
-      {/* Unified Image Lightbox Modal (Supports User Uploads, AI HUD & Markdown Images) */}
-      {lightboxImageUrl && (
-        <div
-          onClick={() => {
-            setLightboxImageUrl(null);
-            setLightboxZoom(1);
-          }}
-          className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex flex-col items-center justify-center p-4 select-none animate-in fade-in duration-150"
-        >
-          <div
-            onClick={(e) => e.stopPropagation()}
-            className="absolute top-4 right-4 flex items-center gap-2 bg-black/60 p-1.5 rounded-full backdrop-blur-md border border-white/20 text-white z-10"
-          >
-            <button
-              type="button"
-              onClick={() => setLightboxZoom((prev) => Math.min(prev + 0.25, 3))}
-              title="Phóng to (+)"
-              className="p-1.5 rounded-full hover:bg-white/20 transition-colors cursor-pointer"
-            >
-              <ZoomIn className="w-4 h-4" strokeWidth={1.5} />
-            </button>
-            <button
-              type="button"
-              onClick={() => setLightboxZoom((prev) => Math.max(prev - 0.25, 0.5))}
-              title="Thu nhỏ (-)"
-              className="p-1.5 rounded-full hover:bg-white/20 transition-colors cursor-pointer"
-            >
-              <ZoomOut className="w-4 h-4" strokeWidth={1.5} />
-            </button>
-            <button
-              type="button"
-              onClick={() => setLightboxZoom(1)}
-              title="Đặt lại kích thước (100%)"
-              className="p-1.5 rounded-full hover:bg-white/20 transition-colors cursor-pointer"
-            >
-              <RotateCcw className="w-4 h-4" strokeWidth={1.5} />
-            </button>
-            <div className="w-px h-4 bg-white/30" />
-            <button
-              type="button"
-              onClick={() => {
-                setLightboxImageUrl(null);
-                setLightboxZoom(1);
-              }}
-              title="Đóng (Esc)"
-              className="p-1.5 rounded-full hover:bg-white/20 transition-colors text-white/90 hover:text-white cursor-pointer"
-            >
-              <X className="w-4 h-4" strokeWidth={1.5} />
-            </button>
-          </div>
-
-          <div
-            onClick={(e) => e.stopPropagation()}
-            className="relative max-w-5xl max-h-[85vh] overflow-hidden flex items-center justify-center"
-          >
-            <img
-              src={lightboxImageUrl}
-              alt="Chi tiết ảnh phóng to"
-              style={{ transform: `scale(${lightboxZoom})` }}
-              className="max-w-full max-h-[80vh] object-contain rounded-xl shadow-2xl transition-transform duration-200"
-            />
-          </div>
-          <div className="absolute bottom-4 text-xs text-white/70">
-            Nhấn ESC hoặc bấm ra ngoài để đóng • Bấm +/- để thu phóng
-          </div>
-        </div>
-      )}
-    </div>
+      </div>
+      {renderLightbox()}
+    </>
   );
 }
