@@ -2,11 +2,11 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { useChat } from '@/context/ChatContext';
-import { Plus, ArrowUp, X, Image as ImageIcon, Camera, Sparkles } from 'lucide-react';
+import { Plus, ArrowUp, X, Image as ImageIcon, Camera, Scan, Smartphone } from 'lucide-react';
 import gsap from 'gsap';
 import CameraCaptureModal from '@/components/camera/CameraCaptureModal';
 
-// Client-side image compressor: scales max dimension to 1200px and outputs clean JPEG base64
+// Client-side image compressor: scales max dimension to 1400px and outputs clean JPEG base64
 const compressImage = (file: File): Promise<string> => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -16,7 +16,7 @@ const compressImage = (file: File): Promise<string> => {
         const canvas = document.createElement('canvas');
         let width = img.width;
         let height = img.height;
-        const maxDim = 1200;
+        const maxDim = 1400;
 
         if (width > maxDim || height > maxDim) {
           if (width > height) {
@@ -33,7 +33,7 @@ const compressImage = (file: File): Promise<string> => {
         const ctx = canvas.getContext('2d');
         if (ctx) {
           ctx.drawImage(img, 0, 0, width, height);
-          const base64 = canvas.toDataURL('image/jpeg', 0.85);
+          const base64 = canvas.toDataURL('image/jpeg', 0.88);
           resolve(base64);
         } else {
           resolve(e.target?.result as string);
@@ -60,6 +60,7 @@ export default function FloatingInputIsland() {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const sendBtnRef = useRef<HTMLButtonElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const nativeCameraInputRef = useRef<HTMLInputElement>(null);
   const plusBtnRef = useRef<HTMLButtonElement>(null);
   const attachMenuRef = useRef<HTMLDivElement>(null);
   const prevCanSendRef = useRef(false);
@@ -154,6 +155,9 @@ export default function FloatingInputIsland() {
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }
+    if (nativeCameraInputRef.current) {
+      nativeCameraInputRef.current.value = '';
+    }
     if (textareaRef.current) {
       textareaRef.current.style.height = 'auto';
     }
@@ -168,6 +172,10 @@ export default function FloatingInputIsland() {
 
   const handleFileClick = () => {
     fileInputRef.current?.click();
+  };
+
+  const handleNativeCameraClick = () => {
+    nativeCameraInputRef.current?.click();
   };
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -201,6 +209,9 @@ export default function FloatingInputIsland() {
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }
+    if (nativeCameraInputRef.current) {
+      nativeCameraInputRef.current.value = '';
+    }
   };
 
   return (
@@ -214,6 +225,16 @@ export default function FloatingInputIsland() {
           ref={fileInputRef}
           type="file"
           accept="image/*"
+          onChange={handleFileChange}
+          className="hidden"
+        />
+
+        {/* Hidden Input for Native Camera App with capture="environment" */}
+        <input
+          ref={nativeCameraInputRef}
+          type="file"
+          accept="image/*"
+          capture="environment"
           onChange={handleFileChange}
           className="hidden"
         />
@@ -259,7 +280,7 @@ export default function FloatingInputIsland() {
           placeholder={
             selectedImage
               ? "Mô tả thêm triệu chứng (loại cây, sờ ráp hay trơn, vị trí vườn...)"
-              : "Nhập triệu chứng cây trồng, bấm '+' hoặc biểu tượng máy ảnh để chụp trực tiếp..."
+              : "Nhập triệu chứng cây trồng, bấm '+' để mở máy ảnh hoặc chọn ảnh..."
           }
           rows={1}
           className="w-full bg-transparent text-[#0d0d0d] dark:text-[#ececec] placeholder-[#8e8e8e] resize-none outline-none text-[15px] leading-relaxed px-2 py-1 max-h-[180px] overflow-y-auto no-scrollbar"
@@ -273,13 +294,13 @@ export default function FloatingInputIsland() {
             {isAttachMenuOpen && (
               <div
                 ref={attachMenuRef}
-                className="absolute bottom-11 left-0 z-50 w-64 p-1.5 bg-[#ffffff] dark:bg-[#1f1f1f] border border-black/10 dark:border-white/10 rounded-2xl shadow-xl backdrop-blur-lg animate-in fade-in zoom-in-95 duration-150"
+                className="absolute bottom-11 left-0 z-50 w-72 p-1.5 bg-[#ffffff] dark:bg-[#1f1f1f] border border-black/10 dark:border-white/10 rounded-2xl shadow-xl backdrop-blur-lg animate-in fade-in zoom-in-95 duration-150"
               >
                 <div className="px-2.5 py-1 text-[11px] font-semibold text-[#8e8e8e] uppercase tracking-wider">
-                  Tùy chọn ảnh chẩn đoán
+                  Tùy chọn tải ảnh chẩn đoán
                 </div>
 
-                {/* Option 1: Chụp ảnh trực tiếp từ Camera trình duyệt */}
+                {/* Option 1: Chụp ảnh trực tiếp từ Camera trình duyệt với khung ngắm HUD */}
                 <button
                   type="button"
                   onClick={() => {
@@ -288,23 +309,48 @@ export default function FloatingInputIsland() {
                   }}
                   className="w-full flex items-center gap-3 p-2 rounded-xl hover:bg-black/5 dark:hover:bg-white/10 text-left transition-colors cursor-pointer group"
                 >
-                  <div className="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center border border-emerald-500/20 group-hover:bg-emerald-500 group-hover:text-white transition-all">
-                    <Camera className="w-4 h-4" />
+                  <div className="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center border border-emerald-500/20 group-hover:bg-emerald-500 group-hover:text-white transition-all shrink-0">
+                    <Scan className="w-4 h-4" />
                   </div>
                   <div className="flex-1">
                     <div className="text-xs font-semibold text-[#0d0d0d] dark:text-[#ececec] flex items-center justify-between">
-                      <span>Chụp ảnh trực tiếp</span>
+                      <span>Ống kính vi thể HD</span>
                       <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400">
-                        HD
+                        Khung ngắm AI
                       </span>
                     </div>
                     <div className="text-[10px] text-[#5d5d5d] dark:text-[#8e8e8e]">
-                      Ống kính vi thể độ nét cao từ trình duyệt
+                      Xem trước trực tiếp, có đèn flash & căn nét
                     </div>
                   </div>
                 </button>
 
-                {/* Option 2: Chọn từ thư viện thiết bị */}
+                {/* Option 2: Chụp nhanh bằng máy ảnh thiết bị (Native Camera) */}
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsAttachMenuOpen(false);
+                    handleNativeCameraClick();
+                  }}
+                  className="w-full flex items-center gap-3 p-2 rounded-xl hover:bg-black/5 dark:hover:bg-white/10 text-left transition-colors cursor-pointer group"
+                >
+                  <div className="w-8 h-8 rounded-lg bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 flex items-center justify-center border border-indigo-500/20 group-hover:bg-indigo-500 group-hover:text-white transition-all shrink-0">
+                    <Smartphone className="w-4 h-4" />
+                  </div>
+                  <div className="flex-1">
+                    <div className="text-xs font-semibold text-[#0d0d0d] dark:text-[#ececec] flex items-center justify-between">
+                      <span>Máy ảnh điện thoại</span>
+                      <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-indigo-500/15 text-indigo-600 dark:text-indigo-400">
+                        Nhanh 1-chạm
+                      </span>
+                    </div>
+                    <div className="text-[10px] text-[#5d5d5d] dark:text-[#8e8e8e]">
+                      Chụp bằng app máy ảnh gốc, không lo quyền Web
+                    </div>
+                  </div>
+                </button>
+
+                {/* Option 3: Chọn từ thư viện thiết bị */}
                 <button
                   type="button"
                   onClick={() => {
@@ -313,15 +359,15 @@ export default function FloatingInputIsland() {
                   }}
                   className="w-full flex items-center gap-3 p-2 rounded-xl hover:bg-black/5 dark:hover:bg-white/10 text-left transition-colors cursor-pointer group"
                 >
-                  <div className="w-8 h-8 rounded-lg bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center border border-blue-500/20 group-hover:bg-blue-500 group-hover:text-white transition-all">
+                  <div className="w-8 h-8 rounded-lg bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center border border-blue-500/20 group-hover:bg-blue-500 group-hover:text-white transition-all shrink-0">
                     <ImageIcon className="w-4 h-4" />
                   </div>
                   <div className="flex-1">
                     <div className="text-xs font-semibold text-[#0d0d0d] dark:text-[#ececec]">
-                      Tải ảnh từ thiết bị
+                      Tải ảnh từ thư viện
                     </div>
                     <div className="text-[10px] text-[#5d5d5d] dark:text-[#8e8e8e]">
-                      Chọn ảnh có sẵn trong thư viện máy
+                      Chọn ảnh có sẵn trong máy
                     </div>
                   </div>
                 </button>
