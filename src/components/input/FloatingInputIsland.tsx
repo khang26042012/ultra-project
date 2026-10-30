@@ -2,8 +2,9 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { useChat } from '@/context/ChatContext';
-import { Plus, ArrowUp, X, Image as ImageIcon } from 'lucide-react';
+import { Plus, ArrowUp, X, Image as ImageIcon, Camera, Sparkles } from 'lucide-react';
 import gsap from 'gsap';
+import CameraCaptureModal from '@/components/camera/CameraCaptureModal';
 
 // Client-side image compressor: scales max dimension to 1200px and outputs clean JPEG base64
 const compressImage = (file: File): Promise<string> => {
@@ -52,11 +53,15 @@ export default function FloatingInputIsland() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [imageName, setImageName] = useState<string>('');
   const [isCompressing, setIsCompressing] = useState<boolean>(false);
+  const [isCameraOpen, setIsCameraOpen] = useState<boolean>(false);
+  const [isAttachMenuOpen, setIsAttachMenuOpen] = useState<boolean>(false);
 
   const islandRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const sendBtnRef = useRef<HTMLButtonElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const plusBtnRef = useRef<HTMLButtonElement>(null);
+  const attachMenuRef = useRef<HTMLDivElement>(null);
   const prevCanSendRef = useRef(false);
 
   const canSend = (input.trim().length > 0 || selectedImage !== null) && !isStreaming && !isCompressing;
@@ -66,9 +71,36 @@ export default function FloatingInputIsland() {
     if (textareaRef.current) {
       textareaRef.current.style.height = 'auto';
       const scrollHeight = textareaRef.current.scrollHeight;
-      textareaRef.current.style.height = `${Math.min(scrollHeight, 180)}px`;
+      textareaRef.current.style.height = Math.min(scrollHeight, 180) + 'px';
     }
   }, [input]);
+
+  // Close attachment menu on outside click or Escape key
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        attachMenuRef.current &&
+        !attachMenuRef.current.contains(event.target as Node) &&
+        plusBtnRef.current &&
+        !plusBtnRef.current.contains(event.target as Node)
+      ) {
+        setIsAttachMenuOpen(false);
+      }
+    }
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key === 'Escape') {
+        setIsAttachMenuOpen(false);
+      }
+    }
+    if (isAttachMenuOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener('keydown', handleKeyDown);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isAttachMenuOpen]);
 
   // GSAP Pop-in animation for send button when ready to send
   useEffect(() => {
@@ -155,6 +187,14 @@ export default function FloatingInputIsland() {
     }
   };
 
+  const handleCameraCapture = (base64Image: string, fileName: string) => {
+    setSelectedImage(base64Image);
+    setImageName(fileName);
+    setTimeout(() => {
+      textareaRef.current?.focus();
+    }, 100);
+  };
+
   const handleRemoveImage = () => {
     setSelectedImage(null);
     setImageName('');
@@ -169,7 +209,7 @@ export default function FloatingInputIsland() {
         ref={islandRef}
         className="relative rounded-[26px] bg-[#ffffff] dark:bg-[#212121] border border-black/10 dark:border-white/10 shadow-[0_2px_12px_rgba(0,0,0,0.08)] dark:shadow-none p-3 focus-within:border-black/25 dark:focus-within:border-white/25 transition-all will-change-transform"
       >
-        {/* Hidden File Input for Image Upload / Camera Capture */}
+        {/* Hidden File Input for Image Upload */}
         <input
           ref={fileInputRef}
           type="file"
@@ -219,25 +259,103 @@ export default function FloatingInputIsland() {
           placeholder={
             selectedImage
               ? "Mô tả thêm triệu chứng (loại cây, sờ ráp hay trơn, vị trí vườn...)"
-              : "Nhập triệu chứng cây trồng hoặc bấm '+' đính kèm ảnh chụp..."
+              : "Nhập triệu chứng cây trồng, bấm '+' hoặc biểu tượng máy ảnh để chụp trực tiếp..."
           }
           rows={1}
           className="w-full bg-transparent text-[#0d0d0d] dark:text-[#ececec] placeholder-[#8e8e8e] resize-none outline-none text-[15px] leading-relaxed px-2 py-1 max-h-[180px] overflow-y-auto no-scrollbar"
         />
 
         {/* Action Controls Bar */}
-        <div className="flex items-center justify-between pt-2 px-1">
-          {/* Left: Nút đính kèm tệp / ảnh */}
-          <div className="flex items-center gap-2">
+        <div className="flex items-center justify-between pt-2 px-1 relative">
+          {/* Left: Nút đính kèm tệp / ảnh & Chụp ảnh từ Camera */}
+          <div className="flex items-center gap-1.5 relative">
+            {/* Popover Action Menu for '+' button */}
+            {isAttachMenuOpen && (
+              <div
+                ref={attachMenuRef}
+                className="absolute bottom-11 left-0 z-50 w-64 p-1.5 bg-[#ffffff] dark:bg-[#1f1f1f] border border-black/10 dark:border-white/10 rounded-2xl shadow-xl backdrop-blur-lg animate-in fade-in zoom-in-95 duration-150"
+              >
+                <div className="px-2.5 py-1 text-[11px] font-semibold text-[#8e8e8e] uppercase tracking-wider">
+                  Tùy chọn ảnh chẩn đoán
+                </div>
+
+                {/* Option 1: Chụp ảnh trực tiếp từ Camera trình duyệt */}
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsAttachMenuOpen(false);
+                    setIsCameraOpen(true);
+                  }}
+                  className="w-full flex items-center gap-3 p-2 rounded-xl hover:bg-black/5 dark:hover:bg-white/10 text-left transition-colors cursor-pointer group"
+                >
+                  <div className="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center border border-emerald-500/20 group-hover:bg-emerald-500 group-hover:text-white transition-all">
+                    <Camera className="w-4 h-4" />
+                  </div>
+                  <div className="flex-1">
+                    <div className="text-xs font-semibold text-[#0d0d0d] dark:text-[#ececec] flex items-center justify-between">
+                      <span>Chụp ảnh trực tiếp</span>
+                      <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400">
+                        HD
+                      </span>
+                    </div>
+                    <div className="text-[10px] text-[#5d5d5d] dark:text-[#8e8e8e]">
+                      Ống kính vi thể độ nét cao từ trình duyệt
+                    </div>
+                  </div>
+                </button>
+
+                {/* Option 2: Chọn từ thư viện thiết bị */}
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsAttachMenuOpen(false);
+                    handleFileClick();
+                  }}
+                  className="w-full flex items-center gap-3 p-2 rounded-xl hover:bg-black/5 dark:hover:bg-white/10 text-left transition-colors cursor-pointer group"
+                >
+                  <div className="w-8 h-8 rounded-lg bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center border border-blue-500/20 group-hover:bg-blue-500 group-hover:text-white transition-all">
+                    <ImageIcon className="w-4 h-4" />
+                  </div>
+                  <div className="flex-1">
+                    <div className="text-xs font-semibold text-[#0d0d0d] dark:text-[#ececec]">
+                      Tải ảnh từ thiết bị
+                    </div>
+                    <div className="text-[10px] text-[#5d5d5d] dark:text-[#8e8e8e]">
+                      Chọn ảnh có sẵn trong thư viện máy
+                    </div>
+                  </div>
+                </button>
+              </div>
+            )}
+
+            {/* Plus Button with Menu */}
+            <button
+              ref={plusBtnRef}
+              type="button"
+              onClick={() => setIsAttachMenuOpen(!isAttachMenuOpen)}
+              disabled={isCompressing || isStreaming}
+              title="Đính kèm ảnh hoặc mở máy ảnh"
+              className={
+                'p-1.5 rounded-full transition-all hover:scale-[1.05] active:scale-[0.95] cursor-pointer ' +
+                (isAttachMenuOpen
+                  ? 'bg-black/10 dark:bg-white/15 text-[#0d0d0d] dark:text-white rotate-45'
+                  : 'hover:bg-[#f2f2f2] dark:hover:bg-[#333] text-[#5d5d5d] hover:text-[#0d0d0d] dark:text-[#b4b4b4] dark:hover:text-white')
+              }
+            >
+              <Plus className="w-4 h-4 transition-transform duration-200" strokeWidth={1.5} />
+            </button>
+
+            {/* Quick Direct Camera Button */}
             <button
               type="button"
-              onClick={handleFileClick}
+              onClick={() => setIsCameraOpen(true)}
               disabled={isCompressing || isStreaming}
-              title="Đính kèm ảnh hoặc chụp từ camera"
-              className="p-1.5 rounded-full hover:bg-[#f2f2f2] dark:hover:bg-[#333] text-[#5d5d5d] hover:text-[#0d0d0d] dark:text-[#b4b4b4] dark:hover:text-white transition-all hover:scale-[1.05] active:scale-[0.95] cursor-pointer"
+              title="Chụp ảnh vi thể trực tiếp (Camera HD)"
+              className="p-1.5 rounded-full hover:bg-[#f2f2f2] dark:hover:bg-[#333] text-[#5d5d5d] hover:text-emerald-600 dark:text-[#b4b4b4] dark:hover:text-emerald-400 transition-all hover:scale-[1.05] active:scale-[0.95] cursor-pointer"
             >
-              <Plus className="w-4 h-4" strokeWidth={1.5} />
+              <Camera className="w-4 h-4" strokeWidth={1.5} />
             </button>
+
             {isCompressing && (
               <span className="text-[11px] text-[#8e8e8e] italic animate-pulse">
                 Đang xử lý ảnh...
@@ -253,17 +371,26 @@ export default function FloatingInputIsland() {
               onClick={() => handleSubmit()}
               disabled={!canSend}
               title="Gửi câu hỏi"
-              className={`p-1.5 rounded-full transition-all will-change-transform ${
-                canSend
+              className={
+                'p-1.5 rounded-full transition-all will-change-transform ' +
+                (canSend
                   ? 'bg-[#0d0d0d] text-white hover:opacity-90 dark:bg-white dark:text-[#0d0d0d] shadow-md hover:scale-[1.05] active:scale-[0.95] cursor-pointer'
-                  : 'bg-[#e5e5e5] text-[#8e8e8e] dark:bg-[#2b2b2b] dark:text-[#555] cursor-not-allowed'
-              }`}
+                  : 'bg-[#e5e5e5] text-[#8e8e8e] dark:bg-[#2b2b2b] dark:text-[#555] cursor-not-allowed')
+              }
             >
               <ArrowUp className="w-4 h-4" strokeWidth={1.5} />
             </button>
           </div>
         </div>
       </div>
+
+      {/* High-Resolution Camera Capture Modal */}
+      <CameraCaptureModal
+        isOpen={isCameraOpen}
+        onClose={() => setIsCameraOpen(false)}
+        onCapture={handleCameraCapture}
+        onSwitchToUpload={handleFileClick}
+      />
 
       {/* Footer Disclaimer */}
       <p className="text-center text-[11px] text-[#8e8e8e] mt-2 select-none">
