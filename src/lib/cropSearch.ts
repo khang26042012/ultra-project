@@ -49,8 +49,8 @@ export interface CropSearchResult {
 let cachedCrops: CropRecord[] | null = null;
 
 // Normalize Vietnamese string: remove diacritics, lowercase, strip punctuation
-export function normalizeVietnamese(str: string): string {
-  if (!str) return '';
+export function normalizeVietnamese(str: unknown): string {
+  if (typeof str !== 'string' || !str) return '';
   return str
     .toLowerCase()
     .normalize('NFD')
@@ -99,7 +99,7 @@ export function invalidateCropCache(): void {
 // Search crop knowledge base by crop name and symptoms
 export function searchCropKnowledge(
   cropName: string,
-  symptoms: string[] = []
+  symptoms: string[] | string = []
 ): {
   success: boolean;
   total_crops_in_db: number;
@@ -116,90 +116,93 @@ export function searchCropKnowledge(
   }
 
   const normCrop = normalizeVietnamese(cropName || '');
-  const normSymptoms = (symptoms || []).map((s) => normalizeVietnamese(s)).filter(Boolean);
+  const symptomsArray = Array.isArray(symptoms)
+    ? symptoms
+    : typeof symptoms === 'string'
+    ? [symptoms]
+    : [];
+  const normSymptoms = symptomsArray
+    .map((s) => normalizeVietnamese(s))
+    .filter(Boolean);
 
   const scored: CropSearchResult[] = [];
 
   for (const crop of allCrops) {
-    const cropNameNorm = normalizeVietnamese(crop.name_vi);
-    const cropSciNorm = normalizeVietnamese(crop.scientific_name);
+    let score = 0;
+    const nameNorm = normalizeVietnamese(crop.name_vi);
+    const sciNorm = normalizeVietnamese(crop.scientific_name);
 
-    let cropScore = 0;
-
-    // Crop name matching
     if (normCrop) {
-      if (cropNameNorm === normCrop || cropSciNorm === normCrop) {
-        cropScore += 100;
-      } else if (cropNameNorm.includes(normCrop) || normCrop.includes(cropNameNorm)) {
-        cropScore += 60;
+      if (nameNorm === normCrop) {
+        score += 100;
+      } else if (nameNorm.includes(normCrop) || normCrop.includes(nameNorm)) {
+        score += 50;
+      } else if (sciNorm.includes(normCrop)) {
+        score += 40;
       } else {
-        const cropTokens = cropNameNorm.split(' ');
-        const queryTokens = normCrop.split(' ');
-        const matches = queryTokens.filter((t) => t.length > 1 && cropTokens.includes(t));
-        if (matches.length > 0) {
-          cropScore += matches.length * 25;
+        const cropWords = normCrop.split(' ').filter((w) => w.length > 1);
+        for (const w of cropWords) {
+          if (nameNorm.includes(w)) score += 12;
         }
       }
     }
 
-    // Symptom matching across crop diseases
-    let bestDisease: CropDisease | undefined;
-    let highestDiseaseScore = 0;
+    let bestMatchedDisease: CropDisease | undefined;
+    let maxDiseaseScore = 0;
 
     if (Array.isArray(crop.danh_sach_benh)) {
-      for (const disease of crop.danh_sach_benh) {
-        let dScore = 0;
-        const diseaseText = [
-          disease.ten_benh || '',
-          Array.isArray(disease.trieu_chung_dien_hinh)
-            ? disease.trieu_chung_dien_hinh.join(' ')
-            : disease.trieu_chung_dien_hinh || '',
-          typeof disease.tac_nhan === 'object'
-            ? `${disease.tac_nhan.loai || ''} ${disease.tac_nhan.ten_khoa_hoc || ''}`
-            : disease.tac_nhan || '',
-          disease.phan_biet_chan_doan_kep || '',
-        ].join(' ');
+      for (const d of crop.danh_sach_benh) {
+        let diseaseScore = 0;
+        const diseaseNameNorm = normalizeVietnamese(d.ten_benh);
 
-        const normDiseaseText = normalizeVietnamese(diseaseText);
+        if (normCrop && diseaseNameNorm.includes(normCrop)) {
+          diseaseScore += 30;
+        }
+
+        const rawSymptoms = Array.isArray(d.trieu_chung_dien_hinh)
+          ? d.trieu_chung_dien_hinh.join(' ')
+          : d.trieu_chung_dien_hinh || '';
+        const symptomsNorm = normalizeVietnamese(rawSymptoms);
 
         for (const sym of normSymptoms) {
-          if (normDiseaseText.includes(sym)) {
-            dScore += 30;
+          if (diseaseNameNorm.includes(sym)) {
+            diseaseScore += 25;
+          } else if (symptomsNorm.includes(sym)) {
+            diseaseScore += 15;
           } else {
-            const symTokens = sym.split(' ');
-            const matched = symTokens.filter((t) => t.length > 1 && normDiseaseText.includes(t));
-            if (matched.length > 0) {
-              dScore += matched.length * 10;
+            const symWords = sym.split(' ').filter((w) => w.length > 2);
+            for (const sw of symWords) {
+              if (symptomsNorm.includes(sw)) diseaseScore += 4;
             }
           }
         }
 
-        if (dScore > highestDiseaseScore) {
-          highestDiseaseScore = dScore;
-          bestDisease = disease;
+        if (diseaseScore > maxDiseaseScore) {
+          maxDiseaseScore = diseaseScore;
+          bestMatchedDisease = d;
         }
       }
     }
 
-    const totalScore = cropScore + highestDiseaseScore;
+    score += maxDiseaseScore;
 
-    if (totalScore > 0) {
+    if (score > 0) {
       scored.push({
         crop_name: crop.name_vi,
         scientific_name: crop.scientific_name,
         topic: crop.topic,
         dia_ban_pho_bien: crop.dia_ban_pho_bien,
         dac_tinh_sinh_thai: crop.dac_tinh_sinh_thai,
-        matched_disease: bestDisease || (highestDiseaseScore > 0 ? crop.danh_sach_benh?.[0] : undefined),
+        matched_disease: bestMatchedDisease || crop.danh_sach_benh?.[0],
         danh_sach_benh: crop.danh_sach_benh || [],
-        score: totalScore,
+        score,
       });
     }
   }
 
   scored.sort((a, b) => b.score - a.score);
 
-  const topResults = scored.slice(0, 3);
+  const topResults = scored.slice(0, 5);
 
   return {
     success: topResults.length > 0,
@@ -207,10 +210,4 @@ export function searchCropKnowledge(
     results: topResults,
     best_match: topResults[0],
   };
-}
-
-// Get crop by ID
-export function getCropById(id: string): CropRecord | undefined {
-  const all = loadAllCrops();
-  return all.find((c) => c.id === id);
 }

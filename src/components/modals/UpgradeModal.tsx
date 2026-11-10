@@ -15,15 +15,24 @@ export default function UpgradeModal() {
       }
     }
     if (isUpgradeOpen) {
+      document.body.style.overflow = 'hidden';
       window.addEventListener('keydown', handleKeyDown);
     }
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', handleKeyDown);
+    };
   }, [isUpgradeOpen, setIsUpgradeOpen]);
 
   if (!isUpgradeOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs animate-in fade-in duration-150">
+    <div
+      onClick={(e) => {
+        if (e.target === e.currentTarget) setIsUpgradeOpen(false);
+      }}
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs animate-in fade-in duration-150"
+    >
       <div className="w-full max-w-2xl bg-[#ffffff] dark:bg-[#212121] border border-[#e5e5e5] dark:border-[#383838] rounded-3xl shadow-2xl p-6 sm:p-8 text-[#0d0d0d] dark:text-[#ececec] relative">
         {/* Close Button */}
         <button

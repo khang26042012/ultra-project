@@ -97,6 +97,7 @@ function CropsEncyclopediaView() {
         if (!isCancelled && data.success) {
           const fetchedCrops = Array.isArray(data.crops) ? data.crops : [];
           setCrops(fetchedCrops);
+          offsetRef.current = fetchedCrops.length;
           setTotalCount(data.total || 0);
           setHasMore(fetchedCrops.length < (data.total || 0));
         }

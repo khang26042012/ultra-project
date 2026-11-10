@@ -113,10 +113,15 @@ export default function ChatMessage({ message }: ChatMessageProps) {
 
   // Tactile Sensory Button Click Handler: sends farmer feedback directly to AI
   const handleSensoryAction = async (question: string, answer: 'Có' | 'Không') => {
+    if (isStreaming) return;
     setCheckedSensoryItems((prev) => ({ ...prev, [question]: answer }));
     if (sendMessage) {
-      const feedbackMessage = `Tôi đã kiểm tra thực địa ngoài vườn cho bài test "${question}": Kết quả là [${answer}]. Nhờ bác sĩ AgriVision chốt lại độ chắc chắn chẩn đoán và hướng dẫn phác đồ sinh học điều trị chi tiết.`;
-      await sendMessage(feedbackMessage);
+      try {
+        const feedbackMessage = `Tôi đã kiểm tra thực địa ngoài vườn cho bài test "${question}": Kết quả là [${answer}]. Nhờ bác sĩ AgriVision chốt lại độ chắc chắn chẩn đoán và hướng dẫn phác đồ sinh học điều trị chi tiết.`;
+        await sendMessage(feedbackMessage);
+      } catch (err) {
+        console.warn('Lỗi gửi phản hồi xúc giác:', err);
+      }
     }
   };
 
@@ -717,10 +722,13 @@ export default function ChatMessage({ message }: ChatMessageProps) {
                 } catch {
                   domain = 'web';
                 }
+                const isSafeHttp = /^https?:\/\//i.test(src.url || '');
+                const safeUrl = isSafeHttp ? src.url : '#';
+
                 return (
                   <a
                     key={sIdx}
-                    href={src.url}
+                    href={safeUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex flex-col group/src text-left p-2 rounded-xl hover:bg-[#f4f4f4] dark:hover:bg-[#212121] transition-colors border border-transparent hover:border-[#e5e5e5] dark:hover:border-[#333]"
@@ -949,7 +957,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
           </button>
 
           <button
-            onClick={() => {
+            onClick={async () => {
               if (isStreaming) return;
               const msgs = activeConversation?.messages || [];
               const thisIdx = msgs.findIndex((m) => m.id === message.id);
@@ -961,7 +969,11 @@ export default function ChatMessage({ message }: ChatMessageProps) {
                 }
               }
               if (prevUserMsg) {
-                sendMessage(prevUserMsg.content, prevUserMsg.imageUrl);
+                try {
+                  await sendMessage(prevUserMsg.content, prevUserMsg.imageUrl);
+                } catch (err) {
+                  console.warn('Lỗi regenerate:', err);
+                }
               }
             }}
             disabled={isStreaming}

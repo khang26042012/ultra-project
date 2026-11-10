@@ -56,7 +56,7 @@ const SEARCH_CROP_DATABASE_TOOL = {
   },
 };
 
-// Definition of Real-time Web Search Tool (OpenAI Function Calling format)
+// Definition of Real-time Web Search Tool
 const WEB_SEARCH_TOOL = {
   type: 'function',
   function: {
@@ -77,7 +77,7 @@ const WEB_SEARCH_TOOL = {
   },
 };
 
-// Resilient fetch with automatic exponential retry and timeout
+// Resilient fetch with automatic exponential retry, timeout, and parent signal cancellation
 async function fetchWithRetry(
   url: string,
   options: RequestInit,
@@ -98,8 +98,9 @@ async function fetchWithRetry(
         return res;
       }
       console.warn(`Gateway fetch returned ${res.status}, retrying ${attempt}/${retries}...`);
-    } catch (err) {
+    } catch (err: unknown) {
       lastError = err;
+      if ((err as Error)?.name === 'AbortError') throw err;
       if (attempt > retries) throw err;
     }
     await new Promise((r) => setTimeout(r, delayMs * attempt));
@@ -108,113 +109,121 @@ async function fetchWithRetry(
 }
 
 export async function POST(req: NextRequest) {
+  let body: any;
   try {
-    const { messages, model, webSearchEnabled = true } = await req.json();
+    body = await req.json();
+  } catch {
+    return new Response(JSON.stringify({ error: 'Định dạng yêu cầu JSON không hợp lệ' }), {
+      status: 400,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
 
-    const incomingMessages = Array.isArray(messages) ? messages : [];
+  const { messages, model, webSearchEnabled = true } = body || {};
 
-    // Filter out client-sent system prompts to maintain static Master System Prompt prefix for Prompt Caching
-    const conversationalMessages = incomingMessages.filter(
-      (m: { role?: string }) => m.role !== 'system'
-    );
+  if (!Array.isArray(messages) || messages.length === 0) {
+    return new Response(JSON.stringify({ error: 'Thiếu mảng tin nhắn hợp lệ' }), {
+      status: 400,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
 
-    // Extract the latest user image in case tool arguments need it
-    let latestUserImage = '';
-    for (let i = conversationalMessages.length - 1; i >= 0; i--) {
-      const msg = conversationalMessages[i];
-      if (msg.role === 'user') {
-        if (typeof msg.imageUrl === 'string' && msg.imageUrl) {
-          latestUserImage = msg.imageUrl;
-          break;
+  const conversationalMessages = messages.filter(
+    (m: { role?: string }) => m.role !== 'system'
+  );
+
+  // Extract the latest user image in case tool arguments need it
+  let latestUserImage = '';
+  for (let i = conversationalMessages.length - 1; i >= 0; i--) {
+    const msg = conversationalMessages[i];
+    if (msg.role === 'user') {
+      if (typeof msg.imageUrl === 'string' && msg.imageUrl) {
+        latestUserImage = msg.imageUrl;
+        break;
+      }
+      if (Array.isArray(msg.content)) {
+        for (const part of msg.content) {
+          if (part?.type === 'image_url' && part?.image_url?.url) {
+            latestUserImage = part.image_url.url;
+            break;
+          }
         }
-        if (Array.isArray(msg.content)) {
-          for (const part of msg.content) {
+      }
+      if (latestUserImage) break;
+    }
+  }
+
+  const activeMessages: any[] = [
+    {
+      role: 'system',
+      content: AGRIVISION_MASTER_SYSTEM_PROMPT,
+    },
+    ...conversationalMessages,
+  ];
+
+  const targetModel =
+    model === 'ag/gemini-3.8-flash' ? 'ag/gemini-3.8-flash' : LOCKED_MODEL;
+
+  let isCancelled = false;
+  let keepAliveInterval: NodeJS.Timeout | null = null;
+
+  const stream = new ReadableStream({
+    cancel() {
+      isCancelled = true;
+      if (keepAliveInterval) clearInterval(keepAliveInterval);
+    },
+    async start(controller) {
+      const encoder = new TextEncoder();
+      const sendEvent = (obj: any) => {
+        if (isCancelled || req.signal.aborted) return;
+        try {
+          controller.enqueue(encoder.encode(`data: ${JSON.stringify(obj)}\n\n`));
+        } catch {}
+      };
+
+      // Keep-alive ping
+      keepAliveInterval = setInterval(() => {
+        if (isCancelled || req.signal.aborted) {
+          if (keepAliveInterval) clearInterval(keepAliveInterval);
+          return;
+        }
+        try {
+          controller.enqueue(encoder.encode(': keep-alive\n\n'));
+        } catch {
+          if (keepAliveInterval) clearInterval(keepAliveInterval);
+        }
+      }, 2500);
+
+      const maxTurns = 6;
+      let turn = 0;
+
+      // Proactively detect if user uploaded an image in current turn
+      const lastIncomingMsg = conversationalMessages[conversationalMessages.length - 1];
+      let currentTurnImage = '';
+      if (lastIncomingMsg && lastIncomingMsg.role === 'user') {
+        if (typeof lastIncomingMsg.imageUrl === 'string' && lastIncomingMsg.imageUrl) {
+          currentTurnImage = lastIncomingMsg.imageUrl;
+        } else if (Array.isArray(lastIncomingMsg.content)) {
+          for (const part of lastIncomingMsg.content) {
             if (part?.type === 'image_url' && part?.image_url?.url) {
-              latestUserImage = part.image_url.url;
+              currentTurnImage = part.image_url.url;
               break;
             }
           }
         }
-        if (latestUserImage) break;
       }
-    }
 
-    // Initial conversation payload: System Prompt & Tools at static head (Optimizes Prompt Cache Tokens)
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const activeMessages: any[] = [
-      {
-        role: 'system',
-        content: AGRIVISION_MASTER_SYSTEM_PROMPT,
-      },
-      ...conversationalMessages,
-    ];
+      let precomputedVisionResult: any = null;
+      if (currentTurnImage && !isCancelled && !req.signal.aborted) {
+        try {
+          sendEvent({
+            type: 'vision_segmenting',
+            status: 'Đang khoanh vùng tổn thương mô lá...',
+          });
 
-    // Selected model fallback
-    const targetModel =
-      model === 'ag/gemini-3.8-flash' ? 'ag/gemini-3.8-flash' : LOCKED_MODEL;
+          precomputedVisionResult = await segmentAndAnnotateCropLesion(currentTurnImage);
 
-    // Create readable stream for client SSE response with cancellation handling
-    let isCancelled = false;
-    let keepAliveInterval: NodeJS.Timeout | null = null;
-
-    const stream = new ReadableStream({
-      cancel() {
-        isCancelled = true;
-        if (keepAliveInterval) clearInterval(keepAliveInterval);
-      },
-      async start(controller) {
-        const encoder = new TextEncoder();
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const sendEvent = (obj: any) => {
-          if (isCancelled || req.signal.aborted) return;
-          try {
-            controller.enqueue(encoder.encode(`data: ${JSON.stringify(obj)}\n\n`));
-          } catch {}
-        };
-
-        // Active SSE Keep-Alive Ping every 2.5s (Crucial for mobile background / 4G idle disconnect)
-        keepAliveInterval = setInterval(() => {
-          if (isCancelled || req.signal.aborted) {
-            if (keepAliveInterval) clearInterval(keepAliveInterval);
-            return;
-          }
-          try {
-            controller.enqueue(encoder.encode(': keep-alive\n\n'));
-          } catch {
-            if (keepAliveInterval) clearInterval(keepAliveInterval);
-          }
-        }, 2500);
-
-        const maxTurns = 6;
-        let turn = 0;
-
-        // Proactively detect if the current incoming turn uploaded an image
-        const lastIncomingMsg = conversationalMessages[conversationalMessages.length - 1];
-        let currentTurnImage = '';
-        if (lastIncomingMsg && lastIncomingMsg.role === 'user') {
-          if (typeof lastIncomingMsg.imageUrl === 'string' && lastIncomingMsg.imageUrl) {
-            currentTurnImage = lastIncomingMsg.imageUrl;
-          } else if (Array.isArray(lastIncomingMsg.content)) {
-            for (const part of lastIncomingMsg.content) {
-              if (part?.type === 'image_url' && part?.image_url?.url) {
-                currentTurnImage = part.image_url.url;
-                break;
-              }
-            }
-          }
-        }
-
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        let precomputedVisionResult: any = null;
-        if (currentTurnImage) {
-          try {
-            sendEvent({
-              type: 'vision_segmenting',
-              status: 'Đang khoanh vùng tổn thương mô lá...',
-            });
-
-            precomputedVisionResult = await segmentAndAnnotateCropLesion(currentTurnImage);
-
+          if (!isCancelled && !req.signal.aborted) {
             sendEvent({
               type: 'vision_hud',
               annotated_image_url: precomputedVisionResult.annotated_image_url,
@@ -235,168 +244,170 @@ HƯỚNG DẪN TRẢ LỜI BÁC SĨ CÂY TRỒNG NAM BỘ:
 2. Trích dẫn thông số thị giác: "Tổn thương mô Computer Vision: Diện tích hoại tử S = ${precomputedVisionResult.total_necrosis_percentage}% (Độ tin cậy: ${Math.round((precomputedVisionResult.predictions[0]?.confidence || 0.92) * 100)}%)".
 3. Trình bày chi tiết chẩn đoán, bóc tách ca bệnh kép, 2 bài test xúc giác thực địa và phác đồ sinh học VietGAP an toàn.`,
             });
-          } catch (err) {
-            console.warn('Proactive YOLO/Roboflow lesion segmentation error:', err);
           }
+        } catch (err) {
+          console.warn('Proactive lesion segmentation error:', err);
         }
+      }
 
-        let overallStreamedContent = '';
+      let overallStreamedContent = '';
 
-        try {
-          while (turn < maxTurns) {
-            if (isCancelled || req.signal.aborted) break;
-            turn++;
+      try {
+        while (turn < maxTurns) {
+          if (isCancelled || req.signal.aborted) break;
+          turn++;
 
-            // Available tools list: Local Pathology RAG tool always active
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            const toolsList: any[] = [SEARCH_CROP_DATABASE_TOOL];
-            // Only add segmentation tool if not already precomputed
-            if (!precomputedVisionResult) {
-              toolsList.push(SEGMENT_CROP_LESION_TOOL);
-            }
-            if (webSearchEnabled !== false) {
-              toolsList.push(WEB_SEARCH_TOOL);
-            }
+          const toolsList: any[] = [SEARCH_CROP_DATABASE_TOOL];
+          if (!precomputedVisionResult) {
+            toolsList.push(SEGMENT_CROP_LESION_TOOL);
+          }
+          if (webSearchEnabled !== false) {
+            toolsList.push(WEB_SEARCH_TOOL);
+          }
 
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            const requestPayload: any = {
-              model: targetModel,
-              messages: activeMessages,
-              stream: true,
-              tools: toolsList,
-              tool_choice: turn === 1 ? 'auto' : 'none',
-            };
+          const requestPayload: any = {
+            model: targetModel,
+            messages: activeMessages,
+            stream: true,
+            tools: toolsList,
+            tool_choice: turn === 1 ? 'auto' : 'none',
+          };
 
-            const gatewayRes = await fetchWithRetry(AI_GATEWAY_URL, {
+          const gatewayRes = await fetchWithRetry(
+            AI_GATEWAY_URL,
+            {
               method: 'POST',
               headers: {
                 Authorization: `Bearer ${AI_GATEWAY_KEY}`,
                 'Content-Type': 'application/json',
               },
               body: JSON.stringify(requestPayload),
+              signal: req.signal,
+            },
+            2,
+            1200,
+            35000
+          );
+
+          if (!gatewayRes.ok) {
+            const errText = await gatewayRes.text();
+            sendEvent({
+              type: 'content',
+              token: `\n\n⚠️ **Lỗi AI Gateway (${gatewayRes.status})**: ${errText || gatewayRes.statusText}`,
             });
+            break;
+          }
 
-            if (!gatewayRes.ok) {
-              const errText = await gatewayRes.text();
-              sendEvent({
-                type: 'content',
-                token: `\n\n⚠️ **Lỗi AI Gateway (${gatewayRes.status})**: ${errText || gatewayRes.statusText}`,
-              });
-              break;
-            }
+          const reader = gatewayRes.body?.getReader();
+          if (!reader) break;
+          const decoder = new TextDecoder();
 
-            const reader = gatewayRes.body?.getReader();
-            if (!reader) break;
-            const decoder = new TextDecoder();
+          let accumulatedContent = '';
+          const toolCallsMap: Record<number, { id: string; name: string; arguments: string }> = {};
+          let buffer = '';
 
-            let accumulatedContent = '';
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            const toolCallsMap: Record<number, { id: string; name: string; arguments: string }> = {};
-            let buffer = '';
+          try {
+            while (true) {
+              if (isCancelled || req.signal.aborted) {
+                try { await reader.cancel(); } catch {}
+                break;
+              }
 
-            try {
-              while (true) {
-                if (isCancelled || req.signal.aborted) {
-                  try { await reader.cancel(); } catch {}
-                  break;
-                }
+              const { value, done } = await reader.read();
+              if (done) break;
 
-                const { value, done } = await reader.read();
-                if (done) break;
+              buffer += decoder.decode(value, { stream: true });
+              const lines = buffer.split('\n');
+              buffer = lines.pop() || '';
 
-                buffer += decoder.decode(value, { stream: true });
-                const lines = buffer.split('\n');
-                buffer = lines.pop() || '';
+              for (const line of lines) {
+                const trimmed = line.trim();
+                if (!trimmed || trimmed.startsWith(':')) continue;
+                if (trimmed === 'data: [DONE]') continue;
+                if (trimmed.startsWith('data: ')) {
+                  try {
+                    const parsed = JSON.parse(trimmed.slice(6));
+                    const choice = parsed.choices?.[0];
+                    if (!choice) continue;
 
-                for (const line of lines) {
-                  const trimmed = line.trim();
-                  if (!trimmed || trimmed.startsWith(':')) continue;
-                  if (trimmed === 'data: [DONE]') continue;
-                  if (trimmed.startsWith('data: ')) {
-                    try {
-                      const parsed = JSON.parse(trimmed.slice(6));
-                      const choice = parsed.choices?.[0];
-                      if (!choice) continue;
-
-                      // Stream reasoning/thought tokens
-                      const reasoning = choice.delta?.reasoning_content || choice.delta?.thought;
-                      if (reasoning) {
-                        sendEvent({ type: 'thought', token: reasoning });
-                      }
-
-                      // Stream assistant content tokens
-                      const content = choice.delta?.content;
-                      if (content) {
-                        accumulatedContent += content;
-                        overallStreamedContent += content;
-                        sendEvent({ type: 'content', token: content });
-                      }
-
-                      // Accumulate tool calls
-                      const deltaToolCalls = choice.delta?.tool_calls;
-                      if (Array.isArray(deltaToolCalls)) {
-                        for (const tc of deltaToolCalls) {
-                          const idx = tc.index ?? 0;
-                          if (!toolCallsMap[idx]) {
-                            toolCallsMap[idx] = {
-                              id: tc.id || `call_${Date.now()}_${idx}`,
-                              name: tc.function?.name || '',
-                              arguments: '',
-                            };
-                          }
-                          if (tc.id) toolCallsMap[idx].id = tc.id;
-                          if (tc.function?.name) toolCallsMap[idx].name = tc.function.name;
-                          if (tc.function?.arguments)
-                            toolCallsMap[idx].arguments += tc.function.arguments;
-                        }
-                      }
-                    } catch {
-                      // Ignore SSE json chunk split artifacts
+                    const reasoning = choice.delta?.reasoning_content || choice.delta?.thought;
+                    if (reasoning) {
+                      sendEvent({ type: 'thought', token: reasoning });
                     }
+
+                    const content = choice.delta?.content;
+                    if (content) {
+                      accumulatedContent += content;
+                      overallStreamedContent += content;
+                      sendEvent({ type: 'content', token: content });
+                    }
+
+                    const deltaToolCalls = choice.delta?.tool_calls;
+                    if (Array.isArray(deltaToolCalls)) {
+                      for (const tc of deltaToolCalls) {
+                        const idx = tc.index ?? 0;
+                        if (!toolCallsMap[idx]) {
+                          toolCallsMap[idx] = {
+                            id: tc.id || `call_${Date.now()}_${idx}`,
+                            name: tc.function?.name || '',
+                            arguments: '',
+                          };
+                        }
+                        if (tc.id) toolCallsMap[idx].id = tc.id;
+                        if (tc.function?.name) toolCallsMap[idx].name = tc.function.name;
+                        if (tc.function?.arguments)
+                          toolCallsMap[idx].arguments += tc.function.arguments;
+                      }
+                    }
+                  } catch {
+                    // Ignore split chunks
                   }
                 }
               }
-            } finally {
-              try {
-                reader.releaseLock();
-              } catch {}
             }
+          } finally {
+            try {
+              reader.releaseLock();
+            } catch {}
+          }
 
-            const toolCallsList = Object.values(toolCallsMap);
+          const toolCallsList = Object.values(toolCallsMap);
 
-            // If Gemini Gateway requested tool calls
-            if (toolCallsList.length > 0) {
-              // Append assistant message with tool_calls to activeMessages
-              activeMessages.push({
-                role: 'assistant',
-                content: accumulatedContent || null,
-                tool_calls: toolCallsList.map((tc) => ({
-                  id: tc.id,
-                  type: 'function',
-                  function: {
-                    name: tc.name,
-                    arguments: tc.arguments,
-                  },
-                })),
-              });
+          if (toolCallsList.length > 0) {
+            if (isCancelled || req.signal.aborted) break;
 
-              for (const tc of toolCallsList) {
-                if (tc.name === 'segment_crop_lesion') {
-                  // Use precomputed result or calculate if missing
-                  let visionResult = precomputedVisionResult;
-                  if (!visionResult) {
-                    let imageToSegment = latestUserImage;
-                    try {
-                      const parsedArgs = JSON.parse(tc.arguments);
-                      if (parsedArgs.imageBase64 && typeof parsedArgs.imageBase64 === 'string') {
-                        imageToSegment = parsedArgs.imageBase64;
-                      }
-                    } catch {
-                      if (tc.arguments && tc.arguments.length > 50) {
-                        imageToSegment = tc.arguments;
-                      }
+            activeMessages.push({
+              role: 'assistant',
+              content: accumulatedContent || null,
+              tool_calls: toolCallsList.map((tc) => ({
+                id: tc.id,
+                type: 'function',
+                function: {
+                  name: tc.name,
+                  arguments: tc.arguments,
+                },
+              })),
+            });
+
+            for (const tc of toolCallsList) {
+              if (isCancelled || req.signal.aborted) break;
+
+              if (tc.name === 'segment_crop_lesion') {
+                let visionResult = precomputedVisionResult;
+                if (!visionResult) {
+                  let imageToSegment = latestUserImage;
+                  try {
+                    const parsedArgs = JSON.parse(tc.arguments);
+                    if (parsedArgs.imageBase64 && typeof parsedArgs.imageBase64 === 'string') {
+                      imageToSegment = parsedArgs.imageBase64;
                     }
+                  } catch {
+                    if (tc.arguments && tc.arguments.length > 50) {
+                      imageToSegment = tc.arguments;
+                    }
+                  }
 
+                  if (imageToSegment) {
                     sendEvent({
                       type: 'vision_segmenting',
                       status: 'Đang khoanh vùng tổn thương mô lá...',
@@ -412,130 +423,125 @@ HƯỚNG DẪN TRẢ LỜI BÁC SĨ CÂY TRỒNG NAM BỘ:
                       summary: visionResult.summary,
                     });
                   }
-
-                  activeMessages.push({
-                    role: 'tool',
-                    tool_call_id: tc.id,
-                    content: JSON.stringify({
-                      status: 'success',
-                      total_necrosis_percentage: visionResult.total_necrosis_percentage,
-                      predictions_count: visionResult.predictions.length,
-                      predictions: visionResult.predictions.map((p: any) => ({
-                        class: p.class,
-                        class_vi: p.class_vi,
-                        confidence: p.confidence,
-                        necrosis_percentage: p.necrosis_percentage,
-                      })),
-                      summary: visionResult.summary,
-                      hud_rendered_in_client: true,
-                    }),
-                  });
-                } else if (tc.name === 'search_crop_database') {
-                  let cropName = '';
-                  let symptoms: string[] = [];
-                  try {
-                    const parsedArgs = JSON.parse(tc.arguments);
-                    cropName = parsedArgs.crop_name || '';
-                    symptoms = Array.isArray(parsedArgs.symptoms) ? parsedArgs.symptoms : [];
-                  } catch {
-                    cropName = tc.arguments;
-                  }
-
-                  // Send UI event that local database is being searched
-                  sendEvent({
-                    type: 'database_search',
-                    crop: cropName,
-                    symptoms,
-                  });
-
-                  // Execute local In-Context Pathology search
-                  const searchResult = searchCropKnowledge(cropName, symptoms);
-
-                  // Append tool result to activeMessages
-                  activeMessages.push({
-                    role: 'tool',
-                    tool_call_id: tc.id,
-                    content: JSON.stringify({
-                      status: 'success',
-                      crop_queried: cropName,
-                      found: searchResult.success,
-                      total_in_database: searchResult.total_crops_in_db,
-                      best_match_profile: searchResult.best_match,
-                      other_related_crops: searchResult.results.slice(1).map((r) => ({
-                        crop_name: r.crop_name,
-                        scientific_name: r.scientific_name,
-                        matched_disease: r.matched_disease?.ten_benh,
-                      })),
-                    }),
-                  });
-                } else if (tc.name === 'web_search') {
-                  let query = '';
-                  try {
-                    const parsedArgs = JSON.parse(tc.arguments);
-                    query = parsedArgs.query || '';
-                  } catch {
-                    query = tc.arguments;
-                  }
-
-                  // Send live searching status to UI
-                  sendEvent({ type: 'searching', query });
-
-                  // Execute Tavily Search Max Power (Cluster 5 Keys Base64)
-                  const searchData = await executeTavilySearch(query);
-
-                  // Send sources to UI
-                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                  const formattedSources = searchData.results.map((r: any) => {
-                    let favicon = r.favicon || r.favicon_url;
-                    if (!favicon && r.url) {
-                      try {
-                        favicon = `https://www.google.com/s2/favicons?domain=${new URL(r.url).hostname}&sz=32`;
-                      } catch {
-                        favicon = undefined;
-                      }
-                    }
-                    return {
-                      title: r.title || 'Nguồn kiểm chứng',
-                      url: r.url || '',
-                      snippet: r.content || r.snippet || '',
-                      favicon,
-                    };
-                  });
-
-                  sendEvent({
-                    type: 'sources',
-                    sources: formattedSources,
-                  });
-
-                  // Append tool response to activeMessages
-                  activeMessages.push({
-                    role: 'tool',
-                    tool_call_id: tc.id,
-                    content: JSON.stringify({
-                      query,
-                      results: searchData.results,
-                      summary: searchData.answer || '',
-                      images: searchData.images || [],
-                    }),
-                  });
-                } else {
-                  // Unknown tool fallback
-                  activeMessages.push({
-                    role: 'tool',
-                    tool_call_id: tc.id,
-                    content: JSON.stringify({ status: 'tool_not_supported', tool: tc.name }),
-                  });
                 }
-              }
 
-              // Continue the multi-step Agent Loop with tool results in context
-              continue;
+                activeMessages.push({
+                  role: 'tool',
+                  tool_call_id: tc.id,
+                  content: visionResult
+                    ? JSON.stringify({
+                        status: 'success',
+                        total_necrosis_percentage: visionResult.total_necrosis_percentage,
+                        predictions_count: visionResult.predictions.length,
+                        predictions: visionResult.predictions.map((p: any) => ({
+                          class: p.class,
+                          class_vi: p.class_vi,
+                          confidence: p.confidence,
+                          necrosis_percentage: p.necrosis_percentage,
+                        })),
+                        summary: visionResult.summary,
+                        hud_rendered_in_client: true,
+                      })
+                    : JSON.stringify({ status: 'no_image_provided', message: 'Không có ảnh đính kèm.' }),
+                });
+              } else if (tc.name === 'search_crop_database') {
+                let cropName = '';
+                let symptoms: string[] = [];
+                try {
+                  const parsedArgs = JSON.parse(tc.arguments);
+                  cropName = parsedArgs.crop_name || '';
+                  symptoms = Array.isArray(parsedArgs.symptoms) ? parsedArgs.symptoms : [];
+                } catch {
+                  cropName = tc.arguments;
+                }
+
+                sendEvent({
+                  type: 'database_search',
+                  crop: cropName,
+                  symptoms,
+                });
+
+                const searchResult = searchCropKnowledge(cropName, symptoms);
+
+                activeMessages.push({
+                  role: 'tool',
+                  tool_call_id: tc.id,
+                  content: JSON.stringify({
+                    status: 'success',
+                    crop_queried: cropName,
+                    found: searchResult.success,
+                    total_in_database: searchResult.total_crops_in_db,
+                    best_match_profile: searchResult.best_match,
+                    other_related_crops: searchResult.results.slice(1).map((r) => ({
+                      crop_name: r.crop_name,
+                      scientific_name: r.scientific_name,
+                      matched_disease: r.matched_disease?.ten_benh,
+                    })),
+                  }),
+                });
+              } else if (tc.name === 'web_search') {
+                let query = '';
+                try {
+                  const parsedArgs = JSON.parse(tc.arguments);
+                  query = parsedArgs.query || '';
+                } catch {
+                  query = tc.arguments;
+                }
+
+                sendEvent({ type: 'searching', query });
+
+                const searchData = await executeTavilySearch(query);
+
+                const formattedSources = searchData.results.map((r: any) => {
+                  let favicon = r.favicon || r.favicon_url;
+                  if (!favicon && r.url) {
+                    try {
+                      favicon = `https://www.google.com/s2/favicons?domain=${new URL(r.url).hostname}&sz=32`;
+                    } catch {
+                      favicon = undefined;
+                    }
+                  }
+                  return {
+                    title: r.title || 'Nguồn kiểm chứng',
+                    url: r.url || '',
+                    snippet: r.content || r.snippet || '',
+                    favicon,
+                  };
+                });
+
+                sendEvent({
+                  type: 'sources',
+                  sources: formattedSources,
+                });
+
+                activeMessages.push({
+                  role: 'tool',
+                  tool_call_id: tc.id,
+                  content: JSON.stringify({
+                    query,
+                    results: searchData.results,
+                    summary: searchData.answer || '',
+                    images: searchData.images || [],
+                  }),
+                });
+              } else {
+                activeMessages.push({
+                  role: 'tool',
+                  tool_call_id: tc.id,
+                  content: JSON.stringify({ status: 'tool_not_supported', tool: tc.name }),
+                });
+              }
             }
 
-            // No tool calls requested, model completed final answer
-            break;
+            continue;
           }
-        } catch (streamErr) {
+
+          break;
+        }
+      } catch (streamErr: unknown) {
+        if ((streamErr as Error)?.name === 'AbortError') {
+          console.log('API stream aborted by client');
+        } else {
           console.error('Agent Loop Streaming Error:', streamErr);
           if (!isCancelled && !req.signal.aborted) {
             sendEvent({
@@ -543,31 +549,27 @@ HƯỚNG DẪN TRẢ LỜI BÁC SĨ CÂY TRỒNG NAM BỘ:
               token: `\n\n⚠️ **Mất kết nối tạm thời với máy chủ AI**: ${(streamErr as Error)?.message || 'fetch failed'}. Nhờ bà con bấm nút tạo lại để em trả lời liền nghen! 🌿`,
             });
           }
-        } finally {
-          if (keepAliveInterval) clearInterval(keepAliveInterval);
-          if (!isCancelled && !req.signal.aborted) {
-            try {
-              controller.enqueue(encoder.encode('data: [DONE]\n\n'));
-              controller.close();
-            } catch {}
-          }
         }
-      },
-    });
+      } finally {
+        if (keepAliveInterval) clearInterval(keepAliveInterval);
+        try {
+          if (!isCancelled && !req.signal.aborted) {
+            controller.enqueue(encoder.encode('data: [DONE]\n\n'));
+          }
+        } catch {}
+        try {
+          controller.close();
+        } catch {}
+      }
+    },
+  });
 
-    return new Response(stream, {
-      headers: {
-        'Content-Type': 'text/event-stream; charset=utf-8',
-        'Cache-Control': 'no-cache, no-transform',
-        Connection: 'keep-alive',
-        'X-Accel-Buffering': 'no',
-      },
-    });
-  } catch (err: unknown) {
-    const message = (err as Error)?.message || 'Internal proxy error';
-    return new Response(JSON.stringify({ error: message }), {
-      status: 500,
-      headers: { 'Content-Type': 'application/json' },
-    });
-  }
+  return new Response(stream, {
+    headers: {
+      'Content-Type': 'text/event-stream; charset=utf-8',
+      'Cache-Control': 'no-cache, no-transform',
+      Connection: 'keep-alive',
+      'X-Accel-Buffering': 'no',
+    },
+  });
 }

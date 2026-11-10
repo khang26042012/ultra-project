@@ -54,3 +54,53 @@ export interface User {
   createdAt: string;
   avatar_url?: string;
 }
+
+export interface ChatContextType {
+  conversations: Conversation[];
+  activeConversationId: string | null;
+  activeConversation: Conversation | null;
+  selectedModel: string;
+  setSelectedModel: (model: string) => void;
+  theme: ThemeMode;
+  setTheme: (theme: ThemeMode) => void;
+  fontSize: FontSizeOption;
+  setFontSize: (size: FontSizeOption) => void;
+  isWebSearchEnabled: boolean;
+  setIsWebSearchEnabled: (enabled: boolean) => void;
+  isAutoScrollEnabled: boolean;
+  setIsAutoScrollEnabled: (enabled: boolean) => void;
+  isSidebarOpen: boolean;
+  setIsSidebarOpen: (open: boolean) => void;
+  toggleSidebar: () => void;
+  isSettingsOpen: boolean;
+  setIsSettingsOpen: (open: boolean) => void;
+  isHelpOpen: boolean;
+  setIsHelpOpen: (open: boolean) => void;
+  isUpgradeOpen: boolean;
+  setIsUpgradeOpen: (open: boolean) => void;
+  isAuthModalOpen: boolean;
+  setIsAuthModalOpen: (open: boolean) => void;
+  currentUser: User | null;
+  login: (email: string, password: string) => Promise<{ success: boolean; error?: string }>;
+  register: (name: string, email: string, password: string) => Promise<{ success: boolean; error?: string }>;
+  logout: () => void;
+  clearChatHistory: () => void;
+  exportBackupJson: () => void;
+  isStreaming: boolean;
+  stopStreaming: () => void;
+  isHydrated: boolean;
+  createNewChat: () => void;
+  selectConversation: (id: string) => void;
+  deleteConversation: (id: string) => void;
+  renameConversation: (id: string, newTitle: string) => void;
+  togglePinConversation: (id: string) => void;
+  sendMessage: (content: string, imageUrl?: string, thinkActive?: boolean) => Promise<void>;
+  updateAvatar: (base64: string) => Promise<{ success: boolean; error?: string }>;
+  userProfile: {
+    name: string;
+    email: string;
+    plan?: string;
+    initials: string;
+    avatar_url?: string;
+  };
+}

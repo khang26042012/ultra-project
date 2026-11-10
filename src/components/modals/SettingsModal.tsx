@@ -62,7 +62,7 @@ export default function SettingsModal() {
     }
   }, [conversations]);
 
-  // Close on Escape key
+  // Close on Escape key and lock body scroll
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
       if (e.key === 'Escape') {
@@ -71,9 +71,13 @@ export default function SettingsModal() {
       }
     }
     if (isSettingsOpen) {
+      document.body.style.overflow = 'hidden';
       window.addEventListener('keydown', handleKeyDown);
     }
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', handleKeyDown);
+    };
   }, [isSettingsOpen, setIsSettingsOpen]);
 
   if (!isSettingsOpen) return null;
@@ -99,7 +103,12 @@ export default function SettingsModal() {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs select-none p-3 sm:p-4 animate-in fade-in duration-150">
+    <div
+      onClick={(e) => {
+        if (e.target === e.currentTarget) setIsSettingsOpen(false);
+      }}
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs select-none p-3 sm:p-4 animate-in fade-in duration-150"
+    >
       <div className="w-full max-w-2xl bg-[#ffffff] dark:bg-[#1e1e1e] border border-[#e5e5e5] dark:border-[#333333] rounded-[24px] shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
         {/* Modal Header */}
         <div className="h-14 px-5 border-b border-[#e5e5e5] dark:border-[#333333] flex items-center justify-between shrink-0">

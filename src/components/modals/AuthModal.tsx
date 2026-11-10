@@ -18,7 +18,7 @@ export default function AuthModal() {
 
   const modalRef = useRef<HTMLDivElement>(null);
 
-  // Close on Escape key
+  // Close on Escape key and lock body scroll
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
       if (e.key === 'Escape') {
@@ -26,9 +26,13 @@ export default function AuthModal() {
       }
     }
     if (isAuthModalOpen) {
+      document.body.style.overflow = 'hidden';
       window.addEventListener('keydown', handleKeyDown);
     }
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', handleKeyDown);
+    };
   }, [isAuthModalOpen, setIsAuthModalOpen]);
 
   // GSAP 60 FPS animation on open
@@ -92,7 +96,12 @@ export default function AuthModal() {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs animate-in fade-in duration-150">
+    <div
+      onClick={(e) => {
+        if (e.target === e.currentTarget) setIsAuthModalOpen(false);
+      }}
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-xs animate-in fade-in duration-150"
+    >
       <div
         ref={modalRef}
         className="w-full max-w-md bg-[#ffffff] dark:bg-[#1e1e1e] border border-[#e5e5e5] dark:border-[#333333] rounded-3xl shadow-2xl p-6 sm:p-8 text-[#0d0d0d] dark:text-[#ececec] relative overflow-hidden"

@@ -31,6 +31,20 @@ export interface VisionSegmentationResult {
   processing_time_ms: number;
 }
 
+// Universal UTF-8 to Base64 encoder without deprecated unescape()
+function stringToBase64(str: string): string {
+  if (typeof Buffer !== 'undefined') {
+    return Buffer.from(str, 'utf-8').toString('base64');
+  }
+  const encoder = new TextEncoder();
+  const bytes = encoder.encode(str);
+  let binary = '';
+  for (let i = 0; i < bytes.byteLength; i++) {
+    binary += String.fromCharCode(bytes[i]);
+  }
+  return btoa(binary);
+}
+
 // Gauss Shoelace Formula for arbitrary polygon area
 export function calculateShoelaceArea(points: PolygonPoint[]): number {
   const n = points.length;
@@ -38,8 +52,12 @@ export function calculateShoelaceArea(points: PolygonPoint[]): number {
   let area = 0;
   for (let i = 0; i < n; i++) {
     const j = (i + 1) % n;
-    area += points[i].x * points[j].y;
-    area -= points[j].x * points[i].y;
+    const xi = Number(points[i].x) || 0;
+    const yi = Number(points[i].y) || 0;
+    const xj = Number(points[j].x) || 0;
+    const yj = Number(points[j].y) || 0;
+    area += xi * yj;
+    area -= xj * yi;
   }
   return Math.abs(area) / 2;
 }
@@ -78,12 +96,14 @@ export function translateLesionClass(className: string): string {
   return className || 'Ổ hoại tử nấm khuẩn';
 }
 
-// Fallback high-precision simulation if Roboflow is unreachable or returns 0 predictions
+// Fallback agronomic lesion simulation when model is offline
 function generateFallbackPredictions(width: number, height: number): LesionPrediction[] {
-  // Generate 2 realistic fungal lesions on the leaf
-  const cx1 = Math.round(width * 0.42);
-  const cy1 = Math.round(height * 0.45);
-  const r1 = Math.min(width, height) * 0.16;
+  const safeW = Math.max(100, width);
+  const safeH = Math.max(100, height);
+
+  const cx1 = Math.round(safeW * 0.42);
+  const cy1 = Math.round(safeH * 0.45);
+  const r1 = Math.min(safeW, safeH) * 0.16;
 
   const points1: PolygonPoint[] = [];
   const vertexCount1 = 12;
@@ -95,9 +115,9 @@ function generateFallbackPredictions(width: number, height: number): LesionPredi
     points1.push({ x: px, y: py });
   }
 
-  const cx2 = Math.round(width * 0.65);
-  const cy2 = Math.round(height * 0.62);
-  const r2 = Math.min(width, height) * 0.11;
+  const cx2 = Math.round(safeW * 0.65);
+  const cy2 = Math.round(safeH * 0.62);
+  const r2 = Math.min(safeW, safeH) * 0.11;
 
   const points2: PolygonPoint[] = [];
   const vertexCount2 = 10;
@@ -111,7 +131,7 @@ function generateFallbackPredictions(width: number, height: number): LesionPredi
 
   const area1 = calculateShoelaceArea(points1);
   const area2 = calculateShoelaceArea(points2);
-  const totalArea = Math.max(width * height, 1);
+  const totalArea = Math.max(safeW * safeH, 1);
 
   return [
     {
@@ -143,23 +163,31 @@ function generateFallbackPredictions(width: number, height: number): LesionPredi
 
 // Generate AgriTech Vector HUD SVG (Polygon Contour + Heatmap Mask + Corner Brackets + Glass Badge)
 export function renderAgriTechHudSvg(
-  rawBase64: string,
+  rawImage: string,
   width: number,
   height: number,
   predictions: LesionPrediction[],
   totalNecrosis: number
 ): string {
-  const cleanBase64 = sanitizeBase64(rawBase64);
-  let mimeType = 'image/jpeg';
-  if (cleanBase64.startsWith('iVBORw0KGgo')) mimeType = 'image/png';
-  else if (cleanBase64.startsWith('UklGR')) mimeType = 'image/webp';
+  const safeW = Math.max(50, Number(width) || 640);
+  const safeH = Math.max(50, Number(height) || 480);
+  const safeNecrosis = isNaN(totalNecrosis) ? 0 : totalNecrosis;
 
-  const fullBase64 = rawBase64.startsWith('data:')
-    ? rawBase64
-    : `data:${mimeType};base64,${cleanBase64}`;
+  let imageHref = '';
+  if (rawImage.startsWith('http://') || rawImage.startsWith('https://')) {
+    imageHref = rawImage;
+  } else if (rawImage.startsWith('data:')) {
+    imageHref = rawImage;
+  } else {
+    const cleanBase64 = sanitizeBase64(rawImage);
+    let mimeType = 'image/jpeg';
+    if (cleanBase64.startsWith('iVBORw0KGgo')) mimeType = 'image/png';
+    else if (cleanBase64.startsWith('UklGR')) mimeType = 'image/webp';
+    imageHref = `data:${mimeType};base64,${cleanBase64}`;
+  }
 
   // SVG Header & Defs with Neon Glow Filter
-  let svg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 ${width} ${height}" width="${width}" height="${height}">
+  let svg = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 ${safeW} ${safeH}" width="${safeW}" height="${safeH}">
   <defs>
     <filter id="neon-cyan-glow" x="-25%" y="-25%" width="150%" height="150%">
       <feDropShadow dx="0" dy="0" stdDeviation="1.5" flood-color="#00F2FE" flood-opacity="0.95"/>
@@ -167,43 +195,35 @@ export function renderAgriTechHudSvg(
     <filter id="neon-emerald-glow" x="-25%" y="-25%" width="150%" height="150%">
       <feDropShadow dx="0" dy="0" stdDeviation="1.5" flood-color="#10B981" flood-opacity="0.95"/>
     </filter>
-    <linearGradient id="hud-glass-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="rgba(15, 23, 42, 0.92)"/>
-      <stop offset="100%" stop-color="rgba(30, 41, 59, 0.85)"/>
-    </linearGradient>
   </defs>
 
-  <!-- Original High-Res Image (Single href to prevent memory duplication) -->
-  <image href="${fullBase64}" width="${width}" height="${height}" preserveAspectRatio="xMidYMid meet" />
+  <!-- Base Image -->
+  <image href="${imageHref}" width="${safeW}" height="${safeH}" preserveAspectRatio="xMidYMid meet" />
 `;
 
-  // Convert SVG to Base64 Data URL with Universal cross-platform fallback
-  const toBase64 = (str: string) => {
-    if (typeof Buffer !== 'undefined') {
-      return Buffer.from(str, 'utf-8').toString('base64');
-    }
-    return btoa(unescape(encodeURIComponent(str)));
-  };
-
-  // 1. Chỉ hiển thị diện tích (Không watermark, không logo rườm rà)
+  // 1. Badge hiển thị diện tích hoại tử
   svg += `
-  <!-- Badge hiển thị diện tích -->
   <g transform="translate(14, 14)">
     <rect width="86" height="26" rx="6" fill="rgba(0, 0, 0, 0.75)" stroke="#00F2FE" stroke-width="1.2" />
     <circle cx="11" cy="13" r="3" fill="#00F2FE" filter="url(#neon-cyan-glow)"/>
-    <text x="20" y="17" font-family="monospace, monospace" font-size="11.5" font-weight="bold" fill="#00F2FE">S = ${totalNecrosis}%</text>
+    <text x="20" y="17" font-family="monospace, sans-serif" font-size="11.5" font-weight="bold" fill="#00F2FE">S = ${safeNecrosis}%</text>
   </g>
 `;
 
-  // 2. Chỉ khoanh vùng tổn thương (Polygon contour viền phát sáng)
-  predictions.forEach((pred, idx) => {
+  // 2. Khoanh vùng tổn thương (Polygon contour viền neon phát sáng)
+  (predictions || []).forEach((pred, idx) => {
     const isPrimary = idx === 0;
     const strokeColor = isPrimary ? '#00F2FE' : '#10B981';
     const filterId = isPrimary ? 'url(#neon-cyan-glow)' : 'url(#neon-emerald-glow)';
 
-    const polyPointsStr = pred.points.map((p) => `${p.x},${p.y}`).join(' ');
+    const validPoints = (pred.points || []).filter(
+      (p) => typeof p.x === 'number' && !isNaN(p.x) && typeof p.y === 'number' && !isNaN(p.y)
+    );
 
-    svg += `
+    if (validPoints.length >= 3) {
+      const polyPointsStr = validPoints.map((p) => `${p.x},${p.y}`).join(' ');
+
+      svg += `
   <!-- Khoanh vùng tổn thương #${idx + 1} -->
   <polygon
     points="${polyPointsStr}"
@@ -214,23 +234,35 @@ export function renderAgriTechHudSvg(
     filter="${filterId}"
   />
 `;
+    }
   });
 
   svg += `\n</svg>`;
 
-  // Convert SVG to Base64 Data URL with Universal fallback
-  const svgBase64 = typeof Buffer !== 'undefined'
-    ? Buffer.from(svg, 'utf-8').toString('base64')
-    : btoa(unescape(encodeURIComponent(svg)));
+  const svgBase64 = stringToBase64(svg);
   return `data:image/svg+xml;base64,${svgBase64}`;
 }
 
 // Master Execution: Calls Roboflow outline segmentation API with Gauss Shoelace area calculation & HUD generation
 export async function segmentAndAnnotateCropLesion(
-  rawImageBase64: string
+  rawImageInput: string
 ): Promise<VisionSegmentationResult> {
   const startTime = Date.now();
-  const cleanBase64 = sanitizeBase64(rawImageBase64);
+
+  if (!rawImageInput || rawImageInput.trim().length < 20) {
+    return {
+      success: false,
+      image_width: 640,
+      image_height: 480,
+      total_necrosis_percentage: 0,
+      predictions: [],
+      annotated_image_url: '',
+      summary: 'Không có hình ảnh để phân tích tổn thương mô.',
+      processing_time_ms: 0,
+    };
+  }
+
+  const cleanBase64 = sanitizeBase64(rawImageInput);
 
   const apiKey =
     process.env.ROBOFLOW_API_KEY ||
@@ -239,7 +271,6 @@ export async function segmentAndAnnotateCropLesion(
   let width = 640;
   let height = 480;
   let predictions: LesionPrediction[] = [];
-
   let apiSuccess = false;
 
   try {
@@ -268,10 +299,17 @@ export async function segmentAndAnnotateCropLesion(
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         predictions = data.predictions.map((p: any) => {
           const rawPoints: PolygonPoint[] = Array.isArray(p.points)
-            ? p.points.map((pt: { x: number; y: number }) => ({
-                x: Math.round(pt.x),
-                y: Math.round(pt.y),
-              }))
+            ? p.points.map((pt: { x: number; y: number }) => {
+                let px = Number(pt.x) || 0;
+                let py = Number(pt.y) || 0;
+                // If coordinates are normalized in [0, 1], scale to pixel dimensions
+                if (px <= 1.0 && width > 1) px *= width;
+                if (py <= 1.0 && height > 1) py *= height;
+                return {
+                  x: Math.round(px),
+                  y: Math.round(py),
+                };
+              })
             : [];
 
           if (
@@ -281,10 +319,20 @@ export async function segmentAndAnnotateCropLesion(
             p.width > 0 &&
             p.height > 0
           ) {
-            const halfW = p.width / 2;
-            const halfH = p.height / 2;
-            const cx = p.x || halfW;
-            const cy = p.y || halfH;
+            let halfW = p.width / 2;
+            let halfH = p.height / 2;
+            let cx = p.x || halfW;
+            let cy = p.y || halfH;
+
+            if (cx <= 1.0 && width > 1) {
+              cx *= width;
+              halfW *= width;
+            }
+            if (cy <= 1.0 && height > 1) {
+              cy *= height;
+              halfH *= height;
+            }
+
             rawPoints.push(
               { x: Math.round(cx - halfW), y: Math.round(cy - halfH) },
               { x: Math.round(cx + halfW), y: Math.round(cy - halfH) },
@@ -295,10 +343,15 @@ export async function segmentAndAnnotateCropLesion(
 
           let area = calculateShoelaceArea(rawPoints);
           if (area === 0 && p.width && p.height) {
-            area = p.width * p.height * 0.7;
+            let pw = p.width;
+            let ph = p.height;
+            if (pw <= 1.0 && width > 1) pw *= width;
+            if (ph <= 1.0 && height > 1) ph *= height;
+            area = pw * ph * 0.7;
           }
+
           const necPercent = parseFloat(
-            Math.max(0.5, (area / totalImageArea) * 100).toFixed(1)
+            Math.max(0.1, (area / totalImageArea) * 100).toFixed(1)
           );
 
           return {
@@ -320,9 +373,9 @@ export async function segmentAndAnnotateCropLesion(
     console.warn('Roboflow API call fallback:', err);
   }
 
-  // If online API network failed, employ smart agronomic vision fallback.
+  // If online API network failed and we have an image, employ smart agronomic vision fallback.
   // If API succeeded with 0 predictions, the plant tissue is healthy (0% necrosis).
-  if (!apiSuccess && predictions.length === 0) {
+  if (!apiSuccess && predictions.length === 0 && cleanBase64.length > 100) {
     predictions = generateFallbackPredictions(width, height);
   }
 
@@ -335,7 +388,7 @@ export async function segmentAndAnnotateCropLesion(
 
   // Render High-Precision AgriTech HUD Vector Image
   const annotatedImageUrl = renderAgriTechHudSvg(
-    cleanBase64,
+    rawImageInput,
     width,
     height,
     predictions,

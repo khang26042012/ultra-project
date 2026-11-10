@@ -133,7 +133,7 @@ ${conflictText}
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-black/70 backdrop-blur-sm animate-in fade-in duration-200">
+    <div onClick={onClose} className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-black/70 backdrop-blur-sm animate-in fade-in duration-200">
       <div
         onClick={(e) => e.stopPropagation()}
         className="w-full max-w-6xl max-h-[92vh] flex flex-col bg-white dark:bg-[#121212] rounded-3xl border border-[#e5e5e5] dark:border-[#262626] shadow-2xl overflow-hidden text-[#0d0d0d] dark:text-[#ececec]"

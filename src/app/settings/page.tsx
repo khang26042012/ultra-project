@@ -85,7 +85,15 @@ function SettingsView() {
           setActiveModal(null);
           if (fileInputRef.current) fileInputRef.current.value = '';
         };
+        img.onerror = () => {
+          console.error('Không thể phân tích định dạng ảnh đại diện');
+          setIsProcessingAvatar(false);
+        };
         img.src = event.target?.result as string;
+      };
+      reader.onerror = () => {
+        console.error('Lỗi đọc tệp ảnh');
+        setIsProcessingAvatar(false);
       };
       reader.readAsDataURL(file);
     } catch (err) {
@@ -128,6 +136,19 @@ function SettingsView() {
       if (savedRegion) setFarmRegion(savedRegion);
     }
   }, []);
+
+  useEffect(() => {
+    if (!activeModal) return;
+    document.body.style.overflow = 'hidden';
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setActiveModal(null);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [activeModal]);
 
   const [newPassword, setNewPassword] = useState('');
   const [passwordSuccess, setPasswordSuccess] = useState(false);
@@ -694,7 +715,12 @@ function SettingsView() {
       {/* SUB-MODALS */}
       {/* 1. Modal Cá nhân hóa */}
       {activeModal === 'personalize' && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 animate-in fade-in duration-150">
+        <div
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setActiveModal(null);
+          }}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 animate-in fade-in duration-150"
+        >
           <div className="w-full max-w-md bg-white dark:bg-[#202020] border border-[#e5e5e5] dark:border-[#333] rounded-3xl p-5 space-y-4 shadow-xl">
             <div className="flex items-center justify-between">
               <h3 className="text-base font-semibold text-[#0d0d0d] dark:text-white">
@@ -750,7 +776,12 @@ function SettingsView() {
 
       {/* 2. Modal Chọn Model AI */}
       {activeModal === 'model' && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 animate-in fade-in duration-150">
+        <div
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setActiveModal(null);
+          }}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 animate-in fade-in duration-150"
+        >
           <div className="w-full max-w-md bg-white dark:bg-[#202020] border border-[#e5e5e5] dark:border-[#333] rounded-3xl p-5 space-y-4 shadow-xl">
             <div className="flex items-center justify-between">
               <h3 className="text-base font-semibold text-[#0d0d0d] dark:text-white">
@@ -822,7 +853,12 @@ function SettingsView() {
 
       {/* 3. Modal Chọn Theme */}
       {activeModal === 'theme' && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 animate-in fade-in duration-150">
+        <div
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setActiveModal(null);
+          }}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 animate-in fade-in duration-150"
+        >
           <div className="w-full max-w-sm bg-white dark:bg-[#202020] border border-[#e5e5e5] dark:border-[#333] rounded-3xl p-5 space-y-3 shadow-xl">
             <div className="flex items-center justify-between">
               <h3 className="text-base font-semibold text-[#0d0d0d] dark:text-white">Giao diện</h3>
@@ -869,7 +905,12 @@ function SettingsView() {
 
       {/* 4. Modal Chọn Cỡ chữ */}
       {activeModal === 'fontSize' && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 animate-in fade-in duration-150">
+        <div
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setActiveModal(null);
+          }}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 animate-in fade-in duration-150"
+        >
           <div className="w-full max-w-sm bg-white dark:bg-[#202020] border border-[#e5e5e5] dark:border-[#333] rounded-3xl p-5 space-y-3 shadow-xl">
             <div className="flex items-center justify-between">
               <h3 className="text-base font-semibold text-[#0d0d0d] dark:text-white">Cỡ chữ</h3>
@@ -916,7 +957,12 @@ function SettingsView() {
 
       {/* 5. Modal Đổi Mật khẩu */}
       {activeModal === 'password' && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 animate-in fade-in duration-150">
+        <div
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setActiveModal(null);
+          }}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 animate-in fade-in duration-150"
+        >
           <div className="w-full max-w-sm bg-white dark:bg-[#202020] border border-[#e5e5e5] dark:border-[#333] rounded-3xl p-5 space-y-4 shadow-xl">
             <div className="flex items-center justify-between">
               <h3 className="text-base font-semibold text-[#0d0d0d] dark:text-white">
@@ -960,7 +1006,12 @@ function SettingsView() {
 
       {/* 6. Modal Xác nhận xóa toàn bộ lịch sử */}
       {activeModal === 'clearHistory' && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 animate-in fade-in duration-150">
+        <div
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setActiveModal(null);
+          }}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 animate-in fade-in duration-150"
+        >
           <div className="w-full max-w-sm bg-white dark:bg-[#202020] border border-[#e5e5e5] dark:border-[#333] rounded-3xl p-5 space-y-4 shadow-xl">
             <div className="space-y-1">
               <h3 className="text-base font-bold text-red-600 dark:text-red-400">
@@ -997,7 +1048,12 @@ function SettingsView() {
 
       {/* 7. Modal Đổi Avatar */}
       {activeModal === 'avatar' && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 animate-in fade-in duration-150">
+        <div
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setActiveModal(null);
+          }}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs p-4 animate-in fade-in duration-150"
+        >
           <div className="w-full max-w-sm bg-white dark:bg-[#202020] border border-[#e5e5e5] dark:border-[#333] rounded-3xl p-5 space-y-4 shadow-xl text-center">
             <div className="flex items-center justify-between">
               <h3 className="text-base font-semibold text-[#0d0d0d] dark:text-white">

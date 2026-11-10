@@ -312,6 +312,12 @@ export default function CameraCaptureModal({
   // Initialize or teardown when modal opens/closes
   useEffect(() => {
     if (isOpen) {
+      document.body.style.overflow = 'hidden';
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') onClose();
+      };
+      window.addEventListener('keydown', handleKeyDown);
+
       setCapturedImage(null);
       setCapturedResolution(null);
       startCamera(facingMode);
@@ -323,14 +329,16 @@ export default function CameraCaptureModal({
           { opacity: 1, scale: 1, duration: 0.25, ease: 'power2.out' }
         );
       }
+
+      return () => {
+        document.body.style.overflow = '';
+        window.removeEventListener('keydown', handleKeyDown);
+        stopCamera();
+      };
     } else {
       stopCamera();
     }
-
-    return () => {
-      stopCamera();
-    };
-  }, [isOpen, startCamera, stopCamera]);
+  }, [isOpen, onClose, startCamera, stopCamera]);
 
   // Read actual stream resolution when loaded
   const handleLoadedMetadata = () => {

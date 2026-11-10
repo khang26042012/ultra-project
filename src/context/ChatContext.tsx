@@ -1,10 +1,9 @@
 'use client';
 
 import React, { createContext, useContext, useState, useEffect, useRef, useCallback } from 'react';
-import { Conversation, Message, ModelOption, ThemeMode, User, SearchSource, FontSizeOption } from '@/types/chat';
-import { getInitials } from '@/lib/utils';
+import { Conversation, Message, ModelOption, ThemeMode, User, SearchSource, FontSizeOption, ChatContextType } from '@/types/chat';
+import { getInitials, generateId, safeSetLocalStorage } from '@/lib/utils';
 import { supabase } from '@/lib/supabase';
-
 
 export const AVAILABLE_MODELS: ModelOption[] = [
   {
@@ -24,54 +23,6 @@ export const AVAILABLE_MODELS: ModelOption[] = [
 
 const INITIAL_CONVERSATIONS: Conversation[] = [];
 
-interface ChatContextType {
-  conversations: Conversation[];
-  activeConversationId: string | null;
-  activeConversation: Conversation | null;
-  selectedModel: string;
-  setSelectedModel: (model: string) => void;
-  theme: ThemeMode;
-  setTheme: (theme: ThemeMode) => void;
-  fontSize: FontSizeOption;
-  setFontSize: (size: FontSizeOption) => void;
-  isWebSearchEnabled: boolean;
-  setIsWebSearchEnabled: (enabled: boolean) => void;
-  isAutoScrollEnabled: boolean;
-  setIsAutoScrollEnabled: (enabled: boolean) => void;
-  isSidebarOpen: boolean;
-  setIsSidebarOpen: (open: boolean) => void;
-  toggleSidebar: () => void;
-  isSettingsOpen: boolean;
-  setIsSettingsOpen: (open: boolean) => void;
-  isHelpOpen: boolean;
-  setIsHelpOpen: (open: boolean) => void;
-  isUpgradeOpen: boolean;
-  setIsUpgradeOpen: (open: boolean) => void;
-  isAuthModalOpen: boolean;
-  setIsAuthModalOpen: (open: boolean) => void;
-  currentUser: User | null;
-  login: (email: string, password: string) => Promise<{ success: boolean; error?: string }>;
-  register: (name: string, email: string, password: string) => Promise<{ success: boolean; error?: string }>;
-  logout: () => void;
-  clearChatHistory: () => void;
-  exportBackupJson: () => void;
-  isStreaming: boolean;
-  createNewChat: () => void;
-  selectConversation: (id: string) => void;
-  deleteConversation: (id: string) => void;
-  renameConversation: (id: string, newTitle: string) => void;
-  togglePinConversation: (id: string) => void;
-  sendMessage: (content: string, imageUrl?: string, thinkActive?: boolean) => Promise<void>;
-  updateAvatar: (base64: string) => Promise<{ success: boolean; error?: string }>;
-  userProfile: {
-    name: string;
-    email: string;
-    plan?: string;
-    initials: string;
-    avatar_url?: string;
-  };
-}
-
 const ChatContext = createContext<ChatContextType | undefined>(undefined);
 
 export function ChatProvider({ children }: { children: React.ReactNode }) {
@@ -89,8 +40,13 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
   const [isUpgradeOpen, setIsUpgradeOpen] = useState<boolean>(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState<boolean>(false);
   const [isStreaming, setIsStreaming] = useState<boolean>(false);
+  const [isHydrated, setIsHydrated] = useState<boolean>(false);
   const [customAvatar, setCustomAvatar] = useState<string | undefined>(undefined);
+
   const abortControllerRef = useRef<AbortController | null>(null);
+  const isSendingRef = useRef<boolean>(false);
+  const conversationsRef = useRef<Conversation[]>(conversations);
+  conversationsRef.current = conversations;
 
   // Safe client-only read for custom avatar to prevent Hydration Mismatch
   useEffect(() => {
@@ -165,6 +121,19 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
     }
   }, []);
 
+  // Auto-heal dangling streaming/thinking flags in loaded conversations
+  const sanitizeLoadedConversations = (list: Conversation[]): Conversation[] => {
+    return (list || []).map((conv) => ({
+      ...conv,
+      messages: (conv.messages || []).map((m) => ({
+        ...m,
+        isStreaming: false,
+        isThinking: false,
+        visionSegmenting: false,
+      })),
+    }));
+  };
+
   // Load conversations for user: Supabase Cloud -> fallback localStorage
   const loadConversationsForUser = useCallback(async (userId?: string) => {
     const key = getChatStorageKey(userId);
@@ -202,6 +171,8 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
                 thought: m.thought || undefined,
                 sources: m.sources || undefined,
                 timestamp: m.timestamp || new Date(m.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                isStreaming: false,
+                isThinking: false,
               });
             }
           }
@@ -214,8 +185,10 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
             messages: messagesByConv[c.id] || [],
           }));
 
-          localStorage.setItem(key, JSON.stringify(loaded));
-          setConversations(loaded);
+          const sanitized = sanitizeLoadedConversations(loaded);
+          safeSetLocalStorage(key, sanitized);
+          setConversations(sanitized);
+          setIsHydrated(true);
           return;
         }
       } catch (sbErr) {
@@ -233,7 +206,9 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
       // ignore
     }
 
-    setConversations(loaded || []);
+    const sanitized = sanitizeLoadedConversations(loaded);
+    setConversations(sanitized);
+    setIsHydrated(true);
   }, [getChatStorageKey]);
 
   // Apply theme class to HTML element with persistence
@@ -346,40 +321,40 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
     }
   }, [loadConversationsForUser]);
 
-  // Persist conversations to localStorage and Server (with Base64 payload sanitization to prevent 5MB QuotaExceededError)
+  // Synchronize across browser tabs
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const handleStorage = (e: StorageEvent) => {
+      const key = getChatStorageKey(currentUser?.id);
+      if (e.key === key && e.newValue) {
+        try {
+          const parsed = JSON.parse(e.newValue);
+          if (Array.isArray(parsed)) {
+            setConversations(sanitizeLoadedConversations(parsed));
+          }
+        } catch {}
+      }
+    };
+    window.addEventListener('storage', handleStorage);
+    return () => window.removeEventListener('storage', handleStorage);
+  }, [currentUser?.id, getChatStorageKey]);
+
+  // Persist conversations to localStorage cleanly via queueMicrotask
   const updateAndPersistConversations = useCallback(
     (updater: (prev: Conversation[]) => Conversation[]) => {
       setConversations((prev) => {
         const updated = updater(prev);
-        try {
+        queueMicrotask(() => {
           const key = getChatStorageKey(currentUser?.id);
-          // Strip heavy image payloads from localStorage persistence while keeping them in React RAM state
-          const sanitizedForStorage = updated.map((conv) => ({
-            ...conv,
-            messages: conv.messages.map((m) => {
-              const hasHeavyImage = m.imageUrl && m.imageUrl.length > 40000;
-              const hasHeavyAnnotated = m.annotatedImageUrl && m.annotatedImageUrl.length > 40000;
-              if (!hasHeavyImage && !hasHeavyAnnotated) return m;
-
-              return {
-                ...m,
-                imageUrl: hasHeavyImage ? '[Ảnh mẫu bệnh học đã lưu]' : m.imageUrl,
-                annotatedImageUrl: hasHeavyAnnotated ? undefined : m.annotatedImageUrl,
-              };
-            }),
-          }));
-
-          localStorage.setItem(key, JSON.stringify(sanitizedForStorage));
-        } catch (storageErr) {
-          console.warn('LocalStorage quota exceeded or write failed:', storageErr);
-        }
+          safeSetLocalStorage(key, updated);
+        });
         return updated;
       });
     },
     [currentUser?.id, getChatStorageKey]
   );
 
-  // Authentication: Register (Bắt conflict theo email, không nuốt lỗi)
+  // Authentication: Register
   const register = async (name: string, email: string, password: string) => {
     try {
       const cleanEmail = email.toLowerCase().trim();
@@ -424,8 +399,8 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
         };
       }
 
-      // 2. Tạo ID user mới
-      const newUserId = `user-${Date.now()}`;
+      // 2. Tạo ID user mới an toàn
+      const newUserId = generateId('user');
       const newUser: User = {
         id: newUserId,
         name: name.trim(),
@@ -465,19 +440,20 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
 
       setCurrentUser(newUser);
 
-      // 5. Di chuyển các đoạn chat khách (guest) sang tài khoản mới
+      // 5. Di chuyển các đoạn chat khách (guest) sang tài khoản mới và dọn dẹp
       const guestKey = getChatStorageKey();
       const guestChats = localStorage.getItem(guestKey);
       if (guestChats) {
         try {
           const parsed: Conversation[] = JSON.parse(guestChats);
           if (Array.isArray(parsed) && parsed.length > 0) {
-            localStorage.setItem(getChatStorageKey(newUser.id), guestChats);
+            safeSetLocalStorage(getChatStorageKey(newUser.id), parsed);
             setConversations(parsed);
             for (const conv of parsed) {
               syncConversationToSupabase(conv, newUser.id);
             }
           }
+          localStorage.removeItem(guestKey);
         } catch {}
       }
 
@@ -487,7 +463,7 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  // Authentication: Login (Truy vấn trực tiếp Supabase, auto-healing)
+  // Authentication: Login
   const login = async (email: string, password: string) => {
     try {
       const cleanEmail = email.toLowerCase().trim();
@@ -558,22 +534,7 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
       );
 
       if (localMatch) {
-        // Tự động đẩy lên Supabase để lần sau không bị lỗi nữa
-        supabase
-          .from('profiles')
-          .upsert(
-            {
-              id: localMatch.id,
-              email: cleanEmail,
-              name: localMatch.name,
-              password_hash: cleanPass,
-              role: 'farmer',
-              updated_at: new Date().toISOString(),
-            },
-            { onConflict: 'email' }
-          )
-          .then();
-
+        syncProfileToSupabase(localMatch);
         localStorage.setItem('agrivision_current_user', JSON.stringify(localMatch));
         setCurrentUser(localMatch);
         await loadConversationsForUser(localMatch.id);
@@ -588,6 +549,7 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
 
   // Authentication: Logout
   const logout = () => {
+    stopStreaming();
     setCurrentUser(null);
     try {
       localStorage.removeItem('agrivision_current_user');
@@ -599,6 +561,7 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
 
   // Clear chat history for current user
   const clearChatHistory = () => {
+    stopStreaming();
     if (currentUser?.id) {
       supabase.from('conversations').delete().eq('user_id', currentUser.id).then();
     }
@@ -633,23 +596,28 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
 
   const activeConversation = conversations.find((c) => c.id === activeConversationId) || null;
 
-  const createNewChat = () => {
+  // Stop active AI stream
+  const stopStreaming = useCallback(() => {
     if (abortControllerRef.current) {
       abortControllerRef.current.abort();
+      abortControllerRef.current = null;
     }
+    isSendingRef.current = false;
     setIsStreaming(false);
+  }, []);
+
+  const createNewChat = () => {
+    stopStreaming();
     setActiveConversationId(null);
   };
 
   const selectConversation = (id: string) => {
-    if (abortControllerRef.current) {
-      abortControllerRef.current.abort();
-    }
-    setIsStreaming(false);
+    stopStreaming();
     setActiveConversationId(id);
   };
 
   const deleteConversation = (id: string) => {
+    stopStreaming();
     deleteConversationFromSupabase(id);
     updateAndPersistConversations((prev) => prev.filter((c) => c.id !== id));
     if (activeConversationId === id) {
@@ -686,10 +654,13 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
   // Multi-step Agent Loop with Web Search & Reasoning Streaming
   const sendMessage = async (content: string, imageUrl?: string, thinkActive = false) => {
     const trimmedContent = content.trim();
-    if ((!trimmedContent && !imageUrl) || isStreaming) return;
+    if ((!trimmedContent && !imageUrl) || isStreaming || isSendingRef.current) return;
+
+    // Mutex lock to prevent double clicks / race conditions
+    isSendingRef.current = true;
 
     const userMessage: Message = {
-      id: `user-${Date.now()}`,
+      id: generateId('msg-user'),
       role: 'user',
       content: trimmedContent || (imageUrl ? 'Chẩn đoán hình ảnh bệnh cây đính kèm' : ''),
       imageUrl: imageUrl || undefined,
@@ -699,10 +670,13 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
     let targetConvId = activeConversationId;
     let currentMessages: Message[] = [];
 
-    if (!targetConvId) {
+    // Verify targetConvId exists in current memory state
+    const existingConv = targetConvId ? conversationsRef.current.find((c) => c.id === targetConvId) : null;
+
+    if (!targetConvId || !existingConv) {
       const titleCandidate = trimmedContent || 'Chẩn đoán hình ảnh';
       const newTitle = titleCandidate.length > 32 ? `${titleCandidate.slice(0, 32)}...` : titleCandidate;
-      targetConvId = `conv-${Date.now()}`;
+      targetConvId = generateId('conv');
       const newConv: Conversation = {
         id: targetConvId,
         title: newTitle,
@@ -717,7 +691,7 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
       // Sync new conversation to Supabase
       syncConversationToSupabase(newConv, currentUser?.id);
 
-      // LPU Groq Fast Titling (<0.2s)
+      // Fast titling trigger
       const convIdToName = targetConvId;
       fetch('/api/chat/title', {
         method: 'POST',
@@ -739,10 +713,9 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
             );
           }
         })
-        .catch((err) => console.warn('LPU titling trigger error:', err));
+        .catch((err) => console.warn('Fast titling trigger error:', err));
     } else {
-      const conv = conversations.find((c) => c.id === targetConvId);
-      currentMessages = conv ? [...conv.messages, userMessage] : [userMessage];
+      currentMessages = [...existingConv.messages, userMessage];
       updateAndPersistConversations((prev) =>
         prev.map((c) =>
           c.id === targetConvId
@@ -760,7 +733,7 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
     syncMessageToSupabase(targetConvId, userMessage);
 
     // Set up placeholder for streaming response
-    const aiMessageId = `ai-${Date.now()}`;
+    const aiMessageId = generateId('msg-ai');
     const initialAiMessage: Message = {
       id: aiMessageId,
       role: 'assistant',
@@ -809,7 +782,6 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
     let currentAnnotatedImageUrl: string | undefined = undefined;
     let isVisionSegmenting = false;
 
-    // Request Screen Wake Lock to prevent mobile OS from putting connection to sleep when multitasking
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let wakeLock: any = null;
     if (typeof navigator !== 'undefined' && 'wakeLock' in navigator) {
@@ -994,7 +966,29 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
       syncMessageToSupabase(targetConvId, finalAiMessage);
     } catch (err: unknown) {
       if ((err as Error)?.name === 'AbortError') {
-        console.log('Stream aborted');
+        // Preserving accumulated content on user cancellation
+        updateAndPersistConversations((prev) =>
+          prev.map((c) =>
+            c.id === targetConvId
+              ? {
+                  ...c,
+                  messages: c.messages.map((m) =>
+                    m.id === aiMessageId
+                      ? {
+                          ...m,
+                          content: accumulatedContent || '*(Đã dừng phản hồi)*',
+                          thought: accumulatedThought || undefined,
+                          isStreaming: false,
+                          isThinking: false,
+                          annotatedImageUrl: currentAnnotatedImageUrl,
+                          sources: currentSources.length > 0 ? currentSources : undefined,
+                        }
+                      : m
+                  ),
+                }
+              : c
+          )
+        );
         return;
       }
       console.error('AgriVision Streaming Error:', err);
@@ -1038,6 +1032,7 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
           wakeLock.release();
         } catch {}
       }
+      isSendingRef.current = false;
       setIsStreaming(false);
       abortControllerRef.current = null;
     }
@@ -1050,7 +1045,8 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
         ? { ...currentUser, avatar_url: compressedBase64 }
         : {
             id: 'guest',
-            name: 'Khách nhà nông', email: '',
+            name: 'Khách nhà nông',
+            email: '',
             passwordHash: '',
             createdAt: new Date().toISOString(),
             avatar_url: compressedBase64,
@@ -1127,6 +1123,8 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
         exportBackupJson,
         updateAvatar,
         isStreaming,
+        stopStreaming,
+        isHydrated,
         createNewChat,
         selectConversation,
         deleteConversation,

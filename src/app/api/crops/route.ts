@@ -8,8 +8,12 @@ export async function GET(req: NextRequest) {
     const { searchParams } = new URL(req.url);
     const query = searchParams.get('q') || searchParams.get('query') || '';
     const topic = searchParams.get('topic') || '';
-    const limit = parseInt(searchParams.get('limit') || '50', 10);
-    const offset = parseInt(searchParams.get('offset') || '0', 10);
+    
+    // Bounds check and sanitize pagination parameters to prevent DoS or memory issues
+    const rawLimit = parseInt(searchParams.get('limit') || '50', 10);
+    const rawOffset = parseInt(searchParams.get('offset') || '0', 10);
+    const limit = Math.max(1, Math.min(100, isNaN(rawLimit) ? 50 : rawLimit));
+    const offset = Math.max(0, isNaN(rawOffset) ? 0 : rawOffset);
 
     const allCrops = loadAllCrops();
 
