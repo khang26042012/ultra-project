@@ -34,6 +34,10 @@ const compressImage = (file: File): Promise<string> => {
         if (ctx) {
           ctx.drawImage(img, 0, 0, width, height);
           const base64 = canvas.toDataURL('image/jpeg', 0.88);
+          // Free canvas backing store memory on mobile
+          ctx.clearRect(0, 0, width, height);
+          canvas.width = 0;
+          canvas.height = 0;
           resolve(base64);
         } else {
           resolve(e.target?.result as string);
@@ -182,6 +186,7 @@ export default function FloatingInputIsland() {
     const files = e.target.files;
     if (files && files.length > 0) {
       const file = files[0];
+      e.target.value = ''; // Reset input value so user can select/retake the same photo
       setImageName(file.name);
       setIsCompressing(true);
       try {

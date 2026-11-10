@@ -32,7 +32,7 @@ interface ChatMessageProps {
 }
 
 export default function ChatMessage({ message }: ChatMessageProps) {
-  const { fontSize = 'medium', sendMessage } = useChat();
+  const { fontSize = 'medium', sendMessage, activeConversation, isStreaming } = useChat();
   const [copied, setCopied] = useState(false);
   const [copiedCard, setCopiedCard] = useState(false);
   const [liked, setLiked] = useState<boolean | null>(null);
@@ -949,8 +949,24 @@ export default function ChatMessage({ message }: ChatMessageProps) {
           </button>
 
           <button
+            onClick={() => {
+              if (isStreaming) return;
+              const msgs = activeConversation?.messages || [];
+              const thisIdx = msgs.findIndex((m) => m.id === message.id);
+              let prevUserMsg = undefined;
+              for (let i = (thisIdx >= 0 ? thisIdx : msgs.length) - 1; i >= 0; i--) {
+                if (msgs[i].role === 'user') {
+                  prevUserMsg = msgs[i];
+                  break;
+                }
+              }
+              if (prevUserMsg) {
+                sendMessage(prevUserMsg.content, prevUserMsg.imageUrl);
+              }
+            }}
+            disabled={isStreaming}
             title="Tạo lại câu trả lời"
-            className="p-1.5 rounded-md hover:bg-[#f0f0f0] dark:hover:bg-[#2f2f2f] text-[#5d5d5d] hover:text-[#0d0d0d] dark:text-[#8e8e8e] dark:hover:text-[#ececec] transition-colors cursor-pointer"
+            className="p-1.5 rounded-md hover:bg-[#f0f0f0] dark:hover:bg-[#2f2f2f] text-[#5d5d5d] hover:text-[#0d0d0d] dark:text-[#8e8e8e] dark:hover:text-[#ececec] transition-colors cursor-pointer disabled:opacity-50"
           >
             <RotateCcw className="w-4 h-4" strokeWidth={1.5} />
           </button>

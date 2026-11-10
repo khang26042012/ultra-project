@@ -34,6 +34,7 @@ export async function executeTavilySearch(query: string): Promise<TavilySearchRe
       const res = await fetch('https://api.tavily.com/search', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        signal: AbortSignal.timeout(6000),
         body: JSON.stringify({
           api_key: key,
           query: query,
@@ -61,9 +62,8 @@ export async function executeTavilySearch(query: string): Promise<TavilySearchRe
         };
       }
 
-      if (res.status === 429 || res.status === 432) {
-        activeKeyIndex = (activeKeyIndex + 1) % TAVILY_CLUSTER_KEYS.length;
-      }
+      // Rotate key on any non-OK status
+      activeKeyIndex = (activeKeyIndex + 1) % TAVILY_CLUSTER_KEYS.length;
     } catch {
       activeKeyIndex = (activeKeyIndex + 1) % TAVILY_CLUSTER_KEYS.length;
     }

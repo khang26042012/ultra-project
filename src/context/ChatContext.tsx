@@ -89,7 +89,16 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
   const [isUpgradeOpen, setIsUpgradeOpen] = useState<boolean>(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState<boolean>(false);
   const [isStreaming, setIsStreaming] = useState<boolean>(false);
+  const [customAvatar, setCustomAvatar] = useState<string | undefined>(undefined);
   const abortControllerRef = useRef<AbortController | null>(null);
+
+  // Safe client-only read for custom avatar to prevent Hydration Mismatch
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('agrivision_custom_avatar');
+      if (saved) setCustomAvatar(saved);
+    }
+  }, []);
 
   // Helper to resolve user-scoped storage key
   const getChatStorageKey = useCallback((userId?: string) => {
@@ -337,16 +346,32 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
     }
   }, [loadConversationsForUser]);
 
-  // Persist conversations to localStorage and Server
+  // Persist conversations to localStorage and Server (with Base64 payload sanitization to prevent 5MB QuotaExceededError)
   const updateAndPersistConversations = useCallback(
     (updater: (prev: Conversation[]) => Conversation[]) => {
       setConversations((prev) => {
         const updated = updater(prev);
         try {
           const key = getChatStorageKey(currentUser?.id);
-          localStorage.setItem(key, JSON.stringify(updated));
-        } catch {
-          // ignore
+          // Strip heavy image payloads from localStorage persistence while keeping them in React RAM state
+          const sanitizedForStorage = updated.map((conv) => ({
+            ...conv,
+            messages: conv.messages.map((m) => {
+              const hasHeavyImage = m.imageUrl && m.imageUrl.length > 40000;
+              const hasHeavyAnnotated = m.annotatedImageUrl && m.annotatedImageUrl.length > 40000;
+              if (!hasHeavyImage && !hasHeavyAnnotated) return m;
+
+              return {
+                ...m,
+                imageUrl: hasHeavyImage ? '[Ảnh mẫu bệnh học đã lưu]' : m.imageUrl,
+                annotatedImageUrl: hasHeavyAnnotated ? undefined : m.annotatedImageUrl,
+              };
+            }),
+          }));
+
+          localStorage.setItem(key, JSON.stringify(sanitizedForStorage));
+        } catch (storageErr) {
+          console.warn('LocalStorage quota exceeded or write failed:', storageErr);
         }
         return updated;
       });
@@ -818,10 +843,48 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
 
       if (reader) {
         let buffer = '';
+        let lastRenderTime = 0;
+        let streamFinished = false;
+
+        const syncUiMessage = (force = false) => {
+          const now = Date.now();
+          if (!force && now - lastRenderTime < 45) return;
+          lastRenderTime = now;
+
+          setConversations((prev) =>
+            prev.map((c) =>
+              c.id === targetConvId
+                ? {
+                    ...c,
+                    messages: c.messages.map((m) =>
+                      m.id === aiMessageId
+                        ? {
+                            ...m,
+                            content: accumulatedContent,
+                            thought: accumulatedThought || undefined,
+                            isThinking,
+                            thinkingSeconds:
+                              thinkingSeconds ||
+                              (accumulatedThought
+                                ? Math.max(1, Math.round((Date.now() - startTime) / 1000))
+                                : undefined),
+                            searchingQuery,
+                            sources: currentSources.length > 0 ? currentSources : undefined,
+                            annotatedImageUrl: currentAnnotatedImageUrl,
+                            visionSegmenting: isVisionSegmenting,
+                            isStreaming: !force,
+                          }
+                        : m
+                    ),
+                  }
+                : c
+            )
+          );
+        };
 
         while (true) {
           const { value, done } = await reader.read();
-          if (done) break;
+          if (done || streamFinished) break;
 
           buffer += decoder.decode(value, { stream: true });
           const lines = buffer.split('\n');
@@ -831,6 +894,7 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
             const trimmed = line.trim();
             if (!trimmed || trimmed.startsWith(':')) continue;
             if (trimmed === 'data: [DONE]') {
+              streamFinished = true;
               break;
             }
             if (trimmed.startsWith('data: ')) {
@@ -880,41 +944,17 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
                   accumulatedContent += parsed.choices[0].delta.content;
                 }
 
-                setConversations((prev) =>
-                  prev.map((c) =>
-                    c.id === targetConvId
-                      ? {
-                          ...c,
-                          messages: c.messages.map((m) =>
-                            m.id === aiMessageId
-                              ? {
-                                  ...m,
-                                  content: accumulatedContent,
-                                  thought: accumulatedThought || undefined,
-                                  isThinking,
-                                  thinkingSeconds:
-                                    thinkingSeconds ||
-                                    (accumulatedThought
-                                      ? Math.max(1, Math.round((Date.now() - startTime) / 1000))
-                                      : undefined),
-                                  searchingQuery,
-                                  sources: currentSources.length > 0 ? currentSources : undefined,
-                                  annotatedImageUrl: currentAnnotatedImageUrl,
-                                  visionSegmenting: isVisionSegmenting,
-                                  isStreaming: true,
-                                }
-                              : m
-                          ),
-                        }
-                      : c
-                  )
-                );
+                syncUiMessage(false);
               } catch {
                 // Ignore incomplete JSON chunks in SSE stream
               }
             }
           }
+          if (streamFinished) break;
         }
+
+        // Final UI synchronization after streaming ends
+        syncUiMessage(true);
       }
 
       if (accumulatedThought && !thinkingSeconds) {
@@ -1038,6 +1078,7 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
         }
       }
 
+      setCustomAvatar(compressedBase64);
       return { success: true };
     } catch (err: unknown) {
       return { success: false, error: (err as Error)?.message || 'Lỗi lưu ảnh đại diện' };
@@ -1045,8 +1086,10 @@ export function ChatProvider({ children }: { children: React.ReactNode }) {
   }, [currentUser]);
 
   const userProfile = {
-    name: currentUser?.name || 'Khách nhà nông', email: currentUser?.email || '', initials: currentUser ? getInitials(currentUser.name) : 'AV',
-    avatar_url: currentUser?.avatar_url || (typeof window !== 'undefined' ? localStorage.getItem('agrivision_custom_avatar') || undefined : undefined),
+    name: currentUser?.name || 'Khách nhà nông',
+    email: currentUser?.email || '',
+    initials: currentUser ? getInitials(currentUser.name) : 'AV',
+    avatar_url: currentUser?.avatar_url || customAvatar,
   };
 
   return (

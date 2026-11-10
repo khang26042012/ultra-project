@@ -77,20 +77,32 @@ const WEB_SEARCH_TOOL = {
   },
 };
 
-// Resilient fetch with automatic exponential retry
-async function fetchWithRetry(url: string, options: RequestInit, retries = 2, delayMs = 1200): Promise<Response> {
+// Resilient fetch with automatic exponential retry and timeout
+async function fetchWithRetry(
+  url: string,
+  options: RequestInit,
+  retries = 2,
+  delayMs = 1200,
+  timeoutMs = 30000
+): Promise<Response> {
   let lastError: unknown;
   for (let attempt = 1; attempt <= retries + 1; attempt++) {
     try {
-      const res = await fetch(url, options);
-      return res;
+      const timeoutSignal = AbortSignal.timeout(timeoutMs);
+      const combinedSignal = options.signal
+        ? AbortSignal.any([options.signal, timeoutSignal])
+        : timeoutSignal;
+
+      const res = await fetch(url, { ...options, signal: combinedSignal });
+      if (res.ok || (res.status < 500 && res.status !== 429) || attempt > retries) {
+        return res;
+      }
+      console.warn(`Gateway fetch returned ${res.status}, retrying ${attempt}/${retries}...`);
     } catch (err) {
       lastError = err;
-      if (attempt <= retries) {
-        console.warn(`Gateway fetch attempt ${attempt} failed, retrying in ${delayMs}ms...`, err);
-        await new Promise((r) => setTimeout(r, delayMs));
-      }
+      if (attempt > retries) throw err;
     }
+    await new Promise((r) => setTimeout(r, delayMs * attempt));
   }
   throw lastError;
 }
@@ -141,23 +153,35 @@ export async function POST(req: NextRequest) {
     const targetModel =
       model === 'ag/gemini-3.8-flash' ? 'ag/gemini-3.8-flash' : LOCKED_MODEL;
 
-    // Create readable stream for client SSE response
+    // Create readable stream for client SSE response with cancellation handling
+    let isCancelled = false;
+    let keepAliveInterval: NodeJS.Timeout | null = null;
+
     const stream = new ReadableStream({
+      cancel() {
+        isCancelled = true;
+        if (keepAliveInterval) clearInterval(keepAliveInterval);
+      },
       async start(controller) {
         const encoder = new TextEncoder();
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const sendEvent = (obj: any) => {
+          if (isCancelled || req.signal.aborted) return;
           try {
             controller.enqueue(encoder.encode(`data: ${JSON.stringify(obj)}\n\n`));
           } catch {}
         };
 
         // Active SSE Keep-Alive Ping every 2.5s (Crucial for mobile background / 4G idle disconnect)
-        const keepAliveInterval = setInterval(() => {
+        keepAliveInterval = setInterval(() => {
+          if (isCancelled || req.signal.aborted) {
+            if (keepAliveInterval) clearInterval(keepAliveInterval);
+            return;
+          }
           try {
             controller.enqueue(encoder.encode(': keep-alive\n\n'));
           } catch {
-            clearInterval(keepAliveInterval);
+            if (keepAliveInterval) clearInterval(keepAliveInterval);
           }
         }, 2500);
 
@@ -220,6 +244,7 @@ HƯỚNG DẪN TRẢ LỜI BÁC SĨ CÂY TRỒNG NAM BỘ:
 
         try {
           while (turn < maxTurns) {
+            if (isCancelled || req.signal.aborted) break;
             turn++;
 
             // Available tools list: Local Pathology RAG tool always active
@@ -269,61 +294,72 @@ HƯỚNG DẪN TRẢ LỜI BÁC SĨ CÂY TRỒNG NAM BỘ:
             const toolCallsMap: Record<number, { id: string; name: string; arguments: string }> = {};
             let buffer = '';
 
-            while (true) {
-              const { value, done } = await reader.read();
-              if (done) break;
+            try {
+              while (true) {
+                if (isCancelled || req.signal.aborted) {
+                  try { await reader.cancel(); } catch {}
+                  break;
+                }
 
-              buffer += decoder.decode(value, { stream: true });
-              const lines = buffer.split('\n');
-              buffer = lines.pop() || '';
+                const { value, done } = await reader.read();
+                if (done) break;
 
-              for (const line of lines) {
-                const trimmed = line.trim();
-                if (!trimmed || trimmed.startsWith(':')) continue;
-                if (trimmed === 'data: [DONE]') continue;
-                if (trimmed.startsWith('data: ')) {
-                  try {
-                    const parsed = JSON.parse(trimmed.slice(6));
-                    const choice = parsed.choices?.[0];
-                    if (!choice) continue;
+                buffer += decoder.decode(value, { stream: true });
+                const lines = buffer.split('\n');
+                buffer = lines.pop() || '';
 
-                    // Stream reasoning/thought tokens
-                    const reasoning = choice.delta?.reasoning_content || choice.delta?.thought;
-                    if (reasoning) {
-                      sendEvent({ type: 'thought', token: reasoning });
-                    }
+                for (const line of lines) {
+                  const trimmed = line.trim();
+                  if (!trimmed || trimmed.startsWith(':')) continue;
+                  if (trimmed === 'data: [DONE]') continue;
+                  if (trimmed.startsWith('data: ')) {
+                    try {
+                      const parsed = JSON.parse(trimmed.slice(6));
+                      const choice = parsed.choices?.[0];
+                      if (!choice) continue;
 
-                    // Stream assistant content tokens
-                    const content = choice.delta?.content;
-                    if (content) {
-                      accumulatedContent += content;
-                      overallStreamedContent += content;
-                      sendEvent({ type: 'content', token: content });
-                    }
-
-                    // Accumulate tool calls
-                    const deltaToolCalls = choice.delta?.tool_calls;
-                    if (Array.isArray(deltaToolCalls)) {
-                      for (const tc of deltaToolCalls) {
-                        const idx = tc.index ?? 0;
-                        if (!toolCallsMap[idx]) {
-                          toolCallsMap[idx] = {
-                            id: tc.id || `call_${Date.now()}_${idx}`,
-                            name: tc.function?.name || '',
-                            arguments: '',
-                          };
-                        }
-                        if (tc.id) toolCallsMap[idx].id = tc.id;
-                        if (tc.function?.name) toolCallsMap[idx].name = tc.function.name;
-                        if (tc.function?.arguments)
-                          toolCallsMap[idx].arguments += tc.function.arguments;
+                      // Stream reasoning/thought tokens
+                      const reasoning = choice.delta?.reasoning_content || choice.delta?.thought;
+                      if (reasoning) {
+                        sendEvent({ type: 'thought', token: reasoning });
                       }
+
+                      // Stream assistant content tokens
+                      const content = choice.delta?.content;
+                      if (content) {
+                        accumulatedContent += content;
+                        overallStreamedContent += content;
+                        sendEvent({ type: 'content', token: content });
+                      }
+
+                      // Accumulate tool calls
+                      const deltaToolCalls = choice.delta?.tool_calls;
+                      if (Array.isArray(deltaToolCalls)) {
+                        for (const tc of deltaToolCalls) {
+                          const idx = tc.index ?? 0;
+                          if (!toolCallsMap[idx]) {
+                            toolCallsMap[idx] = {
+                              id: tc.id || `call_${Date.now()}_${idx}`,
+                              name: tc.function?.name || '',
+                              arguments: '',
+                            };
+                          }
+                          if (tc.id) toolCallsMap[idx].id = tc.id;
+                          if (tc.function?.name) toolCallsMap[idx].name = tc.function.name;
+                          if (tc.function?.arguments)
+                            toolCallsMap[idx].arguments += tc.function.arguments;
+                        }
+                      }
+                    } catch {
+                      // Ignore SSE json chunk split artifacts
                     }
-                  } catch {
-                    // Ignore SSE json chunk split artifacts
                   }
                 }
               }
+            } finally {
+              try {
+                reader.releaseLock();
+              } catch {}
             }
 
             const toolCallsList = Object.values(toolCallsMap);
@@ -501,18 +537,20 @@ HƯỚNG DẪN TRẢ LỜI BÁC SĨ CÂY TRỒNG NAM BỘ:
           }
         } catch (streamErr) {
           console.error('Agent Loop Streaming Error:', streamErr);
-          if (!overallStreamedContent) {
+          if (!isCancelled && !req.signal.aborted) {
             sendEvent({
               type: 'content',
               token: `\n\n⚠️ **Mất kết nối tạm thời với máy chủ AI**: ${(streamErr as Error)?.message || 'fetch failed'}. Nhờ bà con bấm nút tạo lại để em trả lời liền nghen! 🌿`,
             });
           }
         } finally {
-          clearInterval(keepAliveInterval);
-          try {
-            controller.enqueue(encoder.encode('data: [DONE]\n\n'));
-            controller.close();
-          } catch {}
+          if (keepAliveInterval) clearInterval(keepAliveInterval);
+          if (!isCancelled && !req.signal.aborted) {
+            try {
+              controller.enqueue(encoder.encode('data: [DONE]\n\n'));
+              controller.close();
+            } catch {}
+          }
         }
       },
     });

@@ -68,3 +68,13 @@ README.md
 CHANGELOG.md
 LICENSE
 BRAND.md
+*.md
+
+# Test and development utility scripts
+screenshots/
+tools/
+skills/
+capture-screenshots.js
+test_*.js
+test_*.mjs
+test-mobile.js

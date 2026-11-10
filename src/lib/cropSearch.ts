@@ -190,7 +190,7 @@ export function searchCropKnowledge(
         topic: crop.topic,
         dia_ban_pho_bien: crop.dia_ban_pho_bien,
         dac_tinh_sinh_thai: crop.dac_tinh_sinh_thai,
-        matched_disease: bestDisease || (crop.danh_sach_benh && crop.danh_sach_benh[0]),
+        matched_disease: bestDisease || (highestDiseaseScore > 0 ? crop.danh_sach_benh?.[0] : undefined),
         danh_sach_benh: crop.danh_sach_benh || [],
         score: totalScore,
       });

@@ -33,9 +33,6 @@ export async function POST(req: NextRequest) {
       },
     ];
 
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 4000); // 4s timeout protection
-
     const groqRes = await fetch(GROQ_ENDPOINT, {
       method: 'POST',
       headers: {
@@ -49,10 +46,8 @@ export async function POST(req: NextRequest) {
         max_tokens: 30,
         temperature: 0.3,
       }),
-      signal: controller.signal,
+      signal: AbortSignal.timeout(4000), // 4s timeout protection
     });
-
-    clearTimeout(timeout);
 
     if (groqRes.ok) {
       const data = await groqRes.json();

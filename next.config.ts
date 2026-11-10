@@ -2,9 +2,20 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   output: "standalone",
-  // The dev-mode indicator badge renders on top of the page and corrupts every
-  // pixel-diff score in scripts/diff.mjs. Keep it off — QA runs against `npm run dev`.
   devIndicators: false,
+  poweredByHeader: false,
+  outputFileTracingIncludes: {
+    "/api/**/*": ["./src/data/**/*"],
+  },
+  images: {
+    unoptimized: true, // Tiết kiệm tối đa CPU & RAM khi chạy trên VPS 1GB - 2GB
+    remotePatterns: [
+      { protocol: "https", hostname: "**.supabase.co" },
+      { protocol: "https", hostname: "outline.roboflow.com" },
+      { protocol: "https", hostname: "www.google.com" },
+      { protocol: "https", hostname: "**.onrender.com" },
+    ],
+  },
 };
 
 export default nextConfig;

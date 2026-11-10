@@ -1,12 +1,6 @@
-# Production image for the FINISHED clone only.
-# It serves the built Next.js site — no Playwright, no extraction scripts.
-# Cloning itself happens in the dev container (see Dockerfile.dev).
-#
+# Production image for AgriVision (Next.js standalone runtime)
 # Based on https://github.com/vercel/next.js/blob/canary/examples/with-docker/Dockerfile
 
-# IMPORTANT: Node.js version maintenance
-# This Dockerfile uses node:22-alpine to match the repo's Node 22 baseline
-# (package.json "engines" + .nvmrc). Update NODE_VERSION when the baseline changes.
 ARG NODE_VERSION=22-alpine
 
 # ============================================
@@ -14,13 +8,13 @@ ARG NODE_VERSION=22-alpine
 # ============================================
 FROM node:${NODE_VERSION} AS dependencies
 
+RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
 # Copy manifest + lockfile first to leverage Docker layer caching
 COPY package.json package-lock.json ./
 
-# Frozen lockfile for reproducible builds; skip Playwright's browser download —
-# the production image never runs a browser
+# Frozen lockfile for reproducible builds; skip Playwright's browser download
 RUN PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 npm ci --no-audit --no-fund
 
 # ============================================
@@ -28,6 +22,7 @@ RUN PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 npm ci --no-audit --no-fund
 # ============================================
 FROM node:${NODE_VERSION} AS builder
 
+RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
 COPY --from=dependencies /app/node_modules ./node_modules
@@ -35,9 +30,9 @@ COPY . .
 
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
+# Limit V8 heap during build to avoid OOM crash on 1GB - 2GB VPS
+ENV NODE_OPTIONS="--max-old-space-size=1536"
 
-# next.config.ts sets output: "standalone", so the build emits a
-# self-contained server in .next/standalone
 RUN npm run build
 
 # ============================================
@@ -45,6 +40,7 @@ RUN npm run build
 # ============================================
 FROM node:${NODE_VERSION} AS runner
 
+RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
 ENV NODE_ENV=production
@@ -52,15 +48,14 @@ ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 ENV NEXT_TELEMETRY_DISABLED=1
 
-# public/ holds the cloned site's downloaded assets (images, fonts, videos) —
-# it must ship with the runtime image
+# Pre-create app data and .next directories and assign ownership to node user
+RUN mkdir -p /app/data /app/.next && chown -R node:node /app/data /app/.next
+
+# Copy public assets and core pathology database
 COPY --from=builder --chown=node:node /app/public ./public
+COPY --from=builder --chown=node:node /app/src/data ./src/data
 
-# Correct permissions for the prerender cache
-RUN mkdir .next && chown node:node .next
-
-# Output-file-tracing keeps the runtime image small:
-# https://nextjs.org/docs/app/api-reference/config/next-config-js/output
+# Copy Next.js standalone server and static assets
 COPY --from=builder --chown=node:node /app/.next/standalone ./
 COPY --from=builder --chown=node:node /app/.next/static ./.next/static
 

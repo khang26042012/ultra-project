@@ -173,9 +173,17 @@ export function renderAgriTechHudSvg(
     </linearGradient>
   </defs>
 
-  <!-- Original High-Res Image -->
-  <image href="${fullBase64}" xlink:href="${fullBase64}" width="${width}" height="${height}" preserveAspectRatio="xMidYMid meet" />
+  <!-- Original High-Res Image (Single href to prevent memory duplication) -->
+  <image href="${fullBase64}" width="${width}" height="${height}" preserveAspectRatio="xMidYMid meet" />
 `;
+
+  // Convert SVG to Base64 Data URL with Universal cross-platform fallback
+  const toBase64 = (str: string) => {
+    if (typeof Buffer !== 'undefined') {
+      return Buffer.from(str, 'utf-8').toString('base64');
+    }
+    return btoa(unescape(encodeURIComponent(str)));
+  };
 
   // 1. Chỉ hiển thị diện tích (Không watermark, không logo rườm rà)
   svg += `
@@ -210,8 +218,10 @@ export function renderAgriTechHudSvg(
 
   svg += `\n</svg>`;
 
-  // Convert SVG to Base64 Data URL
-  const svgBase64 = Buffer.from(svg, 'utf-8').toString('base64');
+  // Convert SVG to Base64 Data URL with Universal fallback
+  const svgBase64 = typeof Buffer !== 'undefined'
+    ? Buffer.from(svg, 'utf-8').toString('base64')
+    : btoa(unescape(encodeURIComponent(svg)));
   return `data:image/svg+xml;base64,${svgBase64}`;
 }
 
@@ -230,6 +240,8 @@ export async function segmentAndAnnotateCropLesion(
   let height = 480;
   let predictions: LesionPrediction[] = [];
 
+  let apiSuccess = false;
+
   try {
     const roboflowUrl = `https://outline.roboflow.com/plant-disease-segmentation/1?api_key=${apiKey}`;
 
@@ -238,10 +250,12 @@ export async function segmentAndAnnotateCropLesion(
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: cleanBase64,
+      signal: AbortSignal.timeout(10000),
+      body: encodeURIComponent(cleanBase64),
     });
 
     if (res.ok) {
+      apiSuccess = true;
       const data = await res.json();
       if (data.image) {
         width = data.image.width || 640;
@@ -306,8 +320,9 @@ export async function segmentAndAnnotateCropLesion(
     console.warn('Roboflow API call fallback:', err);
   }
 
-  // If no predictions returned from online API, employ smart agronomic vision fallback
-  if (predictions.length === 0) {
+  // If online API network failed, employ smart agronomic vision fallback.
+  // If API succeeded with 0 predictions, the plant tissue is healthy (0% necrosis).
+  if (!apiSuccess && predictions.length === 0) {
     predictions = generateFallbackPredictions(width, height);
   }
 

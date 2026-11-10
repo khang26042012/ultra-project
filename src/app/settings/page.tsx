@@ -116,20 +116,18 @@ function SettingsView() {
   >(null);
   const [isTankMixOpen, setIsTankMixOpen] = useState(false);
 
-  // Personalization settings stored in localStorage
-  const [personalRole, setPersonalRole] = useState(() => {
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem('agrivision_pref_role') || 'Bác / Cô chú nhà vườn';
-    }
-    return 'Bác / Cô chú nhà vườn';
-  });
+  // Personalization settings: start with consistent SSR default, populate in useEffect to prevent Hydration Mismatch
+  const [personalRole, setPersonalRole] = useState('Bác / Cô chú nhà vườn');
+  const [farmRegion, setFarmRegion] = useState('Vĩnh Long / Đồng bằng Sông Cửu Long');
 
-  const [farmRegion, setFarmRegion] = useState(() => {
+  useEffect(() => {
     if (typeof window !== 'undefined') {
-      return localStorage.getItem('agrivision_pref_region') || 'Vĩnh Long / Đồng bằng Sông Cửu Long';
+      const savedRole = localStorage.getItem('agrivision_pref_role');
+      if (savedRole) setPersonalRole(savedRole);
+      const savedRegion = localStorage.getItem('agrivision_pref_region');
+      if (savedRegion) setFarmRegion(savedRegion);
     }
-    return 'Vĩnh Long / Đồng bằng Sông Cửu Long';
-  });
+  }, []);
 
   const [newPassword, setNewPassword] = useState('');
   const [passwordSuccess, setPasswordSuccess] = useState(false);

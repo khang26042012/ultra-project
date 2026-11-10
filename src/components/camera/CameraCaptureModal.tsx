@@ -59,6 +59,10 @@ const compressFile = (file: File): Promise<string> => {
         if (ctx) {
           ctx.drawImage(img, 0, 0, width, height);
           const base64 = canvas.toDataURL('image/jpeg', 0.92);
+          // Free canvas backing store memory on mobile WebKit
+          ctx.clearRect(0, 0, width, height);
+          canvas.width = 0;
+          canvas.height = 0;
           resolve(base64);
         } else {
           resolve(e.target?.result as string);
@@ -83,6 +87,11 @@ export default function CameraCaptureModal({
   const [torchAvailable, setTorchAvailable] = useState(false);
   const [torchOn, setTorchOn] = useState(false);
   const [resolution, setResolution] = useState<{ width: number; height: number } | null>(null);
+
+  const isOpenRef = useRef(isOpen);
+  useEffect(() => {
+    isOpenRef.current = isOpen;
+  }, [isOpen]);
   const [capturedImage, setCapturedImage] = useState<string | null>(null);
   const [capturedResolution, setCapturedResolution] = useState<{ width: number; height: number } | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -185,7 +194,14 @@ export default function CameraCaptureModal({
 
       for (const constraints of constraintTiers) {
         try {
-          activeStream = await navigator.mediaDevices.getUserMedia(constraints);
+          const stream = await navigator.mediaDevices.getUserMedia(constraints);
+          // If modal was closed while waiting for userMedia permission, stop tracks immediately
+          if (!isOpenRef.current) {
+            stream.getTracks().forEach((track) => track.stop());
+            setIsInitializing(false);
+            return;
+          }
+          activeStream = stream;
           if (activeStream) break;
         } catch (err: any) {
           lastErr = err;
@@ -274,6 +290,8 @@ export default function CameraCaptureModal({
     const files = e.target.files;
     if (files && files.length > 0) {
       const file = files[0];
+      // Reset input value immediately so user can retake the exact same photo
+      e.target.value = '';
       try {
         setIsInitializing(true);
         const compressedBase64 = await compressFile(file);
@@ -371,6 +389,10 @@ export default function CameraCaptureModal({
 
     // High quality JPEG (0.94) to preserve fine lesions, fungal spores, and halos
     const base64 = canvas.toDataURL('image/jpeg', 0.94);
+    // Free canvas backing store memory on mobile WebKit
+    ctx.clearRect(0, 0, w, h);
+    canvas.width = 0;
+    canvas.height = 0;
     setCapturedImage(base64);
     setCapturedResolution({ width: w, height: h });
 

@@ -117,12 +117,14 @@ function CropsEncyclopediaView() {
   }, [debouncedQuery, selectedTopic]);
 
   // Load more for infinite scroll
+  const offsetRef = useRef(0);
+
   const loadMore = useCallback(async () => {
     if (loadingMore || !hasMore || loadingInitial) return;
 
     setLoadingMore(true);
     try {
-      const offset = crops.length;
+      const offset = offsetRef.current;
       const url = `/api/crops?topic=${encodeURIComponent(
         selectedTopic
       )}&q=${encodeURIComponent(
@@ -138,6 +140,7 @@ function CropsEncyclopediaView() {
         } else {
           setCrops((prev) => {
             const combined = [...prev, ...nextCrops];
+            offsetRef.current = combined.length;
             if (combined.length >= (data.total || 0)) {
               setHasMore(false);
             }
@@ -157,7 +160,6 @@ function CropsEncyclopediaView() {
     loadingMore,
     hasMore,
     loadingInitial,
-    crops.length,
     selectedTopic,
     debouncedQuery,
   ]);

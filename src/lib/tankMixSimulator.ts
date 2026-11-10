@@ -706,16 +706,28 @@ export function simulateTankMix(
     });
   }
 
-  // Agitate step always between Powder and Liquid
-  walesSteps.push({
-    stepIndex: stepCounter++,
-    walesCode: 'A',
-    walesName: 'Agitation (Khuấy đảo hoàn toàn)',
-    title: `Bước ${stepCounter - 1}: Khuấy đều nước thuốc trong bình`,
-    items: [],
-    instructions:
-      'Dùng que sạch khuấy liên tục 1 - 2 phút cho các hạt phân tử bột phân tán đồng nhất trước khi thêm chất lỏng.',
-  });
+  // Agitate step: customized based on whether dry powders were added
+  if (groupW.length > 0) {
+    walesSteps.push({
+      stepIndex: stepCounter++,
+      walesCode: 'A',
+      walesName: 'Agitation (Khuấy đảo hoàn toàn)',
+      title: `Bước ${stepCounter - 1}: Khuấy đều nước thuốc trong bình`,
+      items: [],
+      instructions:
+        'Dùng que sạch khuấy liên tục 1 - 2 phút cho các hạt phân tử bột phân tán đồng nhất trước khi thêm chất lỏng.',
+    });
+  } else if (groupL.length > 0 || groupE.length > 0 || groupS.length > 0) {
+    walesSteps.push({
+      stepIndex: stepCounter++,
+      walesCode: 'A',
+      walesName: 'Agitation (Khuấy đảo dung dịch)',
+      title: `Bước ${stepCounter - 1}: Khuấy đều nước trong bình`,
+      items: [],
+      instructions:
+        'Khuấy đều nước trong bình trước khi bắt đầu phối trộn các dạng thuốc lỏng.',
+    });
+  }
 
   if (groupL.length > 0) {
     walesSteps.push({
